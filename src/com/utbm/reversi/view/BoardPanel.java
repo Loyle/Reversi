@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 
 public class BoardPanel extends JPanel
 {
-
+	final static int cellSize = 70;
 	/**
 	 * 
 	 */
@@ -20,7 +20,7 @@ public class BoardPanel extends JPanel
 		{
 			for (int j=0;j<8;j++) 
 			{
-				g.fillRect(100 + i*(50+5), 100 + j*(50+5), 50, 50);
+				g.fillRect(100 + i*(cellSize+5), 80 + j*(cellSize+5), cellSize, cellSize);
 			}
 		}
 		
