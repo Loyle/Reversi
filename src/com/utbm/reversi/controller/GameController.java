@@ -1,5 +1,11 @@
 package com.utbm.reversi.controller;
 
-public class GameController {
+import java.util.Scanner;
 
+public class GameController {
+	
+	public GameController() {
+		
+		
+	}
 }
