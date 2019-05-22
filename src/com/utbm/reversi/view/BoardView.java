@@ -13,8 +13,8 @@ public class BoardView extends JFrame {
 		
 		
 		
-		this.setVisible(true);
 		
+		this.setVisible(true);
 	}
 	
 }
