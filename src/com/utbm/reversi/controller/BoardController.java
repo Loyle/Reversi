@@ -10,7 +10,9 @@ public class BoardController extends JPanel implements MouseListener
 	/**
 	 * 
 	 */
+	
 	private static final long serialVersionUID = -8620551383872692190L;
+	final static int cellSize = 70;
 
 	public void mouseClicked(MouseEvent e)
 	{
@@ -18,11 +20,10 @@ public class BoardController extends JPanel implements MouseListener
 		{
 			for (int i=0;i<8;i++) 
 			{
-				if( (e.getX() > 100 + j*50 + j*5) && (e.getX() < 100 + (j+1)*50 + j*5)  && (e.getY() > 100 + (i+1)*50 + i*5) && (e.getY() < 100 + (i+2)*50 + i*5) ) 	
+				if( (e.getX() > 100 + j*cellSize + j*5) && (e.getX() < 100 + (j+1)*cellSize + j*5)  && (e.getY() > 100 + (i+1)*cellSize + i*5) && (e.getY() < 100 + (i+2)*cellSize + i*5) ) 	
 				{
 					System.out.println(i+"-"+j);
-				}
-				
+				}	
 			}
 		}
 	}
