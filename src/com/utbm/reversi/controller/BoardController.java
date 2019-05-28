@@ -16,16 +16,18 @@ public class BoardController extends JPanel implements MouseListener
 
 	public void mouseClicked(MouseEvent e)
 	{
-		for (int j=0;j<8;j++) 
+		/*for (int j=0;j<8;j++) 
 		{
 			for (int i=0;i<8;i++) 
 			{
-				if( (e.getX() > 100 + j*cellSize + j*5) && (e.getX() < 100 + (j+1)*cellSize + j*5)  && (e.getY() > 100 + (i+1)*cellSize + i*5) && (e.getY() < 100 + (i+2)*cellSize + i*5) ) 	
+				if((e.getX() > (-(8*(cellSize+5)))/2+i*(cellSize+5)+2) && (e.getX() < (this.getWidth()-(8*(cellSize+5)))/2+(i+1)*(cellSize+5)+2))
 				{
-					System.out.println(i+"-"+j);
+					System.out.println(i);
 				}	
 			}
-		}
+		}*/
+		
+		//System.out.println();
 	}
 	
 	@Override

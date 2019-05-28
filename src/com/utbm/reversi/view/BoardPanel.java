@@ -20,7 +20,7 @@ public class BoardPanel extends JPanel
 		{
 			for (int j=0;j<8;j++) 
 			{
-				g.fillRect(100 + i*(cellSize+5), 80 + j*(cellSize+5), cellSize, cellSize);
+				g.fillRect((this.getWidth()-(8*(cellSize+5)))/2+i*(cellSize+5)+2, (this.getHeight()-(8*(cellSize+5)))/2+j*(cellSize+5)+2, cellSize, cellSize);
 			}
 		}
 		
