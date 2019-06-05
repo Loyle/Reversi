@@ -45,9 +45,9 @@ public class ReversiFrame extends JFrame
         		final Cell cell = new Cell();
         		cell.setBackground(Color.green);
         		cell.addActionListener(e -> reversiController.onCellClicked(cell));
-        		cell.setCoordX(i);
-        		cell.setCoordY(j);
-        		cellArray[i][j] = cell;
+        		cell.setCoordX(j);
+        		cell.setCoordY(i);
+        		cellArray[j][i] = cell;
         		
         		if ((i > -2 + gridSize/2) && (i < 1 + gridSize/2) && (j > -2 + gridSize/2) && (j < 1 + gridSize/2)) 
         		{

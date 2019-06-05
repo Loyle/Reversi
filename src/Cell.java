@@ -1,6 +1,14 @@
 import java.awt.Color;
-//import java.awt.Image;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class Cell extends JButton
@@ -15,7 +23,7 @@ public class Cell extends JButton
 	private int coordY;
 	
 	private int state;
-	//private Image img;
+	private Image img;
 	
 	public Cell() 
 	{
