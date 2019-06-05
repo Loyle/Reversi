@@ -1,5 +1,5 @@
 package com.utbm.reversi.model;
-import com.utbm.reversi.model.Cells;
+import com.utbm.reversi.model.cells.Cells;
 
 public class Board {
 		private int size;

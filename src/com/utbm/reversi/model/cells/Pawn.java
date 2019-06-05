@@ -1,6 +1,8 @@
-package com.utbm.reversi.model;
+package com.utbm.reversi.model.cells;
 
 import java.awt.Color;
+
+import com.utbm.reversi.model.Player;
 
 public class Pawn {
 	private Player owner;

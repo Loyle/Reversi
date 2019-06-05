@@ -1,4 +1,4 @@
-package com.utbm.reversi.model;
+package com.utbm.reversi.model.cells;
 
 public class Trap extends Cells {
 

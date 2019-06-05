@@ -1,4 +1,4 @@
-/*package com.utbm.reversi.model;
+package com.utbm.reversi.model.cells;
 
 public class Cells {
 	private int value;
@@ -25,4 +25,3 @@ public class Cells {
 		this.pawn = pawn;
 	}
 }
-*/
