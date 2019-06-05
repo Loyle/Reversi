@@ -29,6 +29,13 @@ public class BoardView extends JFrame
 	private final JLabel label1 = new JLabel("Tour des :");
 	private final JPanel whoPlay = new JPanel();
 	
+	private JLabel whiteScoreLabel = new JLabel("Score : 2");
+	private int whiteScore=2;
+	private final JPanel whiteScorePanel = new JPanel();
+	private JLabel blackScoreLabel = new JLabel("Score : 2");
+	private int blackScore=2;
+	private final JPanel blackScorePanel = new JPanel();
+	
 	private final int cellSize = 70;
 	private final int scoresSizeX = 100;
 	private final int gridSize = 8;
@@ -83,14 +90,56 @@ public class BoardView extends JFrame
         scores.setPreferredSize(new Dimension(scoresSizeX,500));
         GridBagConstraints gbc = new GridBagConstraints();
         
+        
+        
+        // WHO WILL PLAY
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        scores.add(label1,gbc);
         this.whoPlay.setPreferredSize(new Dimension(50,50));
         gbc.gridx = 0;
         gbc.gridy = 1;
         scores.add(whoPlay,gbc);
-
+        
+        // ADD SPACE
+        for (int addSpace = 2 ; addSpace<15 ; addSpace++) 
+        {
+            gbc.gridx = 0;
+            gbc.gridy = addSpace;
+            scores.add(new JLabel(" "),gbc);
+        }
+        
+        
+        // WHITE PLAYER SCORE
         gbc.gridx = 0;
-        gbc.gridy = 0;
-        scores.add(label1,gbc);
+        gbc.gridy = 15;
+        scores.add(whiteScorePanel,gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 16;
+        scores.add(whiteScoreLabel,gbc);
+        this.whiteScorePanel.setPreferredSize(new Dimension(40,40));
+        this.whiteScorePanel.setBackground(Color.white);
+        
+        
+        gbc.gridx = 0;
+        gbc.gridy = 17;
+        scores.add(new JLabel(" "),gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 18;
+        scores.add(new JLabel(" "),gbc);
+        
+
+        // BLACK PLAYER SCORE
+        gbc.gridx = 0;
+        gbc.gridy = 19;
+        scores.add(blackScorePanel,gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 20;
+        scores.add(blackScoreLabel,gbc);
+        this.blackScorePanel.setPreferredSize(new Dimension(40,40));
+        this.blackScorePanel.setBackground(Color.black);
+        
+        
         
         
         
@@ -125,6 +174,21 @@ public class BoardView extends JFrame
 		return gridSize;
 	}
 	
+	public void setWhiteScore(int whiteScore) {
+		this.whiteScore = whiteScore;
+	}
+
+
+	public void setBlackScore(int blackScore) {
+		this.blackScore = blackScore;
+	}
+
+
+	public void updateScores() 
+	{
+		this.blackScoreLabel.setText("Score : "+this.blackScore);
+		this.whiteScoreLabel.setText("Score : "+this.whiteScore);
+	}
 	
 	
 	

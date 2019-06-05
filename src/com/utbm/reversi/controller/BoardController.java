@@ -31,11 +31,46 @@ public class BoardController
 				this.change = 0;
 			}
 			cell.updateState();
-
+			compterScores();
 			reversiFrame.changeWhoPlay();
 		}
 		
 	}
+	
+	
+	
+
+	
+	public void compterScores() 
+	{
+		Cell[][] cellArray = this.reversiFrame.getCellArray();
+		
+		int whiteScore = 0;
+		int blackScore = 0;
+		
+		for (int i = 0; i < this.reversiFrame.getGridSize() ; i++) 
+		{
+			for (int j = 0; j < this.reversiFrame.getGridSize() ; j++) 
+			{
+				if (cellArray[j][i].getState() == 1) // State = 1   => White
+				{
+					whiteScore = whiteScore+1;
+				}
+				else if (cellArray[j][i].getState() == 2) // State= 2	=> Black
+				{
+					blackScore = blackScore+1;
+				}
+			}
+		}
+		
+		this.reversiFrame.setBlackScore(blackScore);
+		this.reversiFrame.setWhiteScore(whiteScore);
+		this.reversiFrame.updateScores();
+		
+	}
+	
+	
+	
 	
 	public boolean isFollowingRules(Cell cell) 
 	{
