@@ -59,6 +59,46 @@ public class ReversiController
 			}
 			System.out.println("");
 			*/
+			
+			if (conditions[0] == true) 
+			{
+				completeLeftTop(cell);
+			}
+			
+			if (conditions[1] == true) 
+			{
+				completeTop(cell);
+			}
+			
+			if (conditions[2] == true) 
+			{
+				completeRightTop(cell);
+			}
+			
+			if (conditions[3] == true) 
+			{
+				completeLeftMiddle(cell);
+			}
+			
+			if (conditions[4] == true) 
+			{
+				completeRightMiddle(cell);
+			}
+			
+			if (conditions[5] == true) 
+			{
+				completeLeftBottom(cell);
+			}
+			
+			if (conditions[6] == true) 
+			{
+				completeBottom(cell);
+			}
+			
+			if (conditions[7] == true) 
+			{
+				completeRightBottom(cell);
+			}
 			return true;	
 		}
 		else
@@ -95,9 +135,6 @@ public class ReversiController
             }
             else
             {
-            	//cell.setState(tempState);
-    			//cell.updateState();
-    			//reversiFrame.changeWhoPlay();
             	return true;
             }
         }
@@ -373,6 +410,216 @@ public class ReversiController
 		}
 	}
 	
+	
+	
+	
+	public void completeLeftTop(Cell cell) 
+	{
+		Cell[][] cellArray = this.reversiFrame.getCellArray();
+		
+		int tempState=0;
+		
+		if (this.change == 0) 
+		{
+			tempState=1;
+		}
+		else
+		{
+			tempState=2;
+		}
+		
+		if ((cell.getCoordX() > 0) && (cell.getCoordY() > 0))
+        {
+			if (cellArray[cell.getCoordX() - 1][cell.getCoordY() - 1].getState() != tempState && cellArray[cell.getCoordX() - 1][cell.getCoordY() - 1].getState() != 0)
+            {
+            	cellArray[cell.getCoordX() - 1][cell.getCoordY() - 1].setState(tempState);
+            	cellArray[cell.getCoordX() - 1][cell.getCoordY() - 1].updateState();
+            	completeLeftTop(cellArray[cell.getCoordX() - 1][cell.getCoordY() - 1]);
+            }
+        }
+	}
+	
+	public void completeTop(Cell cell) 
+	{
+		Cell[][] cellArray = this.reversiFrame.getCellArray();
+		
+		int tempState=0;
+		
+		if (this.change == 0) 
+		{
+			tempState=1;
+		}
+		else
+		{
+			tempState=2;
+		}
+		
+		if (cell.getCoordY() > 0)
+        {
+			if (cellArray[cell.getCoordX()][cell.getCoordY() - 1].getState() != tempState && cellArray[cell.getCoordX()][cell.getCoordY() - 1].getState() != 0)
+            {
+            	cellArray[cell.getCoordX()][cell.getCoordY() - 1].setState(tempState);
+            	cellArray[cell.getCoordX()][cell.getCoordY() - 1].updateState();
+            	completeTop(cellArray[cell.getCoordX()][cell.getCoordY() - 1]);
+            }
+        }
+	}
+	
+	public void completeRightTop(Cell cell) 
+	{
+		Cell[][] cellArray = this.reversiFrame.getCellArray();
+		
+		int tempState=0;
+		
+		if (this.change == 0) 
+		{
+			tempState=1;
+		}
+		else
+		{
+			tempState=2;
+		}
+		
+		if ((cell.getCoordX()+1 < reversiFrame.getGridSize()) && (cell.getCoordY() > 0))
+        {
+			if (cellArray[cell.getCoordX() + 1][cell.getCoordY() - 1].getState() != tempState && cellArray[cell.getCoordX() + 1][cell.getCoordY() - 1].getState() != 0)
+            {
+            	cellArray[cell.getCoordX() + 1][cell.getCoordY() - 1].setState(tempState);
+            	cellArray[cell.getCoordX() + 1][cell.getCoordY() - 1].updateState();
+            	completeRightTop(cellArray[cell.getCoordX() + 1][cell.getCoordY() - 1]);
+            }
+        }
+	}
+	
+	public void completeLeftMiddle(Cell cell) 
+	{
+		Cell[][] cellArray = this.reversiFrame.getCellArray();
+		
+		int tempState=0;
+		
+		if (this.change == 0) 
+		{
+			tempState=1;
+		}
+		else
+		{
+			tempState=2;
+		}
+		
+		if (cell.getCoordX() > 0)
+        {
+			if (cellArray[cell.getCoordX() - 1][cell.getCoordY()].getState() != tempState && cellArray[cell.getCoordX() - 1][cell.getCoordY()].getState() != 0)
+            {
+            	cellArray[cell.getCoordX() - 1][cell.getCoordY()].setState(tempState);
+            	cellArray[cell.getCoordX() - 1][cell.getCoordY()].updateState();
+            	completeLeftMiddle(cellArray[cell.getCoordX() - 1][cell.getCoordY()]);
+            }
+        }
+	}
+	
+	public void completeRightMiddle(Cell cell) 
+	{
+		Cell[][] cellArray = this.reversiFrame.getCellArray();
+		
+		int tempState=0;
+		
+		if (this.change == 0) 
+		{
+			tempState=1;
+		}
+		else
+		{
+			tempState=2;
+		}
+		
+		if (cell.getCoordX()+1 < reversiFrame.getGridSize())
+        {
+			if (cellArray[cell.getCoordX() + 1][cell.getCoordY()].getState() != tempState && cellArray[cell.getCoordX() + 1][cell.getCoordY()].getState() != 0)
+            {
+            	cellArray[cell.getCoordX() + 1][cell.getCoordY()].setState(tempState);
+            	cellArray[cell.getCoordX() + 1][cell.getCoordY()].updateState();
+            	completeRightMiddle(cellArray[cell.getCoordX() + 1][cell.getCoordY()]);
+            }
+        }
+	}
+	
+	public void completeLeftBottom(Cell cell) 
+	{
+		Cell[][] cellArray = this.reversiFrame.getCellArray();
+		
+		int tempState=0;
+		
+		if (this.change == 0) 
+		{
+			tempState=1;
+		}
+		else
+		{
+			tempState=2;
+		}
+		
+		if ((cell.getCoordX() > 0) && (cell.getCoordY()+1 < reversiFrame.getGridSize()))
+        {
+			if (cellArray[cell.getCoordX() - 1][cell.getCoordY() + 1].getState() != tempState && cellArray[cell.getCoordX() - 1][cell.getCoordY() + 1].getState() != 0)
+            {
+            	cellArray[cell.getCoordX() - 1][cell.getCoordY() + 1].setState(tempState);
+            	cellArray[cell.getCoordX() - 1][cell.getCoordY() + 1].updateState();
+            	completeLeftBottom(cellArray[cell.getCoordX() - 1][cell.getCoordY() + 1]);
+            }
+        }
+	}
+	
+	public void completeBottom(Cell cell) 
+	{
+		Cell[][] cellArray = this.reversiFrame.getCellArray();
+		
+		int tempState=0;
+		
+		if (this.change == 0) 
+		{
+			tempState=1;
+		}
+		else
+		{
+			tempState=2;
+		}
+		
+		if (cell.getCoordY()+1 < reversiFrame.getGridSize())
+        {
+			if (cellArray[cell.getCoordX()][cell.getCoordY() + 1].getState() != tempState && cellArray[cell.getCoordX()][cell.getCoordY() + 1].getState() != 0)
+            {
+            	cellArray[cell.getCoordX()][cell.getCoordY() + 1].setState(tempState);
+            	cellArray[cell.getCoordX()][cell.getCoordY() + 1].updateState();
+            	completeBottom(cellArray[cell.getCoordX()][cell.getCoordY() + 1]);
+            }
+        }
+	}
+	
+	public void completeRightBottom(Cell cell) 
+	{
+		Cell[][] cellArray = this.reversiFrame.getCellArray();
+		
+		int tempState=0;
+		
+		if (this.change == 0) 
+		{
+			tempState=1;
+		}
+		else
+		{
+			tempState=2;
+		}
+		
+		if ((cell.getCoordX()+1 < reversiFrame.getGridSize()) && (cell.getCoordY()+1 < reversiFrame.getGridSize()))
+        {
+			if (cellArray[cell.getCoordX() + 1][cell.getCoordY() + 1].getState() != tempState && cellArray[cell.getCoordX() + 1][cell.getCoordY() + 1].getState() != 0)
+            {
+            	cellArray[cell.getCoordX() + 1][cell.getCoordY() + 1].setState(tempState);
+            	cellArray[cell.getCoordX() + 1][cell.getCoordY() + 1].updateState();
+            	completeRightBottom(cellArray[cell.getCoordX() + 1][cell.getCoordY() + 1]);
+            }
+        }
+	}
 	
 	
 	public int getChange() 
