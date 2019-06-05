@@ -17,7 +17,7 @@ public class ReversiController
 	
 	public void onCellClicked(Cell cell) 
 	{
-		if ((cell.getState() == 0) && (hasNeighbours(cell) == true) && (isFollowingRules(cell) == true))
+		if ((cell.getState() == 0) && (isFollowingRules(cell) == true))
 		{
 			if (this.change == 0) 
 			{
@@ -36,128 +36,6 @@ public class ReversiController
 		
 	}
 	
-	public boolean hasNeighbours(Cell cell) 
-	{
-		Cell[][] cellArray = this.reversiFrame.getCellArray();
-		
-		int idx=0;
-		
-		// En haut à gauche
-		if ((cell.getCoordX() > 0) && (cell.getCoordY() > 0))
-        {
-            if (cellArray[cell.getCoordX() - 1][cell.getCoordY() - 1].getState() == 0)
-            {
-                idx=idx+1;
-            }
-        }
-		else
-		{
-			idx=idx+1;
-		}
-		
-        // En haut
-        if (cell.getCoordY() > 0)
-        {
-        	if (cellArray[cell.getCoordX()][cell.getCoordY() - 1].getState() == 0)
-            {
-        		idx=idx+1;
-            }
-        }
-		else
-		{
-			idx=idx+1;
-		}
-        
-        // En haut à droite
-        if ((cell.getCoordX()+1 < reversiFrame.getGridSize()) && (cell.getCoordY() > 0))
-        {
-        	if (cellArray[cell.getCoordX() + 1][cell.getCoordY() - 1].getState() == 0)
-            {
-        		idx=idx+1;
-            }
-        }
-		else
-		{
-			idx=idx+1;
-		}
-        
-        // Au milieu à gauche
-        if (cell.getCoordX() > 0)
-        {
-        	if (cellArray[cell.getCoordX() - 1][cell.getCoordY()].getState() == 0)
-            {
-        		idx=idx+1;
-            }
-            
-        }
-        else
-		{
-			idx=idx+1;
-		}
-        
-        // Au milieu à droite
-        if (cell.getCoordX()+1 < reversiFrame.getGridSize())
-        {
-        	if (cellArray[cell.getCoordX() + 1][cell.getCoordY()].getState() == 0)
-            {
-        		idx=idx+1;
-            }
-        }
-        else
-		{
-			idx=idx+1;
-		}
-        
-        // En bas à gauche
-        if ((cell.getCoordX() > 0) && (cell.getCoordY()+1 < reversiFrame.getGridSize()))
-        {
-        	if (cellArray[cell.getCoordX() - 1][cell.getCoordY() + 1].getState() == 0)
-            {
-        		idx=idx+1;
-            }
-        }
-        else
-		{
-			idx=idx+1;
-		}
-        
-        // En bas
-        if (cell.getCoordY()+1 < reversiFrame.getGridSize())
-        {
-        	if (cellArray[cell.getCoordX()][cell.getCoordY() + 1].getState() == 0)
-            {
-        		idx=idx+1;
-            }
-        }
-        else
-		{
-			idx=idx+1;
-		}
-        
-        // En bas à droite
-        if ((cell.getCoordX()+1 < reversiFrame.getGridSize()) && (cell.getCoordY()+1 < reversiFrame.getGridSize()))
-        {
-        	if (cellArray[cell.getCoordX() + 1][cell.getCoordY() + 1].getState() == 0)
-            {
-        		idx=idx+1;
-            }
-        }
-        else
-		{
-			idx=idx+1;
-		}
-        
-        
-        if (idx == 8) 
-        {
-        	return false;
-        }
-        else
-        {
-        	return true;
-        }
-	}
-	
 	public boolean isFollowingRules(Cell cell) 
 	{
 		int compteurInter[] = {0,0,0,0,0,0,0,0};
@@ -172,7 +50,7 @@ public class ReversiController
 		conditions[6] = hasSameColorBottom(cell, compteurInter);
 		conditions[7] = hasSameColorRightBottom(cell, compteurInter);
 		
-		if (conditions[0] == true || conditions[1] == true || conditions[2] == true  || conditions[3] == true  || conditions[4] == true  || conditions[5] == true  || conditions[6] == true  || conditions[7] == true )
+		if ((conditions[0] == true && compteurInter[0]>0) || (conditions[1] == true && compteurInter[1]>0)  || (conditions[2] == true && compteurInter[2]>0)   || (conditions[3] == true && compteurInter[3]>0)   || (conditions[4] == true && compteurInter[4]>0)   || (conditions[5] == true && compteurInter[5]>0)   || (conditions[6] == true && compteurInter[6]>0)   || (conditions[7] == true && compteurInter[7]>0))
 		{
 			/*
 			for (int i=0;i<8;i++) 
