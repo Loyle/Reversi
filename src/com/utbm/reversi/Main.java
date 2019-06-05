@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import com.utbm.reversi.model.Player;
 import com.utbm.reversi.model.powers.Power;
-//import com.utbm.reversi.model.Board;
+import com.utbm.reversi.model.Board;
 import com.utbm.reversi.view.BoardView;
 
 public class Main {
@@ -12,7 +12,7 @@ public class Main {
 
 	public static void main(String[] args) 
 	{
-		//new BoardView();
+		new BoardView();
 		
 		
 		Player player = new Player("Marco", new Color(0,255,25));
