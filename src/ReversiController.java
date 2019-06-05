@@ -41,14 +41,14 @@ public class ReversiController
 		int compteurInter[] = {0,0,0,0,0,0,0,0};
 		
 		boolean conditions[] = new boolean[8];
-		conditions[0] = hasSameColorLeftTop(cell, compteurInter);
-		conditions[1] = hasSameColorTop(cell, compteurInter);
-		conditions[2] = hasSameColorRightTop(cell, compteurInter);
-		conditions[3] = hasSameColorLeftMiddle(cell, compteurInter);
-		conditions[4] = hasSameColorRightMiddle(cell, compteurInter);
-		conditions[5] = hasSameColorLeftBottom(cell, compteurInter);
-		conditions[6] = hasSameColorBottom(cell, compteurInter);
-		conditions[7] = hasSameColorRightBottom(cell, compteurInter);
+		conditions[0] = isFollowingRulesLeftTop(cell, compteurInter);
+		conditions[1] = isFollowingRulesTop(cell, compteurInter);
+		conditions[2] = isFollowingRulesRightTop(cell, compteurInter);
+		conditions[3] = isFollowingRulesLeftMiddle(cell, compteurInter);
+		conditions[4] = isFollowingRulesRightMiddle(cell, compteurInter);
+		conditions[5] = isFollowingRulesLeftBottom(cell, compteurInter);
+		conditions[6] = isFollowingRulesBottom(cell, compteurInter);
+		conditions[7] = isFollowingRulesRightBottom(cell, compteurInter);
 		
 		if ((conditions[0] == true && compteurInter[0]>0) || (conditions[1] == true && compteurInter[1]>0)  || (conditions[2] == true && compteurInter[2]>0)   || (conditions[3] == true && compteurInter[3]>0)   || (conditions[4] == true && compteurInter[4]>0)   || (conditions[5] == true && compteurInter[5]>0)   || (conditions[6] == true && compteurInter[6]>0)   || (conditions[7] == true && compteurInter[7]>0))
 		{
@@ -68,9 +68,7 @@ public class ReversiController
 		
 	}
 	
-	
-	
-	public boolean hasSameColorLeftTop(Cell cell, int[] compteurInter) 
+	public boolean isFollowingRulesLeftTop(Cell cell, int[] compteurInter) 
 	{
 		Cell[][] cellArray = this.reversiFrame.getCellArray();
 		int tempState=0;
@@ -93,7 +91,7 @@ public class ReversiController
             else if (cellArray[cell.getCoordX() - 1][cell.getCoordY() - 1].getState() != tempState)
             {
             	compteurInter[0] = compteurInter[0]+1;
-            	return hasSameColorLeftTop(cellArray[cell.getCoordX() - 1][cell.getCoordY() - 1], compteurInter);
+            	return isFollowingRulesLeftTop(cellArray[cell.getCoordX() - 1][cell.getCoordY() - 1], compteurInter);
             }
             else
             {
@@ -109,7 +107,7 @@ public class ReversiController
 		}
 	}
 	
-	public boolean hasSameColorTop(Cell cell, int[] compteurInter) 
+	public boolean isFollowingRulesTop(Cell cell, int[] compteurInter) 
 	{
 		Cell[][] cellArray = this.reversiFrame.getCellArray();
 		
@@ -134,7 +132,7 @@ public class ReversiController
             else if (cellArray[cell.getCoordX()][cell.getCoordY() - 1].getState() != tempState)
             {
             	compteurInter[1] = compteurInter[1]+1;
-                return hasSameColorTop(cellArray[cell.getCoordX()][cell.getCoordY() - 1], compteurInter);
+                return isFollowingRulesTop(cellArray[cell.getCoordX()][cell.getCoordY() - 1], compteurInter);
             }
             else 
             {
@@ -147,7 +145,7 @@ public class ReversiController
 		}
 	}
 	
-	public boolean hasSameColorRightTop(Cell cell, int[] compteurInter) 
+	public boolean isFollowingRulesRightTop(Cell cell, int[] compteurInter) 
 	{
 		Cell[][] cellArray = this.reversiFrame.getCellArray();
 		
@@ -172,7 +170,7 @@ public class ReversiController
 			else if (cellArray[cell.getCoordX() + 1][cell.getCoordY() - 1].getState() != tempState)
             {
             	compteurInter[2] = compteurInter[2]+1;
-            	return hasSameColorRightTop(cellArray[cell.getCoordX() + 1][cell.getCoordY() - 1], compteurInter);
+            	return isFollowingRulesRightTop(cellArray[cell.getCoordX() + 1][cell.getCoordY() - 1], compteurInter);
             }
             else 
             {
@@ -185,7 +183,7 @@ public class ReversiController
 		}
 	}
 	
-	public boolean hasSameColorLeftMiddle(Cell cell, int[] compteurInter) 
+	public boolean isFollowingRulesLeftMiddle(Cell cell, int[] compteurInter) 
 	{
 		Cell[][] cellArray = this.reversiFrame.getCellArray();
 		
@@ -210,7 +208,7 @@ public class ReversiController
 			else if (cellArray[cell.getCoordX() - 1][cell.getCoordY()].getState() != tempState)
             {
             	compteurInter[3] = compteurInter[3]+1;
-            	return hasSameColorLeftMiddle(cellArray[cell.getCoordX() - 1][cell.getCoordY()], compteurInter);
+            	return isFollowingRulesLeftMiddle(cellArray[cell.getCoordX() - 1][cell.getCoordY()], compteurInter);
             }
             else 
             {
@@ -223,7 +221,7 @@ public class ReversiController
 		}
 	}
 
-	public boolean hasSameColorRightMiddle(Cell cell, int[] compteurInter) 
+	public boolean isFollowingRulesRightMiddle(Cell cell, int[] compteurInter) 
 	{
 		Cell[][] cellArray = this.reversiFrame.getCellArray();
 		
@@ -248,7 +246,7 @@ public class ReversiController
             else if (cellArray[cell.getCoordX() + 1][cell.getCoordY()].getState() != tempState)
             {
             	compteurInter[4] = compteurInter[4]+1;
-            	return hasSameColorRightMiddle(cellArray[cell.getCoordX() + 1][cell.getCoordY()], compteurInter);
+            	return isFollowingRulesRightMiddle(cellArray[cell.getCoordX() + 1][cell.getCoordY()], compteurInter);
             }
             else 
             {
@@ -261,7 +259,7 @@ public class ReversiController
 		}
 	}
 
-	public boolean hasSameColorLeftBottom(Cell cell, int[] compteurInter) 
+	public boolean isFollowingRulesLeftBottom(Cell cell, int[] compteurInter) 
 	{
 		Cell[][] cellArray = this.reversiFrame.getCellArray();
 		
@@ -286,7 +284,7 @@ public class ReversiController
             else if (cellArray[cell.getCoordX() - 1][cell.getCoordY() + 1].getState() != tempState)
             {
             	compteurInter[5] = compteurInter[5]+1;
-                return hasSameColorLeftBottom(cellArray[cell.getCoordX() - 1][cell.getCoordY() + 1], compteurInter);
+                return isFollowingRulesLeftBottom(cellArray[cell.getCoordX() - 1][cell.getCoordY() + 1], compteurInter);
             }
             else 
             {
@@ -299,7 +297,7 @@ public class ReversiController
 		}
 	}
 
-	public boolean hasSameColorBottom(Cell cell, int[] compteurInter) 
+	public boolean isFollowingRulesBottom(Cell cell, int[] compteurInter) 
 	{
 		Cell[][] cellArray = this.reversiFrame.getCellArray();
 		
@@ -324,7 +322,7 @@ public class ReversiController
             else if (cellArray[cell.getCoordX()][cell.getCoordY() + 1].getState() != tempState)
             {
             	compteurInter[6] = compteurInter[6]+1;
-            	return hasSameColorBottom(cellArray[cell.getCoordX()][cell.getCoordY() + 1], compteurInter);
+            	return isFollowingRulesBottom(cellArray[cell.getCoordX()][cell.getCoordY() + 1], compteurInter);
             }
             else 
             {
@@ -337,7 +335,7 @@ public class ReversiController
 		}
 	}
 	
-	public boolean hasSameColorRightBottom(Cell cell, int[] compteurInter) 
+	public boolean isFollowingRulesRightBottom(Cell cell, int[] compteurInter) 
 	{
 		Cell[][] cellArray = this.reversiFrame.getCellArray();
 		
@@ -362,7 +360,7 @@ public class ReversiController
             else if (cellArray[cell.getCoordX() + 1][cell.getCoordY() + 1].getState() != tempState)
             {
             	compteurInter[7] = compteurInter[7]+1;
-            	return hasSameColorRightBottom(cellArray[cell.getCoordX() + 1][cell.getCoordY() + 1], compteurInter);
+            	return isFollowingRulesRightBottom(cellArray[cell.getCoordX() + 1][cell.getCoordY() + 1], compteurInter);
             }
             else 
             {
