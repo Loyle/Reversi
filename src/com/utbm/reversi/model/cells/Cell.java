@@ -2,11 +2,7 @@ package com.utbm.reversi.model.cells;
 
 import java.awt.Color;
 
-//import java.awt.Image;
-
 import javax.swing.JButton;
-
-
 
 public class Cell extends JButton
 {

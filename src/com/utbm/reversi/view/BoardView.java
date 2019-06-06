@@ -38,20 +38,22 @@ public class BoardView extends JFrame
 	
 	private final int cellSize = 70;
 	private final int scoresSizeX = 100;
-	private final int gridSize = 8;
+	private int gridSize;
 	
 	
-	public BoardView() 
+	public BoardView(int size) 
 	{
+		this.gridSize = size;
+		
 		final JPanel game = new JPanel();
         game.setBackground(Color.black);
-        game.setLayout(new GridLayout(gridSize,gridSize,1,1));
+        game.setLayout(new GridLayout(this.gridSize,this.gridSize,1,1));
         
-        cellArray = new Cell[gridSize][gridSize];
+        cellArray = new Cell[this.gridSize][this.gridSize];
         
-        for (int i=0; i<gridSize ; i++) 
+        for (int i=0; i<this.gridSize ; i++) 
         {
-        	for (int j=0;j<gridSize;j++) 
+        	for (int j=0;j<this.gridSize;j++) 
         	{
         		final Cell cell = new Cell();
         		cell.setBackground(Color.green);
@@ -60,13 +62,13 @@ public class BoardView extends JFrame
         		cell.setCoordY(i);
         		cellArray[j][i] = cell;
         		
-        		if ((i > -2 + gridSize/2) && (i < 1 + gridSize/2) && (j > -2 + gridSize/2) && (j < 1 + gridSize/2)) 
+        		if ((i > -2 + this.gridSize/2) && (i < 1 + this.gridSize/2) && (j > -2 + this.gridSize/2) && (j < 1 + this.gridSize/2)) 
         		{
-        			if ((i == -1 + gridSize/2) && (j == -1 + gridSize/2)) 
+        			if ((i == -1 + this.gridSize/2) && (j == -1 + this.gridSize/2)) 
         			{
             			cell.setState(2);
         			}
-        			else if ((i == gridSize/2) && (j == gridSize/2)) 
+        			else if ((i == this.gridSize/2) && (j == this.gridSize/2)) 
         			{
             			cell.setState(2);
         			}
@@ -143,7 +145,7 @@ public class BoardView extends JFrame
         
         
         
-        this.setMinimumSize(new Dimension(13+gridSize*(cellSize+5)+scoresSizeX, 42+gridSize*(cellSize+5)));
+        this.setMinimumSize(new Dimension(13+this.gridSize*(cellSize+5)+scoresSizeX, 42+this.gridSize*(cellSize+5)));
         this.getContentPane().add(game, BorderLayout.CENTER);
         this.getContentPane().add(scores, BorderLayout.EAST);
         this.pack();
@@ -190,6 +192,10 @@ public class BoardView extends JFrame
 		this.whiteScoreLabel.setText("Score : "+this.whiteScore);
 	}
 	
-	
+
+	public void setGridSize(int gridSize) 
+	{
+		this.gridSize = gridSize;
+	}
 	
 }
