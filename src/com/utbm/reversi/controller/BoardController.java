@@ -1,5 +1,4 @@
 package com.utbm.reversi.controller;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -28,6 +27,8 @@ public class BoardController
 	{
 		if ((cell.getState() == 0) && (isFollowingRules(cell) == true))
 		{
+			fillCell(cell);
+			
 			if (this.change == 0) 
 			{
 				cell.setState(1);
@@ -43,7 +44,7 @@ public class BoardController
 			reversiFrame.changeWhoPlay();
 			
 			
-			if (isEnded() == true) 
+			if (isEnded() == true || isBlocked() == true) 
 			{
 				this.reversiFrame.remove(this.reversiFrame.getGame());
 				JPanel end = new JPanel();
@@ -51,18 +52,37 @@ public class BoardController
 				end.setLayout(new GridBagLayout());
 		        GridBagConstraints gbc = new GridBagConstraints();
 				JLabel endMsg = new JLabel();
-				if (this.reversiFrame.getWhiteScore() == this.reversiFrame.getBlackScore()) 
+				if (isEnded() == true) 
 				{
-					endMsg.setText("The game ends in a tie !");
+					if (this.reversiFrame.getWhiteScore() == this.reversiFrame.getBlackScore()) 
+					{
+						endMsg.setText("The game ends in a tie !");
+					}
+					else if (this.reversiFrame.getWhiteScore() > this.reversiFrame.getBlackScore()) 
+					{
+						endMsg.setText("Whites win !");
+					}
+					else
+					{
+						endMsg.setText("Blacks win !");
+					}
 				}
-				else if (this.reversiFrame.getWhiteScore() > this.reversiFrame.getBlackScore()) 
+				else if (isBlocked() == true) 
 				{
-					endMsg.setText("Whites win !");
+					if (this.reversiFrame.getWhiteScore() == this.reversiFrame.getBlackScore()) 
+					{
+						endMsg.setText("No more possibilities ! It was a tie.");
+					}
+					else if (this.reversiFrame.getWhiteScore() > this.reversiFrame.getBlackScore()) 
+					{
+						endMsg.setText("No more possibilities ! Whites were winning.");
+					}
+					else
+					{
+						endMsg.setText("No more possibilities ! Blacks were winning.");
+					}
 				}
-				else
-				{
-					endMsg.setText("Blacks win !");
-				}
+				
 		        gbc.gridx=0;
 		        gbc.gridy=0;
 				end.add(endMsg,gbc);
@@ -181,45 +201,6 @@ public class BoardController
 			System.out.println("");
 			*/
 			
-			if (conditions[0] == true) 
-			{
-				completeLeftTop(cell);
-			}
-			
-			if (conditions[1] == true) 
-			{
-				completeTop(cell);
-			}
-			
-			if (conditions[2] == true) 
-			{
-				completeRightTop(cell);
-			}
-			
-			if (conditions[3] == true) 
-			{
-				completeLeftMiddle(cell);
-			}
-			
-			if (conditions[4] == true) 
-			{
-				completeRightMiddle(cell);
-			}
-			
-			if (conditions[5] == true) 
-			{
-				completeLeftBottom(cell);
-			}
-			
-			if (conditions[6] == true) 
-			{
-				completeBottom(cell);
-			}
-			
-			if (conditions[7] == true) 
-			{
-				completeRightBottom(cell);
-			}
 			return true;	
 		}
 		else
@@ -227,6 +208,61 @@ public class BoardController
 			return false;
 		}
 		
+	}
+	
+	public void fillCell(Cell cell) 
+	{
+		int compteurInter[] = {0,0,0,0,0,0,0,0};
+		
+		boolean conditions[] = new boolean[8];
+		conditions[0] = isFollowingRulesLeftTop(cell, compteurInter);
+		conditions[1] = isFollowingRulesTop(cell, compteurInter);
+		conditions[2] = isFollowingRulesRightTop(cell, compteurInter);
+		conditions[3] = isFollowingRulesLeftMiddle(cell, compteurInter);
+		conditions[4] = isFollowingRulesRightMiddle(cell, compteurInter);
+		conditions[5] = isFollowingRulesLeftBottom(cell, compteurInter);
+		conditions[6] = isFollowingRulesBottom(cell, compteurInter);
+		conditions[7] = isFollowingRulesRightBottom(cell, compteurInter);
+		
+		if (conditions[0] == true) 
+		{
+			completeLeftTop(cell);
+		}
+		
+		if (conditions[1] == true) 
+		{
+			completeTop(cell);
+		}
+		
+		if (conditions[2] == true) 
+		{
+			completeRightTop(cell);
+		}
+		
+		if (conditions[3] == true) 
+		{
+			completeLeftMiddle(cell);
+		}
+		
+		if (conditions[4] == true) 
+		{
+			completeRightMiddle(cell);
+		}
+		
+		if (conditions[5] == true) 
+		{
+			completeLeftBottom(cell);
+		}
+		
+		if (conditions[6] == true) 
+		{
+			completeBottom(cell);
+		}
+		
+		if (conditions[7] == true) 
+		{
+			completeRightBottom(cell);
+		}
 	}
 	
 	public boolean isFollowingRulesLeftTop(Cell cell, int[] compteurInter) 
@@ -772,25 +808,31 @@ public class BoardController
 	}
 	
 	
-	/*public boolean isBlocked() 
+	public boolean isBlocked() 
 	{
 		Cell[][] cellArray = this.reversiFrame.getCellArray();
 		
-		int idx=0;
+		int idx1=0;
+		int idx2=0;
 		
 		for (int i=0;i<reversiFrame.getGridSize();i++) 
 		{
 			for (int j=0;j<reversiFrame.getGridSize();j++) 
 			{
-				if (cellArray[i][j].getState() == 0 && cellArray[i][j].isClicPossible() == true) 
+				if (cellArray[i][j].getState() == 0 && isFollowingRules(cellArray[i][j]) == false) 
 				{
-					
+					idx1=idx1+1;
+				}
+				
+				if (cellArray[i][j].getState() == 0) 
+				{
+					idx2=idx2+1;
 				}
 					
 			}
 		}
-		/*
-		if (idx == reversiFrame.getGridSize()*reversiFrame.getGridSize()) 
+		
+		if (idx1 == idx2) 
 		{
 			return true;
 		}
@@ -798,7 +840,7 @@ public class BoardController
 		{
 			return false;
 		}
-	}*/
+	}
 	
 	
 	

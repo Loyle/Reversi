@@ -1,5 +1,4 @@
 package com.utbm.reversi.model.cells;
-
 import java.awt.Color;
 
 import javax.swing.JButton;
@@ -16,6 +15,7 @@ public class Cell extends JButton
 	private int coordY;
 	
 	private int state;
+	
 	//private Image img;
 	
 	public Cell() 
@@ -99,8 +99,5 @@ public class Cell extends JButton
 		this.setIcon(new ImageIcon(img));
 		*/
 	}
-	
-	
-	
-	
+
 }
