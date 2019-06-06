@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -134,8 +135,21 @@ public class ReversiFrame extends JFrame
         this.blackScorePanel.setBackground(Color.black);
         
         
+        // BACK TO MENU
+        JButton backToMenu = new JButton("<=");
         
+        for (int addSpace = 21 ; addSpace<25 ; addSpace++) 
+        {
+            gbc.gridx = 0;
+            gbc.gridy = addSpace;
+            scores.add(new JLabel(" "),gbc);
+        }
         
+        gbc.gridx = 0;
+        gbc.gridy = 26;
+        backToMenu.setPreferredSize(new Dimension(50,40));
+        backToMenu.addActionListener(e -> reversiController.onBackToMenuClicked(backToMenu));
+        scores.add(backToMenu,gbc);
         
         this.setMinimumSize(new Dimension(13+gridSize*(cellSize+5)+scoresSizeX, 42+gridSize*(cellSize+5)));
         this.getContentPane().add(game, BorderLayout.CENTER);

@@ -21,7 +21,7 @@ public class MenuController
 		
 		reversiFrame.setTitle("Reversi Game");
         
-		reversiFrame.setSize(500, 500);
+		reversiFrame.setSize(700, 700);
 		reversiFrame.setGridSize(this.gridSize);
 
 		reversiFrame.setVisible(true);

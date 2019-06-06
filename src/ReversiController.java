@@ -1,4 +1,5 @@
-
+import javax.swing.JButton;
+import javax.swing.WindowConstants;
 
 public class ReversiController 
 {
@@ -29,6 +30,20 @@ public class ReversiController
 			reversiFrame.changeWhoPlay();
 		}
 		
+	}
+	
+	public void onBackToMenuClicked(JButton backToMenu) 
+	{
+		this.reversiFrame.dispose();
+		
+		MenuFrame menuFrame = new MenuFrame();
+		
+		menuFrame.setTitle("Menu - Reversi Game");
+        
+		menuFrame.setSize(700, 700);
+
+		menuFrame.setVisible(true);
+		menuFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
 	
 	
