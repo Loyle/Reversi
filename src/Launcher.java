@@ -6,14 +6,15 @@ public class Launcher
 
 	public static void main(String[] args) 
 	{
-		final JFrame frame = new ReversiFrame();
-        frame.setTitle("Reversi Game");
+		
+		final JFrame menuFrame = new MenuFrame();
+		menuFrame.setTitle("Menu - Reversi Game");
         
-        frame.setSize(500, 500);
+		menuFrame.setSize(700, 700);
 
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
+		menuFrame.setVisible(true);
+		menuFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		
 	}
 
 }

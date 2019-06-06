@@ -5,7 +5,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -18,8 +17,7 @@ public class ReversiFrame extends JFrame
 	 */
 	private static final long serialVersionUID = -8514403723481387196L;
 	
-	private final ReversiState reversiState = new ReversiState();
-	private final ReversiController reversiController = new ReversiController(this.reversiState,this);
+	private final ReversiController reversiController = new ReversiController(this);
 	private Cell cellArray[][];
 	
 	private final JLabel label1 = new JLabel("Tour des :");
@@ -34,20 +32,22 @@ public class ReversiFrame extends JFrame
 	
 	private final int cellSize = 70;
 	private final int scoresSizeX = 100;
-	private final int gridSize = 8;
+	private int gridSize;
 	
 	
-	public ReversiFrame() 
+	public ReversiFrame(int size) 
 	{
+		this.gridSize = size;
+		
 		final JPanel game = new JPanel();
         game.setBackground(Color.black);
-        game.setLayout(new GridLayout(gridSize,gridSize,1,1));
+        game.setLayout(new GridLayout(this.gridSize,this.gridSize,1,1));
         
-        cellArray = new Cell[gridSize][gridSize];
+        cellArray = new Cell[this.gridSize][this.gridSize];
         
-        for (int i=0; i<gridSize ; i++) 
+        for (int i=0; i<this.gridSize ; i++) 
         {
-        	for (int j=0;j<gridSize;j++) 
+        	for (int j=0;j<this.gridSize;j++) 
         	{
         		final Cell cell = new Cell();
         		cell.setBackground(Color.green);
@@ -56,13 +56,13 @@ public class ReversiFrame extends JFrame
         		cell.setCoordY(i);
         		cellArray[j][i] = cell;
         		
-        		if ((i > -2 + gridSize/2) && (i < 1 + gridSize/2) && (j > -2 + gridSize/2) && (j < 1 + gridSize/2)) 
+        		if ((i > -2 + this.gridSize/2) && (i < 1 + this.gridSize/2) && (j > -2 + this.gridSize/2) && (j < 1 + this.gridSize/2)) 
         		{
-        			if ((i == -1 + gridSize/2) && (j == -1 + gridSize/2)) 
+        			if ((i == -1 + this.gridSize/2) && (j == -1 + this.gridSize/2)) 
         			{
             			cell.setState(2);
         			}
-        			else if ((i == gridSize/2) && (j == gridSize/2)) 
+        			else if ((i == this.gridSize/2) && (j == this.gridSize/2)) 
         			{
             			cell.setState(2);
         			}
@@ -187,6 +187,12 @@ public class ReversiFrame extends JFrame
 	{
 		this.blackScoreLabel.setText("Score : "+this.blackScore);
 		this.whiteScoreLabel.setText("Score : "+this.whiteScore);
+	}
+
+
+	public void setGridSize(int gridSize) 
+	{
+		this.gridSize = gridSize;
 	}
 	
 	

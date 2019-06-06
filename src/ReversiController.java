@@ -1,22 +1,14 @@
-import java.awt.Color;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
 
 public class ReversiController 
 {
-	private final ReversiState reversiState;
 	private final ReversiFrame reversiFrame;
 	private int change = 0;
 	
-	public ReversiController(ReversiState reversiState, ReversiFrame reversiFrame)
+	public ReversiController(ReversiFrame reversiFrame)
 	{
-		this.reversiState = reversiState;
 		this.reversiFrame = reversiFrame;
 	}
-	
-	
-	
 	
 	public void onCellClicked(Cell cell) 
 	{
