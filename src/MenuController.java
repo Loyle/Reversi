@@ -22,8 +22,7 @@ public class MenuController
 		reversiFrame.setTitle("Reversi Game");
         
 		reversiFrame.setSize(700, 700);
-		reversiFrame.setGridSize(this.gridSize);
-
+		
 		reversiFrame.setVisible(true);
 		reversiFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}

@@ -1,4 +1,11 @@
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 public class ReversiController 
@@ -28,8 +35,72 @@ public class ReversiController
 			cell.updateState();
 			compterScores();
 			reversiFrame.changeWhoPlay();
+			
+			
+			if (isEnded() == true) 
+			{
+				this.reversiFrame.remove(this.reversiFrame.getGame());
+				JPanel end = new JPanel();
+				end.setBackground(Color.lightGray);
+				end.setLayout(new GridBagLayout());
+		        GridBagConstraints gbc = new GridBagConstraints();
+				JLabel endMsg = new JLabel();
+				if (this.reversiFrame.getWhiteScore() == this.reversiFrame.getBlackScore()) 
+				{
+					endMsg.setText("The game ends in a tie !");
+				}
+				else if (this.reversiFrame.getWhiteScore() > this.reversiFrame.getBlackScore()) 
+				{
+					endMsg.setText("Whites win !");
+				}
+				else
+				{
+					endMsg.setText("Blacks win !");
+				}
+		        gbc.gridx=0;
+		        gbc.gridy=0;
+				end.add(endMsg,gbc);
+				
+				for (int addSpace = 1 ; addSpace<5 ; addSpace++) 
+		        {
+		            gbc.gridx = 0;
+		            gbc.gridy = addSpace;
+		            end.add(new JLabel(" "),gbc);
+		        }
+				
+				JButton replay = new JButton("Replay");
+				gbc.gridx=0;
+			    gbc.gridy=5;
+			    replay.addActionListener(e -> this.onReplayClicked(replay));
+			    end.add(replay,gbc);
+				this.reversiFrame.getContentPane().add(end,BorderLayout.CENTER);
+				
+				
+				JButton endBackToMenu = new JButton("Back to Menu");
+				gbc.gridx=0;
+			    gbc.gridy=6;
+			    endBackToMenu.addActionListener(e -> this.onBackToMenuClicked(endBackToMenu));
+			    end.add(endBackToMenu,gbc);
+				this.reversiFrame.getContentPane().add(end,BorderLayout.CENTER);
+			}
+			
 		}
 		
+	}
+	
+	public void onReplayClicked(JButton replay) 
+	{
+		
+		ReversiFrame newFrame = new ReversiFrame(this.reversiFrame.getGridSize());
+		newFrame.setTitle("Reversi Game");
+        
+		newFrame.setSize(700, 700);
+		
+		this.reversiFrame.dispose();
+		
+
+		newFrame.setVisible(true);
+		newFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
 	
 	public void onBackToMenuClicked(JButton backToMenu) 
@@ -664,6 +735,66 @@ public class ReversiController
             }
         }
 	}
+	
+	
+	
+	public boolean isEnded() 
+	{
+		Cell[][] cellArray = this.reversiFrame.getCellArray();
+		
+		int idx=0;
+		
+		for (int i=0;i<reversiFrame.getGridSize();i++) 
+		{
+			for (int j=0;j<reversiFrame.getGridSize();j++) 
+			{
+				if (cellArray[i][j].getState() != 0) 
+				{
+					idx=idx+1;
+				}
+			}
+		}
+		
+		if (idx == reversiFrame.getGridSize()*reversiFrame.getGridSize()) 
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	
+	/*public boolean isBlocked() 
+	{
+		Cell[][] cellArray = this.reversiFrame.getCellArray();
+		
+		int idx=0;
+		
+		for (int i=0;i<reversiFrame.getGridSize();i++) 
+		{
+			for (int j=0;j<reversiFrame.getGridSize();j++) 
+			{
+				if (cellArray[i][j].getState() == 0 && cellArray[i][j].isClicPossible() == true) 
+				{
+					
+				}
+					
+			}
+		}
+		/*
+		if (idx == reversiFrame.getGridSize()*reversiFrame.getGridSize()) 
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}*/
+	
+	
 	
 	
 	public int getChange() 
