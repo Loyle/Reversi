@@ -1,8 +1,12 @@
 package com.utbm.reversi.controller;
 
 
+import javax.swing.JButton;
+import javax.swing.WindowConstants;
+
 import com.utbm.reversi.model.cells.Cell;
 import com.utbm.reversi.view.BoardView;
+import com.utbm.reversi.view.MenuFrame;
 
 
 
@@ -37,6 +41,20 @@ public class BoardController
 		
 	}
 	
+	
+	public void onBackToMenuClicked(JButton backToMenu) 
+	{
+		this.reversiFrame.dispose();
+		
+		MenuFrame menuFrame = new MenuFrame();
+		
+		menuFrame.setTitle("Menu - Reversi Game");
+        
+		menuFrame.setSize(700, 700);
+
+		menuFrame.setVisible(true);
+		menuFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+	}
 	
 	
 
