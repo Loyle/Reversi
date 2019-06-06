@@ -26,6 +26,8 @@ public class BoardView extends JFrame
 	private final BoardController reversiController = new BoardController(this);
 	private Cell cellArray[][];
 	
+	final JPanel game = new JPanel();
+	
 	private final JLabel label1 = new JLabel("Tour des :");
 	private final JPanel whoPlay = new JPanel();
 	
@@ -36,6 +38,8 @@ public class BoardView extends JFrame
 	private int blackScore=2;
 	private final JPanel blackScorePanel = new JPanel();
 	
+	private JButton backToMenu = new JButton("<=");
+	
 	private final int cellSize = 70;
 	private final int scoresSizeX = 100;
 	private int gridSize;
@@ -45,9 +49,8 @@ public class BoardView extends JFrame
 	{
 		this.gridSize = size;
 		
-		final JPanel game = new JPanel();
-        game.setBackground(Color.black);
-        game.setLayout(new GridLayout(this.gridSize,this.gridSize,1,1));
+        this.game.setBackground(Color.black);
+        this.game.setLayout(new GridLayout(this.gridSize,this.gridSize,1,1));
         
         cellArray = new Cell[this.gridSize][this.gridSize];
         
@@ -77,7 +80,7 @@ public class BoardView extends JFrame
             			cell.setState(1);
         			}
         		}
-        		game.add(cell);
+        		this.game.add(cell);
         		cell.updateState();
         	}
         }
@@ -91,8 +94,6 @@ public class BoardView extends JFrame
         scores.setLayout(new GridBagLayout());
         scores.setPreferredSize(new Dimension(scoresSizeX,500));
         GridBagConstraints gbc = new GridBagConstraints();
-        
-        
         
         // WHO WILL PLAY
         gbc.gridx = 0;
@@ -142,10 +143,7 @@ public class BoardView extends JFrame
         this.blackScorePanel.setBackground(Color.black);
         
         
-
         // BACK TO MENU
-        JButton backToMenu = new JButton("<=");
-        
         for (int addSpace = 21 ; addSpace<25 ; addSpace++) 
         {
             gbc.gridx = 0;
@@ -155,13 +153,11 @@ public class BoardView extends JFrame
         
         gbc.gridx = 0;
         gbc.gridy = 26;
-        backToMenu.setPreferredSize(new Dimension(50,40));
-        backToMenu.addActionListener(e -> reversiController.onBackToMenuClicked(backToMenu));
-        scores.add(backToMenu,gbc);
+        this.backToMenu.setPreferredSize(new Dimension(50,40));
+        this.backToMenu.addActionListener(e -> reversiController.onBackToMenuClicked(this.backToMenu));
+        scores.add(this.backToMenu,gbc);
         
-        
-        
-        this.setMinimumSize(new Dimension(13+this.gridSize*(cellSize+5)+scoresSizeX, 42+this.gridSize*(cellSize+5)));
+        this.setMinimumSize(new Dimension(13+gridSize*(cellSize+5)+scoresSizeX, 42+gridSize*(cellSize+5)));
         this.getContentPane().add(game, BorderLayout.CENTER);
         this.getContentPane().add(scores, BorderLayout.EAST);
         this.pack();
@@ -191,7 +187,12 @@ public class BoardView extends JFrame
 	{
 		return gridSize;
 	}
+
 	
+	
+	
+
+
 	public void setWhiteScore(int whiteScore) {
 		this.whiteScore = whiteScore;
 	}
@@ -202,16 +203,34 @@ public class BoardView extends JFrame
 	}
 
 
+	
+	
+	public int getWhiteScore() {
+		return whiteScore;
+	}
+
+
+	public int getBlackScore() {
+		return blackScore;
+	}
+
+
 	public void updateScores() 
 	{
 		this.blackScoreLabel.setText("Score : "+this.blackScore);
 		this.whiteScoreLabel.setText("Score : "+this.whiteScore);
 	}
-	
 
-	public void setGridSize(int gridSize) 
-	{
-		this.gridSize = gridSize;
+
+
+	public JPanel getGame() {
+		return game;
 	}
+	
+	
+	
+	
+	
+	
 	
 }
