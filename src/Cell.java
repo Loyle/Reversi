@@ -15,7 +15,6 @@ public class Cell extends JButton
 	
 	private int state;
 	
-	private boolean isClicPossible;
 	//private Image img;
 	
 	public Cell() 
@@ -100,13 +99,6 @@ public class Cell extends JButton
 		*/
 	}
 
-	public boolean isClicPossible() {
-		return isClicPossible;
-	}
-
-	public void setClicPossible(boolean isClicPossible) {
-		this.isClicPossible = isClicPossible;
-	}
 	
 	
 	

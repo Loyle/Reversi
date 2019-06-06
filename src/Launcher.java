@@ -3,10 +3,8 @@ import javax.swing.WindowConstants;
 
 public class Launcher 
 {
-
 	public static void main(String[] args) 
 	{
-		
 		final JFrame menuFrame = new MenuFrame();
 		menuFrame.setTitle("Menu - Reversi Game");
         
@@ -14,11 +12,6 @@ public class Launcher
 
 		menuFrame.setVisible(true);
 		menuFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		
-		
-		
-		
-
 	}
 
 }
