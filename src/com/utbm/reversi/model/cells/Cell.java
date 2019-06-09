@@ -11,9 +11,12 @@ public class Cell extends JButton
 	 */
 	private static final long serialVersionUID = 110484099740962045L;
 	
+	
+	// Coordonnées de la Cell dans le tableau arrayCell
 	private int coordX;
 	private int coordY;
 	
+	// État de la Cell : 0 = vert (vide) ; 1 = blanc ; 2 = noir
 	private int state;
 	
 	//private Image img;

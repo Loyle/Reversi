@@ -1,5 +1,4 @@
 package com.utbm.reversi.controller;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -16,7 +15,9 @@ import com.utbm.reversi.view.ReversiFrame;
 
 public class ReversiController 
 {
+	// On associe le controller à une fenêtre de jeu
 	private final ReversiFrame reversiFrame;
+	// Permet l'alternance entre le tour des blancs et le tour des noirs (0 : blancs, 1 : noirs)
 	private int change = 0;
 	
 	public ReversiController(ReversiFrame reversiFrame)
@@ -24,12 +25,16 @@ public class ReversiController
 		this.reversiFrame = reversiFrame;
 	}
 	
+	// Fonction appelée lors du clic sur une Cell
 	public void onCellClicked(Cell cell) 
 	{
+		// On autorise le clic sur la Cell uniquement si elle est vierge (verte) et que les règles du Reversi sont suivies
 		if ((cell.getState() == 0) && (isFollowingRules(cell) == true))
 		{
+			// On rempli les Cell que l'on a encadré
 			fillCell(cell);
 			
+			// On utilise l'integer change pour alterner entre la pose d'un pion blanc et la pose d'un pion noir
 			if (this.change == 0) 
 			{
 				cell.setState(1);
@@ -40,18 +45,24 @@ public class ReversiController
 				cell.setState(2);
 				this.change = 0;
 			}
+			// On actualise l'apparence de la case
 			cell.updateState();
+			// On recompte le score des deux joueurs à chaque nouveau pion posé
 			compterScores();
+			// On change l'indication sur la droite qui dit quel joueur joue le prochain coup
 			reversiFrame.changeWhoPlay();
 			
-			
+			// On teste si le jeu doit s'arrêter suite à la pose d'un nouveau pion
 			if (isEnded() == true || isBlocked() == true) 
 			{
+				// On détruit le panel sur lequel la grille de Cell est générée
 				this.reversiFrame.remove(this.reversiFrame.getGame());
+				// On crée un nouveau panel pour remplacer celui que l'on vient de supprimer
 				JPanel end = new JPanel();
 				end.setBackground(Color.lightGray);
 				end.setLayout(new GridBagLayout());
 		        GridBagConstraints gbc = new GridBagConstraints();
+		        // On associe un message de fin à ce panel en fonction de la manière dont la partie s'est terminée et en fonction du score
 				JLabel endMsg = new JLabel();
 				if (isEnded() == true) 
 				{
@@ -88,6 +99,7 @@ public class ReversiController
 		        gbc.gridy=0;
 				end.add(endMsg,gbc);
 				
+				// ADD SPACE
 				for (int addSpace = 1 ; addSpace<5 ; addSpace++) 
 		        {
 		            gbc.gridx = 0;
@@ -95,6 +107,7 @@ public class ReversiController
 		            end.add(new JLabel(" "),gbc);
 		        }
 				
+				// Création du bouton permettant de recommencer la partie avec la même taille de grille
 				JButton replay = new JButton("Replay");
 				gbc.gridx=0;
 			    gbc.gridy=5;
@@ -102,12 +115,14 @@ public class ReversiController
 			    end.add(replay,gbc);
 				this.reversiFrame.getContentPane().add(end,BorderLayout.CENTER);
 				
-				
+				// Création du bouton pour revenir au menu
 				JButton endBackToMenu = new JButton("Back to Menu");
 				gbc.gridx=0;
 			    gbc.gridy=6;
 			    endBackToMenu.addActionListener(e -> this.onBackToMenuClicked(endBackToMenu));
 			    end.add(endBackToMenu,gbc);
+			    
+			    // On place le panel de fin là où se trouvait la grille
 				this.reversiFrame.getContentPane().add(end,BorderLayout.CENTER);
 			}
 			
@@ -115,9 +130,10 @@ public class ReversiController
 		
 	}
 	
+	// Fonction associée au clic sur le bouton rejouer
 	public void onReplayClicked(JButton replay) 
 	{
-		
+		// Destruction de l'ancienne fenêtre et création d'un nouvelle
 		ReversiFrame newFrame = new ReversiFrame(this.reversiFrame.getGridSize());
 		newFrame.setTitle("Reversi Game");
         
@@ -130,8 +146,10 @@ public class ReversiController
 		newFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
 	
+	// Fonction associée au clic sur le bouton retour au menu
 	public void onBackToMenuClicked(JButton backToMenu) 
 	{
+		// Suppression de la fenêtre de jeu et création d'une fenêtre de menu
 		this.reversiFrame.dispose();
 		
 		MenuFrame menuFrame = new MenuFrame();
@@ -146,18 +164,21 @@ public class ReversiController
 	
 	
 	
-	
+	// Fonction permettant de compter le score actuel en parcourant toute la grille
 	public void compterScores() 
 	{
 		Cell[][] cellArray = this.reversiFrame.getCellArray();
 		
+		// On initialise les scores
 		int whiteScore = 0;
 		int blackScore = 0;
 		
+		// On parcourt toute la grille
 		for (int i = 0; i < this.reversiFrame.getGridSize() ; i++) 
 		{
 			for (int j = 0; j < this.reversiFrame.getGridSize() ; j++) 
 			{
+				// On augmente le score de 1 pour chaque pion possédé par un joueur
 				if (cellArray[j][i].getState() == 1) // State = 1   => White
 				{
 					whiteScore = whiteScore+1;
@@ -169,6 +190,7 @@ public class ReversiController
 			}
 		}
 		
+		// On associe le score à la fenêtre, pour pouvoir l'afficher sur le côté droit
 		this.reversiFrame.setBlackScore(blackScore);
 		this.reversiFrame.setWhiteScore(whiteScore);
 		this.reversiFrame.updateScores();
@@ -177,11 +199,20 @@ public class ReversiController
 	
 	
 	
-	
+	// On appelle cette fonction pour voir si l'on peut place le pion ou nonà où on a cliqué
 	public boolean isFollowingRules(Cell cell) 
 	{
+		// Ce tableau sert à compter, pour chaque direction (les 4 diagonales, le haut, le bas, la gauche, la droite), le nombre de pions placés entre le
+		// nouveau pion et le pion de la même couleur le plus proche (ex :   N - B - newN    :   on aura un pion B à gauche, donc compteurIter[3]=1)
+		// Indices du tableau compteurInter
+		//	 0	 1 	 2
+		//	 3   X   4
+		//   5   6   7
 		int compteurInter[] = {0,0,0,0,0,0,0,0};
 		
+		// On appelle toutes les fonctions permetant de tester, pour chaque direction, si on peut placer le pion
+		// On appelle ces fonctions avant la boucle if pour réaliser tous les test et ne pas s'arrêter trop tôt en parcourant les "OU"
+		// En effet, les fonctions ne s'exécutent plus dès qu'un "OU" est vrai
 		boolean conditions[] = new boolean[8];
 		conditions[0] = isFollowingRulesLeftTop(cell, compteurInter);
 		conditions[1] = isFollowingRulesTop(cell, compteurInter);
@@ -192,9 +223,11 @@ public class ReversiController
 		conditions[6] = isFollowingRulesBottom(cell, compteurInter);
 		conditions[7] = isFollowingRulesRightBottom(cell, compteurInter);
 		
+		// Si une seule des directions autorise la pose d'un pion, alors on autorise la pose d'un pion
 		if ((conditions[0] == true && compteurInter[0]>0) || (conditions[1] == true && compteurInter[1]>0)  || (conditions[2] == true && compteurInter[2]>0)   || (conditions[3] == true && compteurInter[3]>0)   || (conditions[4] == true && compteurInter[4]>0)   || (conditions[5] == true && compteurInter[5]>0)   || (conditions[6] == true && compteurInter[6]>0)   || (conditions[7] == true && compteurInter[7]>0))
 		{
 			/*
+			// Permet de voir à chaque pose l'état du tableau compterInter
 			for (int i=0;i<8;i++) 
 			{
 				System.out.print("-"+compteurInter[i]);
@@ -211,8 +244,10 @@ public class ReversiController
 		
 	}
 	
+	// Fonction permettant de changer la couleur et l'état des pions encadrés
 	public void fillCell(Cell cell) 
 	{
+		// On appelle les mêmes foncitons de test que précédemment dans isFollowingRules
 		int compteurInter[] = {0,0,0,0,0,0,0,0};
 		
 		boolean conditions[] = new boolean[8];
@@ -225,6 +260,7 @@ public class ReversiController
 		conditions[6] = isFollowingRulesBottom(cell, compteurInter);
 		conditions[7] = isFollowingRulesRightBottom(cell, compteurInter);
 		
+		// On teste une par une les conditions, pour réaliser l'encadrement
 		if (conditions[0] == true) 
 		{
 			completeLeftTop(cell);
@@ -266,10 +302,18 @@ public class ReversiController
 		}
 	}
 	
+	// =================================================================================================================================
+	// Série de 8 fonctions permettant de tester, pour chaque direction, si la pose d'un pion est possible
+	// =================================================================================================================================
+	
+	// En haut à gauche (seule celle-ci sera commentée)
 	public boolean isFollowingRulesLeftTop(Cell cell, int[] compteurInter) 
 	{
+		// On va se servir du tableau de Cell pour se déplacer
 		Cell[][] cellArray = this.reversiFrame.getCellArray();
+		// Servira à sauvegarder l'état du nouveau pion que l'on posera si la condition de isFollowingRules est remplie
 		int tempState=0;
+		// On sauvegarde donc l'état du futur pion
 		if (this.change == 0) 
 		{
 			tempState=1;
@@ -279,28 +323,36 @@ public class ReversiController
 			tempState=2;
 		}
 		
+		// Cette condition permet de ne pas fair un test qui sortirait du tableau et entrainerait une erreur (limites : de 0 à gridSize)
 		if ((cell.getCoordX() > 0) && (cell.getCoordY() > 0))
         {
+			// Si l'on rencontre une case vierge (verte), alors on ne peut pas poser de pion et il n'y a pas de pions intermédiaires
 			if (cellArray[cell.getCoordX() - 1][cell.getCoordY() - 1].getState() == 0) 
             {
             	compteurInter[0] = 0;
                 return false;
             }
+			// Si l'on rencontre un pion de la couleur opposée à celle que l'on va poser, on rappelle la fonction en augmentant la valeur du compteur de pions
+			// intermédiaires
             else if (cellArray[cell.getCoordX() - 1][cell.getCoordY() - 1].getState() != tempState)
             {
             	compteurInter[0] = compteurInter[0]+1;
             	return isFollowingRulesLeftTop(cellArray[cell.getCoordX() - 1][cell.getCoordY() - 1], compteurInter);
             }
+			// On peut poser le pion si l'on rencontre un pion de la même couleur (le problème d'un nombre de pions encadrés nul est résolu par le compteur)
             else
             {
             	return true;
             }
         }
+		// Si l'on sort de la grille, on retourne évidemment faux pour dire que l'on nepeut rien poser
 		else 
 		{
 			return false;
 		}
 	}
+	
+	// Les foncitons suivantes ne changent rien, à part les coordonnées
 	
 	public boolean isFollowingRulesTop(Cell cell, int[] compteurInter) 
 	{
@@ -569,14 +621,19 @@ public class ReversiController
 	}
 	
 	
+
+	// =================================================================================================================================
+	// Série de 8 fonctions permettant de changer l'état et la couleur des pions encadrés
+	// =================================================================================================================================
 	
-	
+	// En haut à gauche
+	// Seule celle-ci sera commentée
 	public void completeLeftTop(Cell cell) 
 	{
+		// On aura besoin du tableau de Cell pour se déplacer
 		Cell[][] cellArray = this.reversiFrame.getCellArray();
-		
+		// On enregistre l'état du futur pion à poser
 		int tempState=0;
-		
 		if (this.change == 0) 
 		{
 			tempState=1;
@@ -586,12 +643,16 @@ public class ReversiController
 			tempState=2;
 		}
 		
+		// On prend garde à ne pas faire de test sur l'extérieur du tableau qi mènerait à une erreur
 		if ((cell.getCoordX() > 0) && (cell.getCoordY() > 0))
         {
+			// On change l'état et la couleur si le pion voisin est d'une couleur différente de celle du pion posé, et si il ya a un pion voisin (case non verte/vide)
 			if (cellArray[cell.getCoordX() - 1][cell.getCoordY() - 1].getState() != tempState && cellArray[cell.getCoordX() - 1][cell.getCoordY() - 1].getState() != 0)
             {
+				// On change l'état et on actualise la couleur
             	cellArray[cell.getCoordX() - 1][cell.getCoordY() - 1].setState(tempState);
             	cellArray[cell.getCoordX() - 1][cell.getCoordY() - 1].updateState();
+            	// On rappelle la fonction pour retourner plusieurs pions
             	completeLeftTop(cellArray[cell.getCoordX() - 1][cell.getCoordY() - 1]);
             }
         }
@@ -781,12 +842,21 @@ public class ReversiController
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	// Fonction appelée pour tester si la grille est pleine (et donc la partie terminée)
 	public boolean isEnded() 
 	{
+		// On a besoin de la grille de Cell que l'on va parcourir
 		Cell[][] cellArray = this.reversiFrame.getCellArray();
 		
 		int idx=0;
 		
+		// On parcourt la grille et on incrémente à chaque case non vide/non verte
 		for (int i=0;i<reversiFrame.getGridSize();i++) 
 		{
 			for (int j=0;j<reversiFrame.getGridSize();j++) 
@@ -798,6 +868,7 @@ public class ReversiController
 			}
 		}
 		
+		// Si le nombre de case non vides correspond au nombre de cases de la grille, la grilles est complète
 		if (idx == reversiFrame.getGridSize()*reversiFrame.getGridSize()) 
 		{
 			return true;
@@ -809,22 +880,27 @@ public class ReversiController
 	}
 	
 	
+	// On teste s'il y a encore des cases où placer le futur pion (et donc si on peut continuer la partie ou pas)
 	public boolean isBlocked() 
 	{
+		// On a besoin de la grille de Cell que l'on va parcourir
 		Cell[][] cellArray = this.reversiFrame.getCellArray();
 		
 		int idx1=0;
 		int idx2=0;
 		
+		// On parcourt toute la grille
 		for (int i=0;i<reversiFrame.getGridSize();i++) 
 		{
 			for (int j=0;j<reversiFrame.getGridSize();j++) 
 			{
+				// Si la case est vide et que l'on ne peut rien y poser, on incrémente idx1
 				if (cellArray[i][j].getState() == 0 && isFollowingRules(cellArray[i][j]) == false) 
 				{
 					idx1=idx1+1;
 				}
 				
+				// Si la case est vide, on incrémente idx2
 				if (cellArray[i][j].getState() == 0) 
 				{
 					idx2=idx2+1;
@@ -833,10 +909,12 @@ public class ReversiController
 			}
 		}
 		
+		// S'il y a autant de case vide que de cases vides où on ne peut rien poser, alors le jeu est bien bloqué
 		if (idx1 == idx2) 
 		{
 			return true;
 		}
+		// Sinon, on peut continuer à jouer
 		else
 		{
 			return false;
@@ -845,7 +923,7 @@ public class ReversiController
 	
 	
 	
-	
+	// Getter de l'alternance entre les 2 joueurs pour actualiser l'indicateur en haut à droite
 	public int getChange() 
 	{
 		return change;

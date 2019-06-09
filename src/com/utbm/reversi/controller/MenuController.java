@@ -9,18 +9,24 @@ import com.utbm.reversi.view.ReversiFrame;
 
 public class MenuController 
 {
+	// Le controller est associé à une fenêtre
 	private final MenuFrame menuFrame;
+	// Taille de la grille de jeu
 	private int gridSize = 8;
 	
+	// Le MenuController doit être lié à une MenuFrame
 	public MenuController(MenuFrame menuFrame) 
 	{
 		this.menuFrame = menuFrame;
 	}
 	
+	// Fonction appelé lorsque l'on clique sur le bouton play
 	public void onPlayClicked(JButton play) 
 	{
+		// On supprime la fenêtre actuelle (le menu)
 		this.menuFrame.dispose();
 		
+		// On crée une nouvelle fenêtre de jeu
 		ReversiFrame reversiFrame = new ReversiFrame(this.gridSize);
 		
 		reversiFrame.setTitle("Reversi Game");
@@ -31,14 +37,17 @@ public class MenuController
 		reversiFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
 	
+	// Fonction appelée lorsque l'on déplace le curseur pour modifier la taille de la grille
 	public void onSliderStateChanged(JSlider gridSizeSlider, JLabel gridSizeLabel, int gridSize) 
 	{
 
+		// La taille de la grille ne peut être qu'un nombre pair (logique vu les 4 pièces de départ)
     	if (gridSize%2 !=0)
     	{
     		gridSize=gridSize-1;
     	}
     	
+    	// La condition permet d'ajouter un 0 aux nombres à un chiffre pour garder un label à 2 chiffres, qui ne se décale donc pas
     	if (gridSize < 10)
 		{
         	gridSizeLabel.setText("     Valeur actuelle : 0" + gridSize);
@@ -48,6 +57,7 @@ public class MenuController
     		gridSizeLabel.setText("     Valeur actuelle : " + gridSize);
     	}
     	
+    	// On enregistre la taille de la grille
     	this.gridSize = gridSize;
     	
     	
