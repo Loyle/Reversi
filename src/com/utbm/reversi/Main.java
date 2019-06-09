@@ -15,6 +15,10 @@ public class Main {
 	public static void main(String[] args) 
 	{
 		//new BoardView();
+		
+		//==========================================================================================================================
+		// Ici, on crée un objet MenuFrame (c'est la fenêtre où le menu est affiché)
+		//==========================================================================================================================
 		final JFrame menuFrame = new MenuFrame();
 		menuFrame.setTitle("Menu - Reversi Game");
         

@@ -1,5 +1,4 @@
 package com.utbm.reversi.view;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -12,10 +11,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.utbm.reversi.controller.BoardController;
+import com.utbm.reversi.controller.ReversiController;
 import com.utbm.reversi.model.cells.Cell;
 
-public class BoardView extends JFrame 
+public class ReversiFrame extends JFrame 
 {
 
 	/**
@@ -23,7 +22,7 @@ public class BoardView extends JFrame
 	 */
 	private static final long serialVersionUID = -8514403723481387196L;
 	
-	private final BoardController reversiController = new BoardController(this);
+	private final ReversiController reversiController = new ReversiController(this);
 	private Cell cellArray[][];
 	
 	final JPanel game = new JPanel();
@@ -45,7 +44,7 @@ public class BoardView extends JFrame
 	private int gridSize;
 	
 	
-	public BoardView(int size) 
+	public ReversiFrame(int size) 
 	{
 		this.gridSize = size;
 		

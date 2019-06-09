@@ -1,4 +1,5 @@
 package com.utbm.reversi.controller;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -10,15 +11,15 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import com.utbm.reversi.model.cells.Cell;
-import com.utbm.reversi.view.BoardView;
 import com.utbm.reversi.view.MenuFrame;
+import com.utbm.reversi.view.ReversiFrame;
 
-public class BoardController 
+public class ReversiController 
 {
-	private final BoardView reversiFrame;
+	private final ReversiFrame reversiFrame;
 	private int change = 0;
 	
-	public BoardController(BoardView reversiFrame)
+	public ReversiController(ReversiFrame reversiFrame)
 	{
 		this.reversiFrame = reversiFrame;
 	}
@@ -117,7 +118,7 @@ public class BoardController
 	public void onReplayClicked(JButton replay) 
 	{
 		
-		BoardView newFrame = new BoardView(this.reversiFrame.getGridSize());
+		ReversiFrame newFrame = new ReversiFrame(this.reversiFrame.getGridSize());
 		newFrame.setTitle("Reversi Game");
         
 		newFrame.setSize(700, 700);

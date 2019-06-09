@@ -1,12 +1,11 @@
 package com.utbm.reversi.controller;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JSlider;
 import javax.swing.WindowConstants;
 
-import com.utbm.reversi.view.BoardView;
 import com.utbm.reversi.view.MenuFrame;
+import com.utbm.reversi.view.ReversiFrame;
 
 public class MenuController 
 {
@@ -22,12 +21,12 @@ public class MenuController
 	{
 		this.menuFrame.dispose();
 		
-		BoardView reversiFrame = new BoardView(this.gridSize);
+		ReversiFrame reversiFrame = new ReversiFrame(this.gridSize);
 		
 		reversiFrame.setTitle("Reversi Game");
         
 		reversiFrame.setSize(700, 700);
-
+		
 		reversiFrame.setVisible(true);
 		reversiFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
