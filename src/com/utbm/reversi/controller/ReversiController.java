@@ -18,7 +18,7 @@ public class ReversiController
 	// On associe le controller à une fenêtre de jeu
 	private final ReversiFrame reversiFrame;
 	// Permet l'alternance entre le tour des blancs et le tour des noirs (0 : blancs, 1 : noirs)
-	private int change = 0;
+	private int change = 1;
 	
 	public ReversiController(ReversiFrame reversiFrame)
 	{
@@ -35,15 +35,15 @@ public class ReversiController
 			fillCell(cell);
 			
 			// On utilise l'integer change pour alterner entre la pose d'un pion blanc et la pose d'un pion noir
-			if (this.change == 0) 
+			if (this.change == 1) 
 			{
-				cell.setState(1);
-				this.change = 1;
-			}
-			else if (this.change == 1) 
-			{
-				cell.setState(2);
+				cell.setState(2); // 2 = Blancs
 				this.change = 0;
+			}
+			else if (this.change == 0) 
+			{
+				cell.setState(1); // 1 = Noirs
+				this.change = 1;
 			}
 			// On actualise l'apparence de la case
 			cell.updateState();

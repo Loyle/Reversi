@@ -1,6 +1,12 @@
 package com.utbm.reversi.model.cells;
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 
 public class Cell extends JButton
@@ -11,29 +17,60 @@ public class Cell extends JButton
 	 */
 	private static final long serialVersionUID = 110484099740962045L;
 	
-	
 	// Coordonnées de la Cell dans le tableau arrayCell
 	private int coordX;
 	private int coordY;
 	
-	// État de la Cell : 0 = vert (vide) ; 1 = blanc ; 2 = noir
+	// État de la Cell : 0 = vert (vide) ; 1 = noir ; 2 = blanc
 	private int state;
 	
-	//private Image img;
+	private Image img;
+	private Image backgroundImg;
+	private Image blackImg;
+	private Image whiteImg;
+	
 	
 	public Cell() 
 	{
 		this.state = 0;
 		
-		/*
-		//CHANGER L'APPARENCE
-		this.setForeground(Color.white);
-		this.setOpaque(false);
-		this.setFocusPainted(false);
-		this.setBorderPainted(false);
+		try 
+		{
+		      whiteImg = ImageIO.read(new File("reversiBlanc.jpg"));
+		} 
+		catch (IOException e) 
+		{
+		      e.printStackTrace();
+		}
+		
+		try 
+		{
+		      blackImg = ImageIO.read(new File("reversiNoir.jpg"));
+		} 
+		catch (IOException e) 
+		{
+		      e.printStackTrace();
+		}
+		
+		try 
+		{
+		      backgroundImg = ImageIO.read(new File("reversiBackground.jpg"));
+		} 
+		catch (IOException e) 
+		{
+		      e.printStackTrace();
+		}
+
+		// Permet de ne pas actualiser juste en survolant
 		this.setContentAreaFilled(false);
-		this.setBorder(null);
-		*/
+		
+		//CHANGER L'APPARENCE
+		//this.setForeground(Color.white);
+		//this.setOpaque(false);
+		//this.setFocusPainted(false);
+		//this.setBorderPainted(false);
+		//this.setBorder(null);
+		
 	}
 
 	public int getCoordX() {
@@ -63,44 +100,30 @@ public class Cell extends JButton
 		this.state = state;
 	}
 	
+	
 	public void updateState() 
 	{
-		if (this.state == 1) 
+		this.setBackground(Color.green);
+		
+		if (this.state == 0) 
 		{
-			this.setBackground(Color.white);
+			this.img = backgroundImg;
+		}
+		else if (this.state == 1) 
+		{
+			 this.img = this.blackImg;
 		}
 		else if (this.state == 2) 
 		{
-			this.setBackground(Color.black);
+			 this.img = this.whiteImg;
 		}
-		
-		
-		/*
-		if (this.state == 0) 
-		{
-			try 
-			{
-			     this.img = ImageIO.read(new File("reversiBlanc.png"));
-			} 
-			catch (IOException e) 
-			{
-				e.printStackTrace();
-			}
-		}
-		else
-		{
-			try 
-			{
-			     this.img = ImageIO.read(new File("reversiNoir.png"));
-			} 
-			catch (IOException e) 
-			{
-				e.printStackTrace();
-			}
-		}
-		
-		this.setIcon(new ImageIcon(img));
-		*/
+		this.repaint();
 	}
+	
+	 public void paintComponent(Graphics g)
+	 {
+		  Graphics2D g2d = (Graphics2D)g;
+		  g2d.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+	 }
 
 }

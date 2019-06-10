@@ -1,5 +1,4 @@
 package com.utbm.reversi.view;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -91,15 +90,15 @@ public class ReversiFrame extends JFrame
         		{
         			if ((i == -1 + this.gridSize/2) && (j == -1 + this.gridSize/2)) 
         			{
-            			cell.setState(2); // 2 = noir
+            			cell.setState(1); // 1 = noir
         			}
         			else if ((i == this.gridSize/2) && (j == this.gridSize/2)) 
         			{
-            			cell.setState(2); // 2 = noir
+            			cell.setState(1); // 1 = noir
         			}
         			else 
         			{
-            			cell.setState(1); // 1 = blanc
+            			cell.setState(2); // 2 = blanc
         			}
         		}
         		// On ajoute la Cell au panel
@@ -206,11 +205,11 @@ public class ReversiFrame extends JFrame
 	{
 		if (this.reversiController.getChange() == 1) 
 		{
-			this.whoPlay.setBackground(Color.black);
+			this.whoPlay.setBackground(Color.white);
 		}
 		else if (this.reversiController.getChange() == 0) 
 		{
-			this.whoPlay.setBackground(Color.white);
+			this.whoPlay.setBackground(Color.black);
 		}
 	}
 
