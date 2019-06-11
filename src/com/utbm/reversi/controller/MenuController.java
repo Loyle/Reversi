@@ -2,8 +2,6 @@ package com.utbm.reversi.controller;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JSlider;
-import javax.swing.WindowConstants;
-
 import com.utbm.reversi.view.MenuFrame;
 import com.utbm.reversi.view.ReversiFrame;
 
@@ -26,15 +24,9 @@ public class MenuController
 		// On supprime la fenêtre actuelle (le menu)
 		this.menuFrame.dispose();
 		
-		// On crée une nouvelle fenêtre de jeu
-		ReversiFrame reversiFrame = new ReversiFrame(this.gridSize);
-		
-		reversiFrame.setTitle("Reversi Game");
-        
-		reversiFrame.setSize(700, 700);
-		
-		reversiFrame.setVisible(true);
-		reversiFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		// On lance une nouvelle partie
+		ReversiFrame reversi = new ReversiFrame(this.gridSize);
+		reversi.initWindow();
 	}
 	
 	// Fonction appelée lorsque l'on déplace le curseur pour modifier la taille de la grille

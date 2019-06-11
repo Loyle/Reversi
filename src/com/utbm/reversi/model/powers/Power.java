@@ -4,6 +4,7 @@ import javax.swing.ImageIcon;
 
 import com.utbm.reversi.model.Board;
 import com.utbm.reversi.model.Player;
+import com.utbm.reversi.model.cells.Cell;
 
 public abstract class Power {
 	
@@ -38,5 +39,5 @@ public abstract class Power {
 		return this.icon;
 	}
 	
-	public abstract void use(Board board, int x, int y);
+	public abstract void use(Board board, Cell cell);
 }

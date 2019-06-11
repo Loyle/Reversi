@@ -9,24 +9,28 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import com.utbm.reversi.model.cells.Cell;
+import com.utbm.reversi.model.Game;
+import com.utbm.reversi.model.cells.OldCell;
 import com.utbm.reversi.view.MenuFrame;
 import com.utbm.reversi.view.ReversiFrame;
 
-public class ReversiController 
+public class GameOld 
 {
 	// On associe le controller à une fenêtre de jeu
 	private final ReversiFrame reversiFrame;
+	private Game game;
+	
 	// Permet l'alternance entre le tour des blancs et le tour des noirs (0 : blancs, 1 : noirs)
 	private int change = 1;
 	
-	public ReversiController(ReversiFrame reversiFrame)
+	public GameOld(ReversiFrame reversiFrame, Game game)
 	{
 		this.reversiFrame = reversiFrame;
+		this.game = game;
 	}
 	
 	// Fonction appelée lors du clic sur une Cell
-	public void onCellClicked(Cell cell) 
+	public void onCellClicked(OldCell cell) 
 	{
 		// On autorise le clic sur la Cell uniquement si elle est vierge (verte) et que les règles du Reversi sont suivies
 		if ((cell.getState() == 0) && (isFollowingRules(cell) == true))
@@ -134,7 +138,7 @@ public class ReversiController
 	public void onReplayClicked(JButton replay) 
 	{
 		// Destruction de l'ancienne fenêtre et création d'un nouvelle
-		ReversiFrame newFrame = new ReversiFrame(this.reversiFrame.getGridSize());
+		/*ReversiFrame newFrame = new ReversiFrame(this.reversiFrame.getGridSize());
 		newFrame.setTitle("Reversi Game");
         
 		newFrame.setSize(700, 700);
@@ -143,7 +147,7 @@ public class ReversiController
 		
 
 		newFrame.setVisible(true);
-		newFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		newFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);*/
 	}
 	
 	// Fonction associée au clic sur le bouton retour au menu
@@ -167,7 +171,7 @@ public class ReversiController
 	// Fonction permettant de compter le score actuel en parcourant toute la grille
 	public void compterScores() 
 	{
-		Cell[][] cellArray = this.reversiFrame.getCellArray();
+		/*Cell[][] cellArray = this.reversiFrame.getCellArray();
 		
 		// On initialise les scores
 		int whiteScore = 0;
@@ -193,14 +197,14 @@ public class ReversiController
 		// On associe le score à la fenêtre, pour pouvoir l'afficher sur le côté droit
 		this.reversiFrame.setBlackScore(blackScore);
 		this.reversiFrame.setWhiteScore(whiteScore);
-		this.reversiFrame.updateScores();
+		this.reversiFrame.updateScores();*/
 		
 	}
 	
 	
 	
 	// On appelle cette fonction pour voir si l'on peut place le pion ou nonà où on a cliqué
-	public boolean isFollowingRules(Cell cell) 
+	public boolean isFollowingRules(OldCell cell) 
 	{
 		// Ce tableau sert à compter, pour chaque direction (les 4 diagonales, le haut, le bas, la gauche, la droite), le nombre de pions placés entre le
 		// nouveau pion et le pion de la même couleur le plus proche (ex :   N - B - newN    :   on aura un pion B à gauche, donc compteurIter[3]=1)
@@ -245,7 +249,7 @@ public class ReversiController
 	}
 	
 	// Fonction permettant de changer la couleur et l'état des pions encadrés
-	public void fillCell(Cell cell) 
+	public void fillCell(OldCell cell) 
 	{
 		// On appelle les mêmes foncitons de test que précédemment dans isFollowingRules
 		int compteurInter[] = {0,0,0,0,0,0,0,0};
@@ -307,10 +311,10 @@ public class ReversiController
 	// =================================================================================================================================
 	
 	// En haut à gauche (seule celle-ci sera commentée)
-	public boolean isFollowingRulesLeftTop(Cell cell, int[] compteurInter) 
+	public boolean isFollowingRulesLeftTop(OldCell cell, int[] compteurInter) 
 	{
 		// On va se servir du tableau de Cell pour se déplacer
-		Cell[][] cellArray = this.reversiFrame.getCellArray();
+		OldCell[][] cellArray = this.reversiFrame.getCellArray();
 		// Servira à sauvegarder l'état du nouveau pion que l'on posera si la condition de isFollowingRules est remplie
 		int tempState=0;
 		// On sauvegarde donc l'état du futur pion
@@ -354,9 +358,9 @@ public class ReversiController
 	
 	// Les foncitons suivantes ne changent rien, à part les coordonnées
 	
-	public boolean isFollowingRulesTop(Cell cell, int[] compteurInter) 
+	public boolean isFollowingRulesTop(OldCell cell, int[] compteurInter) 
 	{
-		Cell[][] cellArray = this.reversiFrame.getCellArray();
+		OldCell[][] cellArray = this.reversiFrame.getCellArray();
 		
 		int tempState=1;
 		
@@ -392,9 +396,9 @@ public class ReversiController
 		}
 	}
 	
-	public boolean isFollowingRulesRightTop(Cell cell, int[] compteurInter) 
+	public boolean isFollowingRulesRightTop(OldCell cell, int[] compteurInter) 
 	{
-		Cell[][] cellArray = this.reversiFrame.getCellArray();
+		OldCell[][] cellArray = this.reversiFrame.getCellArray();
 		
 		int tempState=0;
 		
@@ -430,9 +434,9 @@ public class ReversiController
 		}
 	}
 	
-	public boolean isFollowingRulesLeftMiddle(Cell cell, int[] compteurInter) 
+	public boolean isFollowingRulesLeftMiddle(OldCell cell, int[] compteurInter) 
 	{
-		Cell[][] cellArray = this.reversiFrame.getCellArray();
+		OldCell[][] cellArray = this.reversiFrame.getCellArray();
 		
 		int tempState=0;
 		
@@ -468,9 +472,9 @@ public class ReversiController
 		}
 	}
 
-	public boolean isFollowingRulesRightMiddle(Cell cell, int[] compteurInter) 
+	public boolean isFollowingRulesRightMiddle(OldCell cell, int[] compteurInter) 
 	{
-		Cell[][] cellArray = this.reversiFrame.getCellArray();
+		OldCell[][] cellArray = this.reversiFrame.getCellArray();
 		
 		int tempState=0;
 		
@@ -506,9 +510,9 @@ public class ReversiController
 		}
 	}
 
-	public boolean isFollowingRulesLeftBottom(Cell cell, int[] compteurInter) 
+	public boolean isFollowingRulesLeftBottom(OldCell cell, int[] compteurInter) 
 	{
-		Cell[][] cellArray = this.reversiFrame.getCellArray();
+		OldCell[][] cellArray = this.reversiFrame.getCellArray();
 		
 		int tempState=0;
 		
@@ -544,9 +548,9 @@ public class ReversiController
 		}
 	}
 
-	public boolean isFollowingRulesBottom(Cell cell, int[] compteurInter) 
+	public boolean isFollowingRulesBottom(OldCell cell, int[] compteurInter) 
 	{
-		Cell[][] cellArray = this.reversiFrame.getCellArray();
+		OldCell[][] cellArray = this.reversiFrame.getCellArray();
 		
 		int tempState=0;
 		
@@ -582,9 +586,9 @@ public class ReversiController
 		}
 	}
 	
-	public boolean isFollowingRulesRightBottom(Cell cell, int[] compteurInter) 
+	public boolean isFollowingRulesRightBottom(OldCell cell, int[] compteurInter) 
 	{
-		Cell[][] cellArray = this.reversiFrame.getCellArray();
+		OldCell[][] cellArray = this.reversiFrame.getCellArray();
 		
 		int tempState=0;
 		
@@ -628,10 +632,10 @@ public class ReversiController
 	
 	// En haut à gauche
 	// Seule celle-ci sera commentée
-	public void completeLeftTop(Cell cell) 
+	public void completeLeftTop(OldCell cell) 
 	{
 		// On aura besoin du tableau de Cell pour se déplacer
-		Cell[][] cellArray = this.reversiFrame.getCellArray();
+		OldCell[][] cellArray = this.reversiFrame.getCellArray();
 		// On enregistre l'état du futur pion à poser
 		int tempState=0;
 		if (this.change == 0) 
@@ -658,9 +662,9 @@ public class ReversiController
         }
 	}
 	
-	public void completeTop(Cell cell) 
+	public void completeTop(OldCell cell) 
 	{
-		Cell[][] cellArray = this.reversiFrame.getCellArray();
+		OldCell[][] cellArray = this.reversiFrame.getCellArray();
 		
 		int tempState=0;
 		
@@ -684,9 +688,9 @@ public class ReversiController
         }
 	}
 	
-	public void completeRightTop(Cell cell) 
+	public void completeRightTop(OldCell cell) 
 	{
-		Cell[][] cellArray = this.reversiFrame.getCellArray();
+		OldCell[][] cellArray = this.reversiFrame.getCellArray();
 		
 		int tempState=0;
 		
@@ -710,9 +714,9 @@ public class ReversiController
         }
 	}
 	
-	public void completeLeftMiddle(Cell cell) 
+	public void completeLeftMiddle(OldCell cell) 
 	{
-		Cell[][] cellArray = this.reversiFrame.getCellArray();
+		OldCell[][] cellArray = this.reversiFrame.getCellArray();
 		
 		int tempState=0;
 		
@@ -736,9 +740,9 @@ public class ReversiController
         }
 	}
 	
-	public void completeRightMiddle(Cell cell) 
+	public void completeRightMiddle(OldCell cell) 
 	{
-		Cell[][] cellArray = this.reversiFrame.getCellArray();
+		OldCell[][] cellArray = this.reversiFrame.getCellArray();
 		
 		int tempState=0;
 		
@@ -762,9 +766,9 @@ public class ReversiController
         }
 	}
 	
-	public void completeLeftBottom(Cell cell) 
+	public void completeLeftBottom(OldCell cell) 
 	{
-		Cell[][] cellArray = this.reversiFrame.getCellArray();
+		OldCell[][] cellArray = this.reversiFrame.getCellArray();
 		
 		int tempState=0;
 		
@@ -788,9 +792,9 @@ public class ReversiController
         }
 	}
 	
-	public void completeBottom(Cell cell) 
+	public void completeBottom(OldCell cell) 
 	{
-		Cell[][] cellArray = this.reversiFrame.getCellArray();
+		OldCell[][] cellArray = this.reversiFrame.getCellArray();
 		
 		int tempState=0;
 		
@@ -814,9 +818,9 @@ public class ReversiController
         }
 	}
 	
-	public void completeRightBottom(Cell cell) 
+	public void completeRightBottom(OldCell cell) 
 	{
-		Cell[][] cellArray = this.reversiFrame.getCellArray();
+		OldCell[][] cellArray = this.reversiFrame.getCellArray();
 		
 		int tempState=0;
 		
@@ -852,7 +856,7 @@ public class ReversiController
 	public boolean isEnded() 
 	{
 		// On a besoin de la grille de Cell que l'on va parcourir
-		Cell[][] cellArray = this.reversiFrame.getCellArray();
+		OldCell[][] cellArray = this.reversiFrame.getCellArray();
 		
 		int idx=0;
 		
@@ -884,7 +888,7 @@ public class ReversiController
 	public boolean isBlocked() 
 	{
 		// On a besoin de la grille de Cell que l'on va parcourir
-		Cell[][] cellArray = this.reversiFrame.getCellArray();
+		OldCell[][] cellArray = this.reversiFrame.getCellArray();
 		
 		int idx1=0;
 		int idx2=0;

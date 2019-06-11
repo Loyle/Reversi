@@ -4,6 +4,7 @@ import javax.swing.ImageIcon;
 
 import com.utbm.reversi.model.Board;
 import com.utbm.reversi.model.Player;
+import com.utbm.reversi.model.cells.Cell;
 
 public class GiletJaunePower extends Power {
 
@@ -15,7 +16,7 @@ public class GiletJaunePower extends Power {
 	}
 	
 	@Override
-	public void use(Board board, int x, int y) {
+	public void use(Board board, Cell cell) {
 		// TODO Auto-generated method stub
 		
 	}

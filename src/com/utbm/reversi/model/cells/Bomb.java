@@ -1,5 +1,5 @@
 package com.utbm.reversi.model.cells;
 
-public class Bomb extends Cells {
+public class Bomb extends Cell {
 
 }

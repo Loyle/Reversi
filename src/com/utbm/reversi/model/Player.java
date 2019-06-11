@@ -13,6 +13,7 @@ import com.utbm.reversi.model.powers.SwitchPower;
 public class Player {
 	private String name;
 	private int level;
+	private int score;
 	private float xp;
 	private Color color;
 	private ArrayList<Power> powers;
@@ -82,6 +83,32 @@ public class Player {
 	 */
 	public void setLevel(int level) {
 		this.level = level;
+	}
+	
+	/**
+	 * @param score
+	 */
+	public void setScore(int score) {
+		this.score = score;
+	}
+	/**
+	 * @return
+	 */
+	public int getScore() {
+		return this.score;
+	}
+	/**
+	 * Increase score by 1
+	 */
+	public void addScore() {
+		this.score++;
+	}
+	/**
+	 * Increase score by custom value
+	 * @param score
+	 */
+	public void addScore(int score) {
+		this.score += score;
 	}
 	
 	/**
