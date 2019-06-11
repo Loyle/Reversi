@@ -25,8 +25,7 @@ public class ColorBombPower extends Power {
 		 *		*	°	*	=> 	°	°	°
 		 * 		*	°	°		°	°	°
 		 */
-		
-		board.
+
 
 	}
 
