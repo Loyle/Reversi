@@ -17,7 +17,9 @@ public class ShieldPower extends Power {
 	@Override
 	public void use(Board board, int x, int y) {
 		// TODO Auto-generated method stub
-		
+		/*
+		 * Use -> le pion choisi ne se retourne pas s'il est encadré 
+		 */
 	}
 
 }

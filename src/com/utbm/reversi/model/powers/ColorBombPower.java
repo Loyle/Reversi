@@ -17,6 +17,15 @@ public class ColorBombPower extends Power {
 	@Override
 	public void use(Board board, int x, int y) {
 		// TODO Auto-generated method stub
+		/*
+		 *Use ->  Carré autour du pion changeant la couleur de touts les pions dans la couelur du 
+		 * player ayant poser le pion
+		 * 		°	*	*		°	°	°
+		 *		*	°	*	=> 	°	°	°
+		 * 		*	°	°		°	°	°
+		 */
+		
+		board.
 		
 	}
 

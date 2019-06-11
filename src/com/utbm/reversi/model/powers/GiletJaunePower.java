@@ -18,6 +18,7 @@ public class GiletJaunePower extends Power {
 	public void use(Board board, int x, int y) {
 		// TODO Auto-generated method stub
 		
+		
 	}
 
 }
