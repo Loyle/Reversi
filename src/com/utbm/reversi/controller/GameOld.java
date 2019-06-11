@@ -183,11 +183,11 @@ public class GameOld
 			for (int j = 0; j < this.reversiFrame.getGridSize() ; j++) 
 			{
 				// On augmente le score de 1 pour chaque pion possédé par un joueur
-				if (cellArray[j][i].getState() == 1) // State = 1   => White
+				if (cellArray[j][i].getState() == 2) // State = 2   => White
 				{
 					whiteScore = whiteScore+1;
 				}
-				else if (cellArray[j][i].getState() == 2) // State= 2	=> Black
+				else if (cellArray[j][i].getState() == 1) // State= 1	=> Black
 				{
 					blackScore = blackScore+1;
 				}
