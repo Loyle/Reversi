@@ -1,18 +1,18 @@
 package com.utbm.reversi.model;
-import com.utbm.reversi.model.cells.Cells;
+import java.awt.Color;
+
+import com.utbm.reversi.model.cells.Cell;
 
 public class Board {
 		private int size;
-		private Cells [][] board;
-		
-		int[][] multiples = new int[4][2]; 
+		private Cell [][] board;
 		
 		public Board(int size) {
-			board = new Cells[size][size];
+			board = new Cell[size][size];
 			this.size=size;
 			for (int i=0;i<size;i++ ) {
 				for(int j=0;j<size;j++) {
-							board[i][j]= new Cells();		
+							board[i][j]= new Cell(new Color(0,200,0));		
 				}
 			}
 		}
@@ -25,14 +25,8 @@ public class Board {
 			this.size=size;
 		}
 		
-		
-		public void print() {
-			for (int i=0;i<size;i++ ) {
-				for(int j=0;j<size;j++) {
-					System.out.print(""+this.board[i][j].getValue());			
-				}
-				System.out.println();
-			}
+		public Cell[][] getBoardCells() {
+			return this.board;
 		}
-		
+			
 }

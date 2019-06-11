@@ -1,129 +1,116 @@
 package com.utbm.reversi.model.cells;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.JButton;
 
-public class Cell extends JButton
-{
+import com.utbm.reversi.model.Player;
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 110484099740962045L;
+@SuppressWarnings("serial")
+public class Cell extends JButton {
+	private int value;
 	
-	// Coordonnées de la Cell dans le tableau arrayCell
+	private Player owner;
+	private Color color;
+	private Color defaultColor;
+	
+	//private Pawn pawn;
+	
 	private int coordX;
 	private int coordY;
 	
-	// État de la Cell : 0 = vert (vide) ; 1 = noir ; 2 = blanc
-	private int state;
-	
-	private Image img;
-	private Image backgroundImg;
-	private Image blackImg;
-	private Image whiteImg;
-	
-	
-	public Cell() 
-	{
-		this.state = 0;
-		
-		try 
-		{
-		      whiteImg = ImageIO.read(new File("reversiBlanc.jpg"));
-		} 
-		catch (IOException e) 
-		{
-		      e.printStackTrace();
-		}
-		
-		try 
-		{
-		      blackImg = ImageIO.read(new File("reversiNoir.jpg"));
-		} 
-		catch (IOException e) 
-		{
-		      e.printStackTrace();
-		}
-		
-		try 
-		{
-		      backgroundImg = ImageIO.read(new File("reversiBackground.jpg"));
-		} 
-		catch (IOException e) 
-		{
-		      e.printStackTrace();
-		}
-
-		// Permet de ne pas actualiser juste en survolant
+	public Cell() {
+		this.value = 0;
+		this.color = Color.GREEN;
+		this.defaultColor = this.color;
+		this.owner = null;
+		this.setBackground(this.defaultColor);
+		//this.pawn = null;
+		this.setBorderPainted(false);
 		this.setContentAreaFilled(false);
-		
-		//CHANGER L'APPARENCE
-		//this.setForeground(Color.white);
-		//this.setOpaque(false);
-		//this.setFocusPainted(false);
+	}
+	public Cell(Color color) {
+		this.value = 0;
+		this.color = color;
+		this.defaultColor = this.color;
+		this.owner = null;
+		this.setBackground(this.defaultColor);
+		//this.pawn = null;
 		//this.setBorderPainted(false);
-		//this.setBorder(null);
-		
+		this.setContentAreaFilled(false);
 	}
-
+	
+	public int getValue() {
+		return this.value;
+	}
+	
+	public void setValue(int value) {
+		this.value = value;
+	}
+	
+	/**
+	 * @return the color
+	 */
+	public Color getColor() {
+		return color;
+	}
+	/**
+	 * @param color the color to set
+	 */
+	public void setColor(Color color) {
+		this.color = color;
+	}
+	/**
+	 * @return the owner
+	 */
+	public Player getOwner() {
+		return owner;
+	}
+	/**
+	 * @param owner the owner to set
+	 */
+	public void setOwner(Player owner) {
+		this.owner = owner;
+		this.color = this.owner.getColor();
+	}
+	
+	public void setCoordX(int x) {
+		this.coordX = x;
+	}
 	public int getCoordX() {
-		return coordX;
+		return this.coordX;
 	}
-
-	public void setCoordX(int coordX) {
-		this.coordX = coordX;
+	public void setCoordY(int y) {
+		this.coordX = y;
 	}
-
 	public int getCoordY() {
-		return coordY;
-	}
-
-	public void setCoordY(int coordY) {
-		this.coordY = coordY;
-	}
-
-	
-	public int getState() 
-	{
-		return state;
-	}
-
-	public void setState(int state) 
-	{
-		this.state = state;
+		return this.coordY;
 	}
 	
-	
-	public void updateState() 
-	{
-		this.setBackground(Color.green);
-		
-		if (this.state == 0) 
-		{
-			this.img = backgroundImg;
+	public void updateState() {
+		this.setBackground(this.defaultColor);
+		repaint();
+	}
+	public void paintComponent(Graphics g) {
+		Graphics2D g2d = (Graphics2D)g;
+		g2d.setColor(this.defaultColor);
+		g2d.fillRect(0, 0, this.getWidth(), getHeight());
+		if(this.owner != null) {			
+			g2d.setColor(this.color);
+			g2d.fillOval(10, 10, this.getWidth() - 20, this.getHeight() - 20);
 		}
-		else if (this.state == 1) 
-		{
-			 this.img = this.blackImg;
-		}
-		else if (this.state == 2) 
-		{
-			 this.img = this.whiteImg;
-		}
-		this.repaint();
 	}
-	
-	 public void paintComponent(Graphics g)
-	 {
-		  Graphics2D g2d = (Graphics2D)g;
-		  g2d.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
-	 }
 
+	
+	
+	
+	/*public Pawn getPawn() {
+	return this.pawn;
+	}
+
+	public void setPawn(Pawn pawn) {
+		this.pawn = pawn;
+	}*/
 }

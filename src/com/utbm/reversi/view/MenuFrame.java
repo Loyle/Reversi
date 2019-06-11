@@ -35,6 +35,7 @@ public class MenuFrame extends JFrame
 		// Création du panel
 		this.menuBackground = new JPanel();
 		this.menuBackground.setLayout(new GridBagLayout());
+		//this.setLocationRelativeTo(null);
 		GridBagConstraints gbc = new GridBagConstraints();
 		menuBackground.setBackground(Color.white);
 
@@ -100,12 +101,4 @@ public class MenuFrame extends JFrame
         
 		this.getContentPane().add(menuBackground);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 }
