@@ -25,6 +25,7 @@ public class MenuController
 		this.menuFrame.dispose();
 		
 		// On lance une nouvelle partie
+		@SuppressWarnings("unused")
 		ReversiFrame reversi = new ReversiFrame(this.gridSize);
 	}
 	

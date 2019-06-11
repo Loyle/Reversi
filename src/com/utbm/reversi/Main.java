@@ -1,12 +1,7 @@
 package com.utbm.reversi;
 
-import java.awt.Color;
-
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
-
-import com.utbm.reversi.model.Player;
-import com.utbm.reversi.model.powers.Power;
 import com.utbm.reversi.view.MenuFrame;
 
 public class Main {

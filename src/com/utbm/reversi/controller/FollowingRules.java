@@ -1,19 +1,6 @@
 package com.utbm.reversi.controller;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.WindowConstants;
-
 import com.utbm.reversi.model.Game;
 import com.utbm.reversi.model.cells.Cell;
-import com.utbm.reversi.model.cells.OldCell;
-import com.utbm.reversi.view.MenuFrame;
-import com.utbm.reversi.view.ReversiFrame;
 
 public class FollowingRules 
 {
