@@ -32,7 +32,7 @@ public class Main {
         
         
         
-		Player player = new Player("Marco", new Color(0,255,25));
+		/*Player player = new Player("Marco", new Color(0,255,25));
 		
 		System.out.println("Nom : " + player.getName());
 		
@@ -43,7 +43,7 @@ public class Main {
 		
 		for(Power power : player.getPowers()) {
 			System.out.println("Power file : " + power.getIcon());
-		}
+		}*/
 		
 	}
 }

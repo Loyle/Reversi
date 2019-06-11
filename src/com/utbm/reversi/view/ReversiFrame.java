@@ -64,6 +64,7 @@ public class ReversiFrame extends JFrame
 		this.game.addPlayer(new Player("Comar", Color.BLACK));
 		this.game.addPlayer(new Player("Toinou", Color.WHITE));
 		
+		this.initWindow();
 		this.game.run();
 	}
 	
@@ -99,8 +100,8 @@ public class ReversiFrame extends JFrame
         		//cells[i][j].addActionListener(e -> reversiController.onCellClicked(cells[x][y]));
         		cells[i][j].addActionListener(this.listener);
         		// On stocke dans la Cell sa position dans le tableau
-        		cells[i][j].setCoordX(j);
-        		cells[i][j].setCoordY(i);
+        		cells[i][j].setCoordX(i);
+        		cells[i][j].setCoordY(j);
         		
         		// On place les premiers jetons au milieu (2 noirs, 2 blancs)
         		if ((i > -2 + this.gridSize/2) && (i < 1 + this.gridSize/2) && (j > -2 + this.gridSize/2) && (j < 1 + this.gridSize/2)) 

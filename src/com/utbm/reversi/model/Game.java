@@ -80,7 +80,7 @@ public class Game {
 		return this.currentPlayer;
 	}
 	
-	public void next() {	
+	public void next() {
 		
 		this.countScore();
 		
@@ -108,7 +108,5 @@ public class Game {
 				}
 			}
 		}
-		
-		System.out.println("SCORE : " + this.players.get(0).getScore());
 	}
 }

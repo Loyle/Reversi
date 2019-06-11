@@ -83,7 +83,7 @@ public class Cell extends JButton {
 		return this.coordX;
 	}
 	public void setCoordY(int y) {
-		this.coordX = y;
+		this.coordY = y;
 	}
 	public int getCoordY() {
 		return this.coordY;

@@ -20,8 +20,13 @@ public class GameController {
 		if(this.game.isStart()) {
 			// On veut que la case appartienne pas à un joueur
 			if(cell.getOwner() == null) {
-				cell.setOwner(this.game.getCurrentPlayer());
-				this.game.next();
+				FollowingRules rules = new FollowingRules(this.game, cell);
+				
+				if(rules.isPlayable()) {
+					rules.replaceCell();
+					
+					this.game.next();
+				}
 			}
 		}
 		else {
