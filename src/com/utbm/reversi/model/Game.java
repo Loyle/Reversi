@@ -1,12 +1,17 @@
 package com.utbm.reversi.model;
 
+
+import java.time.Duration;
 import java.util.ArrayList;
+
+import com.utbm.reversi.model.cells.Bomb;
+import com.utbm.reversi.model.powers.ColorBombPower;
 import com.utbm.reversi.model.powers.Power;
 import com.utbm.reversi.view.ReversiFrame;
 
 public class Game {
 	private ArrayList<Player> players;
-	private ArrayList<Power> powers;
+	private ArrayList<Power> powers;	
 	private Player currentPlayer;
 	private Board board;
 	
@@ -18,7 +23,6 @@ public class Game {
 	public Game(ReversiFrame frame, int size) {
 		this.players = new ArrayList<Player>();
 		this.powers = new ArrayList<Power>();
-		
 		this.isStart = false;
 		this.round = 0;
 		
@@ -81,6 +85,9 @@ public class Game {
 	}
 	
 	public void next() {
+
+		Power pow = new ColorBombPower(this.currentPlayer, "ytg");
+		pow.use(this, this.board.getBoardCells()[2][2]);
 		
 		this.countScore();
 		
@@ -90,6 +97,24 @@ public class Game {
 
 			// Tour suivant
 			this.addRound();
+			
+			
+			// update des power , stp et remove power si duration = 0
+			ArrayList<Power> powersToDelete = new ArrayList<Power>();
+			for(Power power : powers) {
+				power.setDuration(power.getDuration()-1);
+				if(power.getDuration()==0) {
+					powersToDelete.add(power);
+				}
+			}
+			for(Power power : powersToDelete) {
+				//créer stop power method
+			}
+				powers.removeAll(powersToDelete);
+			
+			
+			
+			//for each power en cours decrementer duration check état et remove array si == 0 créer stop power 
 		}else {
 			// Go to next player
 			this.currentPlayer = this.players.get(this.players.indexOf(this.currentPlayer) + 1);

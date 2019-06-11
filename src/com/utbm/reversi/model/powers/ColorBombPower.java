@@ -3,6 +3,7 @@ package com.utbm.reversi.model.powers;
 import javax.swing.ImageIcon;
 
 import com.utbm.reversi.model.Board;
+import com.utbm.reversi.model.Game;
 import com.utbm.reversi.model.Player;
 import com.utbm.reversi.model.cells.Cell;
 
@@ -16,9 +17,35 @@ public class ColorBombPower extends Power {
 	}
 	
 	@Override
-	public void use(Board board, Cell cell) {
+	public void use(Game game, Cell cell) {
 		// TODO Auto-generated method stub
-		Cell[][] arrayCell = board.getBoardCells();
+		/*
+		 *Use ->  Carré autour du pion changeant la couleur de touts les pions dans la couelur du 
+		 * player ayant poser le pion
+		 * 		°	*	*		°	°	°
+		 *		*	°	*	=> 	°	°	°
+		 * 		*	°	°		°	°	°
+		 */
+
+		int xStart = cell.getCoordX();
+		int yStart = cell.getCoordY();
+		if (cell.getCoordX()>0) {
+			xStart--;
+		}
+		if (cell.getCoordY()>0) {
+			yStart--;
+		}
+		int saveY = yStart;
+		while ( xStart<=cell.getCoordX()+1 && xStart<game.getBoard().getSize()) {
+			yStart= saveY;
+			while ( yStart<=cell.getCoordY()+1 && yStart<game.getBoard().getSize()) {
+				game.getBoard().getBoardCells()[xStart][yStart].setOwner(this.getOwner());
+				game.getBoard().getBoardCells()[xStart][yStart].updateState();
+				yStart++;
+			}
+			xStart++;
+		}
+
 	}
 
 }
