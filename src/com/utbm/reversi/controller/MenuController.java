@@ -26,7 +26,6 @@ public class MenuController
 		
 		// On lance une nouvelle partie
 		ReversiFrame reversi = new ReversiFrame(this.gridSize);
-		reversi.initWindow();
 	}
 	
 	// Fonction appelée lorsque l'on déplace le curseur pour modifier la taille de la grille

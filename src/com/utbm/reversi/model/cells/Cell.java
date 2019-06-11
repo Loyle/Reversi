@@ -15,6 +15,7 @@ public class Cell extends JButton {
 	private Player owner;
 	private Color color;
 	private Color defaultColor;
+	private boolean isLock;
 	
 	//private Pawn pawn;
 	
@@ -26,9 +27,9 @@ public class Cell extends JButton {
 		this.color = Color.GREEN;
 		this.defaultColor = this.color;
 		this.owner = null;
+		this.isLock = true;
 		this.setBackground(this.defaultColor);
 		//this.pawn = null;
-		this.setBorderPainted(false);
 		this.setContentAreaFilled(false);
 	}
 	public Cell(Color color) {
@@ -36,9 +37,9 @@ public class Cell extends JButton {
 		this.color = color;
 		this.defaultColor = this.color;
 		this.owner = null;
+		this.isLock = true;
 		this.setBackground(this.defaultColor);
 		//this.pawn = null;
-		//this.setBorderPainted(false);
 		this.setContentAreaFilled(false);
 	}
 	
@@ -83,7 +84,7 @@ public class Cell extends JButton {
 		return this.coordX;
 	}
 	public void setCoordY(int y) {
-		this.coordX = y;
+		this.coordY = y;
 	}
 	public int getCoordY() {
 		return this.coordY;
@@ -101,6 +102,12 @@ public class Cell extends JButton {
 			g2d.setColor(this.color);
 			g2d.fillOval(10, 10, this.getWidth() - 20, this.getHeight() - 20);
 		}
+	}
+	public boolean isLock() {
+		return isLock;
+	}
+	public void setLock(boolean isLock) {
+		this.isLock = isLock;
 	}
 
 	
