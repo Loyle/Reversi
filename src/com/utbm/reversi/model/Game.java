@@ -77,6 +77,12 @@ public class Game {
 	public void run() {
 		this.currentPlayer = this.players.get(0);
 		
+		this.frame.setCurrentPlayer(this.currentPlayer);
+		
+		this.countScore();
+		this.frame.updateScores(this.players.get(0), this.players.get(1));
+		
+		
 		this.setStart(true);
 	}
 	
@@ -86,10 +92,8 @@ public class Game {
 	
 	public void next() {
 
-		Power pow = new ColorBombPower(this.currentPlayer, "ytg");
-		pow.use(this, this.board.getBoardCells()[2][2]);
-		
-		this.countScore();
+		/*Power pow = new ColorBombPower(this.currentPlayer, "ytg");
+		pow.use(this, this.board.getBoardCells()[2][2]);*/
 		
 		if(this.players.indexOf(this.currentPlayer) == this.players.size() - 1) {
 			// Come back to first player
@@ -112,13 +116,18 @@ public class Game {
 			}
 				powers.removeAll(powersToDelete);
 			
-			
-			
 			//for each power en cours decrementer duration check état et remove array si == 0 créer stop power 
 		}else {
 			// Go to next player
 			this.currentPlayer = this.players.get(this.players.indexOf(this.currentPlayer) + 1);
 		}
+		
+		// Update Score
+		this.countScore();
+		this.frame.updateScores(this.players.get(0), this.players.get(1));
+		
+		// Update Current player
+		this.frame.setCurrentPlayer(this.currentPlayer);
 	}
 	
 	public void countScore() {
