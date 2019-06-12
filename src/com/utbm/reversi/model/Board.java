@@ -10,8 +10,8 @@ public class Board {
 		public Board(int size) {
 			board = new Cell[size][size];
 			this.size=size;
-			for (int i=0;i<size;i++ ) {
-				for(int j=0;j<size;j++) {
+			for (int j=0;j<size;j++ ) {
+				for(int i=0;i<size;i++) {
 							board[i][j]= new Cell(new Color(0,200,0));		
 				}
 			}

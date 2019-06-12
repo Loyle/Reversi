@@ -9,7 +9,6 @@ public class FollowingRules
 	private int x;
 	private int y;
 	private int size;
-	
 	private int countInter[];
 	
 	public FollowingRules(Game game, Cell cell)
@@ -22,25 +21,34 @@ public class FollowingRules
 		this.size = this.game.getBoard().getSize();
 	}
 	
-	public int[] findInter() {
-		
-		
+	public int[] findInter() 
+	{
 		int inter[] = {0,0,0,0,0,0,0,0};
 		
-		
+		// startX et startY sont les coordonnées d'une Cell voisine
 		int startX;
 		int startY;
+		
 		int count;
 		// Top
 		startX = this.x;
 		startY = this.y - 1;
 		count = 0;
-		while(startY >= 0 && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) {
-			if(this.game.getBoard().getBoardCells()[startX][startY].getOwner().equals(this.game.getCurrentPlayer()) == true) {
+		// TANT QUE
+		// Les coordonnées du voisin sont dans la grille
+		// ET QUE
+		// Ce voisin a un pion posé sur lui/a un propriétaire
+		while((startY >= 0) && (this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null))
+		{
+			// SI
+			// Le propriétaire de cette case est celui qui joue en ce moment
+			if(this.game.getBoard().getBoardCells()[startX][startY].getOwner().equals(this.game.getCurrentPlayer()) == true) 
+			{
 				inter[0] = count;
 				break;
 			}
-			else {
+			else 
+			{
 				count++;
 			}
 			
@@ -51,11 +59,14 @@ public class FollowingRules
 		startX = this.x;
 		startY = this.y + 1;
 		count = 0;
-		while (startY < this.size && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) {
-			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner().equals(this.game.getCurrentPlayer()) == true) {
+		while (startY < this.size && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) 
+		{
+			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner().equals(this.game.getCurrentPlayer()) == true) 
+			{
 				inter[1] = count;
 				break;
-			} else {
+			} else 
+			{
 				count++;
 			}
 			
@@ -66,12 +77,15 @@ public class FollowingRules
 		startX = this.x - 1;
 		startY = this.y;
 		count = 0;
-		while (startX >= 0 && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) {
-			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner()
-					.equals(this.game.getCurrentPlayer()) == true) {
+		while (startX >= 0 && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) 
+		{
+			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner().equals(this.game.getCurrentPlayer()) == true) 
+			{
 				inter[2] = count;
 				break;
-			} else {
+			} 
+			else 
+			{
 				count++;
 			}
 
@@ -82,12 +96,15 @@ public class FollowingRules
 		startX = this.x + 1;
 		startY = this.y;
 		count = 0;
-		while (startX < this.size && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) {
-			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner()
-					.equals(this.game.getCurrentPlayer()) == true) {
+		while (startX < this.size && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) 
+		{
+			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner().equals(this.game.getCurrentPlayer()) == true) 
+			{
 				inter[3] = count;
 				break;
-			} else {
+			} 
+			else 
+			{
 				count++;
 			}
 
@@ -99,11 +116,13 @@ public class FollowingRules
 		startY = this.y - 1;
 		count = 0;
 		while (startX < this.size && startY >= 0 && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) {
-			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner()
-					.equals(this.game.getCurrentPlayer()) == true) {
+			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner().equals(this.game.getCurrentPlayer()) == true) 
+			{
 				inter[4] = count;
 				break;
-			} else {
+			} 
+			else 
+			{
 				count++;
 			}
 
@@ -115,12 +134,15 @@ public class FollowingRules
 		startX = this.x + 1;
 		startY = this.y + 1;
 		count = 0;
-		while (startX < this.size && startY < this.size && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) {
-			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner()
-					.equals(this.game.getCurrentPlayer()) == true) {
+		while (startX < this.size && startY < this.size && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) 
+		{
+			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner().equals(this.game.getCurrentPlayer()) == true) 
+			{
 				inter[5] = count;
 				break;
-			} else {
+			} 
+			else
+			{
 				count++;
 			}
 			startX++;
@@ -131,12 +153,15 @@ public class FollowingRules
 		startX = this.x - 1;
 		startY = this.y + 1;
 		count = 0;
-		while (startX >= 0 && startY < this.size && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) {
-			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner()
-					.equals(this.game.getCurrentPlayer()) == true) {
+		while (startX >= 0 && startY < this.size && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) 
+		{
+			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner().equals(this.game.getCurrentPlayer()) == true)
+			{
 				inter[6] = count;
 				break;
-			} else {
+			}
+			else 
+			{
 				count++;
 			}
 			startX--;
@@ -147,11 +172,15 @@ public class FollowingRules
 		startX = this.x - 1;
 		startY = this.y - 1;
 		count = 0;
-		while (startX >= 0 && startY >= 0 && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) {
-			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner().equals(this.game.getCurrentPlayer()) == true) {
+		while (startX >= 0 && startY >= 0 && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) 
+		{
+			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner().equals(this.game.getCurrentPlayer()) == true)
+			{
 				inter[7] = count;
 				break;
-			} else {
+			} 
+			else 
+			{
 				count++;
 			}
 			startX--;
@@ -161,42 +190,53 @@ public class FollowingRules
 		return inter;
 	}
 	
-	public boolean isPlayable() {
+	// La case est jouable si on a pu compter un pion adverse entre le nouveau pion et un autre pion de la même couleur
+	public boolean isPlayable() 
+	{
 		this.countInter = this.findInter();
 		
-		for(int i = 0; i < 8; i++) {
-			if(this.countInter[i] > 0) {
+		for(int i = 0; i < 8; i++) 
+		{
+			if(this.countInter[i] > 0)
+			{
 				return true;
 			}
 		}
 		return false;
 	}
 	
-	public void replaceCell() {
-		
+	// Permet de placer le nouveau pion et de retourner les pions impactés
+	public void replaceCell() 
+	{
 		// TOP
-		for (int i = 0; i <= this.countInter[0]; i++) {
+		// Change le propriétaire de toutes les cases encadrées, et actualise (ce qui place le pion)
+		for (int i = 0; i <= this.countInter[0]; i++) 
+		{
 			this.game.getBoard().getBoardCells()[this.x][this.y - i].setOwner(this.game.getCurrentPlayer());
 			this.game.getBoard().getBoardCells()[this.x][this.y - i].updateState();
 		}
 		// BOTTOM
-		for (int i = 0; i <= this.countInter[1]; i++) {
+		for (int i = 0; i <= this.countInter[1]; i++) 
+		{
 			this.game.getBoard().getBoardCells()[this.x][this.y + i].setOwner(this.game.getCurrentPlayer());
 			this.game.getBoard().getBoardCells()[this.x][this.y + i].updateState();
 		}
 		// LEFT
-		for (int i = 0; i <= this.countInter[2]; i++) {
+		for (int i = 0; i <= this.countInter[2]; i++)
+		{
 			this.game.getBoard().getBoardCells()[this.x - i][this.y].setOwner(this.game.getCurrentPlayer());
 			this.game.getBoard().getBoardCells()[this.x - i][this.y].updateState();
 		}
 		// RIGHT
-		for (int i = 0; i <= this.countInter[3]; i++) {
+		for (int i = 0; i <= this.countInter[3]; i++) 
+		{
 			this.game.getBoard().getBoardCells()[this.x + i][this.y].setOwner(this.game.getCurrentPlayer());
 			this.game.getBoard().getBoardCells()[this.x + i][this.y].updateState();
 		}
 		
 		// TOP-RIGHT
-		for (int i = 0; i <= this.countInter[4]; i++) {
+		for (int i = 0; i <= this.countInter[4]; i++)
+		{
 			this.game.getBoard().getBoardCells()[this.x + i][this.y - i].setOwner(this.game.getCurrentPlayer());
 			this.game.getBoard().getBoardCells()[this.x + i][this.y - i].updateState();
 		}
@@ -207,12 +247,14 @@ public class FollowingRules
 		}
 
 		// BOTTOM-LEFT
-		for (int i = 0; i <= this.countInter[6]; i++) {
+		for (int i = 0; i <= this.countInter[6]; i++) 
+		{
 			this.game.getBoard().getBoardCells()[this.x - i][this.y + i].setOwner(this.game.getCurrentPlayer());
 			this.game.getBoard().getBoardCells()[this.x - i][this.y + i].updateState();
 		}
 		// TOP-LEFT
-		for (int i = 0; i <= this.countInter[7]; i++) {
+		for (int i = 0; i <= this.countInter[7]; i++) 
+		{
 			this.game.getBoard().getBoardCells()[this.x - i][this.y - i].setOwner(this.game.getCurrentPlayer());
 			this.game.getBoard().getBoardCells()[this.x - i][this.y - i].updateState();
 		}
@@ -421,21 +463,7 @@ public class FollowingRules
 			newFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		}*/
 		
-		// Fonction associée au clic sur le bouton retour au menu
-		/*public void onBackToMenuClicked(JButton backToMenu) 
-		{
-			// Suppression de la fenêtre de jeu et création d'une fenêtre de menu
-			this.reversiFrame.dispose();
-			
-			MenuFrame menuFrame = new MenuFrame();
-			
-			menuFrame.setTitle("Menu - Reversi Game");
-	        
-			menuFrame.setSize(700, 700);
-
-			menuFrame.setVisible(true);
-			menuFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		}*/
+		
 	
 	
 }

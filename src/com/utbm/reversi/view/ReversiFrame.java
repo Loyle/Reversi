@@ -58,7 +58,7 @@ public class ReversiFrame extends JFrame
 		this.controller = new GameController(this.game, this);
 		this.listener = new GameListener(this.controller);
 		
-		this.gridSize = this.game.getBoard().getSize();
+		this.gridSize = size;
 		
 		this.game.addPlayer(new Player("Comar", Color.BLACK));
 		this.game.addPlayer(new Player("Toinou", Color.WHITE));
@@ -90,9 +90,9 @@ public class ReversiFrame extends JFrame
         
         
         // On génère la grille de Cell
-        for (int i=0; i < this.gridSize ; i++) 
+        for (int j=0; j < this.gridSize ; j++) 
         {
-        	for (int j=0;j < this.gridSize;j++) 
+        	for (int i=0;i < this.gridSize;i++) 
         	{
         		// On associe le clic sur le bouton à une fonction présente dans le ReversiController
         		//cells[i][j].addActionListener(e -> reversiController.onCellClicked(cells[x][y]));
@@ -231,7 +231,7 @@ public class ReversiFrame extends JFrame
         this.backToMenu = new JButton("<=");
         this.backToMenu.setPreferredSize(new Dimension(50,40));
         // On associe ce bouton à une fonction dans ReversiController
-        //this.backToMenu.addActionListener(e -> reversiController.onBackToMenuClicked(this.backToMenu));
+        this.backToMenu.addActionListener(e -> listener.onBackToMenuClicked(this.backToMenu));
         scores.add(this.backToMenu,gbc);
         
         
@@ -258,6 +258,12 @@ public class ReversiFrame extends JFrame
 		this.whoPlayColor.setBackground(player.getColor());
 		this.whoPlayName.setText(player.getName());
 	}
+
+	public JPanel getGamePanel() {
+		return gamePanel;
+	}
+	
+	
 	
 	
 }
