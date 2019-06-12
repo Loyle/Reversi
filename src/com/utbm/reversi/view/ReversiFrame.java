@@ -144,7 +144,7 @@ public class ReversiFrame extends JFrame
         gbc.gridx = 0;
         gbc.gridy = 0;
         
-        this.label = new JLabel("Tour des :");
+        this.label = new JLabel("Tour de :");
         this.label.setFont(new Font("Arial",0,20));
         scores.add(this.label,gbc);
         
