@@ -6,7 +6,10 @@ import java.util.ArrayList;
 
 import com.utbm.reversi.model.cells.Bomb;
 import com.utbm.reversi.model.powers.ColorBombPower;
+import com.utbm.reversi.model.powers.GiletJaunePower;
 import com.utbm.reversi.model.powers.Power;
+import com.utbm.reversi.model.powers.ShieldPower;
+import com.utbm.reversi.model.powers.SwitchPower;
 import com.utbm.reversi.view.ReversiFrame;
 
 public class Game {
@@ -14,6 +17,7 @@ public class Game {
 	private ArrayList<Power> powers;	
 	private Player currentPlayer;
 	private Board board;
+	private int numberPower;
 	
 	private ReversiFrame frame;
 	
@@ -25,6 +29,7 @@ public class Game {
 		this.powers = new ArrayList<Power>();
 		this.isStart = false;
 		this.round = 0;
+		this.numberPower = 4;
 		
 		this.frame = frame;
 		
@@ -39,7 +44,13 @@ public class Game {
 	public void removePlayer(Player player) {
 		this.players.remove(player);
 	}
-	
+	public int getNumberPower() {
+		return numberPower;
+	}
+
+	public void setNumberPower(int numberPower) {
+		this.numberPower = numberPower;
+	}
 	public void addPower(Power power) {
 		this.powers.add(power);
 	}
@@ -77,12 +88,27 @@ public class Game {
 	public void run() {
 		this.currentPlayer = this.players.get(0);
 		
+
+		// Give random power to each player
+		for(Player player : players) {
+			for(int nbPow = 0; nbPow<this.numberPower;nbPow++) {
+				player.addRandomPower();
+			}
+		}
+		
+		for(Player player : players) {
+			System.out.println(""+player.getName());
+			for(Power power : player.getPowers()) {
+				System.out.println("Power file : " + power.getIcon());
+			}
+		}
+
 		this.frame.setCurrentPlayer(this.currentPlayer);
 		
 		this.countScore();
 		this.frame.updateScores(this.players.get(0), this.players.get(1));
 		
-		this.board.getBoardCells()[4][4].setEnabled(false);
+		this.board.getBoardCells()[4][2].setEnabled(false);
 		
 		this.setStart(true);
 	}
@@ -93,31 +119,38 @@ public class Game {
 	
 	public void next() {
 
-		/*Power pow = new ColorBombPower(this.currentPlayer, "ytg");
-		pow.use(this, this.board.getBoardCells()[2][2]);*/
+
+		Power pow = new SwitchPower(this.currentPlayer, "ytg");
+		powers.add(pow);
+		pow.use(this, this.board.getBoardCells()[4][3]);
+		
+		this.countScore();
+
 		
 		if(this.players.indexOf(this.currentPlayer) == this.players.size() - 1) {
 			// Come back to first player
 			this.currentPlayer = this.players.get(0);
-
-			// Tour suivant
-			this.addRound();
 			
-			
-			// update des power , stp et remove power si duration = 0
+			// update des power , stop et remove power si duration = 0
 			ArrayList<Power> powersToDelete = new ArrayList<Power>();
 			for(Power power : powers) {
-				power.setDuration(power.getDuration()-1);
+				System.out.println(power.getDuration());
 				if(power.getDuration()==0) {
 					powersToDelete.add(power);
 				}
 			}
 			for(Power power : powersToDelete) {
-				//créer stop power method
+				power.stop(this);
 			}
 				powers.removeAll(powersToDelete);
-			
+				powersToDelete.clear();
+	
+				// Tour suivant
+				this.addRound();
+		
+
 			//for each power en cours decrementer duration check état et remove array si == 0 créer stop power 
+
 		}else {
 			// Go to next player
 			this.currentPlayer = this.players.get(this.players.indexOf(this.currentPlayer) + 1);
@@ -144,4 +177,6 @@ public class Game {
 			}
 		}
 	}
+
+
 }
