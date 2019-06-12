@@ -235,12 +235,20 @@ public class ReversiFrame extends JFrame
         scores.add(this.backToMenu,gbc);
         
         
+        
+        // Power Part
+        JPanel powerPart = new JPanel(new GridLayout(1,4));
+        
+        
+        
         // On donne une taille minimale à la fenêtre
         this.setMinimumSize(new Dimension(13+gridSize*(cellSize+5)+scoresSizeX, 42+gridSize*(cellSize+5)));
         // On ajoute les 2 panel à la fenêtre
+        
         this.getContentPane().add(gamePanel, BorderLayout.CENTER);
         this.getContentPane().add(scores, BorderLayout.EAST);
         this.pack();
+        
         
         this.setVisible(true);
 	}

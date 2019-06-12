@@ -82,6 +82,7 @@ public class Game {
 		this.countScore();
 		this.frame.updateScores(this.players.get(0), this.players.get(1));
 		
+		this.board.getBoardCells()[4][4].setEnabled(false);
 		
 		this.setStart(true);
 	}
