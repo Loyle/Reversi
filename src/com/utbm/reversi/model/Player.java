@@ -136,7 +136,7 @@ public class Player {
 	 * 
 	 */
 	public void addRandomPower() {
-		int rando = (int) new Random().nextInt(4);
+		int rando = (int) new Random().nextInt(6);
 		
 		switch (rando) {
 		case 0:
@@ -150,6 +150,12 @@ public class Player {
 			break;
 		case 3:
 			this.powers.add(new GiletJaunePower(this,"giletjaune_logo.png"));
+			break;
+		case 4:
+			this.powers.add(new GiletJaunePower(this,"shield_logo.png"));
+			break;
+		case 5:
+			this.powers.add(new GiletJaunePower(this,"FlintnSteel_logo.png"));
 			break;
 
 		default:

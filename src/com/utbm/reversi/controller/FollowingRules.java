@@ -35,7 +35,7 @@ public class FollowingRules
 		startX = this.x;
 		startY = this.y - 1;
 		count = 0;
-		while(startY >= 0 && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) {
+		while(startY >= 0 && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null ) {
 			if(this.game.getBoard().getBoardCells()[startX][startY].getOwner().equals(this.game.getCurrentPlayer()) == true) {
 				inter[0] = count;
 				break;
@@ -176,45 +176,61 @@ public class FollowingRules
 		
 		// TOP
 		for (int i = 0; i <= this.countInter[0]; i++) {
-			this.game.getBoard().getBoardCells()[this.x][this.y - i].setOwner(this.game.getCurrentPlayer());
-			this.game.getBoard().getBoardCells()[this.x][this.y - i].updateState();
+			if(this.game.getBoard().getBoardCells()[this.x][this.y - i].isEnabled()) {
+				this.game.getBoard().getBoardCells()[this.x][this.y - i].setOwner(this.game.getCurrentPlayer());
+				this.game.getBoard().getBoardCells()[this.x][this.y - i].updateState();				
+			}
 		}
 		// BOTTOM
 		for (int i = 0; i <= this.countInter[1]; i++) {
-			this.game.getBoard().getBoardCells()[this.x][this.y + i].setOwner(this.game.getCurrentPlayer());
-			this.game.getBoard().getBoardCells()[this.x][this.y + i].updateState();
+			if(this.game.getBoard().getBoardCells()[this.x][this.y + i].isEnabled()) {
+				this.game.getBoard().getBoardCells()[this.x][this.y + i].setOwner(this.game.getCurrentPlayer());
+				this.game.getBoard().getBoardCells()[this.x][this.y + i].updateState();	
+			}
 		}
 		// LEFT
 		for (int i = 0; i <= this.countInter[2]; i++) {
-			this.game.getBoard().getBoardCells()[this.x - i][this.y].setOwner(this.game.getCurrentPlayer());
-			this.game.getBoard().getBoardCells()[this.x - i][this.y].updateState();
+			if (this.game.getBoard().getBoardCells()[this.x - i][this.y].isEnabled()) {
+				this.game.getBoard().getBoardCells()[this.x - i][this.y].setOwner(this.game.getCurrentPlayer());
+				this.game.getBoard().getBoardCells()[this.x - i][this.y].updateState();				
+			}
 		}
 		// RIGHT
 		for (int i = 0; i <= this.countInter[3]; i++) {
-			this.game.getBoard().getBoardCells()[this.x + i][this.y].setOwner(this.game.getCurrentPlayer());
-			this.game.getBoard().getBoardCells()[this.x + i][this.y].updateState();
+			if(this.game.getBoard().getBoardCells()[this.x + i][this.y].isEnabled()) {
+				this.game.getBoard().getBoardCells()[this.x + i][this.y].setOwner(this.game.getCurrentPlayer());
+				this.game.getBoard().getBoardCells()[this.x + i][this.y].updateState();				
+			}
 		}
 		
 		// TOP-RIGHT
 		for (int i = 0; i <= this.countInter[4]; i++) {
-			this.game.getBoard().getBoardCells()[this.x + i][this.y - i].setOwner(this.game.getCurrentPlayer());
-			this.game.getBoard().getBoardCells()[this.x + i][this.y - i].updateState();
+			if(this.game.getBoard().getBoardCells()[this.x + i][this.y - i].isEnabled()) {
+				this.game.getBoard().getBoardCells()[this.x + i][this.y - i].setOwner(this.game.getCurrentPlayer());
+				this.game.getBoard().getBoardCells()[this.x + i][this.y - i].updateState();				
+			}
 		}
 		// BOTTOM-RIGHT
 		for (int i = 0; i <= this.countInter[5]; i++) {
-			this.game.getBoard().getBoardCells()[this.x + i][this.y + i].setOwner(this.game.getCurrentPlayer());
-			this.game.getBoard().getBoardCells()[this.x + i][this.y + i].updateState();
+			if(this.game.getBoard().getBoardCells()[this.x + i][this.y + i].isEnabled()) {
+				this.game.getBoard().getBoardCells()[this.x + i][this.y + i].setOwner(this.game.getCurrentPlayer());
+				this.game.getBoard().getBoardCells()[this.x + i][this.y + i].updateState();
+			}
 		}
 
 		// BOTTOM-LEFT
 		for (int i = 0; i <= this.countInter[6]; i++) {
-			this.game.getBoard().getBoardCells()[this.x - i][this.y + i].setOwner(this.game.getCurrentPlayer());
-			this.game.getBoard().getBoardCells()[this.x - i][this.y + i].updateState();
+			if(this.game.getBoard().getBoardCells()[this.x - i][this.y + i].isEnabled()) {
+				this.game.getBoard().getBoardCells()[this.x - i][this.y + i].setOwner(this.game.getCurrentPlayer());
+				this.game.getBoard().getBoardCells()[this.x - i][this.y + i].updateState();			
+			}
 		}
 		// TOP-LEFT
 		for (int i = 0; i <= this.countInter[7]; i++) {
-			this.game.getBoard().getBoardCells()[this.x - i][this.y - i].setOwner(this.game.getCurrentPlayer());
-			this.game.getBoard().getBoardCells()[this.x - i][this.y - i].updateState();
+			if(this.game.getBoard().getBoardCells()[this.x - i][this.y - i].isEnabled()) {
+				this.game.getBoard().getBoardCells()[this.x - i][this.y - i].setOwner(this.game.getCurrentPlayer());
+				this.game.getBoard().getBoardCells()[this.x - i][this.y - i].updateState();				
+			}
 		}
 	}
 	
