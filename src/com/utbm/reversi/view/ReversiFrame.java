@@ -2,6 +2,7 @@ package com.utbm.reversi.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -25,26 +26,24 @@ public class ReversiFrame extends JFrame
 	//private Board board;
 	
 	// On crée un premier panel sur lequel seront affichés les boutons (il est en paramètre pour gérer la fin d'une partie)
-	final JPanel gamePanel = new JPanel();
+	private JPanel gamePanel;
 	
 	// On crée un label et un panel associés au tour du joueur (le panel est la case qui change de couleur, le texte est "tour des :")
-	private final JLabel label1 = new JLabel("Tour des :");
-	private final JPanel whoPlay = new JPanel();
+	private JLabel label;
+	private JPanel whoPlayColor;
+	private JLabel whoPlayName;
+	
 	
 	// On crée un label et un panel comme avant pour afficher le score (couleur + texte). Le int est associé au score. On le fait pour chaque couleur.
-	private JLabel whiteScoreLabel = new JLabel("Score : 2");
-	private int whiteScore=2;
-	private final JPanel whiteScorePanel = new JPanel();
-	private JLabel blackScoreLabel = new JLabel("Score : 2");
-	private int blackScore=2;
-	private final JPanel blackScorePanel = new JPanel();
+	private JLabel whiteScoreLabel;
+	private JLabel blackScoreLabel;
 	
 	// On crée le bouton de retour vers le menu
-	private JButton backToMenu = new JButton("<=");
+	private JButton backToMenu;
 	
 	// On crée 2 constantes (la taille d'une case à la génération et la largeur de la bande sur le côté où les scores sont affichés)
-	private final int cellSize = 70;
-	private final int scoresSizeX = 100;
+	private int cellSize;
+	private int scoresSizeX;
 	
 	// La taille de la grille est stockée dans un int, qui change à chaque génération d'une nouvelle fenêtre
 	private int gridSize;
@@ -75,7 +74,8 @@ public class ReversiFrame extends JFrame
 		this.setSize(700, 700);
 		this.setLocationRelativeTo(null);
 		
-		// On redétermine la taille de la grille quand on crée la fenêtre
+		this.scoresSizeX = 100;
+		this.cellSize = 70;
 		
 		// On recupère les cellules du board
         Cell [][] cells = this.game.getBoard().getBoardCells();
@@ -83,8 +83,9 @@ public class ReversiFrame extends JFrame
 		// ======================================================================================
 		// PANEL "game" OÙ SONT LES CELL
 		// ======================================================================================
+        
+        this.gamePanel = new JPanel();
         this.gamePanel.setBackground(Color.black);
-        // On affiche les cell dans une GridLayout
         this.gamePanel.setLayout(new GridLayout(this.gridSize,this.gridSize,0,0));
         
         
@@ -93,10 +94,7 @@ public class ReversiFrame extends JFrame
         {
         	for (int j=0;j < this.gridSize;j++) 
         	{
-        		cells[i][j].setBackground(Color.green);
         		// On associe le clic sur le bouton à une fonction présente dans le ReversiController
-        		//final int x = i;
-        		//final int y = j;
         		//cells[i][j].addActionListener(e -> reversiController.onCellClicked(cells[x][y]));
         		cells[i][j].addActionListener(this.listener);
         		// On stocke dans la Cell sa position dans le tableau
@@ -134,7 +132,7 @@ public class ReversiFrame extends JFrame
      	// PANEL "scores" OÙ SONT LES SCORES
         // ======================================================================================
         final JPanel scores = new JPanel();
-        scores.setBackground(Color.gray);
+        scores.setBackground(Color.LIGHT_GRAY);
         // On détermine la taille de la band ede côté où sont les scores, et on lui associe le layout
         scores.setLayout(new GridBagLayout());
         scores.setPreferredSize(new Dimension(scoresSizeX,500));
@@ -142,13 +140,27 @@ public class ReversiFrame extends JFrame
         
         // WHO WILL PLAY
         // On positionne les informations sur qui va jouer
+        
         gbc.gridx = 0;
         gbc.gridy = 0;
-        scores.add(label1,gbc);
-        this.whoPlay.setPreferredSize(new Dimension(50,50));
+        
+        this.label = new JLabel("Tour de :");
+        this.label.setFont(new Font("Arial",0,20));
+        scores.add(this.label,gbc);
+        
+        
         gbc.gridx = 0;
         gbc.gridy = 1;
-        scores.add(whoPlay,gbc);
+        this.whoPlayName= new JLabel();
+        this.whoPlayName.setFont(new Font("Arial",0,20));
+        //this.whoPlayName.setPreferredSize(new Dimension(20,100));
+        scores.add(this.whoPlayName,gbc);
+        
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        this.whoPlayColor= new JPanel();
+        this.whoPlayColor.setPreferredSize(new Dimension(50,50));
+        scores.add(this.whoPlayColor,gbc);
         
         // ADD SPACE
         // On se déplace vers le bas en ajoutant des label vides
@@ -164,12 +176,17 @@ public class ReversiFrame extends JFrame
         // On affiche les informations sur les scores des joueurs
         gbc.gridx = 0;
         gbc.gridy = 15;
+        JPanel whiteScorePanel = new JPanel();
+        whiteScorePanel.setPreferredSize(new Dimension(40,40));
+        whiteScorePanel.setBackground(Color.white);
         scores.add(whiteScorePanel,gbc);
+        
         gbc.gridx = 0;
         gbc.gridy = 16;
+        this.whiteScoreLabel = new JLabel();
         scores.add(whiteScoreLabel,gbc);
-        this.whiteScorePanel.setPreferredSize(new Dimension(40,40));
-        this.whiteScorePanel.setBackground(Color.white);
+        
+        
         
         // ADD SPACE
         gbc.gridx = 0;
@@ -183,12 +200,18 @@ public class ReversiFrame extends JFrame
         // BLACK PLAYER SCORE
         gbc.gridx = 0;
         gbc.gridy = 19;
+        
+        JPanel blackScorePanel = new JPanel();
+        blackScorePanel.setPreferredSize(new Dimension(40,40));
+        blackScorePanel.setBackground(Color.black);
         scores.add(blackScorePanel,gbc);
+        
         gbc.gridx = 0;
         gbc.gridy = 20;
-        scores.add(blackScoreLabel,gbc);
-        this.blackScorePanel.setPreferredSize(new Dimension(40,40));
-        this.blackScorePanel.setBackground(Color.black);
+        
+        this.blackScoreLabel =new JLabel();
+        scores.add(this.blackScoreLabel,gbc);
+        
         
         
         // ADD SPACE
@@ -199,18 +222,18 @@ public class ReversiFrame extends JFrame
             scores.add(new JLabel(" "),gbc);
         }
         
+        
+        
         // BACK TO MENU
         // On crée un bouton qui renvoie vers le menu
         gbc.gridx = 0;
         gbc.gridy = 26;
+        this.backToMenu = new JButton("<=");
         this.backToMenu.setPreferredSize(new Dimension(50,40));
         // On associe ce bouton à une fonction dans ReversiController
-        
-        
         //this.backToMenu.addActionListener(e -> reversiController.onBackToMenuClicked(this.backToMenu));
-        
-        
         scores.add(this.backToMenu,gbc);
+        
         
         // On donne une taille minimale à la fenêtre
         this.setMinimumSize(new Dimension(13+gridSize*(cellSize+5)+scoresSizeX, 42+gridSize*(cellSize+5)));
@@ -221,79 +244,20 @@ public class ReversiFrame extends JFrame
         
         this.setVisible(true);
 	}
-	
-
-    
-    // ======================================================================================
- 	// Fonction qui permet de changer l'apparence du carré de couleur indiquant qui va jouer
-    // ======================================================================================
-	public void changeWhoPlay()
-	{
-		/*if (this.reversiController.getChange() == 1) 
-		{
-			this.whoPlay.setBackground(Color.white);
-		}
-		else if (this.reversiController.getChange() == 0) 
-		{
-			this.whoPlay.setBackground(Color.black);
-		}*/
-	}
 
 	// ======================================================================================
  	// Fonction qui actualise l'état des cores dans les label
     // ======================================================================================
-	public void updateScores() 
+	public void updateScores(Player p1, Player p2) 
 	{
-		this.blackScoreLabel.setText("Score : "+this.blackScore);
-		this.whiteScoreLabel.setText("Score : "+this.whiteScore);
+		this.blackScoreLabel.setText("Score : " + p1.getScore());
+		this.whiteScoreLabel.setText("Score : " + p2.getScore());
 	}
 
-	
-	
-	
-	
-
-	// ======================================================================================
- 	// Getters et setters
-    // ======================================================================================
-
-
-	public int getGridSize() 
-	{
-		return gridSize;
+	public void setCurrentPlayer(Player player) {
+		this.whoPlayColor.setBackground(player.getColor());
+		this.whoPlayName.setText(player.getName());
 	}
-
-
-	public void setWhiteScore(int whiteScore) {
-		this.whiteScore = whiteScore;
-	}
-
-
-	public void setBlackScore(int blackScore) {
-		this.blackScore = blackScore;
-	}
-
-
-	
-	public int getWhiteScore() {
-		return whiteScore;
-	}
-
-
-	public int getBlackScore() {
-		return blackScore;
-	}
-
-
-
-	public JPanel getGamePanel() {
-		return gamePanel;
-	}
-	
-	
-	
-	
-	
 	
 	
 }

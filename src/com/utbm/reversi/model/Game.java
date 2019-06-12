@@ -88,6 +88,7 @@ public class Game {
 	public void run() {
 		this.currentPlayer = this.players.get(0);
 		
+
 		// Give random power to each player
 		for(Player player : players) {
 			for(int nbPow = 0; nbPow<this.numberPower;nbPow++) {
@@ -101,6 +102,12 @@ public class Game {
 				System.out.println("Power file : " + power.getIcon());
 			}
 		}
+
+		this.frame.setCurrentPlayer(this.currentPlayer);
+		
+		this.countScore();
+		this.frame.updateScores(this.players.get(0), this.players.get(1));
+	
 		this.setStart(true);
 	}
 	
@@ -110,11 +117,13 @@ public class Game {
 	
 	public void next() {
 
+
 		Power pow = new SwitchPower(this.currentPlayer, "ytg");
 		powers.add(pow);
 		pow.use(this, this.board.getBoardCells()[4][3]);
 		
 		this.countScore();
+
 		
 		if(this.players.indexOf(this.currentPlayer) == this.players.size() - 1) {
 			// Come back to first player
@@ -133,14 +142,24 @@ public class Game {
 			}
 				powers.removeAll(powersToDelete);
 				powersToDelete.clear();
-			
+	
 				// Tour suivant
 				this.addRound();
 		
+
+			//for each power en cours decrementer duration check état et remove array si == 0 créer stop power 
+
 		}else {
 			// Go to next player
 			this.currentPlayer = this.players.get(this.players.indexOf(this.currentPlayer) + 1);
 		}
+		
+		// Update Score
+		this.countScore();
+		this.frame.updateScores(this.players.get(0), this.players.get(1));
+		
+		// Update Current player
+		this.frame.setCurrentPlayer(this.currentPlayer);
 	}
 	
 	public void countScore() {
