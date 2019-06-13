@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.utbm.reversi.controller.FollowingRules;
 import com.utbm.reversi.model.cells.Bomb;
 import com.utbm.reversi.model.powers.ColorBombPower;
 import com.utbm.reversi.model.powers.Power;
@@ -144,7 +145,7 @@ public class Game {
 		this.frame.setCurrentPlayer(this.currentPlayer);
 		
 		
-		if (isEnded()) 
+		if (isEnded() || isBlocked()) 
 		{
 			// On détruit le panel sur lequel la grille de Cell est générée
 			this.frame.remove(this.frame.getGamePanel());
@@ -175,7 +176,7 @@ public class Game {
 			JButton replay = new JButton("Replay");
 			gbc.gridx=0;
 		    gbc.gridy=5;
-		    //replay.addActionListener(e -> this.onReplayClicked(replay));
+		    replay.addActionListener(e -> this.frame.getListener().onReplayClicked(replay));
 		    end.add(replay,gbc);
 			this.frame.getContentPane().add(end,BorderLayout.CENTER);
 			
@@ -183,11 +184,28 @@ public class Game {
 			JButton endBackToMenu = new JButton("Back to Menu");
 			gbc.gridx=0;
 		    gbc.gridy=6;
-		    //endBackToMenu.addActionListener(e -> this.onBackToMenuClicked(endBackToMenu));
+		    endBackToMenu.addActionListener(e -> this.frame.getListener().onBackToMenuClicked(endBackToMenu));
 		    end.add(endBackToMenu,gbc);
+		    
+
+			endMsg.setText("BLOCKED");
+		    
+		    if (isEnded()) 
+			{
+				endMsg.setText("END");
+			}
+		    
+		    
+		    
+		    
 		    
 		    // On place le panel de fin là où se trouvait la grille
 			this.frame.getContentPane().add(end,BorderLayout.CENTER);
+			
+			
+			
+			
+			
 			
 			
 				/*
@@ -253,5 +271,46 @@ public class Game {
 		}
 	}
 	
+	
+	
+	public boolean isBlocked() 
+	{
+		
+		int idx1=0;
+		int idx2=0;
+		
+		// On parcourt toute la grille
+		for (int i=0;i<board.getSize();i++) 
+		{
+			for (int j=0;j<board.getSize();j++) 
+			{
+				FollowingRules rules = new FollowingRules(this, this.board.getBoardCells()[i][j]);
+				
+				// Si la case est vide et que l'on ne peut rien y poser, on incrémente idx1
+				if (this.board.getBoardCells()[i][j].getOwner() == null && rules.isPlayable() == false) 
+				{
+					idx1=idx1+1;
+				}
+				
+				// Si la case est vide, on incrémente idx2
+				if (this.board.getBoardCells()[i][j].getOwner() == null) 
+				{
+					idx2=idx2+1;
+				}
+					
+			}
+		}
+		
+		// S'il y a autant de case vide que de cases vides où on ne peut rien poser, alors le jeu est bien bloqué
+		if (idx1 == idx2) 
+		{
+			return true;
+		}
+		// Sinon, on peut continuer à jouer
+		else
+		{
+			return false;
+		}
+	}
 	
 }

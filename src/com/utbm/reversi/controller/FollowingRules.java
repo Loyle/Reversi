@@ -294,45 +294,7 @@ public class FollowingRules
 	*/
 	
 	// On teste s'il y a encore des cases où placer le futur pion (et donc si on peut continuer la partie ou pas)
-	/*public boolean isBlocked() 
-	{
-		// On a besoin de la grille de Cell que l'on va parcourir
-		OldCell[][] cellArray = this.reversiFrame.getCellArray();
-		
-		int idx1=0;
-		int idx2=0;
-		
-		// On parcourt toute la grille
-		for (int i=0;i<reversiFrame.getGridSize();i++) 
-		{
-			for (int j=0;j<reversiFrame.getGridSize();j++) 
-			{
-				// Si la case est vide et que l'on ne peut rien y poser, on incrémente idx1
-				if (cellArray[i][j].getState() == 0 && isFollowingRules(cellArray[i][j]) == false) 
-				{
-					idx1=idx1+1;
-				}
-				
-				// Si la case est vide, on incrémente idx2
-				if (cellArray[i][j].getState() == 0) 
-				{
-					idx2=idx2+1;
-				}
-					
-			}
-		}
-		
-		// S'il y a autant de case vide que de cases vides où on ne peut rien poser, alors le jeu est bien bloqué
-		if (idx1 == idx2) 
-		{
-			return true;
-		}
-		// Sinon, on peut continuer à jouer
-		else
-		{
-			return false;
-		}
-	}
+	/*
 	
 	
 	
@@ -447,21 +409,6 @@ public class FollowingRules
 			
 		}*/
 		
-		// Fonction associée au clic sur le bouton rejouer
-		/*public void onReplayClicked(JButton replay) 
-		{
-			// Destruction de l'ancienne fenêtre et création d'un nouvelle
-			ReversiFrame newFrame = new ReversiFrame(this.reversiFrame.getGridSize());
-			newFrame.setTitle("Reversi Game");
-	        
-			newFrame.setSize(700, 700);
-			
-			this.reversiFrame.dispose();
-			
-
-			newFrame.setVisible(true);
-			newFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		}*/
 		
 		
 	

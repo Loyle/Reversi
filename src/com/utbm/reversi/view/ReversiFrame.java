@@ -262,6 +262,17 @@ public class ReversiFrame extends JFrame
 	public JPanel getGamePanel() {
 		return gamePanel;
 	}
+
+	public GameListener getListener() {
+		return listener;
+	}
+
+	public int getGridSize() {
+		return gridSize;
+	}
+	
+	
+	
 	
 	
 	
