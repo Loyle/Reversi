@@ -17,13 +17,15 @@ public abstract class Power {
 		this.owner = null;
 		this.icon = null;
 	}
-	public Power(Player owner, ImageIcon icon) {
+	public Power(Player owner, ImageIcon icon, int duration) {
 		this.owner = owner;
 		this.icon = icon;
+		this.duration = duration;
 	}
-	public Power(Player owner, String icon) {
+	public Power(Player owner, String icon, int duration) {
 		this.owner = owner;
 		this.icon = new ImageIcon(icon);
+		this.duration =  duration;
 	}
 	
 	
@@ -48,4 +50,6 @@ public abstract class Power {
 	}
 	
 	public abstract void use(Game game, Cell cell);
+	public abstract void next(Game game, Cell cell);
+	public abstract void stop(Game game);
 }

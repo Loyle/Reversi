@@ -3,6 +3,7 @@ package com.utbm.reversi.model.cells;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 
 import javax.swing.JButton;
 
@@ -96,8 +97,22 @@ public class Cell extends JButton {
 	}
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D)g;
-		g2d.setColor(this.defaultColor);
-		g2d.fillRect(0, 0, this.getWidth(), getHeight());
+		
+		RenderingHints rh = new RenderingHints(
+	             RenderingHints.KEY_TEXT_ANTIALIASING,
+	             RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+		
+		g2d.setRenderingHints(rh);
+		
+		if(this.isEnabled()) {
+			g2d.setColor(this.defaultColor);
+			g2d.fillRect(0, 0, this.getWidth(), getHeight());
+		}
+		else {
+			// Cell is disable
+			g2d.setColor(new Color(120,120,120));
+			g2d.fillRect(0, 0, this.getWidth(), getHeight());
+		}
 		if(this.owner != null) {			
 			g2d.setColor(this.color);
 			g2d.fillOval(10, 10, this.getWidth() - 20, this.getHeight() - 20);

@@ -34,6 +34,7 @@ public class FollowingRules
 		startX = this.x;
 		startY = this.y - 1;
 		count = 0;
+
 		// TANT QUE
 		// Les coordonnées du voisin sont dans la grille
 		// ET QUE
@@ -44,6 +45,7 @@ public class FollowingRules
 			// Le propriétaire de cette case est celui qui joue en ce moment
 			if(this.game.getBoard().getBoardCells()[startX][startY].getOwner().equals(this.game.getCurrentPlayer()) == true) 
 			{
+
 				inter[0] = count;
 				break;
 			}
@@ -210,53 +212,68 @@ public class FollowingRules
 	{
 		// TOP
 		// Change le propriétaire de toutes les cases encadrées, et actualise (ce qui place le pion)
-		for (int i = 0; i <= this.countInter[0]; i++) 
-		{
-			this.game.getBoard().getBoardCells()[this.x][this.y - i].setOwner(this.game.getCurrentPlayer());
-			this.game.getBoard().getBoardCells()[this.x][this.y - i].updateState();
+		
+		for (int i = 0; i <= this.countInter[0]; i++) {
+			if(this.game.getBoard().getBoardCells()[this.x][this.y - i].isEnabled()) {
+				this.game.getBoard().getBoardCells()[this.x][this.y - i].setOwner(this.game.getCurrentPlayer());
+				this.game.getBoard().getBoardCells()[this.x][this.y - i].updateState();				
+			}
 		}
 		// BOTTOM
-		for (int i = 0; i <= this.countInter[1]; i++) 
-		{
-			this.game.getBoard().getBoardCells()[this.x][this.y + i].setOwner(this.game.getCurrentPlayer());
-			this.game.getBoard().getBoardCells()[this.x][this.y + i].updateState();
+		for (int i = 0; i <= this.countInter[1]; i++) {
+			if(this.game.getBoard().getBoardCells()[this.x][this.y + i].isEnabled()) {
+				this.game.getBoard().getBoardCells()[this.x][this.y + i].setOwner(this.game.getCurrentPlayer());
+				this.game.getBoard().getBoardCells()[this.x][this.y + i].updateState();	
+			}
 		}
 		// LEFT
-		for (int i = 0; i <= this.countInter[2]; i++)
-		{
-			this.game.getBoard().getBoardCells()[this.x - i][this.y].setOwner(this.game.getCurrentPlayer());
-			this.game.getBoard().getBoardCells()[this.x - i][this.y].updateState();
+		for (int i = 0; i <= this.countInter[2]; i++) {
+			if (this.game.getBoard().getBoardCells()[this.x - i][this.y].isEnabled()) {
+				this.game.getBoard().getBoardCells()[this.x - i][this.y].setOwner(this.game.getCurrentPlayer());
+				this.game.getBoard().getBoardCells()[this.x - i][this.y].updateState();				
+			}
 		}
 		// RIGHT
-		for (int i = 0; i <= this.countInter[3]; i++) 
-		{
-			this.game.getBoard().getBoardCells()[this.x + i][this.y].setOwner(this.game.getCurrentPlayer());
-			this.game.getBoard().getBoardCells()[this.x + i][this.y].updateState();
+		for (int i = 0; i <= this.countInter[3]; i++) {
+			if(this.game.getBoard().getBoardCells()[this.x + i][this.y].isEnabled()) {
+				this.game.getBoard().getBoardCells()[this.x + i][this.y].setOwner(this.game.getCurrentPlayer());
+				this.game.getBoard().getBoardCells()[this.x + i][this.y].updateState();				
+			}
 		}
 		
 		// TOP-RIGHT
-		for (int i = 0; i <= this.countInter[4]; i++)
-		{
-			this.game.getBoard().getBoardCells()[this.x + i][this.y - i].setOwner(this.game.getCurrentPlayer());
-			this.game.getBoard().getBoardCells()[this.x + i][this.y - i].updateState();
+		for (int i = 0; i <= this.countInter[4]; i++) {
+			if(this.game.getBoard().getBoardCells()[this.x + i][this.y - i].isEnabled()) {
+				this.game.getBoard().getBoardCells()[this.x + i][this.y - i].setOwner(this.game.getCurrentPlayer());
+				this.game.getBoard().getBoardCells()[this.x + i][this.y - i].updateState();				
+			}
 		}
 		// BOTTOM-RIGHT
 		for (int i = 0; i <= this.countInter[5]; i++) {
-			this.game.getBoard().getBoardCells()[this.x + i][this.y + i].setOwner(this.game.getCurrentPlayer());
-			this.game.getBoard().getBoardCells()[this.x + i][this.y + i].updateState();
+			if(this.game.getBoard().getBoardCells()[this.x + i][this.y + i].isEnabled()) {
+				this.game.getBoard().getBoardCells()[this.x + i][this.y + i].setOwner(this.game.getCurrentPlayer());
+				this.game.getBoard().getBoardCells()[this.x + i][this.y + i].updateState();
+			}
 		}
 
 		// BOTTOM-LEFT
 		for (int i = 0; i <= this.countInter[6]; i++) 
 		{
+			if(this.game.getBoard().getBoardCells()[this.x - i][this.y + i].isEnabled()) {
 			this.game.getBoard().getBoardCells()[this.x - i][this.y + i].setOwner(this.game.getCurrentPlayer());
 			this.game.getBoard().getBoardCells()[this.x - i][this.y + i].updateState();
+		}
 		}
 		// TOP-LEFT
 		for (int i = 0; i <= this.countInter[7]; i++) 
 		{
+			if(this.game.getBoard().getBoardCells()[this.x - i][this.y - i].isEnabled()) {
 			this.game.getBoard().getBoardCells()[this.x - i][this.y - i].setOwner(this.game.getCurrentPlayer());
 			this.game.getBoard().getBoardCells()[this.x - i][this.y - i].updateState();
+		}
+		}
+
+		
 		}
 	}
 	
@@ -413,4 +430,4 @@ public class FollowingRules
 		
 	
 	
-}
+
