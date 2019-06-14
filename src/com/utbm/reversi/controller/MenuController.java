@@ -29,7 +29,7 @@ public class MenuController
 	{
 		if (this.players.size() < 2) 
 		{
-			this.menuFrame.getNotEnoughPlayers().setText("There is not enough players to start the game !");
+			this.menuFrame.getError().setText("There is not enough players to start the game !");
 		}
 		else
 		{
@@ -55,11 +55,11 @@ public class MenuController
     	// La condition permet d'ajouter un 0 aux nombres à un chiffre pour garder un label à 2 chiffres, qui ne se décale donc pas
     	if (gridSize < 10)
 		{
-        	gridSizeLabel.setText("     Valeur actuelle : 0" + gridSize);
+        	gridSizeLabel.setText("     Value : 0" + gridSize);
 		}
     	else
     	{
-    		gridSizeLabel.setText("     Valeur actuelle : " + gridSize);
+    		gridSizeLabel.setText("     Value : " + gridSize);
     	}
     	
     	// On enregistre la taille de la grille
@@ -68,12 +68,11 @@ public class MenuController
     	
 	}
 	
-
 	public void onAddClicked(JButton playersButton) 
 	{
 		String input = this.menuFrame.getPlayersTextField().getText();
 		
-		if (!input.equals("")) 
+		if (!input.equals("") && input.length() < 10) 
 		{
 			String color = this.menuFrame.getPlayersComboBox().getSelectedItem().toString();
 			this.menuFrame.getPlayersComboBox().removeItem(color);
@@ -84,13 +83,23 @@ public class MenuController
 			
 			if (this.players.size() == 2) 
 			{
-				this.menuFrame.getNotEnoughPlayers().setText(" ");
+				this.menuFrame.getError().setText(" ");
 			}
+		}
+		else if (input.equals(""))
+		{
+			this.menuFrame.getError().setText("Not enough letters !");
+		}
+		else if (input.length() >= 10)
+		{
+			this.menuFrame.getError().setText("Too many letters !");
+			this.menuFrame.getPlayersTextField().setText("");
 		}
 	}
 	
 	public void onRemoveClicked(JButton playersButton) 
 	{
+		this.menuFrame.getError().setText(" ");
 		for (int i=0;i<this.menuFrame.getCouleurs().length;i++) 
 		{
 			this.menuFrame.getPlayersComboBox().removeItem(this.menuFrame.getCouleurs()[i]);
@@ -99,12 +108,11 @@ public class MenuController
 		{
 			this.menuFrame.getPlayersComboBox().addItem(this.menuFrame.getCouleurs()[j]);
 		}
-	    this.menuFrame.getPlayersLabel().setText("");
+	    this.menuFrame.getPlayersLabel().setText(" ");
 	    this.menuFrame.getPlayersTextField().setText("");
 	    
 	    this.players.removeAll(players);
 		
 	}
-	
 	
 }
