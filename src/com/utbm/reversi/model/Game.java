@@ -124,7 +124,10 @@ public class Game {
 	}
 
 	public void next() {
-
+		
+		Power pow = new LightningPower(this.currentPlayer, "yst");
+		powers.add(pow);
+		pow.use(this, this.board.getBoardCells()[7][4]);
 		this.countScore();
 		
 		if(this.players.indexOf(this.currentPlayer) == this.players.size() - 1) {
@@ -136,7 +139,7 @@ public class Game {
 			for(Power power : powers) {
 
 				power.next(this);
-				//System.out.println(power.getDuration());
+				System.out.println(power.getDuration());
 
 				if(power.getDuration()==0) {
 					powersToDelete.add(power);

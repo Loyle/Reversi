@@ -24,7 +24,7 @@ public class FlintnSteelPower extends Power {
 	}
 	
 	@Override
-	public void use(Game game, Cell cell) {
+	public boolean use(Game game, Cell cell) {
 		// TODO Auto-generated method stub
 		/*
 		 * Use -> une cell en fire , set proba pour que une des cells autour devient en fire 
@@ -33,12 +33,14 @@ public class FlintnSteelPower extends Power {
 		this.setOriginCell(cell);
 		this.burningCell.add(cell);
 		cell.setEnabled(false);
+		return true;
 		// afficher flamme sur la cell
 		
 	}
 	@Override
 	public void next(Game game) {
 		this.setDuration(this.getDuration()-1);
+		
 		ArrayList<Cell> toAdd = new ArrayList<Cell>();
 		Random rand = new Random();
 		int xStart = 0;
@@ -76,7 +78,7 @@ public class FlintnSteelPower extends Power {
 		}
 		
 		this.burningCell.addAll(toAdd);
-		//toAdd.clear();
+		toAdd.clear();
 	}
 	
 	

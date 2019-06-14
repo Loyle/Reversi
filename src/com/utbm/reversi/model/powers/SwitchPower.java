@@ -16,7 +16,7 @@ public class SwitchPower extends Power {
 	}
 	
 	@Override
-	public void use(Game game, Cell cell) {
+	public boolean use(Game game, Cell cell) {
 		// TODO Auto-generated method stub
 		/*
 		 * Use -> change juste un pion de couleur 
@@ -26,11 +26,12 @@ public class SwitchPower extends Power {
 		int currentY = cell.getCoordY();
 		if(cell.getOwner() !=null && cell.isEnabled()) {
 			if(!cell.getOwner().equals(game.getCurrentPlayer())) {
-				cell.setOwner(game.getCurrentPlayer());			
+				cell.setOwner(game.getCurrentPlayer());
+				return true;
 			}
 		} 
 			game.getBoard().getBoardCells()[currentX][currentY].updateState();
-			
+		return false;
 	}
 	@Override
 	public void next(Game game) {
