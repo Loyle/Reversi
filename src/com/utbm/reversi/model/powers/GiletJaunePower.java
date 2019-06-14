@@ -29,6 +29,11 @@ public class GiletJaunePower extends Power {
 
 		while(xStart<=cell.getCoordX()+1 && xStart<game.getBoard().getSize()) {
 			game.getBoard().getBoardCells()[xStart][yStart].setEnabled(false);
+			if(game.getBoard().getBoardCells()[xStart][yStart].getOwner() != null) {
+				game.getBoard().getBoardCells()[xStart][yStart].setHoverIcon(this.getHoverIcon());
+				game.getBoard().getBoardCells()[xStart][yStart].updateState();				
+			}
+			
 			xStart++;
 		}
 		
@@ -39,6 +44,10 @@ public class GiletJaunePower extends Power {
 		
 		while(yStart<=cell.getCoordY()+1 && yStart<game.getBoard().getSize()) {
 			game.getBoard().getBoardCells()[xStart][yStart].setEnabled(false);
+			if(game.getBoard().getBoardCells()[xStart][yStart].getOwner() != null) {
+				game.getBoard().getBoardCells()[xStart][yStart].setHoverIcon(this.getHoverIcon());
+				game.getBoard().getBoardCells()[xStart][yStart].updateState();				
+			}
 			yStart++;
 		}
 		 return true;
@@ -59,6 +68,8 @@ public class GiletJaunePower extends Power {
 
 		while(xStart<=this.getOriginCell().getCoordX()+1 && xStart<game.getBoard().getSize()) {
 			game.getBoard().getBoardCells()[xStart][yStart].setEnabled(true);
+			game.getBoard().getBoardCells()[xStart][yStart].setHoverIcon(null);
+			game.getBoard().getBoardCells()[xStart][yStart].updateState();
 			xStart++;
 		}
 		
@@ -69,6 +80,8 @@ public class GiletJaunePower extends Power {
 		
 		while(yStart<=this.getOriginCell().getCoordY()+1 && yStart<game.getBoard().getSize()) {
 			game.getBoard().getBoardCells()[xStart][yStart].setEnabled(true);
+			game.getBoard().getBoardCells()[xStart][yStart].setHoverIcon(null);
+			game.getBoard().getBoardCells()[xStart][yStart].updateState();
 			yStart++;
 		}
 		

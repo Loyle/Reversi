@@ -65,4 +65,10 @@ public abstract class Power {
 	public void setOriginCell(Cell originCell) {
 		this.originCell = originCell;
 	}
+	public ImageIcon getHoverIcon() {
+		return hoverIcon;
+	}
+	public void setHoverIcon(ImageIcon hoverIcon) {
+		this.hoverIcon = hoverIcon;
+	}
 }

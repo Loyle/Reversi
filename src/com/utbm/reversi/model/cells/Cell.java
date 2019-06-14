@@ -134,15 +134,15 @@ public class Cell extends JButton {
 		
 		g2d.setRenderingHints(rh);
 		
-		if(this.isEnabled()) {
+		//if(this.isEnabled()) {
 			g2d.setColor(this.defaultColor);
 			g2d.fillRect(0, 0, this.getWidth(), getHeight());
-		}
+		/*}
 		else {
 			// Cell is disable
 			g2d.setColor(new Color(120,120,120));
 			g2d.fillRect(0, 0, this.getWidth(), getHeight());
-		}
+		}*/
 		if(this.owner != null) {			
 			g2d.setColor(this.color);
 			g2d.fillOval(10, 10, this.getWidth() - 20, this.getHeight() - 20);
