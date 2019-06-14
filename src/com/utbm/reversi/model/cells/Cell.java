@@ -19,6 +19,7 @@ public class Cell extends JButton {
 	private Color defaultColor;
 	private boolean isLock;
 	private ImageIcon icon;
+	private ImageIcon hoverIcon;
 	
 	//private Pawn pawn;
 	
@@ -33,6 +34,7 @@ public class Cell extends JButton {
 		this.isLock = true;
 		this.setBackground(this.defaultColor);
 		this.icon = null;
+		this.hoverIcon = null;
 				
 		this.setContentAreaFilled(false);
 	}
@@ -44,6 +46,7 @@ public class Cell extends JButton {
 		this.isLock = true;
 		this.setBackground(this.defaultColor);
 		this.icon = null;
+		this.hoverIcon = null;
 
 		this.setContentAreaFilled(false);
 	}
@@ -99,6 +102,24 @@ public class Cell extends JButton {
 	public int getCoordY() {
 		return this.coordY;
 	}
+	public boolean isLock() {
+		return isLock;
+	}
+	public void setLock(boolean isLock) {
+		this.isLock = isLock;
+	}
+	/**
+	 * @return the hoverIcon
+	 */
+	public ImageIcon getHoverIcon() {
+		return hoverIcon;
+	}
+	/**
+	 * @param hoverIcon the hoverIcon to set
+	 */
+	public void setHoverIcon(ImageIcon hoverIcon) {
+		this.hoverIcon = hoverIcon;
+	}
 	
 	public void updateState() {
 		this.setBackground(this.defaultColor);
@@ -126,11 +147,9 @@ public class Cell extends JButton {
 			g2d.setColor(this.color);
 			g2d.fillOval(10, 10, this.getWidth() - 20, this.getHeight() - 20);
 		}
-	}
-	public boolean isLock() {
-		return isLock;
-	}
-	public void setLock(boolean isLock) {
-		this.isLock = isLock;
+		
+		if(this.hoverIcon != null) {
+			g2d.drawImage(this.hoverIcon.getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+		}
 	}
 }
