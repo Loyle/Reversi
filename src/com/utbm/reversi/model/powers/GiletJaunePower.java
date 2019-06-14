@@ -1,8 +1,6 @@
 package com.utbm.reversi.model.powers;
 
 import javax.swing.ImageIcon;
-
-import com.utbm.reversi.model.Board;
 import com.utbm.reversi.model.Game;
 import com.utbm.reversi.model.Player;
 import com.utbm.reversi.model.cells.Cell;
@@ -22,7 +20,7 @@ public class GiletJaunePower extends Power {
 		/*
 		 * Use -> block 5 case ne croix 
 		 */
-		
+		this.setOriginCell(cell);
 		int xStart = cell.getCoordX();
 		int yStart = cell.getCoordY();
 		if(cell.getCoordX()>0) {
@@ -46,14 +44,34 @@ public class GiletJaunePower extends Power {
 		
 	}
 	@Override
-	public void next(Game game, Cell cell) {
+	public void next(Game game) {
 		
 		this.setDuration(this.getDuration()-1);
 		
 	}
 	@Override
 	public void stop(Game game) {
-		// TODO Auto-generated method stub
+		
+		int xStart = this.getOriginCell().getCoordX();
+		int yStart = this.getOriginCell().getCoordY();
+		if(this.getOriginCell().getCoordX()>0) {
+			xStart--;
+		}
+
+		while(xStart<=this.getOriginCell().getCoordX()+1 && xStart<game.getBoard().getSize()) {
+			game.getBoard().getBoardCells()[xStart][yStart].setEnabled(true);
+			xStart++;
+		}
+		
+		if(this.getOriginCell().getCoordY()>0) {
+			yStart--;
+		}
+		xStart=this.getOriginCell().getCoordX();
+		
+		while(yStart<=this.getOriginCell().getCoordY()+1 && yStart<game.getBoard().getSize()) {
+			game.getBoard().getBoardCells()[xStart][yStart].setEnabled(true);
+			yStart++;
+		}
 		
 	}
 }

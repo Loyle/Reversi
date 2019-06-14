@@ -6,7 +6,9 @@ import java.util.ArrayList;
 
 import com.utbm.reversi.model.cells.Bomb;
 import com.utbm.reversi.model.powers.ColorBombPower;
+import com.utbm.reversi.model.powers.FlintnSteelPower;
 import com.utbm.reversi.model.powers.GiletJaunePower;
+import com.utbm.reversi.model.powers.LightningPower;
 import com.utbm.reversi.model.powers.Power;
 import com.utbm.reversi.model.powers.ShieldPower;
 import com.utbm.reversi.model.powers.SwitchPower;
@@ -108,7 +110,7 @@ public class Game {
 		this.countScore();
 		this.frame.updateScores(this.players.get(0), this.players.get(1));
 		
-		this.board.getBoardCells()[4][2].setEnabled(false);
+		//this.board.getBoardCells()[2][2].setEnabled(false);
 		
 		this.setStart(true);
 	}
@@ -120,12 +122,11 @@ public class Game {
 	public void next() {
 
 
-		Power pow = new SwitchPower(this.currentPlayer, "ytg");
+		Power pow = new LightningPower(this.currentPlayer, "ytg");
 		powers.add(pow);
-		pow.use(this, this.board.getBoardCells()[4][3]);
+		pow.use(this, this.board.getBoardCells()[1][1]);
 		
 		this.countScore();
-
 		
 		if(this.players.indexOf(this.currentPlayer) == this.players.size() - 1) {
 			// Come back to first player
@@ -134,7 +135,8 @@ public class Game {
 			// update des power , stop et remove power si duration = 0
 			ArrayList<Power> powersToDelete = new ArrayList<Power>();
 			for(Power power : powers) {
-				System.out.println(power.getDuration());
+				power.next(this);
+				//System.out.println(power.getDuration());
 				if(power.getDuration()==0) {
 					powersToDelete.add(power);
 				}

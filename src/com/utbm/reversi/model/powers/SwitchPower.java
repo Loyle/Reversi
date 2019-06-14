@@ -2,7 +2,6 @@ package com.utbm.reversi.model.powers;
 
 import javax.swing.ImageIcon;
 
-import com.utbm.reversi.model.Board;
 import com.utbm.reversi.model.Game;
 import com.utbm.reversi.model.Player;
 import com.utbm.reversi.model.cells.Cell;
@@ -22,6 +21,7 @@ public class SwitchPower extends Power {
 		/*
 		 * Use -> change juste un pion de couleur 
 		 */
+		this.setOriginCell(cell);
 		int currentX = cell.getCoordX();
 		int currentY = cell.getCoordY();
 		if(cell.getOwner() !=null && cell.isEnabled()) {
@@ -33,12 +33,12 @@ public class SwitchPower extends Power {
 			
 	}
 	@Override
-	public void next(Game game, Cell cell) {
-		
+	public void next(Game game) {
+		// not necessary
 	}
 	@Override
 	public void stop(Game game) {
-		// TODO Auto-generated method stub
+		// not necessary
 		
 	}
 

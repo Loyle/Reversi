@@ -78,6 +78,11 @@ public class Cell extends JButton {
 		this.color = this.owner.getColor();
 	}
 	
+	public void clearOwner() {
+		this.owner = null;
+		this.color = this.defaultColor;
+	}
+	
 	public void setCoordX(int x) {
 		this.coordX = x;
 	}

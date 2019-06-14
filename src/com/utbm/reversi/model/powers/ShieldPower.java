@@ -2,7 +2,6 @@ package com.utbm.reversi.model.powers;
 
 import javax.swing.ImageIcon;
 
-import com.utbm.reversi.model.Board;
 import com.utbm.reversi.model.Game;
 import com.utbm.reversi.model.Player;
 import com.utbm.reversi.model.cells.Cell;
@@ -22,26 +21,25 @@ public class ShieldPower extends Power {
 		/*
 		 * Use -> le pion choisi ne se retourne pas s'il est encadré 
 		 */
-		int currentX = cell.getCoordX();
-		int currentY = cell.getCoordY();
+		this.setOriginCell(cell); 
+
 		if(cell.getOwner()!=null) {
 			if(cell.getOwner().equals(this.getOwner())) {
 				cell.setEnabled(false);
 			}			
 		}
-		game.getBoard().getBoardCells()[currentX][currentY].updateState();
+		game.getBoard().getBoardCells()[cell.getCoordX()][cell.getCoordY()].updateState();
 		
 	}
 	@Override
-	public void next(Game game, Cell cell) {
+	public void next(Game game) {
 		if(this.getDuration()>0) {
 			this.setDuration(this.getDuration()-1);			
 		}
 	}
 	@Override
 	public void stop(Game game) {
-		// TODO Auto-generated method stub
-		
+		this.getOriginCell().setEnabled(true);		
 	}
 
 }

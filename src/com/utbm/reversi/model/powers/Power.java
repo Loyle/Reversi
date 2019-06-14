@@ -2,7 +2,6 @@ package com.utbm.reversi.model.powers;
 
 import javax.swing.ImageIcon;
 
-import com.utbm.reversi.model.Board;
 import com.utbm.reversi.model.Game;
 import com.utbm.reversi.model.Player;
 import com.utbm.reversi.model.cells.Cell;
@@ -12,20 +11,24 @@ public abstract class Power {
 	private Player owner;
 	private ImageIcon icon;
 	private int duration;
+	private Cell originCell;
 	
 	public Power() {
 		this.owner = null;
 		this.icon = null;
+		this.setOriginCell(null);
 	}
 	public Power(Player owner, ImageIcon icon, int duration) {
 		this.owner = owner;
 		this.icon = icon;
 		this.duration = duration;
+		this.setOriginCell(null);
 	}
 	public Power(Player owner, String icon, int duration) {
 		this.owner = owner;
 		this.icon = new ImageIcon(icon);
 		this.duration =  duration;
+		this.setOriginCell(null);
 	}
 	
 	
@@ -50,6 +53,12 @@ public abstract class Power {
 	}
 	
 	public abstract void use(Game game, Cell cell);
-	public abstract void next(Game game, Cell cell);
+	public abstract void next(Game game);
 	public abstract void stop(Game game);
+	public Cell getOriginCell() {
+		return originCell;
+	}
+	public void setOriginCell(Cell originCell) {
+		this.originCell = originCell;
+	}
 }
