@@ -107,15 +107,11 @@ public class Game {
 				player.addRandomPower();
 			}
 		}
-		
-		for(Player player : players) {
-			System.out.println(""+player.getName());
-			for(Power power : player.getPowers()) {
-				System.out.println("Power file : " + power.getIcon());
-			}
-		}
 
 		this.frame.setCurrentPlayer(this.currentPlayer);
+		
+		// Update power list for this player
+		this.frame.updatePlayerPowers(this.currentPlayer);
 
 		this.countScore();
 		this.frame.updateScores(this.players.get(0), this.players.get(1));
@@ -170,6 +166,9 @@ public class Game {
 		// Update Current player
 		this.frame.setCurrentPlayer(this.currentPlayer);
 		
+		// Set Player power
+		this.frame.updatePlayerPowers(this.currentPlayer);
+		
 		
 		if (isEnded() || isBlocked()) 
 		{
@@ -202,7 +201,7 @@ public class Game {
 			JButton replay = new JButton("Replay");
 			gbc.gridx=0;
 		    gbc.gridy=5;
-		    replay.addActionListener(e -> this.frame.getListener().onReplayClicked(replay));
+		    //replay.addActionListener(e -> this.frame.getListener().onReplayClicked(replay));
 		    end.add(replay,gbc);
 			this.frame.getContentPane().add(end,BorderLayout.CENTER);
 			
@@ -210,7 +209,7 @@ public class Game {
 			JButton endBackToMenu = new JButton("Back to Menu");
 			gbc.gridx=0;
 		    gbc.gridy=6;
-		    endBackToMenu.addActionListener(e -> this.frame.getListener().onBackToMenuClicked(endBackToMenu));
+		    //endBackToMenu.addActionListener(e -> this.frame.getListener().onBackToMenuClicked(endBackToMenu));
 		    end.add(endBackToMenu,gbc);
 		    
 

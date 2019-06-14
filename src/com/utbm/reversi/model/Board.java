@@ -1,7 +1,10 @@
 package com.utbm.reversi.model;
 import java.awt.Color;
+import java.util.Random;
 
+import com.utbm.reversi.model.cells.Bomb;
 import com.utbm.reversi.model.cells.Cell;
+import com.utbm.reversi.model.cells.Trap;
 
 public class Board {
 		private int size;
@@ -12,7 +15,19 @@ public class Board {
 			this.size=size;
 			for (int j=0;j<size;j++ ) {
 				for(int i=0;i<size;i++) {
-							board[i][j]= new Cell(new Color(0,200,0));		
+					int rando = new Random().nextInt(20);
+					if(rando < 2) {
+						// Add trap
+						board[i][j]= new Trap(new Color(0,200,0));
+					}
+					else if(rando < 4) {
+						// Add Bomb
+						board[i][j]= new Bomb(new Color(0,200,0));
+					}
+					else {
+						// Add basic Cell
+						board[i][j]= new Cell(new Color(0,200,0));	
+					}		
 				}
 			}
 		}

@@ -17,6 +17,7 @@ public class Player {
 	private float xp;
 	private Color color;
 	private ArrayList<Power> powers;
+	private Power usingPower;
 	
 	public Player(String name) {
 		this.setName(name);
@@ -24,6 +25,7 @@ public class Player {
 		this.setLevel(0);
 		this.setXp(0);
 		this.powers = new ArrayList<Power>();
+		this.usingPower = null;
 	}
 	public Player(String name, Color color) {
 		this.setName(name);
@@ -31,6 +33,7 @@ public class Player {
 		this.setLevel(0);
 		this.setXp(0);
 		this.powers = new ArrayList<Power>();
+		this.usingPower = null;
 	}
 	
 	/**
@@ -132,30 +135,37 @@ public class Player {
 		return this.powers;
 	}
 	
+	public void setUsingPower(Power power) {
+		this.usingPower = power;
+	}
+	public Power getUsingPower() {
+		return this.usingPower;
+	}
+	
 	/**
-	 * 
+	 * Get a random power to player
 	 */
 	public void addRandomPower() {
 		int rando = (int) new Random().nextInt(6);
 		
 		switch (rando) {
 		case 0:
-			this.powers.add(new SwitchPower(this,"switch_logo.png"));
+			this.powers.add(new SwitchPower(this,"./data/Switch_logo.png"));
 			break;
 		case 1:
-			this.powers.add(new ColorBombPower(this,"colorbomb_logo.png"));	
+			this.powers.add(new ColorBombPower(this,"./data/ColorBomb_logo.png"));	
 			break;
 		case 2:
-			this.powers.add(new LightningPower(this,"lightning_logo.png"));
+			this.powers.add(new LightningPower(this,"./data/Lightning_logo.png"));
 			break;
 		case 3:
-			this.powers.add(new GiletJaunePower(this,"giletjaune_logo.png"));
+			this.powers.add(new GiletJaunePower(this,"./data/GiletJaune_logo.png"));
 			break;
 		case 4:
-			this.powers.add(new GiletJaunePower(this,"shield_logo.png"));
+			this.powers.add(new GiletJaunePower(this,"./data/Shield_logo.png"));
 			break;
 		case 5:
-			this.powers.add(new GiletJaunePower(this,"FlintnSteel_logo.png"));
+			this.powers.add(new GiletJaunePower(this,"./data/FlintnSteel_logo.png"));
 			break;
 
 		default:

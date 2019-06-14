@@ -20,6 +20,7 @@ import com.utbm.reversi.listeners.GameListener;
 import com.utbm.reversi.model.Game;
 import com.utbm.reversi.model.Player;
 import com.utbm.reversi.model.cells.Cell;
+import com.utbm.reversi.model.powers.Power;
 
 @SuppressWarnings("serial")
 public class ReversiFrame extends JFrame 
@@ -54,7 +55,7 @@ public class ReversiFrame extends JFrame
 	private Game game;
 	private GameController controller;
 	
-	private ArrayList<JButton> powerListBtn;
+	private ArrayList<PowerButton> powerListBtn;
 	
 	public ReversiFrame(int size) 
 	{
@@ -75,7 +76,7 @@ public class ReversiFrame extends JFrame
 		
 		this.scoresSizeX = 100;
 		this.cellSize = 70;
-		this.powerListBtn = new ArrayList<JButton>();
+		this.powerListBtn = new ArrayList<PowerButton>();
 		
 		// On recupère les cellules du board
         Cell [][] cells = this.game.getBoard().getBoardCells();
@@ -246,7 +247,8 @@ public class ReversiFrame extends JFrame
         // Power Part
         JPanel powerPart = new JPanel(new GridLayout(1,this.game.getNumberPower()));
         for(int i = 0; i < this.game.getNumberPower(); i++) {
-        	JButton btn = new JButton();
+        	PowerButton btn = new PowerButton();
+        	btn.addActionListener(e -> this.listener.onPowerClick(btn));
         	this.setFixedSize(btn, 150, 150);
         	powerPart.add(btn);
         	this.powerListBtn.add(btn);
@@ -284,25 +286,18 @@ public class ReversiFrame extends JFrame
 		this.whoPlayColor.setBackground(player.getColor());
 		this.whoPlayName.setText(player.getName());
 	}
+	
+	public void updatePlayerPowers(Player player) {
+		int i = 0;
+		for(Power power : player.getPowers()) {
+			this.powerListBtn.get(i).setIcon(power.getIcon());
+			this.powerListBtn.get(i).setPower(power);
+			i++;
+		}
+	}
 
 	public JPanel getGamePanel() {
 		return gamePanel;
 	}
 
-	public GameListener getListener() {
-		return listener;
-	}
-
-	public int getGridSize() {
-		return gridSize;
-	}
-	
-	
-	
-	
-	
-	
-	public void addPowerToList() {
-		
-	}
 }

@@ -133,15 +133,4 @@ public class Cell extends JButton {
 	public void setLock(boolean isLock) {
 		this.isLock = isLock;
 	}
-
-	
-	
-	
-	/*public Pawn getPawn() {
-	return this.pawn;
-	}
-
-	public void setPawn(Pawn pawn) {
-		this.pawn = pawn;
-	}*/
 }
