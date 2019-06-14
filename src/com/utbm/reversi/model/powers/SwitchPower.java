@@ -40,7 +40,6 @@ public class SwitchPower extends Power {
 	@Override
 	public void stop(Game game) {
 		// not necessary
-		
 	}
 
 }
