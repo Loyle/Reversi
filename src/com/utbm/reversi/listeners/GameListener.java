@@ -61,5 +61,4 @@ public class GameListener implements ActionListener {
 				newFrame.setVisible(true);
 				newFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
-			
 }

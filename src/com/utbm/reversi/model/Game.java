@@ -120,13 +120,6 @@ public class Game {
 		this.countScore();
 		this.frame.updateScores(this.players.get(0), this.players.get(1));
 
-		
-		//this.board.getBoardCells()[2][2].setEnabled(false);
-
-
-		this.board.getBoardCells()[4][2].setEnabled(false);
-
-		
 		this.setStart(true);
 	}
 
@@ -136,43 +129,6 @@ public class Game {
 
 	public void next() {
 
-		/*Power pow = new ColorBombPower(this.currentPlayer, "ytg");
-		pow.use(this, this.board.getBoardCells()[2][2]);*/
-
-		if(this.players.indexOf(this.currentPlayer) == this.players.size() - 1) 
-		{
-			// Come back to first player
-			this.currentPlayer = this.players.get(0);
-
-			// Tour suivant
-			this.addRound();
-
-
-			// update des power , stp et remove power si duration = 0
-			ArrayList<Power> powersToDelete = new ArrayList<Power>();
-			for(Power power : powers) 
-			{
-				power.setDuration(power.getDuration()-1);
-				if(power.getDuration()==0) 
-				{
-					powersToDelete.add(power);
-				}
-			}
-			for(Power power : powersToDelete) 
-			{
-				//créer stop power method
-			}
-			powers.removeAll(powersToDelete);
-
-			//for each power en cours decrementer duration check état et remove array si == 0 créer stop power 
-		}
-		else 
-		{
-
-		Power pow = new LightningPower(this.currentPlayer, "ytg");
-		powers.add(pow);
-		pow.use(this, this.board.getBoardCells()[1][1]);
-		
 		this.countScore();
 		
 		if(this.players.indexOf(this.currentPlayer) == this.players.size() - 1) {
@@ -182,8 +138,10 @@ public class Game {
 			// update des power , stop et remove power si duration = 0
 			ArrayList<Power> powersToDelete = new ArrayList<Power>();
 			for(Power power : powers) {
+
 				power.next(this);
 				//System.out.println(power.getDuration());
+
 				if(power.getDuration()==0) {
 					powersToDelete.add(power);
 				}
@@ -291,9 +249,8 @@ public class Game {
 					endMsg.setText("Blacks win !");
 				}*/
 		}
-		}
-		
 	}
+		
 
 	public void countScore() {
 		for(Player player : this.players) {

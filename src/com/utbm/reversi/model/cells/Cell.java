@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import com.utbm.reversi.model.Player;
@@ -17,6 +18,7 @@ public class Cell extends JButton {
 	private Color color;
 	private Color defaultColor;
 	private boolean isLock;
+	private ImageIcon icon;
 	
 	//private Pawn pawn;
 	
@@ -30,7 +32,8 @@ public class Cell extends JButton {
 		this.owner = null;
 		this.isLock = true;
 		this.setBackground(this.defaultColor);
-		//this.pawn = null;
+		this.icon = null;
+				
 		this.setContentAreaFilled(false);
 	}
 	public Cell(Color color) {
@@ -40,7 +43,8 @@ public class Cell extends JButton {
 		this.owner = null;
 		this.isLock = true;
 		this.setBackground(this.defaultColor);
-		//this.pawn = null;
+		this.icon = null;
+
 		this.setContentAreaFilled(false);
 	}
 	
