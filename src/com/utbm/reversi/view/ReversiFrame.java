@@ -1,11 +1,13 @@
 package com.utbm.reversi.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -52,6 +54,8 @@ public class ReversiFrame extends JFrame
 	private Game game;
 	private GameController controller;
 	
+	private ArrayList<JButton> powerListBtn;
+	
 	public ReversiFrame(int size) 
 	{
 		this.game = new Game(this, size);
@@ -68,17 +72,20 @@ public class ReversiFrame extends JFrame
 	}
 	
 	public void initWindow() {
+		
+		this.scoresSizeX = 100;
+		this.cellSize = 70;
+		this.powerListBtn = new ArrayList<JButton>();
+		
+		// On recupère les cellules du board
+        Cell [][] cells = this.game.getBoard().getBoardCells();
+		
+		
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.setTitle("Reversi Game");
         
 		this.setSize(700, 700);
 		this.setLocationRelativeTo(null);
-		
-		this.scoresSizeX = 100;
-		this.cellSize = 70;
-		
-		// On recupère les cellules du board
-        Cell [][] cells = this.game.getBoard().getBoardCells();
 		
 		// ======================================================================================
 		// PANEL "game" OÙ SONT LES CELL
@@ -237,20 +244,32 @@ public class ReversiFrame extends JFrame
         
         
         // Power Part
-        JPanel powerPart = new JPanel(new GridLayout(1,4));
-        
+        JPanel powerPart = new JPanel(new GridLayout(1,this.game.getNumberPower()));
+        for(int i = 0; i < this.game.getNumberPower(); i++) {
+        	JButton btn = new JButton();
+        	this.setFixedSize(btn, 150, 150);
+        	powerPart.add(btn);
+        	this.powerListBtn.add(btn);
+        }
         
         
         // On donne une taille minimale à la fenêtre
         this.setMinimumSize(new Dimension(13+gridSize*(cellSize+5)+scoresSizeX, 42+gridSize*(cellSize+5)));
         // On ajoute les 2 panel à la fenêtre
         
+        this.getContentPane().add(powerPart, BorderLayout.SOUTH);
         this.getContentPane().add(gamePanel, BorderLayout.CENTER);
         this.getContentPane().add(scores, BorderLayout.EAST);
         this.pack();
         
-        
         this.setVisible(true);
+	}
+	
+	public void setFixedSize(Component c, int width, int height) {
+		c.setPreferredSize(new Dimension(width,height));
+		c.setMinimumSize(new Dimension(width,height));
+		c.setMaximumSize(new Dimension(width,height));
+		c.setSize(width, height);
 	}
 
 	// ======================================================================================
@@ -267,5 +286,7 @@ public class ReversiFrame extends JFrame
 		this.whoPlayName.setText(player.getName());
 	}
 	
-	
+	public void addPowerToList() {
+		
+	}
 }

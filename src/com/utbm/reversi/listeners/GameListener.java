@@ -21,5 +21,5 @@ public class GameListener implements ActionListener {
 		if(source instanceof Cell) {
 			this.controller.onCellClick((Cell) source);
 		}
-	}	
+	}
 }

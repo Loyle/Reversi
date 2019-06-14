@@ -107,9 +107,7 @@ public class Game {
 		
 		this.countScore();
 		this.frame.updateScores(this.players.get(0), this.players.get(1));
-		
-		this.board.getBoardCells()[4][2].setEnabled(false);
-		
+			
 		this.setStart(true);
 	}
 	
@@ -117,13 +115,7 @@ public class Game {
 		return this.currentPlayer;
 	}
 	
-	public void next() {
-
-
-		Power pow = new SwitchPower(this.currentPlayer, "ytg");
-		powers.add(pow);
-		pow.use(this, this.board.getBoardCells()[4][3]);
-		
+	public void next() {		
 		this.countScore();
 
 		
@@ -134,7 +126,6 @@ public class Game {
 			// update des power , stop et remove power si duration = 0
 			ArrayList<Power> powersToDelete = new ArrayList<Power>();
 			for(Power power : powers) {
-				System.out.println(power.getDuration());
 				if(power.getDuration()==0) {
 					powersToDelete.add(power);
 				}
