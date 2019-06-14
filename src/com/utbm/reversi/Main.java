@@ -1,5 +1,7 @@
 package com.utbm.reversi;
 
+import java.awt.Dimension;
+
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import com.utbm.reversi.view.MenuFrame;
@@ -16,7 +18,8 @@ public class Main {
 		//==========================================================================================================================
 		final JFrame menuFrame = new MenuFrame();
 		menuFrame.setTitle("Menu - Reversi Game");
-        
+
+		menuFrame.setMinimumSize(new Dimension(700,700));
 		menuFrame.setSize(700, 700);
 
 		menuFrame.setVisible(true);

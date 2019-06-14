@@ -40,19 +40,24 @@ public class MenuFrame extends JFrame
 	private JLabel error;
 	private JTextField playersTextField;
 	private JComboBox playersComboBox;
+	private JComboBox powersComboBox;
     private String[] couleurs = {"White","Black","Red","Blue","Yellow","Green","Gray","Orange","Rose","Purple"};
 	
 	public MenuFrame() 
 	{
+        // ==========================================================================================================================
 		// BACKGROUND
+        // ==========================================================================================================================
 		// Création du panel
 		this.menuBackground = new JPanel();
 		this.menuBackground.setLayout(new GridBagLayout());
-		//this.setLocationRelativeTo(null);
 		GridBagConstraints gbc = new GridBagConstraints();
+		//this.setLocationRelativeTo(null);
 		menuBackground.setBackground(Color.white);
 
-		// BOUTON PLAY
+		// ==========================================================================================================================
+		// PLAY BUTTON
+		// ==========================================================================================================================
 		final JButton play = new JButton("Play");
 		// On associe le clic sur le bouton play à cette fonction du controller
 		play.addActionListener(e -> menuController.onPlayClicked(play));
@@ -61,11 +66,11 @@ public class MenuFrame extends JFrame
         this.menuBackground.add(play,gbc);
 		
         // ADD SPACE
-        for (int addSpace = 1 ; addSpace<10 ; addSpace++) 
+        for (int addSpace = 1 ; addSpace<5 ; addSpace++) 
         {
             gbc.gridx = 0;
             gbc.gridy = addSpace;
-            if (addSpace == 5) 
+            if (addSpace == 3) 
             {
             	this.error = new JLabel(" ");
                 this.menuBackground.add(this.error,gbc);
@@ -77,63 +82,6 @@ public class MenuFrame extends JFrame
         }
         
         
-        
-        // ==========================================================================================================================
-        // TAILLE GRILLE
-        // ==========================================================================================================================
-        // On crée un panel dans lequel on mettra la Slide Bar et la label qui affiche la taille de la grille
-        final JPanel gridSizePanel = new JPanel();
-        gridSizePanel.setBackground(Color.white);
-        // On crée la un contour et un titre pour ce panel
-        gridSizePanel.setBorder(BorderFactory.createTitledBorder("Grid Size :"));
-        // On lui donne la dimension voulue
-        gridSizePanel.setPreferredSize(new Dimension(400, 80));
-        gbc.gridx = 0;
-        gbc.gridy = 10;
-        this.menuBackground.add(gridSizePanel,gbc);
-        
-        // On crée la slide bar
-        JSlider gridSizeSlider = new JSlider();
-        // Minimum et maximum des valeurs possibles dans la slide bar
-        gridSizeSlider.setMinimum(4);
-        gridSizeSlider.setMaximum(20);
-        // Afficher la graduation
-        gridSizeSlider.setPaintTicks(true);
-        // Afficher les nombres
-        gridSizeSlider.setPaintLabels(true);
-        // Taille graduation
-        gridSizeSlider.setMinorTickSpacing(2);
-        // Écart entre la valeur minimum et la valeur maximum
-        gridSizeSlider.setMajorTickSpacing(16);
-        // Valeur de base
-        gridSizeSlider.setValue(8);
-        gridSizeSlider.setBackground(Color.white);
-        gridSizePanel.add(gridSizeSlider,BorderLayout.EAST);
-
-        // Label qui affiche la taille de la grille
-        JLabel gridSizeLabel = new JLabel();
-        gridSizeLabel.setText("     Value : 08");
-        gridSizePanel.add(gridSizeLabel,BorderLayout.WEST);
-        
-        // On associe le changement d'état de la slide bar à la fonction du controller
-        gridSizeSlider.addChangeListener(new ChangeListener()
-        {
-            public void stateChanged(ChangeEvent event)
-            {
-            	menuController.onSliderStateChanged(gridSizeSlider, gridSizeLabel, ((JSlider)event.getSource()).getValue());
-            }
-        });    
-        
-        // ADD SPACE
-        for (int addSpace = 11 ; addSpace<15 ; addSpace++) 
-        {
-            gbc.gridx = 0;
-            gbc.gridy = addSpace;
-            this.menuBackground.add(new JLabel(" "),gbc);
-        }
-        
-        
-
         // ==========================================================================================================================
         // PLAYERS
         // ==========================================================================================================================
@@ -142,9 +90,9 @@ public class MenuFrame extends JFrame
         playersPanel.setLayout(new GridBagLayout());
 		GridBagConstraints gbcPlayers = new GridBagConstraints();
         playersPanel.setBorder(BorderFactory.createTitledBorder("Players :"));
-        playersPanel.setPreferredSize(new Dimension(400, 200));
+        playersPanel.setPreferredSize(new Dimension(400, 150));
         gbc.gridx = 0;
-        gbc.gridy = 15;
+        gbc.gridy = 6;
         this.menuBackground.add(playersPanel,gbc);
         
         
@@ -231,6 +179,132 @@ public class MenuFrame extends JFrame
         gbcRegisteredPlayers.gridx = 0;
         gbcRegisteredPlayers.gridy = 3;
         registeredPlayersPanel.add(this.playersLabel3,gbcRegisteredPlayers);
+        
+        
+        
+        
+        
+        
+
+        // ADD SPACE
+        for (int addSpace = 7 ; addSpace<10 ; addSpace++) 
+        {
+            gbc.gridx = 0;
+            gbc.gridy = addSpace;
+            this.menuBackground.add(new JLabel(" "),gbc);
+        }
+        
+        
+
+        // ==========================================================================================================================
+        // POWERS
+        // ==========================================================================================================================
+        JPanel powersPanel = new JPanel();
+        powersPanel.setBackground(Color.white);
+        powersPanel.setLayout(new GridBagLayout());
+		GridBagConstraints gbcPowers = new GridBagConstraints();
+		powersPanel.setBorder(BorderFactory.createTitledBorder("Powers :"));
+		powersPanel.setPreferredSize(new Dimension(400, 80));
+        gbc.gridx = 0;
+        gbc.gridy = 11;
+        this.menuBackground.add(powersPanel,gbc);
+        
+        
+        JLabel powersLabel = new JLabel("Number of powers per player :");
+        gbcPowers.gridx = 0;
+        gbcPowers.gridy = 0;
+        powersPanel.add(powersLabel,gbcPowers);
+        
+
+        gbcPowers.gridx = 1;
+        gbcPowers.gridy = 0;
+        powersPanel.add(new JLabel("               "),gbcPowers);
+        
+        String[] powerNumbers = {"0","1","2","3","4","5","6","7","8","9","10"};
+        this.powersComboBox = new JComboBox(powerNumbers); 
+        gbcPowers.gridx = 2;
+        gbcPowers.gridy = 0;
+        powersPanel.add(powersComboBox,gbcPowers);
+        
+        // ADD SPACE
+        for (int addSpace = 12 ; addSpace<15 ; addSpace++) 
+        {
+            gbc.gridx = 0;
+            gbc.gridy = addSpace;
+            this.menuBackground.add(new JLabel(" "),gbc);
+        }
+        
+        
+        
+        
+        
+
+        // ==========================================================================================================================
+        // TAILLE GRILLE
+        // ==========================================================================================================================
+        // On crée un panel dans lequel on mettra la Slide Bar et la label qui affiche la taille de la grille
+        final JPanel gridSizePanel = new JPanel();
+        gridSizePanel.setLayout(new GridBagLayout());
+		GridBagConstraints gbcGridSize = new GridBagConstraints();
+		
+        gridSizePanel.setBackground(Color.white);
+        // On crée la un contour et un titre pour ce panel
+        gridSizePanel.setBorder(BorderFactory.createTitledBorder("Grid Size :"));
+        // On lui donne la dimension voulue
+        gridSizePanel.setPreferredSize(new Dimension(400, 100));
+        gbc.gridx = 0;
+        gbc.gridy = 15;
+        this.menuBackground.add(gridSizePanel,gbc);
+        
+        // On crée la slide bar
+        JSlider gridSizeSlider = new JSlider();
+        // Minimum et maximum des valeurs possibles dans la slide bar
+        gridSizeSlider.setMinimum(4);
+        gridSizeSlider.setMaximum(20);
+        // Afficher la graduation
+        gridSizeSlider.setPaintTicks(true);
+        // Afficher les nombres
+        gridSizeSlider.setPaintLabels(true);
+        // Taille graduation
+        gridSizeSlider.setMinorTickSpacing(2);
+        // Écart entre la valeur minimum et la valeur maximum
+        gridSizeSlider.setMajorTickSpacing(16);
+        // Valeur de base
+        gridSizeSlider.setValue(8);
+        gridSizeSlider.setBackground(Color.white);
+        gbcGridSize.gridx = 0;
+        gbcGridSize.gridy = 0;
+        gridSizePanel.add(gridSizeSlider,gbcGridSize);
+
+
+        gbcGridSize.gridx = 1;
+        gbcGridSize.gridy = 0;
+        gridSizePanel.add(new JLabel("               "),gbcGridSize);
+        
+        
+        // Label qui affiche la taille de la grille
+        JLabel gridSizeLabel = new JLabel();
+        gridSizeLabel.setText("Value : 08");
+        gbcGridSize.gridx = 2;
+        gbcGridSize.gridy = 0;
+        gridSizePanel.add(gridSizeLabel,gbcGridSize);
+        
+        // On associe le changement d'état de la slide bar à la fonction du controller
+        gridSizeSlider.addChangeListener(new ChangeListener()
+        {
+            public void stateChanged(ChangeEvent event)
+            {
+            	menuController.onSliderStateChanged(gridSizeSlider, gridSizeLabel, ((JSlider)event.getSource()).getValue());
+            }
+        });    
+        
+      
+        
+        
+        
+        
+        
+        
         
 		this.getContentPane().add(menuBackground);
 	}

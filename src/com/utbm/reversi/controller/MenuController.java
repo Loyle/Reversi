@@ -55,11 +55,11 @@ public class MenuController
     	// La condition permet d'ajouter un 0 aux nombres à un chiffre pour garder un label à 2 chiffres, qui ne se décale donc pas
     	if (gridSize < 10)
 		{
-        	gridSizeLabel.setText("     Value : 0" + gridSize);
+        	gridSizeLabel.setText("Value : 0" + gridSize);
 		}
     	else
     	{
-    		gridSizeLabel.setText("     Value : " + gridSize);
+    		gridSizeLabel.setText("Value : " + gridSize);
     	}
     	
     	// On enregistre la taille de la grille
