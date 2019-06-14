@@ -56,4 +56,33 @@ public class MenuController
 	}
 	
 
+	public void onAddClicked(JButton playersButton) 
+	{
+		String input = this.menuFrame.getPlayersTextField().getText();
+		
+		if (!input.equals("")) 
+		{
+			String color = this.menuFrame.getPlayersComboBox().getSelectedItem().toString();
+			this.menuFrame.getPlayersComboBox().removeItem(color);
+	        this.menuFrame.getPlayersLabel().setText(this.menuFrame.getPlayersLabel().getText() + input + " (" + color + ")  ;  ");
+			this.menuFrame.getPlayersTextField().setText("");
+		}
+	}
+	
+	public void onRemoveClicked(JButton playersButton) 
+	{
+		for (int i=0;i<this.menuFrame.getCouleurs().length;i++) 
+		{
+			this.menuFrame.getPlayersComboBox().removeItem(this.menuFrame.getCouleurs()[i]);
+		}
+		for (int j=0;j<5;j++) 
+		{
+			this.menuFrame.getPlayersComboBox().addItem(this.menuFrame.getCouleurs()[j]);
+		}
+	    this.menuFrame.getPlayersLabel().setText("");
+	    this.menuFrame.getPlayersTextField().setText("");
+		
+	}
+	
+	
 }

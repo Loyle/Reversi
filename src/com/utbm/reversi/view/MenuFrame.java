@@ -4,13 +4,17 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
+import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -28,6 +32,10 @@ public class MenuFrame extends JFrame
 	private final MenuController menuController = new MenuController(this);
 	// On déclare un panel dans lequel on placera les boutons du menu
 	private JPanel menuBackground;
+	private JLabel playersLabel;
+	private JTextField playersTextField;
+	private JComboBox playersComboBox;
+    private String[] couleurs = {"Blanc","Noir","Rouge","Bleu","Jaune"};
 	
 	public MenuFrame() 
 	{
@@ -55,6 +63,9 @@ public class MenuFrame extends JFrame
             this.menuBackground.add(new JLabel(" "),gbc);
         }
         
+        
+        
+        // ==========================================================================================================================
         // TAILLE GRILLE
         // On crée un panel dans lequel on mettra la Slide Bar et la label qui affiche la taille de la grille
         final JPanel gridSizePanel = new JPanel();
@@ -82,6 +93,7 @@ public class MenuFrame extends JFrame
         gridSizeSlider.setMajorTickSpacing(16);
         // Valeur de base
         gridSizeSlider.setValue(8);
+        gridSizeSlider.setBackground(Color.white);
         gridSizePanel.add(gridSizeSlider,BorderLayout.EAST);
 
         // Label qui affiche la taille de la grille
@@ -98,7 +110,111 @@ public class MenuFrame extends JFrame
             }
         });    
         
+        // ADD SPACE
+        for (int addSpace = 11 ; addSpace<15 ; addSpace++) 
+        {
+            gbc.gridx = 0;
+            gbc.gridy = addSpace;
+            this.menuBackground.add(new JLabel(" "),gbc);
+        }
+        
+        
+
+        // ==========================================================================================================================
+        // PLAYERS
+        // ==========================================================================================================================
+        JPanel playersPanel = new JPanel();
+        playersPanel.setBackground(Color.white);
+        playersPanel.setBorder(BorderFactory.createTitledBorder("Players :"));
+        playersPanel.setPreferredSize(new Dimension(400, 200));
+        gbc.gridx = 0;
+        gbc.gridy = 15;
+        this.menuBackground.add(playersPanel,gbc);
+        
+        
+        // SOUS-PANEL : AJOUT DES JOUEURS
+        JPanel addPlayersPanel = new JPanel();
+        addPlayersPanel.setBackground(Color.white);
+        playersPanel.add(addPlayersPanel,BorderLayout.CENTER);
+        
+        addPlayersPanel.setLayout(new GridBagLayout());
+		GridBagConstraints gbcPlayers = new GridBagConstraints();
+        
+        this.playersTextField = new JTextField(10);
+        gbcPlayers.gridx = 0;
+        gbcPlayers.gridy = 0;
+        addPlayersPanel.add(playersTextField,gbcPlayers);   
+        
+        gbcPlayers.gridx = 1;
+        gbcPlayers.gridy = 0;
+        addPlayersPanel.add(new JLabel("     "),gbcPlayers);
+        
+        this.playersComboBox = new JComboBox(couleurs); 
+        gbcPlayers.gridx = 2;
+        gbcPlayers.gridy = 0;
+        addPlayersPanel.add(playersComboBox,gbcPlayers);
+
+        gbcPlayers.gridx = 3;
+        gbcPlayers.gridy = 0;
+        addPlayersPanel.add(new JLabel("     "),gbcPlayers);
+        
+
+        JButton playersAddButton = new JButton("Add");
+        gbcPlayers.gridx = 4;
+        gbcPlayers.gridy = 0;
+        addPlayersPanel.add(playersAddButton,gbcPlayers);
+        playersAddButton.addActionListener(e -> menuController.onAddClicked(playersAddButton));
+        
+
+        gbcPlayers.gridx = 5;
+        gbcPlayers.gridy = 0;
+        addPlayersPanel.add(new JLabel("     "),gbcPlayers);
+        
+        JButton playersRemoveButton = new JButton("Remove all");
+        gbcPlayers.gridx = 6;
+        gbcPlayers.gridy = 0;
+        addPlayersPanel.add(playersRemoveButton,gbcPlayers);
+        playersRemoveButton.addActionListener(e -> menuController.onRemoveClicked(playersRemoveButton));
+        
+        
+        
+        
+        
+
+        // SOUS-PANEL : JOUEURS ENREGISTRÉS
+        JPanel registeredPlayersPanel = new JPanel();
+        registeredPlayersPanel.setBackground(Color.white);
+        playersPanel.add(registeredPlayersPanel,BorderLayout.SOUTH);
+        
+        JLabel label = new JLabel("Registered players :");
+        this.playersLabel = new JLabel("");
+        registeredPlayersPanel.add(label,BorderLayout.NORTH);
+        registeredPlayersPanel.add(this.playersLabel ,BorderLayout.SOUTH);
         
 		this.getContentPane().add(menuBackground);
 	}
+
+	public JLabel getPlayersLabel() {
+		return playersLabel;
+	}
+
+	public JTextField getPlayersTextField() {
+		return playersTextField;
+	}
+
+	public JComboBox getPlayersComboBox() {
+		return playersComboBox;
+	}
+
+	public String[] getCouleurs() {
+		return couleurs;
+	}
+
+	
+	
+	
+	
+	
+	
+	
 }
