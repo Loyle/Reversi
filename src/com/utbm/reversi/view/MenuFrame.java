@@ -33,6 +33,7 @@ public class MenuFrame extends JFrame
 	// On déclare un panel dans lequel on placera les boutons du menu
 	private JPanel menuBackground;
 	private JLabel playersLabel;
+	private JLabel notEnoughPlayers;
 	private JTextField playersTextField;
 	private JComboBox playersComboBox;
     private String[] couleurs = {"Blanc","Noir","Rouge","Bleu","Jaune"};
@@ -60,13 +61,22 @@ public class MenuFrame extends JFrame
         {
             gbc.gridx = 0;
             gbc.gridy = addSpace;
-            this.menuBackground.add(new JLabel(" "),gbc);
+            if (addSpace == 5) 
+            {
+            	this.notEnoughPlayers = new JLabel(" ");
+                this.menuBackground.add(this.notEnoughPlayers,gbc);
+            }
+            else
+            {
+                this.menuBackground.add(new JLabel(" "),gbc);
+            }
         }
         
         
         
         // ==========================================================================================================================
         // TAILLE GRILLE
+        // ==========================================================================================================================
         // On crée un panel dans lequel on mettra la Slide Bar et la label qui affiche la taille de la grille
         final JPanel gridSizePanel = new JPanel();
         gridSizePanel.setBackground(Color.white);
@@ -208,6 +218,10 @@ public class MenuFrame extends JFrame
 
 	public String[] getCouleurs() {
 		return couleurs;
+	}
+
+	public JLabel getNotEnoughPlayers() {
+		return notEnoughPlayers;
 	}
 
 	

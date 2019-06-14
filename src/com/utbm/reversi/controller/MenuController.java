@@ -1,7 +1,11 @@
 package com.utbm.reversi.controller;
+import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JSlider;
+
+import com.utbm.reversi.model.Player;
 import com.utbm.reversi.view.MenuFrame;
 import com.utbm.reversi.view.ReversiFrame;
 
@@ -12,6 +16,8 @@ public class MenuController
 	// Taille de la grille de jeu
 	private int gridSize = 8;
 	
+	private ArrayList<Player> players = new ArrayList<Player>();
+	
 	// Le MenuController doit être lié à une MenuFrame
 	public MenuController(MenuFrame menuFrame) 
 	{
@@ -21,12 +27,19 @@ public class MenuController
 	// Fonction appelé lorsque l'on clique sur le bouton play
 	public void onPlayClicked(JButton play) 
 	{
-		// On supprime la fenêtre actuelle (le menu)
-		this.menuFrame.dispose();
-		
-		// On lance une nouvelle partie
-		@SuppressWarnings("unused")
-		ReversiFrame reversi = new ReversiFrame(this.gridSize);
+		if (this.players.size() < 2) 
+		{
+			this.menuFrame.getNotEnoughPlayers().setText("There is not enough players to start the game !");
+		}
+		else
+		{
+			// On supprime la fenêtre actuelle (le menu)
+			this.menuFrame.dispose();
+			
+			// On lance une nouvelle partie
+			@SuppressWarnings("unused")
+			ReversiFrame reversi = new ReversiFrame(this.gridSize);
+		}
 	}
 	
 	// Fonction appelée lorsque l'on déplace le curseur pour modifier la taille de la grille
@@ -66,6 +79,13 @@ public class MenuController
 			this.menuFrame.getPlayersComboBox().removeItem(color);
 	        this.menuFrame.getPlayersLabel().setText(this.menuFrame.getPlayersLabel().getText() + input + " (" + color + ")  ;  ");
 			this.menuFrame.getPlayersTextField().setText("");
+			
+			this.players.add(new Player(this.menuFrame.getPlayersLabel().getText()));
+			
+			if (this.players.size() == 2) 
+			{
+				this.menuFrame.getNotEnoughPlayers().setText(" ");
+			}
 		}
 	}
 	
@@ -81,6 +101,8 @@ public class MenuController
 		}
 	    this.menuFrame.getPlayersLabel().setText("");
 	    this.menuFrame.getPlayersTextField().setText("");
+	    
+	    this.players.removeAll(players);
 		
 	}
 	
