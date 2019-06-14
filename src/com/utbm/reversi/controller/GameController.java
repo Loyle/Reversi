@@ -30,6 +30,8 @@ public class GameController {
 				}
 			} else {
 				if(this.game.getCurrentPlayer().getUsingPower().use(this.game, cell)) {
+					//this.game.getCurrentPlayer().getPowers().remove(this.game.getCurrentPlayer().getUsingPower());
+					this.game.getCurrentPlayer().setUsingPower(null);
 					this.game.next();
 				}
 			}

@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import com.utbm.reversi.model.powers.ColorBombPower;
+import com.utbm.reversi.model.powers.FlintnSteelPower;
 import com.utbm.reversi.model.powers.GiletJaunePower;
 import com.utbm.reversi.model.powers.LightningPower;
 import com.utbm.reversi.model.powers.Power;
+import com.utbm.reversi.model.powers.ShieldPower;
 import com.utbm.reversi.model.powers.SwitchPower;
 
 public class Player {
@@ -162,10 +164,10 @@ public class Player {
 			this.powers.add(new GiletJaunePower(this,"./data/GiletJaune_logo.png"));
 			break;
 		case 4:
-			this.powers.add(new GiletJaunePower(this,"./data/Shield_logo.png"));
+			this.powers.add(new ShieldPower(this,"./data/Shield_logo.png"));
 			break;
 		case 5:
-			this.powers.add(new GiletJaunePower(this,"./data/FlintnSteel_logo.png"));
+			this.powers.add(new FlintnSteelPower(this,"./data/FlintnSteel_logo.png"));
 			break;
 
 		default:
