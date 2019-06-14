@@ -46,9 +46,7 @@ public class GiletJaunePower extends Power {
 	}
 	@Override
 	public void next(Game game) {
-		
 		this.setDuration(this.getDuration()-1);
-		
 	}
 	@Override
 	public void stop(Game game) {

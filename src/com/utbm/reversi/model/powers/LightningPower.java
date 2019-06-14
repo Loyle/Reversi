@@ -34,11 +34,11 @@ public class LightningPower extends Power {
 		
 		xStart=saveX;
 		yStart=saveY;
-		if (cell.getCoordX()>0) {
+		if (cell.getCoordX()>0 && cell.getCoordY()<game.getBoard().getSize()-1) {
 			xStart--;
 		}
-		if(cell.getCoordX()>0) {
-			yStart++;			
+		if(cell.getCoordX()>0 && cell.getCoordY()<game.getBoard().getSize()-1) {
+			yStart++;
 		}
 		
 		while(xStart<=cell.getCoordX()+1 && xStart<game.getBoard().getSize() && yStart>=cell.getCoordY()-1 && yStart>=0){
