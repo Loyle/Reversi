@@ -17,20 +17,36 @@ public class GameController {
 	}
 	
 	public void onCellClick(Cell cell) {
-		if(this.game.isStart()) {
+		if(this.game.isStart()) 
+		{
 			// On veut que la case appartienne pas à un joueur
-			if(cell.getOwner() == null) {
+			if(cell.getOwner() == null) 
+			{
 				FollowingRules rules = new FollowingRules(this.game, cell);
 				
-				if(rules.isPlayable()) {
+				if(rules.isPlayable()) 
+				{
 					rules.replaceCell();
-					
 					this.game.next();
 				}
+				
+				
 			}
 		}
-		else {
+		else 
+		{
 			System.out.println("[DEBUG] Game is not start");
 		}
 	}
+
+	public Game getGame() {
+		return game;
+	}
+
+	public ReversiFrame getFrame() {
+		return frame;
+	}
+	
+	
+	
 }

@@ -9,7 +9,6 @@ public class FollowingRules
 	private int x;
 	private int y;
 	private int size;
-	
 	private int countInter[];
 	
 	public FollowingRules(Game game, Cell cell)
@@ -22,25 +21,36 @@ public class FollowingRules
 		this.size = this.game.getBoard().getSize();
 	}
 	
-	public int[] findInter() {
-		
-		
+	public int[] findInter() 
+	{
 		int inter[] = {0,0,0,0,0,0,0,0};
 		
-		
+		// startX et startY sont les coordonnées d'une Cell voisine
 		int startX;
 		int startY;
+		
 		int count;
 		// Top
 		startX = this.x;
 		startY = this.y - 1;
 		count = 0;
-		while(startY >= 0 && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null ) {
-			if(this.game.getBoard().getBoardCells()[startX][startY].getOwner().equals(this.game.getCurrentPlayer()) == true) {
+
+		// TANT QUE
+		// Les coordonnées du voisin sont dans la grille
+		// ET QUE
+		// Ce voisin a un pion posé sur lui/a un propriétaire
+		while((startY >= 0) && (this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null))
+		{
+			// SI
+			// Le propriétaire de cette case est celui qui joue en ce moment
+			if(this.game.getBoard().getBoardCells()[startX][startY].getOwner().equals(this.game.getCurrentPlayer()) == true) 
+			{
+
 				inter[0] = count;
 				break;
 			}
-			else {
+			else 
+			{
 				count++;
 			}
 			
@@ -51,11 +61,14 @@ public class FollowingRules
 		startX = this.x;
 		startY = this.y + 1;
 		count = 0;
-		while (startY < this.size && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) {
-			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner().equals(this.game.getCurrentPlayer()) == true) {
+		while (startY < this.size && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) 
+		{
+			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner().equals(this.game.getCurrentPlayer()) == true) 
+			{
 				inter[1] = count;
 				break;
-			} else {
+			} else 
+			{
 				count++;
 			}
 			
@@ -66,12 +79,15 @@ public class FollowingRules
 		startX = this.x - 1;
 		startY = this.y;
 		count = 0;
-		while (startX >= 0 && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) {
-			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner()
-					.equals(this.game.getCurrentPlayer()) == true) {
+		while (startX >= 0 && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) 
+		{
+			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner().equals(this.game.getCurrentPlayer()) == true) 
+			{
 				inter[2] = count;
 				break;
-			} else {
+			} 
+			else 
+			{
 				count++;
 			}
 
@@ -82,12 +98,15 @@ public class FollowingRules
 		startX = this.x + 1;
 		startY = this.y;
 		count = 0;
-		while (startX < this.size && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) {
-			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner()
-					.equals(this.game.getCurrentPlayer()) == true) {
+		while (startX < this.size && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) 
+		{
+			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner().equals(this.game.getCurrentPlayer()) == true) 
+			{
 				inter[3] = count;
 				break;
-			} else {
+			} 
+			else 
+			{
 				count++;
 			}
 
@@ -99,11 +118,13 @@ public class FollowingRules
 		startY = this.y - 1;
 		count = 0;
 		while (startX < this.size && startY >= 0 && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) {
-			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner()
-					.equals(this.game.getCurrentPlayer()) == true) {
+			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner().equals(this.game.getCurrentPlayer()) == true) 
+			{
 				inter[4] = count;
 				break;
-			} else {
+			} 
+			else 
+			{
 				count++;
 			}
 
@@ -115,12 +136,15 @@ public class FollowingRules
 		startX = this.x + 1;
 		startY = this.y + 1;
 		count = 0;
-		while (startX < this.size && startY < this.size && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) {
-			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner()
-					.equals(this.game.getCurrentPlayer()) == true) {
+		while (startX < this.size && startY < this.size && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) 
+		{
+			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner().equals(this.game.getCurrentPlayer()) == true) 
+			{
 				inter[5] = count;
 				break;
-			} else {
+			} 
+			else
+			{
 				count++;
 			}
 			startX++;
@@ -131,12 +155,15 @@ public class FollowingRules
 		startX = this.x - 1;
 		startY = this.y + 1;
 		count = 0;
-		while (startX >= 0 && startY < this.size && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) {
-			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner()
-					.equals(this.game.getCurrentPlayer()) == true) {
+		while (startX >= 0 && startY < this.size && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) 
+		{
+			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner().equals(this.game.getCurrentPlayer()) == true)
+			{
 				inter[6] = count;
 				break;
-			} else {
+			}
+			else 
+			{
 				count++;
 			}
 			startX--;
@@ -147,11 +174,15 @@ public class FollowingRules
 		startX = this.x - 1;
 		startY = this.y - 1;
 		count = 0;
-		while (startX >= 0 && startY >= 0 && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) {
-			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner().equals(this.game.getCurrentPlayer()) == true) {
+		while (startX >= 0 && startY >= 0 && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) 
+		{
+			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner().equals(this.game.getCurrentPlayer()) == true)
+			{
 				inter[7] = count;
 				break;
-			} else {
+			} 
+			else 
+			{
 				count++;
 			}
 			startX--;
@@ -161,20 +192,27 @@ public class FollowingRules
 		return inter;
 	}
 	
-	public boolean isPlayable() {
+	// La case est jouable si on a pu compter un pion adverse entre le nouveau pion et un autre pion de la même couleur
+	public boolean isPlayable() 
+	{
 		this.countInter = this.findInter();
 		
-		for(int i = 0; i < 8; i++) {
-			if(this.countInter[i] > 0) {
+		for(int i = 0; i < 8; i++) 
+		{
+			if(this.countInter[i] > 0)
+			{
 				return true;
 			}
 		}
 		return false;
 	}
 	
-	public void replaceCell() {
-		
+	// Permet de placer le nouveau pion et de retourner les pions impactés
+	public void replaceCell() 
+	{
 		// TOP
+		// Change le propriétaire de toutes les cases encadrées, et actualise (ce qui place le pion)
+		
 		for (int i = 0; i <= this.countInter[0]; i++) {
 			if(this.game.getBoard().getBoardCells()[this.x][this.y - i].isEnabled()) {
 				this.game.getBoard().getBoardCells()[this.x][this.y - i].setOwner(this.game.getCurrentPlayer());
@@ -219,18 +257,23 @@ public class FollowingRules
 		}
 
 		// BOTTOM-LEFT
-		for (int i = 0; i <= this.countInter[6]; i++) {
+		for (int i = 0; i <= this.countInter[6]; i++) 
+		{
 			if(this.game.getBoard().getBoardCells()[this.x - i][this.y + i].isEnabled()) {
-				this.game.getBoard().getBoardCells()[this.x - i][this.y + i].setOwner(this.game.getCurrentPlayer());
-				this.game.getBoard().getBoardCells()[this.x - i][this.y + i].updateState();			
-			}
+			this.game.getBoard().getBoardCells()[this.x - i][this.y + i].setOwner(this.game.getCurrentPlayer());
+			this.game.getBoard().getBoardCells()[this.x - i][this.y + i].updateState();
+		}
 		}
 		// TOP-LEFT
-		for (int i = 0; i <= this.countInter[7]; i++) {
+		for (int i = 0; i <= this.countInter[7]; i++) 
+		{
 			if(this.game.getBoard().getBoardCells()[this.x - i][this.y - i].isEnabled()) {
-				this.game.getBoard().getBoardCells()[this.x - i][this.y - i].setOwner(this.game.getCurrentPlayer());
-				this.game.getBoard().getBoardCells()[this.x - i][this.y - i].updateState();				
-			}
+			this.game.getBoard().getBoardCells()[this.x - i][this.y - i].setOwner(this.game.getCurrentPlayer());
+			this.game.getBoard().getBoardCells()[this.x - i][this.y - i].updateState();
+		}
+		}
+
+		
 		}
 	}
 	
@@ -268,45 +311,7 @@ public class FollowingRules
 	*/
 	
 	// On teste s'il y a encore des cases où placer le futur pion (et donc si on peut continuer la partie ou pas)
-	/*public boolean isBlocked() 
-	{
-		// On a besoin de la grille de Cell que l'on va parcourir
-		OldCell[][] cellArray = this.reversiFrame.getCellArray();
-		
-		int idx1=0;
-		int idx2=0;
-		
-		// On parcourt toute la grille
-		for (int i=0;i<reversiFrame.getGridSize();i++) 
-		{
-			for (int j=0;j<reversiFrame.getGridSize();j++) 
-			{
-				// Si la case est vide et que l'on ne peut rien y poser, on incrémente idx1
-				if (cellArray[i][j].getState() == 0 && isFollowingRules(cellArray[i][j]) == false) 
-				{
-					idx1=idx1+1;
-				}
-				
-				// Si la case est vide, on incrémente idx2
-				if (cellArray[i][j].getState() == 0) 
-				{
-					idx2=idx2+1;
-				}
-					
-			}
-		}
-		
-		// S'il y a autant de case vide que de cases vides où on ne peut rien poser, alors le jeu est bien bloqué
-		if (idx1 == idx2) 
-		{
-			return true;
-		}
-		// Sinon, on peut continuer à jouer
-		else
-		{
-			return false;
-		}
-	}
+	/*
 	
 	
 	
@@ -421,37 +426,8 @@ public class FollowingRules
 			
 		}*/
 		
-		// Fonction associée au clic sur le bouton rejouer
-		/*public void onReplayClicked(JButton replay) 
-		{
-			// Destruction de l'ancienne fenêtre et création d'un nouvelle
-			ReversiFrame newFrame = new ReversiFrame(this.reversiFrame.getGridSize());
-			newFrame.setTitle("Reversi Game");
-	        
-			newFrame.setSize(700, 700);
-			
-			this.reversiFrame.dispose();
-			
-
-			newFrame.setVisible(true);
-			newFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		}*/
 		
-		// Fonction associée au clic sur le bouton retour au menu
-		/*public void onBackToMenuClicked(JButton backToMenu) 
-		{
-			// Suppression de la fenêtre de jeu et création d'une fenêtre de menu
-			this.reversiFrame.dispose();
-			
-			MenuFrame menuFrame = new MenuFrame();
-			
-			menuFrame.setTitle("Menu - Reversi Game");
-	        
-			menuFrame.setSize(700, 700);
+		
+	
+	
 
-			menuFrame.setVisible(true);
-			menuFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		}*/
-	
-	
-}
