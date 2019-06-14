@@ -243,9 +243,8 @@ public class Game {
 					endMsg.setText("Blacks win !");
 				}*/
 		}
-		}
-		
 	}
+		
 
 	public void countScore() {
 		for(Player player : this.players) {

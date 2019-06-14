@@ -252,7 +252,6 @@ public class ReversiFrame extends JFrame
         	this.powerListBtn.add(btn);
         }
         
-        
         // On donne une taille minimale à la fenêtre
         this.setMinimumSize(new Dimension(13+gridSize*(cellSize+5)+scoresSizeX, 42+gridSize*(cellSize+5)));
         // On ajoute les 2 panel à la fenêtre
