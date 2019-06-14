@@ -86,8 +86,8 @@ public class LightningPower extends Power {
 				while ( yStart<=this.getOriginCell().getCoordY()+1 && yStart<game.getBoard().getSize()) {
 					
 					if(xStart != this.getOriginCell().getCoordX()|| yStart!=this.getOriginCell().getCoordY() ) {
-						float r = rand.nextInt(200)/10 ;
-						if( r <= 1) {	
+						float r = rand.nextInt(200) ;
+						if( r <= 10) {	
 							if(xStart>=0 && yStart>=0) {
 								game.getBoard().getBoardCells()[xStart][yStart].setOwner(this.getOriginCell().getOwner());
 								game.getBoard().getBoardCells()[xStart][yStart].updateState();

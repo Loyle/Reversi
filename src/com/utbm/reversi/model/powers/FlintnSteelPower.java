@@ -63,8 +63,8 @@ public class FlintnSteelPower extends Power {
 				while ( yStart<=this.getOriginCell().getCoordY()+1 && yStart<game.getBoard().getSize()) {
 					
 					if(xStart != this.getOriginCell().getCoordX()|| yStart!=this.getOriginCell().getCoordY() ) {
-						float r = rand.nextInt(100)/10 ;
-						if( r <= 2) {	
+						float r = rand.nextInt(100) ;
+						if( r <= 10) {	
 							game.getBoard().getBoardCells()[xStart][yStart].setEnabled(false);
 							if(xStart>=0 && yStart>=0) {
 								toAdd.add(game.getBoard().getBoardCells()[xStart][yStart]);								

@@ -55,9 +55,7 @@ public class Game {
 	public void removePlayer(Player player) {
 		this.players.remove(player);
 	}
-	public ArrayList<Power> getPowers(){
-		return this.powers;
-	}
+	
 	public int getNumberPower() {
 		return numberPower;
 	}
@@ -70,7 +68,7 @@ public class Game {
 		this.powers.add(power);
 	}
 	public void removePower(Power power) {
-		this.powers.add(power);
+		this.powers.remove(power);
 	}
 
 	public void setStart(Boolean status) {
