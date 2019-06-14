@@ -10,23 +10,27 @@ public abstract class Power {
 	
 	private Player owner;
 	private ImageIcon icon;
+	private ImageIcon hoverIcon;
 	private int duration;
 	private Cell originCell;
 	
 	public Power() {
 		this.owner = null;
 		this.icon = null;
+		this.hoverIcon = null;
 		this.setOriginCell(null);
 	}
-	public Power(Player owner, ImageIcon icon, int duration) {
+	public Power(Player owner, ImageIcon icon, ImageIcon hoverIcon, int duration) {
 		this.owner = owner;
 		this.icon = icon;
+		this.hoverIcon = hoverIcon;
 		this.duration = duration;
 		this.setOriginCell(null);
 	}
-	public Power(Player owner, String icon, int duration) {
+	public Power(Player owner, String icon, String hoverIcon, int duration) {
 		this.owner = owner;
 		this.icon = new ImageIcon(icon);
+		this.hoverIcon = new ImageIcon(hoverIcon);
 		this.duration =  duration;
 		this.setOriginCell(null);
 	}

@@ -13,13 +13,13 @@ public class FlintnSteelPower extends Power {
 	
 	private ArrayList<Cell> burningCell;
 	
-	public FlintnSteelPower(Player owner, ImageIcon icon) {
-		super(owner,icon,3);
+	public FlintnSteelPower(Player owner, ImageIcon icon, ImageIcon hoverIcon) {
+		super(owner,icon,hoverIcon,3);
 		this.burningCell = new ArrayList<Cell>();
 	}
 	
-	public FlintnSteelPower(Player owner, String icon) {
-		super(owner,icon,3);
+	public FlintnSteelPower(Player owner, String icon, String hoverIcon) {
+		super(owner,icon,hoverIcon,3);
 		this.burningCell = new ArrayList<Cell>();
 	}
 	

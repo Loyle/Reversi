@@ -152,22 +152,22 @@ public class Player {
 		
 		switch (rando) {
 		case 0:
-			this.powers.add(new SwitchPower(this,"./data/Switch_logo.png"));
+			this.powers.add(new SwitchPower(this,"./data/Switch_logo.png",""));
 			break;
 		case 1:
-			this.powers.add(new ColorBombPower(this,"./data/ColorBomb_logo.png"));	
+			this.powers.add(new ColorBombPower(this,"./data/ColorBomb_logo.png",""));	
 			break;
 		case 2:
-			this.powers.add(new LightningPower(this,"./data/Lightning_logo.png"));
+			this.powers.add(new LightningPower(this,"./data/Lightning_logo.png",""));
 			break;
 		case 3:
-			this.powers.add(new GiletJaunePower(this,"./data/GiletJaune_logo.png"));
+			this.powers.add(new GiletJaunePower(this,"./data/GiletJaune_logo.png","./data/GiletJaune_hover.png"));
 			break;
 		case 4:
-			this.powers.add(new ShieldPower(this,"./data/Shield_logo.png"));
+			this.powers.add(new ShieldPower(this,"./data/Shield_logo.png",""));
 			break;
 		case 5:
-			this.powers.add(new FlintnSteelPower(this,"./data/FlintnSteel_logo.png"));
+			this.powers.add(new FlintnSteelPower(this,"./data/FlintnSteel_logo.png",""));
 			break;
 
 		default:

@@ -7,11 +7,11 @@ import com.utbm.reversi.model.cells.Cell;
 
 public class GiletJaunePower extends Power {
 
-	public GiletJaunePower(Player owner, ImageIcon icon) {
-		super(owner,icon,5);
+	public GiletJaunePower(Player owner, ImageIcon icon, ImageIcon hoverIcon) {
+		super(owner,icon,hoverIcon,5);
 	}
-	public GiletJaunePower(Player owner, String icon) {
-		super(owner,icon,5);
+	public GiletJaunePower(Player owner, String icon, String hoverIcon) {
+		super(owner,icon,hoverIcon,5);
 	}
 	
 	@Override

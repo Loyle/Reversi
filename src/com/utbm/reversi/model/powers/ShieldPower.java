@@ -8,11 +8,11 @@ import com.utbm.reversi.model.cells.Cell;
 
 public class ShieldPower extends Power {
 	
-	public ShieldPower(Player owner, ImageIcon icon) {
-		super(owner,icon,3);
+	public ShieldPower(Player owner, ImageIcon icon, ImageIcon hoverIcon) {
+		super(owner,icon,hoverIcon,3);
 	}
-	public ShieldPower(Player owner, String icon) {
-		super(owner,icon,3);
+	public ShieldPower(Player owner, String icon, String hoverIcon) {
+		super(owner,icon,hoverIcon,3);
 	}
 	
 	@Override
