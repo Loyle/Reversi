@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,7 +20,7 @@ public class Cell extends JButton {
 	private Color defaultColor;
 	private boolean isLock;
 	private ImageIcon icon;
-	private ImageIcon hoverIcon;
+	private ArrayList<ImageIcon> hoverIcons;
 	
 	//private Pawn pawn;
 	
@@ -34,7 +35,7 @@ public class Cell extends JButton {
 		this.isLock = true;
 		this.setBackground(this.defaultColor);
 		this.icon = null;
-		this.hoverIcon = null;
+		this.hoverIcons = new ArrayList<ImageIcon>();
 				
 		this.setContentAreaFilled(false);
 	}
@@ -46,7 +47,7 @@ public class Cell extends JButton {
 		this.isLock = true;
 		this.setBackground(this.defaultColor);
 		this.icon = null;
-		this.hoverIcon = null;
+		this.hoverIcons = new ArrayList<ImageIcon>();;
 
 		this.setContentAreaFilled(false);
 	}
@@ -111,14 +112,17 @@ public class Cell extends JButton {
 	/**
 	 * @return the hoverIcon
 	 */
-	public ImageIcon getHoverIcon() {
-		return hoverIcon;
+	public ArrayList<ImageIcon> getHoverIcon() {
+		return this.hoverIcons;
 	}
 	/**
 	 * @param hoverIcon the hoverIcon to set
 	 */
-	public void setHoverIcon(ImageIcon hoverIcon) {
-		this.hoverIcon = hoverIcon;
+	public void addHoverIcon(ImageIcon hoverIcon) {
+		this.hoverIcons.add(hoverIcon);
+	}
+	public void removeHoverIcon(ImageIcon hoverIcon) {
+		this.hoverIcons.remove(hoverIcon);
 	}
 	
 	public void updateState() {
@@ -148,8 +152,8 @@ public class Cell extends JButton {
 			g2d.fillOval(10, 10, this.getWidth() - 20, this.getHeight() - 20);
 		}
 		
-		if(this.hoverIcon != null) {
-			g2d.drawImage(this.hoverIcon.getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+		for(ImageIcon hoverIcon : this.hoverIcons) {
+			g2d.drawImage(hoverIcon.getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
 		}
 	}
 }

@@ -26,6 +26,7 @@ public class ShieldPower extends Power {
 		if(cell.getOwner()!=null) {
 			if(cell.getOwner().equals(this.getOwner())) {
 				cell.setEnabled(false);
+				cell.addHoverIcon(this.getHoverIcon());
 				game.getBoard().getBoardCells()[cell.getCoordX()][cell.getCoordY()].updateState();
 				return true;
 			}			
@@ -40,7 +41,8 @@ public class ShieldPower extends Power {
 	}
 	@Override
 	public void stop(Game game) {
-		this.getOriginCell().setEnabled(true);		
+		this.getOriginCell().setEnabled(true);	
+		this.getOriginCell().removeHoverIcon(this.getHoverIcon());
 	}
 
 }

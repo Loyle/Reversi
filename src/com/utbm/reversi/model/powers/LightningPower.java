@@ -35,8 +35,9 @@ public class LightningPower extends Power {
 		}
 		while(xStart<=cell.getCoordX()+1 && xStart<game.getBoard().getSize() && yStart<=cell.getCoordY()+1 && yStart<game.getBoard().getSize()) {
 			game.getBoard().getBoardCells()[xStart][yStart].setOwner(this.getOwner());
-			this.lightningCell.add(game.getBoard().getBoardCells()[xStart][yStart]);
+			game.getBoard().getBoardCells()[xStart][yStart].addHoverIcon(this.getHoverIcon());
 			game.getBoard().getBoardCells()[xStart][yStart].updateState();
+			this.lightningCell.add(game.getBoard().getBoardCells()[xStart][yStart]);
 			xStart++;
 			yStart++;
 		}
@@ -52,6 +53,7 @@ public class LightningPower extends Power {
 		
 		while(xStart<=cell.getCoordX()+1 && xStart<game.getBoard().getSize() && yStart>=cell.getCoordY()-1 && yStart>=0){
 			game.getBoard().getBoardCells()[xStart][yStart].setOwner(this.getOwner());
+			game.getBoard().getBoardCells()[xStart][yStart].addHoverIcon(this.getHoverIcon());
 			game.getBoard().getBoardCells()[xStart][yStart].updateState();
 			this.lightningCell.add(game.getBoard().getBoardCells()[xStart][yStart]);
 			xStart++;
@@ -90,6 +92,7 @@ public class LightningPower extends Power {
 						if( r <= 10) {	
 							if(xStart>=0 && yStart>=0) {
 								game.getBoard().getBoardCells()[xStart][yStart].setOwner(this.getOriginCell().getOwner());
+								game.getBoard().getBoardCells()[xStart][yStart].addHoverIcon(this.getHoverIcon());
 								game.getBoard().getBoardCells()[xStart][yStart].updateState();
 								toAdd.add(game.getBoard().getBoardCells()[xStart][yStart]);								
 							}
@@ -100,12 +103,17 @@ public class LightningPower extends Power {
 				xStart++;
 			}
 		}
+		this.lightningCell.addAll(toAdd);
 		
 		
 	}
 	@Override
 	public void stop(Game game) {
-		lightningCell.clear();
+		for(Cell cell : this.lightningCell) {
+			cell.removeHoverIcon(this.getHoverIcon());
+			cell.updateState();
+		}
+		this.lightningCell.clear();
 	}
 
 }

@@ -33,6 +33,10 @@ public class FlintnSteelPower extends Power {
 		this.setOriginCell(cell);
 		this.burningCell.add(cell);
 		cell.setEnabled(false);
+		
+		cell.addHoverIcon(this.getHoverIcon());
+		cell.updateState();
+		
 		return true;
 		// afficher flamme sur la cell
 		
@@ -67,6 +71,8 @@ public class FlintnSteelPower extends Power {
 						if( r <= 10) {	
 							if(xStart>=0 && yStart>=0) {
 								game.getBoard().getBoardCells()[xStart][yStart].setEnabled(false);
+								game.getBoard().getBoardCells()[xStart][yStart].addHoverIcon(this.getHoverIcon());
+								game.getBoard().getBoardCells()[xStart][yStart].updateState();
 								toAdd.add(game.getBoard().getBoardCells()[xStart][yStart]);								
 							}
 						}
@@ -84,11 +90,13 @@ public class FlintnSteelPower extends Power {
 	
 	@Override
 	public void stop(Game game) {
-		for(Cell cell : burningCell) {
+		for(Cell cell : this.burningCell) {
 			cell.setEnabled(true);
+			cell.removeHoverIcon(this.getHoverIcon());
 			cell.clearOwner();
+			cell.updateState();
 		}
-		burningCell.clear();
+		this.burningCell.clear();
 	}
 	
 }

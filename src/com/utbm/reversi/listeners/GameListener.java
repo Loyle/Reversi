@@ -1,5 +1,6 @@
 package com.utbm.reversi.listeners;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -61,10 +62,12 @@ public class GameListener implements ActionListener {
 	
 	public void onPowerClick(PowerButton btn) {
 		if(this.controller.getGame().getCurrentPlayer().getUsingPower() == null || this.controller.getGame().getCurrentPlayer().getUsingPower().equals(btn.getPower()) == false) {
-			this.controller.getGame().getCurrentPlayer().setUsingPower(btn.getPower());			
+			this.controller.getGame().getCurrentPlayer().setUsingPower(btn.getPower());
+			btn.setBackground(Color.RED);
 		}
 		else {
 			this.controller.getGame().getCurrentPlayer().setUsingPower(null);
+			btn.setBackground(null);
 		}
 	}
 }
