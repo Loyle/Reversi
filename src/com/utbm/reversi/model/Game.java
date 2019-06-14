@@ -199,7 +199,7 @@ public class Game {
 			JButton replay = new JButton("Replay");
 			gbc.gridx=0;
 		    gbc.gridy=5;
-		    //replay.addActionListener(e -> this.frame.getListener().onReplayClicked(replay));
+		    replay.addActionListener(e -> this.frame.getListener().onReplayClicked(replay));
 		    end.add(replay,gbc);
 			this.frame.getContentPane().add(end,BorderLayout.CENTER);
 			
@@ -207,7 +207,7 @@ public class Game {
 			JButton endBackToMenu = new JButton("Back to Menu");
 			gbc.gridx=0;
 		    gbc.gridy=6;
-		    //endBackToMenu.addActionListener(e -> this.frame.getListener().onBackToMenuClicked(endBackToMenu));
+		    endBackToMenu.addActionListener(e -> this.frame.getListener().onBackToMenuClicked(endBackToMenu));
 		    end.add(endBackToMenu,gbc);
 		    
 

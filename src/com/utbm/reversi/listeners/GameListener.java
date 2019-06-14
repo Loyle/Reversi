@@ -48,6 +48,10 @@ public class GameListener implements ActionListener {
 	// Fonction associée au clic sur le bouton rejouer
 	public void onReplayClicked(JButton replay) {
 		// Destruction de l'ancienne fenêtre et création d'un nouvelle
+
+		this.controller.getFrame().dispose();
+		
+		
 		ReversiFrame newFrame = new ReversiFrame(this.controller.getGame().getBoard().getSize());
 		newFrame.setTitle("Reversi Game");
 

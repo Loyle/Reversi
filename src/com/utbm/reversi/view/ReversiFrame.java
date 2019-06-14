@@ -307,4 +307,10 @@ public class ReversiFrame extends JFrame
 		return gamePanel;
 	}
 
+	public GameListener getListener() {
+		return listener;
+	}
+	
+	
+
 }
