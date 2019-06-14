@@ -289,6 +289,10 @@ public class ReversiFrame extends JFrame
 	
 	public void updatePlayerPowers(Player player) {
 		int i = 0;
+		for(i = 0; i < this.game.getNumberPower(); i++) {
+			this.powerListBtn.get(i).setIcon(null);
+		}
+		i = 0;
 		for(Power power : player.getPowers()) {
 			this.powerListBtn.get(i).setIcon(power.getIcon());
 			this.powerListBtn.get(i).setPower(power);

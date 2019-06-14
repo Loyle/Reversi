@@ -32,7 +32,6 @@ public class GameController {
 				if(this.game.getCurrentPlayer().getUsingPower().use(this.game, cell)) {
 					this.game.addPower(this.game.getCurrentPlayer().getUsingPower());
 					this.game.getCurrentPlayer().removePower(this.game.getCurrentPlayer().getUsingPower());
-					
 					this.game.getCurrentPlayer().setUsingPower(null);
 					this.game.next();
 				}
