@@ -72,14 +72,36 @@ public class MenuController
 	{
 		String input = this.menuFrame.getPlayersTextField().getText();
 		
-		if (!input.equals("") && input.length() < 10) 
+		if (!input.equals("") && input.length() < 10 && this.players.size() < 9) 
 		{
 			String color = this.menuFrame.getPlayersComboBox().getSelectedItem().toString();
 			this.menuFrame.getPlayersComboBox().removeItem(color);
-	        this.menuFrame.getPlayersLabel().setText(this.menuFrame.getPlayersLabel().getText() + input + " (" + color + ")  ;  ");
-			this.menuFrame.getPlayersTextField().setText("");
 			
-			this.players.add(new Player(this.menuFrame.getPlayersLabel().getText()));
+
+			this.players.add(new Player(input));
+			
+			if (this.players.size() <= 3)
+			{
+		        this.menuFrame.getPlayersLabel1().setText(this.menuFrame.getPlayersLabel1().getText() + input + " (" + color + ")  ;  ");
+			}
+			else if (this.players.size() > 3 && this.players.size() <= 6) 
+			{
+		        this.menuFrame.getPlayersLabel2().setText(this.menuFrame.getPlayersLabel2().getText() + input + " (" + color + ")  ;  ");
+			}
+			else if (this.players.size() > 6 && this.players.size() <= 9) 
+			{
+				if (this.players.size()==9) 
+				{
+			        this.menuFrame.getPlayersLabel3().setText(this.menuFrame.getPlayersLabel3().getText() + input + " (" + color + ")");
+					
+				}
+				else
+				{
+			        this.menuFrame.getPlayersLabel3().setText(this.menuFrame.getPlayersLabel3().getText() + input + " (" + color + ")  ;  ");
+					
+				}
+			}
+			this.menuFrame.getPlayersTextField().setText("");
 			
 			if (this.players.size() == 2) 
 			{
@@ -95,6 +117,11 @@ public class MenuController
 			this.menuFrame.getError().setText("Too many letters !");
 			this.menuFrame.getPlayersTextField().setText("");
 		}
+		else if (this.players.size() >= 9) 
+		{
+			this.menuFrame.getError().setText("The maximum of players is 9 !");
+			this.menuFrame.getPlayersTextField().setText("");
+		}
 	}
 	
 	public void onRemoveClicked(JButton playersButton) 
@@ -104,11 +131,13 @@ public class MenuController
 		{
 			this.menuFrame.getPlayersComboBox().removeItem(this.menuFrame.getCouleurs()[i]);
 		}
-		for (int j=0;j<5;j++) 
+		for (int j=0;j<this.menuFrame.getCouleurs().length;j++) 
 		{
 			this.menuFrame.getPlayersComboBox().addItem(this.menuFrame.getCouleurs()[j]);
 		}
-	    this.menuFrame.getPlayersLabel().setText(" ");
+	    this.menuFrame.getPlayersLabel1().setText(" ");
+	    this.menuFrame.getPlayersLabel2().setText(" ");
+	    this.menuFrame.getPlayersLabel3().setText(" ");
 	    this.menuFrame.getPlayersTextField().setText("");
 	    
 	    this.players.removeAll(players);

@@ -34,11 +34,13 @@ public class MenuFrame extends JFrame
 	private final MenuController menuController = new MenuController(this);
 	// On déclare un panel dans lequel on placera les boutons du menu
 	private JPanel menuBackground;
-	private JLabel playersLabel;
+	private JLabel playersLabel1;
+	private JLabel playersLabel2;
+	private JLabel playersLabel3;
 	private JLabel error;
 	private JTextField playersTextField;
 	private JComboBox playersComboBox;
-    private String[] couleurs = {"White","Black","Red","Blue","Yellow"};
+    private String[] couleurs = {"White","Black","Red","Blue","Yellow","Green","Gray","Orange","Rose","Purple"};
 	
 	public MenuFrame() 
 	{
@@ -217,16 +219,30 @@ public class MenuFrame extends JFrame
         gbcRegisteredPlayers.gridx = 0;
         gbcRegisteredPlayers.gridy = 0;
         registeredPlayersPanel.add(label,gbcRegisteredPlayers);
-        this.playersLabel = new JLabel(" ");
+        this.playersLabel1 = new JLabel(" ");
         gbcRegisteredPlayers.gridx = 0;
         gbcRegisteredPlayers.gridy = 1;
-        registeredPlayersPanel.add(this.playersLabel,gbcRegisteredPlayers);
+        registeredPlayersPanel.add(this.playersLabel1,gbcRegisteredPlayers);
+        this.playersLabel2 = new JLabel(" ");
+        gbcRegisteredPlayers.gridx = 0;
+        gbcRegisteredPlayers.gridy = 2;
+        registeredPlayersPanel.add(this.playersLabel2,gbcRegisteredPlayers);
+        this.playersLabel3 = new JLabel(" ");
+        gbcRegisteredPlayers.gridx = 0;
+        gbcRegisteredPlayers.gridy = 3;
+        registeredPlayersPanel.add(this.playersLabel3,gbcRegisteredPlayers);
         
 		this.getContentPane().add(menuBackground);
 	}
 
-	public JLabel getPlayersLabel() {
-		return playersLabel;
+	public JLabel getPlayersLabel1() {
+		return playersLabel1;
+	}
+	public JLabel getPlayersLabel2() {
+		return playersLabel2;
+	}
+	public JLabel getPlayersLabel3() {
+		return playersLabel3;
 	}
 
 	public JTextField getPlayersTextField() {
