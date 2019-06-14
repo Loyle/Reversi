@@ -16,7 +16,7 @@ public class ShieldPower extends Power {
 	}
 	
 	@Override
-	public void use(Game game, Cell cell) {
+	public boolean use(Game game, Cell cell) {
 		// TODO Auto-generated method stub
 		/*
 		 * Use -> le pion choisi ne se retourne pas s'il est encadré 
@@ -26,10 +26,11 @@ public class ShieldPower extends Power {
 		if(cell.getOwner()!=null) {
 			if(cell.getOwner().equals(this.getOwner())) {
 				cell.setEnabled(false);
+				game.getBoard().getBoardCells()[cell.getCoordX()][cell.getCoordY()].updateState();
+				return true;
 			}			
 		}
-		game.getBoard().getBoardCells()[cell.getCoordX()][cell.getCoordY()].updateState();
-		
+		return false;
 	}
 	@Override
 	public void next(Game game) {

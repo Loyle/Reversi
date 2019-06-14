@@ -15,7 +15,7 @@ public class GiletJaunePower extends Power {
 	}
 	
 	@Override
-	public void use(Game game, Cell cell) {
+	public boolean use(Game game, Cell cell) {
 		// TODO Auto-generated method stub
 		/*
 		 * Use -> block 5 case ne croix 
@@ -41,6 +41,7 @@ public class GiletJaunePower extends Power {
 			game.getBoard().getBoardCells()[xStart][yStart].setEnabled(false);
 			yStart++;
 		}
+		 return true;
 		
 	}
 	@Override

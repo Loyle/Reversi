@@ -16,7 +16,7 @@ public class ColorBombPower extends Power {
 	}
 	
 	@Override
-	public void use(Game game, Cell cell) {
+	public boolean use(Game game, Cell cell) {
 		// TODO Auto-generated method stub
 		/*
 		 *Use ->  Carré autour du pion changeant la couleur de touts les pions dans la couelur du 
@@ -44,6 +44,8 @@ public class ColorBombPower extends Power {
 			}
 			xStart++;
 		}
+		
+		return true;
 
 	}
 	@Override

@@ -52,7 +52,7 @@ public abstract class Power {
 		this.duration = duration;
 	}
 	
-	public abstract void use(Game game, Cell cell);
+	public abstract boolean use(Game game, Cell cell);
 	public abstract void next(Game game);
 	public abstract void stop(Game game);
 	public Cell getOriginCell() {
