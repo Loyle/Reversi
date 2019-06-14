@@ -64,13 +64,11 @@ public class FlintnSteelPower extends Power {
 					
 					if(xStart != this.getOriginCell().getCoordX()|| yStart!=this.getOriginCell().getCoordY() ) {
 						float r = rand.nextInt(100)/10 ;
-						if( r <= 2) {
-							System.out.println("x: "+xStart);
-							System.out.println("y: "+yStart);
-							
+						if( r <= 2) {	
 							game.getBoard().getBoardCells()[xStart][yStart].setEnabled(false);
-							toAdd.add(game.getBoard().getBoardCells()[xStart][yStart]);
-							System.out.println("ADD");
+							if(xStart>=0 && yStart>=0) {
+								toAdd.add(game.getBoard().getBoardCells()[xStart][yStart]);								
+							}
 						}
 					}
 					yStart++;
@@ -90,7 +88,7 @@ public class FlintnSteelPower extends Power {
 			cell.setEnabled(true);
 			cell.clearOwner();
 		}
-		
+		burningCell.clear();
 	}
 	
 }
