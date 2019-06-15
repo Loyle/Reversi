@@ -1,4 +1,5 @@
 package com.utbm.reversi.controller;
+import java.awt.Color;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -38,7 +39,7 @@ public class MenuController
 			
 			// On lance une nouvelle partie
 			@SuppressWarnings("unused")
-			ReversiFrame reversi = new ReversiFrame(this.gridSize);
+			ReversiFrame reversi = new ReversiFrame(this.gridSize,players);
 		}
 	}
 	
@@ -77,28 +78,72 @@ public class MenuController
 			String color = this.menuFrame.getPlayersComboBox().getSelectedItem().toString();
 			this.menuFrame.getPlayersComboBox().removeItem(color);
 			
+			switch (color) {
+				case "White":
+					this.players.add(new Player(input,Color.white));
+					break;
+				case "Black":
+					this.players.add(new Player(input,Color.black));
+					break;
+				case "Red":
+					this.players.add(new Player(input,Color.red));
+					break;
+				case "Blue":
+					this.players.add(new Player(input,Color.blue));
+					break;
+				case "Yellow":
+					this.players.add(new Player(input,Color.yellow));
+					break;
+				case "Green":
+					this.players.add(new Player(input,Color.green));
+					break;
+				case "Gray":
+					this.players.add(new Player(input,Color.gray));
+					break;
+				case "Orange":
+					this.players.add(new Player(input,Color.orange));
+					break;
+				case "Pink":
+					this.players.add(new Player(input,Color.pink));
+					break;
+				case "Cyan":
+					this.players.add(new Player(input,Color.cyan));
+					break;
+			}
 
-			this.players.add(new Player(input));
+			
 			
 			if (this.players.size() <= 3)
 			{
-		        this.menuFrame.getPlayersLabel1().setText(this.menuFrame.getPlayersLabel1().getText() + input + " (" + color + ")  ;  ");
-			}
-			else if (this.players.size() > 3 && this.players.size() <= 6) 
-			{
-		        this.menuFrame.getPlayersLabel2().setText(this.menuFrame.getPlayersLabel2().getText() + input + " (" + color + ")  ;  ");
-			}
-			else if (this.players.size() > 6 && this.players.size() <= 9) 
-			{
-				if (this.players.size()==9) 
+				if (this.players.size()==1) 
 				{
-			        this.menuFrame.getPlayersLabel3().setText(this.menuFrame.getPlayersLabel3().getText() + input + " (" + color + ")");
-					
+			        this.menuFrame.getPlayersLabel1().setText(this.menuFrame.getPlayersLabel1().getText() + input + " (" + color + ")");
 				}
 				else
 				{
-			        this.menuFrame.getPlayersLabel3().setText(this.menuFrame.getPlayersLabel3().getText() + input + " (" + color + ")  ;  ");
-					
+			        this.menuFrame.getPlayersLabel1().setText(this.menuFrame.getPlayersLabel1().getText() + "  ;  " + input + " (" + color + ")");
+				}
+			}
+			else if (this.players.size() > 3 && this.players.size() <= 6) 
+			{
+				if (this.players.size()==4) 
+				{
+			        this.menuFrame.getPlayersLabel2().setText(this.menuFrame.getPlayersLabel2().getText() + input + " (" + color + ")");
+				}
+				else
+				{
+			        this.menuFrame.getPlayersLabel2().setText(this.menuFrame.getPlayersLabel2().getText() + "  ;  " +  input + " (" + color + ")");
+				}
+			}
+			else if (this.players.size() > 6 && this.players.size() <= 9) 
+			{
+				if (this.players.size()==7) 
+				{
+			        this.menuFrame.getPlayersLabel3().setText(this.menuFrame.getPlayersLabel3().getText() + input + " (" + color + ")");
+				}
+				else
+				{
+			        this.menuFrame.getPlayersLabel3().setText(this.menuFrame.getPlayersLabel3().getText() + "  ;  " +  input + " (" + color + ")");
 				}
 			}
 			this.menuFrame.getPlayersTextField().setText("");

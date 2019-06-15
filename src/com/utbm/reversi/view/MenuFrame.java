@@ -41,7 +41,7 @@ public class MenuFrame extends JFrame
 	private JTextField playersTextField;
 	private JComboBox playersComboBox;
 	private JComboBox powersComboBox;
-    private String[] couleurs = {"White","Black","Red","Blue","Yellow","Green","Gray","Orange","Rose","Purple"};
+    private String[] couleurs = {"White","Black","Red","Blue","Yellow","Green","Gray","Orange","Pink","Cyan"};
 	
 	public MenuFrame() 
 	{

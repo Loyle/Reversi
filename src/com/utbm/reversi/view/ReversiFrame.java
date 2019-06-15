@@ -57,16 +57,17 @@ public class ReversiFrame extends JFrame
 	
 	private ArrayList<PowerButton> powerListBtn;
 	
-	public ReversiFrame(int size) 
+	public ReversiFrame(int size, ArrayList<Player> players) 
 	{
 		this.game = new Game(this, size);
+		for (Player player : players) 
+		{
+			this.game.addPlayer(player);
+		}
 		this.controller = new GameController(this.game, this);
 		this.listener = new GameListener(this.controller);
 		
 		this.gridSize = size;
-		
-		this.game.addPlayer(new Player("Comar", Color.BLACK));
-		this.game.addPlayer(new Player("Toinou", Color.WHITE));
 		
 		this.initWindow();
 		this.game.run();
@@ -167,7 +168,9 @@ public class ReversiFrame extends JFrame
         gbc.gridx = 0;
         gbc.gridy = 2;
         this.whoPlayColor= new JPanel();
+        this.whoPlayColor.setMinimumSize(new Dimension(50,50));
         this.whoPlayColor.setPreferredSize(new Dimension(50,50));
+        this.whoPlayColor.setMaximumSize(new Dimension(50,50));
         scores.add(this.whoPlayColor,gbc);
         
         // ADD SPACE
@@ -310,6 +313,11 @@ public class ReversiFrame extends JFrame
 	public GameListener getListener() {
 		return listener;
 	}
+
+	public Game getGame() {
+		return game;
+	}
+	
 	
 	
 

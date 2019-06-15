@@ -52,7 +52,7 @@ public class GameListener implements ActionListener {
 		this.controller.getFrame().dispose();
 		
 		
-		ReversiFrame newFrame = new ReversiFrame(this.controller.getGame().getBoard().getSize());
+		ReversiFrame newFrame = new ReversiFrame(this.controller.getGame().getBoard().getSize(),this.controller.getFrame().getGame().getPlayers());
 		newFrame.setTitle("Reversi Game");
 
 		newFrame.setSize(700, 700);
