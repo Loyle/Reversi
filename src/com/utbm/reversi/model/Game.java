@@ -107,7 +107,7 @@ public class Game {
 		this.frame.updatePlayerPowers(this.currentPlayer);
 
 		this.countScore();
-		this.frame.updateScores(this.players.get(0), this.players.get(1));
+		this.frame.updateScores(this.players);
 
 		this.setStart(true);
 	}
@@ -151,7 +151,7 @@ public class Game {
 
 		// Update Score
 		this.countScore();
-		this.frame.updateScores(this.players.get(0), this.players.get(1));
+		this.frame.updateScores(this.players);
 
 		// Update Current player
 		this.frame.setCurrentPlayer(this.currentPlayer);

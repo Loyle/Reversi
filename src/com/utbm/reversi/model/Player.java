@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.JLabel;
+
 import com.utbm.reversi.model.powers.ColorBombPower;
 import com.utbm.reversi.model.powers.FlintnSteelPower;
 import com.utbm.reversi.model.powers.GiletJaunePower;
@@ -16,6 +18,7 @@ public class Player {
 	private String name;
 	private int level;
 	private int score;
+	private JLabel scoreLabel;
 	private float xp;
 	private Color color;
 	private ArrayList<Power> powers;
@@ -28,6 +31,7 @@ public class Player {
 		this.setXp(0);
 		this.powers = new ArrayList<Power>();
 		this.usingPower = null;
+		this.scoreLabel = new JLabel();
 	}
 	public Player(String name, Color color) {
 		this.setName(name);
@@ -36,6 +40,7 @@ public class Player {
 		this.setXp(0);
 		this.powers = new ArrayList<Power>();
 		this.usingPower = null;
+		this.scoreLabel = new JLabel();
 	}
 	
 	/**
@@ -174,4 +179,9 @@ public class Player {
 			break;
 		}
 	}
+	public JLabel getScoreLabel() {
+		return scoreLabel;
+	}
+	
+	
 }
