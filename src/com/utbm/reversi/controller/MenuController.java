@@ -3,7 +3,6 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JSlider;
 
@@ -41,7 +40,7 @@ public class MenuController
 			this.menuFrame.dispose();
 			
 			// On lance une nouvelle partie
-			ReversiFrame reversi = new ReversiFrame(this.gridSize, this.nbPower,players);
+			new ReversiFrame(this.gridSize, this.nbPower,players);
 		}
 	}
 	
@@ -49,11 +48,21 @@ public class MenuController
 	public void onSliderStateChanged(JSlider gridSizeSlider, JLabel gridSizeLabel, int gridSize) 
 	{
 
-		// La taille de la grille ne peut être qu'un nombre pair (logique vu les 4 pièces de départ)
-    	if (gridSize%2 !=0)
-    	{
-    		gridSize=gridSize-1;
-    	}
+		if (this.players.size()%2 !=0) // Si le nombre de joueurs est impair
+		{
+			if (gridSize%2 ==0) // Si la taille de la grille est pair
+	    	{
+	    		gridSize=gridSize+1;
+	    	}
+		}
+		else // Si le nombre de joueurs est pair
+		{
+			if (gridSize%2 !=0) // Si la taille de la grille est impair
+	    	{
+	    		gridSize=gridSize-1;
+	    	}
+		}
+    	
     	
     	// La condition permet d'ajouter un 0 aux nombres à un chiffre pour garder un label à 2 chiffres, qui ne se décale donc pas
     	if (gridSize < 10)
@@ -73,10 +82,43 @@ public class MenuController
 	
 	public void onAddClicked(JButton playersButton) 
 	{
+		
+		
+		
+		
 		String input = this.menuFrame.getPlayersTextField().getText();
 		
 		if (!input.equals("") && input.length() < 10 && this.players.size() < 9) 
 		{
+			
+			
+			if (this.players.size()%2 ==0) 
+			{
+				this.menuFrame.getGridSizeSlider().setMinimum(5);
+				this.menuFrame.getGridSizeSlider().setMaximum(21);
+				this.gridSize++;
+			}
+			else
+			{
+				this.menuFrame.getGridSizeSlider().setMinimum(4);
+				this.menuFrame.getGridSizeSlider().setMaximum(20);
+				this.gridSize--;
+			}
+			
+			if (this.gridSize < 10)
+			{
+	        	this.menuFrame.getGridSizeLabel().setText("Value : 0" + this.gridSize);
+			}
+	    	else
+	    	{
+	    		this.menuFrame.getGridSizeLabel().setText("Value : " + this.gridSize);
+	    	}
+			
+			
+			
+			
+			
+			
 			String color = this.menuFrame.getPlayersComboBox().getSelectedItem().toString();
 			this.menuFrame.getPlayersComboBox().removeItem(color);
 			

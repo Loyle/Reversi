@@ -3,8 +3,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -31,13 +29,15 @@ public class MenuFrame extends JFrame
 	private final MenuController menuController = new MenuController(this);
 	// On déclare un panel dans lequel on placera les boutons du menu
 	private JPanel menuBackground;
+	private JLabel gridSizeLabel;
+	private JSlider gridSizeSlider;
 	private JLabel playersLabel1;
 	private JLabel playersLabel2;
 	private JLabel playersLabel3;
 	private JLabel error;
 	private JTextField playersTextField;
-	private JComboBox playersComboBox;
-	private JComboBox powersComboBox;
+	private JComboBox<String> playersComboBox;
+	private JComboBox<String> powersComboBox;
     private String[] couleurs = {"White","Black","Red","Blue","Yellow","Green","Gray","Orange","Pink","Cyan"};
 	
 	public MenuFrame() 
@@ -114,7 +114,7 @@ public class MenuFrame extends JFrame
         gbcAddPlayers.gridy = 0;
         addPlayersPanel.add(new JLabel("     "),gbcAddPlayers);
         
-        this.playersComboBox = new JComboBox(couleurs); 
+        this.playersComboBox = new JComboBox<String>(couleurs); 
         gbcAddPlayers.gridx = 2;
         gbcAddPlayers.gridy = 0;
         addPlayersPanel.add(playersComboBox,gbcAddPlayers);
@@ -129,6 +129,8 @@ public class MenuFrame extends JFrame
         gbcAddPlayers.gridy = 0;
         addPlayersPanel.add(playersAddButton,gbcAddPlayers);
         playersAddButton.addActionListener(e -> menuController.onAddClicked(playersAddButton));
+
+    	
         
 
         gbcAddPlayers.gridx = 5;
@@ -218,7 +220,7 @@ public class MenuFrame extends JFrame
         powersPanel.add(new JLabel("               "),gbcPowers);
         
         String[] powerNumbers = {"0","1","2","3","4","5","6","7","8","9","10"};
-        this.powersComboBox = new JComboBox(powerNumbers); 
+        this.powersComboBox = new JComboBox<String>(powerNumbers); 
         this.powersComboBox.setSelectedIndex(4);
         gbcPowers.gridx = 2;
         gbcPowers.gridy = 0;
@@ -240,7 +242,7 @@ public class MenuFrame extends JFrame
         
 
         // ==========================================================================================================================
-        // TAILLE GRILLE
+        // GRID SIZE
         // ==========================================================================================================================
         // On crée un panel dans lequel on mettra la Slide Bar et la label qui affiche la taille de la grille
         final JPanel gridSizePanel = new JPanel();
@@ -257,24 +259,24 @@ public class MenuFrame extends JFrame
         this.menuBackground.add(gridSizePanel,gbc);
         
         // On crée la slide bar
-        JSlider gridSizeSlider = new JSlider();
+        this.gridSizeSlider = new JSlider();
         // Minimum et maximum des valeurs possibles dans la slide bar
-        gridSizeSlider.setMinimum(4);
-        gridSizeSlider.setMaximum(20);
+        this.gridSizeSlider.setMinimum(4);
+        this.gridSizeSlider.setMaximum(20);
         // Afficher la graduation
-        gridSizeSlider.setPaintTicks(true);
+        this.gridSizeSlider.setPaintTicks(true);
         // Afficher les nombres
-        gridSizeSlider.setPaintLabels(true);
+        this.gridSizeSlider.setPaintLabels(true);
         // Taille graduation
-        gridSizeSlider.setMinorTickSpacing(2);
+        this.gridSizeSlider.setMinorTickSpacing(2);
         // Écart entre la valeur minimum et la valeur maximum
-        gridSizeSlider.setMajorTickSpacing(16);
+        this.gridSizeSlider.setMajorTickSpacing(16);
         // Valeur de base
-        gridSizeSlider.setValue(8);
-        gridSizeSlider.setBackground(Color.white);
+        this.gridSizeSlider.setValue(8);
+        this.gridSizeSlider.setBackground(Color.white);
         gbcGridSize.gridx = 0;
         gbcGridSize.gridy = 0;
-        gridSizePanel.add(gridSizeSlider,gbcGridSize);
+        gridSizePanel.add(this.gridSizeSlider,gbcGridSize);
 
 
         gbcGridSize.gridx = 1;
@@ -283,11 +285,11 @@ public class MenuFrame extends JFrame
         
         
         // Label qui affiche la taille de la grille
-        JLabel gridSizeLabel = new JLabel();
-        gridSizeLabel.setText("Value : 08");
+        this.gridSizeLabel = new JLabel();
+        this.gridSizeLabel.setText("Value : 08");
         gbcGridSize.gridx = 2;
         gbcGridSize.gridy = 0;
-        gridSizePanel.add(gridSizeLabel,gbcGridSize);
+        gridSizePanel.add(this.gridSizeLabel,gbcGridSize);
         
         // On associe le changement d'état de la slide bar à la fonction du controller
         gridSizeSlider.addChangeListener(new ChangeListener()
@@ -297,6 +299,8 @@ public class MenuFrame extends JFrame
             	menuController.onSliderStateChanged(gridSizeSlider, gridSizeLabel, ((JSlider)event.getSource()).getValue());
             }
         });    
+        
+
         
       
         
@@ -323,7 +327,7 @@ public class MenuFrame extends JFrame
 		return playersTextField;
 	}
 
-	public JComboBox getPlayersComboBox() {
+	public JComboBox<String> getPlayersComboBox() {
 		return playersComboBox;
 	}
 
@@ -335,8 +339,16 @@ public class MenuFrame extends JFrame
 		return error;
 	}
 
-	public JComboBox getPowersComboBox() {
+	public JComboBox<String> getPowersComboBox() {
 		return powersComboBox;
+	}
+
+	public JLabel getGridSizeLabel() {
+		return gridSizeLabel;
+	}
+
+	public JSlider getGridSizeSlider() {
+		return gridSizeSlider;
 	}
 	
 	

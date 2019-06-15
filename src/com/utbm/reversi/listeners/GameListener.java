@@ -9,7 +9,6 @@ import javax.swing.WindowConstants;
 
 import com.utbm.reversi.controller.GameController;
 import com.utbm.reversi.model.cells.Cell;
-import com.utbm.reversi.model.powers.Power;
 import com.utbm.reversi.view.MenuFrame;
 import com.utbm.reversi.view.PowerButton;
 import com.utbm.reversi.view.ReversiFrame;

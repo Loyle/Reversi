@@ -5,7 +5,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.time.Duration;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -13,14 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.utbm.reversi.controller.FollowingRules;
-import com.utbm.reversi.model.cells.Bomb;
-import com.utbm.reversi.model.powers.ColorBombPower;
-import com.utbm.reversi.model.powers.FlintnSteelPower;
-import com.utbm.reversi.model.powers.GiletJaunePower;
-import com.utbm.reversi.model.powers.LightningPower;
 import com.utbm.reversi.model.powers.Power;
-import com.utbm.reversi.model.powers.ShieldPower;
-import com.utbm.reversi.model.powers.SwitchPower;
 import com.utbm.reversi.view.ReversiFrame;
 
 public class Game {
