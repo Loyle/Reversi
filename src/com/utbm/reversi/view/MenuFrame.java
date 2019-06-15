@@ -234,6 +234,14 @@ public class MenuFrame extends JFrame
             this.menuBackground.add(new JLabel(" "),gbc);
         }
         
+        this.powersComboBox.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				menuController.onComboBoxPower(((JComboBox<String>)event.getSource()).getSelectedIndex());
+			}
+		});
+        
         
         
         

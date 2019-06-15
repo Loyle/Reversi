@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JSlider;
 
@@ -16,6 +17,7 @@ public class MenuController
 	private final MenuFrame menuFrame;
 	// Taille de la grille de jeu
 	private int gridSize = 8;
+	private int nbPower = 4;
 	
 	private ArrayList<Player> players = new ArrayList<Player>();
 	
@@ -38,8 +40,7 @@ public class MenuController
 			this.menuFrame.dispose();
 			
 			// On lance une nouvelle partie
-			@SuppressWarnings("unused")
-			ReversiFrame reversi = new ReversiFrame(this.gridSize,players);
+			ReversiFrame reversi = new ReversiFrame(this.gridSize, this.nbPower,players);
 		}
 	}
 	
@@ -187,6 +188,10 @@ public class MenuController
 	    
 	    this.players.removeAll(players);
 		
+	}
+
+	public void onComboBoxPower(int nbPower) {
+		this.nbPower = nbPower;
 	}
 	
 }
