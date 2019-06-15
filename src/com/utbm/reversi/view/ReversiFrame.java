@@ -78,7 +78,7 @@ public class ReversiFrame extends JFrame
 
 	public void initWindow() {
 
-		this.scoresSizeX = 100;
+		this.scoresSizeX = 200;
 		this.cellSize = 70;
 		this.powerListBtn = new ArrayList<PowerButton>();
 
@@ -392,50 +392,22 @@ public class ReversiFrame extends JFrame
 		}
 
 
-		// WHITE PLAYER SCORE
-		// On affiche les informations sur les scores des joueurs
-		gbc.gridx = 0;
-		gbc.gridy = 15;
-		JPanel whiteScorePanel = new JPanel();
-		whiteScorePanel.setPreferredSize(new Dimension(40,40));
-		whiteScorePanel.setBackground(Color.white);
-		scores.add(whiteScorePanel,gbc);
-
-		gbc.gridx = 0;
-		gbc.gridy = 16;
-		this.whiteScoreLabel = new JLabel();
-		scores.add(whiteScoreLabel,gbc);
-
-
+		// SCORES LABELS
+		// On crée un nouveau label par joueur
+		int incr=0;
+		
+		for (Player player : this.game.getPlayers()) 
+		{
+			player.setScore(this.game.getPlayers().size());
+			player.getScoreLabel().setText("Score de "+player.getName()+" : "+player.getScore());
+			incr++;
+			gbc.gridx = 0;
+			gbc.gridy = 15+incr;
+			scores.add(player.getScoreLabel(),gbc);
+		}
 
 		// ADD SPACE
-		gbc.gridx = 0;
-		gbc.gridy = 17;
-		scores.add(new JLabel(" "),gbc);
-		gbc.gridx = 0;
-		gbc.gridy = 18;
-		scores.add(new JLabel(" "),gbc);
-
-
-		// BLACK PLAYER SCORE
-		gbc.gridx = 0;
-		gbc.gridy = 19;
-
-		JPanel blackScorePanel = new JPanel();
-		blackScorePanel.setPreferredSize(new Dimension(40,40));
-		blackScorePanel.setBackground(Color.black);
-		scores.add(blackScorePanel,gbc);
-
-		gbc.gridx = 0;
-		gbc.gridy = 20;
-
-		this.blackScoreLabel =new JLabel();
-		scores.add(this.blackScoreLabel,gbc);
-
-
-
-		// ADD SPACE
-		for (int addSpace = 21 ; addSpace<25 ; addSpace++) 
+		for (int addSpace = 15+incr+1 ; addSpace<15+incr+5 ; addSpace++) 
 		{
 			gbc.gridx = 0;
 			gbc.gridy = addSpace;
@@ -447,7 +419,7 @@ public class ReversiFrame extends JFrame
 		// BACK TO MENU
 		// On crée un bouton qui renvoie vers le menu
 		gbc.gridx = 0;
-		gbc.gridy = 26;
+		gbc.gridy = 15+incr+5;
 		this.backToMenu = new JButton("<=");
 		this.backToMenu.setPreferredSize(new Dimension(50,40));
 		// On associe ce bouton à une fonction dans ReversiController
@@ -488,10 +460,12 @@ public class ReversiFrame extends JFrame
 	// ======================================================================================
 	// Fonction qui actualise l'état des cores dans les label
 	// ======================================================================================
-	public void updateScores(Player p1, Player p2) 
+	public void updateScores(ArrayList<Player> players) 
 	{
-		this.blackScoreLabel.setText("Score : " + p1.getScore());
-		this.whiteScoreLabel.setText("Score : " + p2.getScore());
+		for (Player player : players) 
+		{
+			player.getScoreLabel().setText("Score de "+player.getName()+" : "+player.getScore());
+		}
 	}
 
 	public void setCurrentPlayer(Player player) {

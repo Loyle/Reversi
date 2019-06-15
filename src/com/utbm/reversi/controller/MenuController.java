@@ -82,10 +82,6 @@ public class MenuController
 	
 	public void onAddClicked(JButton playersButton) 
 	{
-		
-		
-		
-		
 		String input = this.menuFrame.getPlayersTextField().getText();
 		
 		if (!input.equals("") && input.length() < 10 && this.players.size() < 9) 
