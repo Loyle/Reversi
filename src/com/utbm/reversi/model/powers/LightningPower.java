@@ -34,10 +34,12 @@ public class LightningPower extends Power {
 			yStart--;
 		}
 		while(xStart<=cell.getCoordX()+1 && xStart<game.getBoard().getSize() && yStart<=cell.getCoordY()+1 && yStart<game.getBoard().getSize()) {
-			game.getBoard().getBoardCells()[xStart][yStart].setOwner(this.getOwner());
-			game.getBoard().getBoardCells()[xStart][yStart].addHoverIcon(this.getHoverIcon());
-			game.getBoard().getBoardCells()[xStart][yStart].updateState();
-			this.lightningCell.add(game.getBoard().getBoardCells()[xStart][yStart]);
+			if(game.getBoard().getBoardCells()[xStart][yStart].isEnabled()) {
+				game.getBoard().getBoardCells()[xStart][yStart].setOwner(this.getOwner());
+				game.getBoard().getBoardCells()[xStart][yStart].addHoverIcon(this.getHoverIcon());
+				game.getBoard().getBoardCells()[xStart][yStart].updateState();
+				this.lightningCell.add(game.getBoard().getBoardCells()[xStart][yStart]);				
+			}
 			xStart++;
 			yStart++;
 		}
@@ -52,10 +54,12 @@ public class LightningPower extends Power {
 		}
 		
 		while(xStart<=cell.getCoordX()+1 && xStart<game.getBoard().getSize() && yStart>=cell.getCoordY()-1 && yStart>=0){
-			game.getBoard().getBoardCells()[xStart][yStart].setOwner(this.getOwner());
-			game.getBoard().getBoardCells()[xStart][yStart].addHoverIcon(this.getHoverIcon());
-			game.getBoard().getBoardCells()[xStart][yStart].updateState();
-			this.lightningCell.add(game.getBoard().getBoardCells()[xStart][yStart]);
+			if(game.getBoard().getBoardCells()[xStart][yStart].isEnabled()) {
+				game.getBoard().getBoardCells()[xStart][yStart].setOwner(this.getOwner());
+				game.getBoard().getBoardCells()[xStart][yStart].addHoverIcon(this.getHoverIcon());
+				game.getBoard().getBoardCells()[xStart][yStart].updateState();
+				this.lightningCell.add(game.getBoard().getBoardCells()[xStart][yStart]);				
+			}
 			xStart++;
 			yStart--;
 		}
@@ -91,10 +95,12 @@ public class LightningPower extends Power {
 						float r = rand.nextInt(200) ;
 						if( r <= 10) {	
 							if(xStart>=0 && yStart>=0) {
-								game.getBoard().getBoardCells()[xStart][yStart].setOwner(this.getOriginCell().getOwner());
-								game.getBoard().getBoardCells()[xStart][yStart].addHoverIcon(this.getHoverIcon());
-								game.getBoard().getBoardCells()[xStart][yStart].updateState();
-								toAdd.add(game.getBoard().getBoardCells()[xStart][yStart]);								
+								if(game.getBoard().getBoardCells()[xStart][yStart].isEnabled()) {
+									game.getBoard().getBoardCells()[xStart][yStart].setOwner(this.getOwner());
+									game.getBoard().getBoardCells()[xStart][yStart].addHoverIcon(this.getHoverIcon());
+									game.getBoard().getBoardCells()[xStart][yStart].updateState();
+									toAdd.add(game.getBoard().getBoardCells()[xStart][yStart]);																					
+								}
 							}
 						}
 					}
