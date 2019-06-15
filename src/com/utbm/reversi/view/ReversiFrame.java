@@ -57,9 +57,9 @@ public class ReversiFrame extends JFrame
 	
 	private ArrayList<PowerButton> powerListBtn;
 	
-	public ReversiFrame(int size) 
+	public ReversiFrame(int size , int nbPower) 
 	{
-		this.game = new Game(this, size);
+		this.game = new Game(this, size, nbPower);
 		this.controller = new GameController(this.game, this);
 		this.listener = new GameListener(this.controller);
 		

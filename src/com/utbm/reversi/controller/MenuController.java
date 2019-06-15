@@ -2,6 +2,7 @@ package com.utbm.reversi.controller;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JSlider;
 
@@ -15,6 +16,7 @@ public class MenuController
 	private final MenuFrame menuFrame;
 	// Taille de la grille de jeu
 	private int gridSize = 8;
+	private int nbPower = 4;
 	
 	private ArrayList<Player> players = new ArrayList<Player>();
 	
@@ -38,7 +40,7 @@ public class MenuController
 			
 			// On lance une nouvelle partie
 			@SuppressWarnings("unused")
-			ReversiFrame reversi = new ReversiFrame(this.gridSize);
+			ReversiFrame reversi = new ReversiFrame(this.gridSize, this.nbPower);
 		}
 	}
 	
@@ -142,6 +144,10 @@ public class MenuController
 	    
 	    this.players.removeAll(players);
 		
+	}
+
+	public void onComboBoxPower(int nbPower) {
+		this.nbPower = nbPower;
 	}
 	
 }

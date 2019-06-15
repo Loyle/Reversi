@@ -35,12 +35,12 @@ public class Game {
 	private boolean isStart;
 	private int round;
 
-	public Game(ReversiFrame frame, int size) {
+	public Game(ReversiFrame frame, int size, int nbPower) {
 		this.players = new ArrayList<Player>();
 		this.powers = new ArrayList<Power>();
 		this.isStart = false;
 		this.round = 0;
-		this.numberPower = 4;
+		this.numberPower = nbPower ;
 		
 		this.frame = frame;
 
