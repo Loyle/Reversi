@@ -113,22 +113,42 @@ public class ReversiFrame extends JFrame
         		cells[i][j].setCoordX(i);
         		cells[i][j].setCoordY(j);
         		
-        		// On place les premiers jetons au milieu (2 noirs, 2 blancs)
-        		if ((i > -2 + this.gridSize/2) && (i < 1 + this.gridSize/2) && (j > -2 + this.gridSize/2) && (j < 1 + this.gridSize/2)) 
+        		// On place les premiers jetons au milieu
+        		
+        		switch (this.game.getPlayers().size()) 
         		{
-        			if ((i == -1 + this.gridSize/2) && (j == -1 + this.gridSize/2)) 
-        			{
-        				cells[i][j].setOwner(this.game.getPlayers().get(0));
-        			}
-        			else if ((i == this.gridSize/2) && (j == this.gridSize/2)) 
-        			{
-        				cells[i][j].setOwner(this.game.getPlayers().get(0));
-        			}
-        			else 
-        			{
-        				cells[i][j].setOwner(this.game.getPlayers().get(1));
-        			}
+        			case 2:
+        				if ((i > -2 + this.gridSize/2) && (i < 1 + this.gridSize/2) && (j > -2 + this.gridSize/2) && (j < 1 + this.gridSize/2)) 
+                		{
+                			if (((i == -1 + this.gridSize/2) && (j == -1 + this.gridSize/2)) || ((i == this.gridSize/2) && (j == this.gridSize/2))) 
+                			{
+                				cells[i][j].setOwner(this.game.getPlayers().get(0));
+                			}
+                			else 
+                			{
+                				cells[i][j].setOwner(this.game.getPlayers().get(1));
+                			}
+                		}
+        				break;
+        			case 3:
+        				if ((i > -2 + this.gridSize/2) && (i < 2 + this.gridSize/2) && (j > -2 + this.gridSize/2) && (j < 2 + this.gridSize/2)) 
+                		{
+                			if (((i == -1 + this.gridSize/2) && (j == -1 + this.gridSize/2)) || ((i == this.gridSize/2) && (j == this.gridSize/2)) || ((i == 1+this.gridSize/2) && (j == 1+this.gridSize/2))) 
+                			{
+                				cells[i][j].setOwner(this.game.getPlayers().get(0));
+                			}
+                			else if (((i == this.gridSize/2) && (j == -1 + this.gridSize/2)) || ((i == 1+this.gridSize/2) && (j == this.gridSize/2)) || ((i == -1+this.gridSize/2) && (j == 1+this.gridSize/2))) 
+                			{
+                				cells[i][j].setOwner(this.game.getPlayers().get(1));
+                			}
+                			else
+                			{
+                				cells[i][j].setOwner(this.game.getPlayers().get(2));
+                			}
+                		}
+        				break;
         		}
+        		
         		
         		// On ajoute la Cell au panel
         		this.gamePanel.add(cells[i][j]);
