@@ -90,19 +90,86 @@ public class MenuController
 		
 		if (!input.equals("") && input.length() < 10 && this.players.size() < 9) 
 		{
-			
-			
-			if (this.players.size()%2 ==0) 
+			switch (this.players.size()) 
 			{
-				this.menuFrame.getGridSizeSlider().setMinimum(5);
-				this.menuFrame.getGridSizeSlider().setMaximum(21);
-				this.gridSize++;
-			}
-			else
-			{
-				this.menuFrame.getGridSizeSlider().setMinimum(4);
-				this.menuFrame.getGridSizeSlider().setMaximum(20);
-				this.gridSize--;
+				case 0:
+					this.menuFrame.getGridSizeSlider().setMinimum(5);
+					this.menuFrame.getGridSizeSlider().setMaximum(21);
+					this.gridSize++;
+					break;
+				case 1:
+					this.menuFrame.getGridSizeSlider().setMinimum(4);
+					this.menuFrame.getGridSizeSlider().setMaximum(20);
+					this.gridSize--;
+					break;
+				case 2:
+					this.menuFrame.getGridSizeSlider().setMinimum(5);
+					this.menuFrame.getGridSizeSlider().setMaximum(21);
+					this.gridSize++;
+					break;
+				case 3:
+					this.menuFrame.getGridSizeSlider().setMinimum(6);
+					this.menuFrame.getGridSizeSlider().setMaximum(22);
+					if (gridSize<=6) 
+					{
+						this.gridSize=6;
+					}
+					else
+					{
+						this.gridSize--;
+					}
+					break;
+				case 4:
+					this.menuFrame.getGridSizeSlider().setMinimum(7);
+					this.menuFrame.getGridSizeSlider().setMaximum(23);
+					this.gridSize++;
+					break;
+				case 5:
+					this.menuFrame.getGridSizeSlider().setMinimum(8);
+					this.menuFrame.getGridSizeSlider().setMaximum(24);
+					if (gridSize<=8) 
+					{
+						this.gridSize=8;
+					}
+					else
+					{
+						this.gridSize--;
+					}
+					break;
+				case 6:
+					this.menuFrame.getGridSizeSlider().setMinimum(9);
+					this.menuFrame.getGridSizeSlider().setMaximum(25);
+					this.gridSize++;
+					break;
+				case 7:
+					this.menuFrame.getGridSizeSlider().setMinimum(10);
+					this.menuFrame.getGridSizeSlider().setMaximum(26);
+					if (gridSize<=10) 
+					{
+						this.gridSize=10;
+					}
+					else
+					{
+						this.gridSize--;
+					}
+					break;
+				case 8:
+					this.menuFrame.getGridSizeSlider().setMinimum(11);
+					this.menuFrame.getGridSizeSlider().setMaximum(27);
+					this.gridSize++;
+					break;
+				case 9:
+					this.menuFrame.getGridSizeSlider().setMinimum(12);
+					this.menuFrame.getGridSizeSlider().setMaximum(28);
+					if (gridSize<=12) 
+					{
+						this.gridSize=12;
+					}
+					else
+					{
+						this.gridSize--;
+					}
+					break;
 			}
 			
 			if (this.gridSize < 10)
@@ -144,14 +211,14 @@ public class MenuController
 				case "Gray":
 					this.players.add(new Player(input,Color.gray));
 					break;
-				case "Orange":
-					this.players.add(new Player(input,Color.orange));
-					break;
 				case "Pink":
 					this.players.add(new Player(input,Color.pink));
 					break;
 				case "Cyan":
 					this.players.add(new Player(input,Color.cyan));
+					break;
+				case "Orange":
+					this.players.add(new Player(input,Color.orange));
 					break;
 			}
 
@@ -228,6 +295,14 @@ public class MenuController
 	    this.menuFrame.getPlayersLabel2().setText(" ");
 	    this.menuFrame.getPlayersLabel3().setText(" ");
 	    this.menuFrame.getPlayersTextField().setText("");
+	    
+
+		this.menuFrame.getGridSizeSlider().setMinimum(4);
+		this.menuFrame.getGridSizeSlider().setMaximum(20);
+		this.gridSize=8;
+		this.menuFrame.getGridSizeSlider().setValue(8);
+		this.menuFrame.getGridSizeLabel().setText("Value : 08");
+		
 	    
 	    this.players.removeAll(players);
 		
