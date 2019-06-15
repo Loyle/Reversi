@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -202,13 +203,30 @@ public class Game {
 		    endBackToMenu.addActionListener(e -> this.frame.getListener().onBackToMenuClicked(endBackToMenu));
 		    end.add(endBackToMenu,gbc);
 		    
+		    
 
-			endMsg.setText("BLOCKED");
+			endMsg.setText("BLOCKED !");
 		    
 		    if (isEnded()) 
 			{
-				endMsg.setText("END");
+				endMsg.setText("END !");
 			}
+		    
+		    
+		    ArrayList<Integer> scores = new ArrayList<Integer>();
+		    for (Player player : this.players) 
+		    {
+		    	scores.add(player.getScore());
+		    }
+		    int max = Collections.max(scores);
+		    for (Player player : this.players) 
+		    {
+		    	if (max == player.getScore())
+		    	{
+					endMsg.setText(endMsg.getText()+" "+player.getName() + " wins !");
+		    	}
+		    }
+		    
 		    
 		    
 		    
