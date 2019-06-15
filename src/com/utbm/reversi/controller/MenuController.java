@@ -30,6 +30,7 @@ public class MenuController
 	// Fonction appelé lorsque l'on clique sur le bouton play
 	public void onPlayClicked(JButton play) 
 	{
+		this.nbPower = this.menuFrame.getPowersComboBox().getSelectedIndex();
 		if (this.players.size() < 2) 
 		{
 			this.menuFrame.getError().setText("There is not enough players to start the game !");
@@ -190,8 +191,6 @@ public class MenuController
 		
 	}
 
-	public void onComboBoxPower(int nbPower) {
-		this.nbPower = nbPower;
-	}
+	
 	
 }

@@ -1,13 +1,10 @@
 package com.utbm.reversi.view;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -222,6 +219,7 @@ public class MenuFrame extends JFrame
         
         String[] powerNumbers = {"0","1","2","3","4","5","6","7","8","9","10"};
         this.powersComboBox = new JComboBox(powerNumbers); 
+        this.powersComboBox.setSelectedIndex(4);
         gbcPowers.gridx = 2;
         gbcPowers.gridy = 0;
         powersPanel.add(powersComboBox,gbcPowers);
@@ -234,13 +232,7 @@ public class MenuFrame extends JFrame
             this.menuBackground.add(new JLabel(" "),gbc);
         }
         
-        this.powersComboBox.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent event) {
-				menuController.onComboBoxPower(((JComboBox<String>)event.getSource()).getSelectedIndex());
-			}
-		});
+       
         
         
         
@@ -342,6 +334,12 @@ public class MenuFrame extends JFrame
 	public JLabel getError() {
 		return error;
 	}
+
+	public JComboBox getPowersComboBox() {
+		return powersComboBox;
+	}
+	
+	
 
 	
 	
