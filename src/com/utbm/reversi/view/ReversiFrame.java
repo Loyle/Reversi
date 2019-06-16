@@ -37,9 +37,6 @@ public class ReversiFrame extends JFrame
 	private JLabel whoPlayName;
 
 
-	// On crée un label et un panel comme avant pour afficher le score (couleur + texte). Le int est associé au score. On le fait pour chaque couleur.
-	private JLabel whiteScoreLabel;
-	private JLabel blackScoreLabel;
 
 	// On crée le bouton de retour vers le menu
 	private JButton backToMenu;
@@ -47,6 +44,7 @@ public class ReversiFrame extends JFrame
 	// On crée 2 constantes (la taille d'une case à la génération et la largeur de la bande sur le côté où les scores sont affichés)
 	private int cellSize;
 	private int scoresSizeX;
+	private int buttonSizeY;
 
 	// La taille de la grille est stockée dans un int, qui change à chaque génération d'une nouvelle fenêtre
 	private int gridSize;
@@ -78,7 +76,15 @@ public class ReversiFrame extends JFrame
 
 	public void initWindow() {
 
-		this.scoresSizeX = 200;
+		if (this.game.getNumberPower() ==0) 
+		{
+			this.scoresSizeX = 918;
+		}
+		else
+		{
+			this.scoresSizeX = 1070;
+		}
+		this.buttonSizeY=0;
 		this.cellSize = 70;
 		this.powerListBtn = new ArrayList<PowerButton>();
 
@@ -86,10 +92,12 @@ public class ReversiFrame extends JFrame
 		Cell [][] cells = this.game.getBoard().getBoardCells();
 
 
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		//this.setResizable(false);
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.setTitle("Reversi Game");
 
-		this.setSize(700, 700);
+		//this.setSize(700, 700);
 		this.setLocationRelativeTo(null);
 
 		// ======================================================================================
@@ -400,6 +408,7 @@ public class ReversiFrame extends JFrame
 		{
 			player.setScore(this.game.getPlayers().size());
 			player.getScoreLabel().setText("Score de "+player.getName()+" : "+player.getScore());
+			player.getScoreLabel().setFont(new Font("Arial",0,20));
 			incr++;
 			gbc.gridx = 0;
 			gbc.gridy = 15+incr;
@@ -436,10 +445,16 @@ public class ReversiFrame extends JFrame
 			this.setFixedSize(btn, 150, 150);
 			powerPart.add(btn);
 			this.powerListBtn.add(btn);
+
+			this.buttonSizeY=150;
 		}
 
 		// On donne une taille minimale à la fenêtre
-		this.setMinimumSize(new Dimension(13+gridSize*(cellSize+5)+scoresSizeX, 42+gridSize*(cellSize+5)));
+		this.setMinimumSize(new Dimension(10+gridSize*(cellSize+5)+scoresSizeX, 39+gridSize*(cellSize+5)+buttonSizeY));
+
+		//this.gamePanel.setSize(new Dimension(this.gamePanel.getHeight(),this.gamePanel.getHeight()));
+		//scores.setPreferredSize(new Dimension(this.getWidth()-this.gamePanel.getWidth(),1500));
+		//System.out.println(this.getWidth()+"-"+this.gamePanel.wid);
 		// On ajoute les 2 panel à la fenêtre
 
 		this.getContentPane().add(powerPart, BorderLayout.SOUTH);
