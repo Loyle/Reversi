@@ -9,6 +9,7 @@ import javax.swing.JSlider;
 import com.utbm.reversi.model.Player;
 import com.utbm.reversi.view.MenuFrame;
 import com.utbm.reversi.view.ReversiFrame;
+import com.utbm.reversi.view.RulesFrame;
 
 public class MenuController 
 {
@@ -304,6 +305,9 @@ public class MenuController
 		
 	}
 
-	
+	public void onRulesClicked(JButton rulesButton) 
+	{
+		new RulesFrame();
+	}
 	
 }

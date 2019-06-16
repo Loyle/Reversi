@@ -429,8 +429,8 @@ public class ReversiFrame extends JFrame
 		// On crée un bouton qui renvoie vers le menu
 		gbc.gridx = 0;
 		gbc.gridy = 15+incr+5;
-		this.backToMenu = new JButton("<=");
-		this.backToMenu.setPreferredSize(new Dimension(50,40));
+		this.backToMenu = new JButton("Back to menu");
+		this.backToMenu.setPreferredSize(new Dimension(125,30));
 		// On associe ce bouton à une fonction dans ReversiController
 		this.backToMenu.addActionListener(e -> listener.onBackToMenuClicked(this.backToMenu));
 		scores.add(this.backToMenu,gbc);

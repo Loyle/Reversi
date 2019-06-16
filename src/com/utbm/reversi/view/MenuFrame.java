@@ -42,6 +42,10 @@ public class MenuFrame extends JFrame
 	
 	public MenuFrame() 
 	{
+		
+
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		
         // ==========================================================================================================================
 		// BACKGROUND
         // ==========================================================================================================================
@@ -56,18 +60,28 @@ public class MenuFrame extends JFrame
 		// PLAY BUTTON
 		// ==========================================================================================================================
 		final JButton play = new JButton("Play");
+		final JButton rules = new JButton("Rules");
 		// On associe le clic sur le bouton play à cette fonction du controller
 		play.addActionListener(e -> menuController.onPlayClicked(play));
         gbc.gridx = 0;
         gbc.gridy = 0;
         this.menuBackground.add(play,gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        this.menuBackground.add(new JLabel("     "),gbc);
+
+		rules.addActionListener(e -> menuController.onRulesClicked(rules));
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        this.menuBackground.add(rules,gbc);
 		
         // ADD SPACE
-        for (int addSpace = 1 ; addSpace<5 ; addSpace++) 
+        for (int addSpace = 3 ; addSpace<5 ; addSpace++) 
         {
             gbc.gridx = 0;
             gbc.gridy = addSpace;
-            if (addSpace == 3) 
+            if (addSpace == 4) 
             {
             	this.error = new JLabel(" ");
                 this.menuBackground.add(this.error,gbc);
