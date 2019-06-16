@@ -124,7 +124,7 @@ public class Game {
 			// Come back to first player
 			this.currentPlayer = this.players.get(0);
 			
-			// update des power , stop et remove power si duration = 0
+			// update des power à supprimer, stop et remove power si duration = 0
 			ArrayList<Power> powersToDelete = new ArrayList<Power>();
 			for(Power power : powers) {
 				power.next(this);
@@ -227,34 +227,8 @@ public class Game {
 		    	}
 		    }
 		    
-		    
-		    
-		    
-		    
-		    
 		    // On place le panel de fin là où se trouvait la grille
 			this.frame.getContentPane().add(end,BorderLayout.CENTER);
-			
-			
-			
-			
-			
-			
-			
-				/*
-			}
-				if (this.frame.getWhiteScore() == this.reversiFrame.getBlackScore()) 
-				{
-					endMsg.setText("The game ends in a tie !");
-				}
-				else if (this.frame.getWhiteScore() > this.reversiFrame.getBlackScore()) 
-				{
-					endMsg.setText("Whites win !");
-				}
-				else
-				{
-					endMsg.setText("Blacks win !");
-				}*/
 		}
 	}
 		

@@ -1,6 +1,8 @@
 package com.utbm.reversi.controller;
 
 import com.utbm.reversi.model.Game;
+import com.utbm.reversi.model.cells.BombCell;
+import com.utbm.reversi.model.cells.TrapCell;
 import com.utbm.reversi.model.cells.Cell;
 import com.utbm.reversi.view.ReversiFrame;
 
@@ -22,9 +24,17 @@ public class GameController {
 			if (this.game.getCurrentPlayer().getUsingPower() == null) {
 				if (cell.getOwner() == null) {
 					FollowingRules rules = new FollowingRules(this.game, cell);
-
 					if (rules.isPlayable()) {
 						rules.replaceCell();
+
+						if (cell instanceof BombCell) {
+							// Bomb Cell
+							((BombCell) cell).use(this.game);
+						} else if (cell instanceof TrapCell) {
+							// Trap Cell
+							((TrapCell) cell).use(this.game);
+						}
+
 						this.game.next();
 					}
 				}

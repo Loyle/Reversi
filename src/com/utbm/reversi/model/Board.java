@@ -2,9 +2,9 @@ package com.utbm.reversi.model;
 import java.awt.Color;
 import java.util.Random;
 
-import com.utbm.reversi.model.cells.Bomb;
+import com.utbm.reversi.model.cells.BombCell;
 import com.utbm.reversi.model.cells.Cell;
-import com.utbm.reversi.model.cells.Trap;
+import com.utbm.reversi.model.cells.TrapCell;
 
 public class Board {
 		private int size;
@@ -17,12 +17,17 @@ public class Board {
 				for(int i=0;i<size;i++) {
 					int rando = new Random().nextInt(20);
 					if(rando < 2) {
-						// Add trap
-						board[i][j]= new Trap(new Color(0,200,0));
+						// Obstacle
+						board[i][j]= new Cell(new Color(50,50,50));
+						board[i][j].setEnabled(false);
 					}
 					else if(rando < 4) {
+						// Add trap
+						board[i][j]= new TrapCell(new Color(0,200,0));
+					}
+					else if(rando < 6) {
 						// Add Bomb
-						board[i][j]= new Bomb(new Color(0,200,0));
+						board[i][j]= new BombCell(new Color(0,200,0));
 					}
 					else {
 						// Add basic Cell

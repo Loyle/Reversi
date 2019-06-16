@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.WindowConstants;
 
 import com.utbm.reversi.controller.GameController;
+import com.utbm.reversi.model.Player;
 import com.utbm.reversi.model.cells.Cell;
 import com.utbm.reversi.view.MenuFrame;
 import com.utbm.reversi.view.PowerButton;
@@ -50,7 +51,9 @@ public class GameListener implements ActionListener {
 
 		this.controller.getFrame().dispose();
 		
-		
+		for(Player player : this.controller.getGame().getPlayers()) {
+			player.getPowers().clear();
+		}
 		ReversiFrame newFrame = new ReversiFrame(this.controller.getGame().getBoard().getSize(),this.controller.getFrame().getGame().getNumberPower(),this.controller.getFrame().getGame().getPlayers());
 		newFrame.setTitle("Reversi Game");
 
