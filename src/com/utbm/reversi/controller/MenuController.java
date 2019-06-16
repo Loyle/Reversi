@@ -305,7 +305,7 @@ public class MenuController
 		
 	}
 
-	public void onRulesClicked(JButton rulesButton) 
+	public void onRulesClicked() 
 	{
 		new RulesFrame();
 	}

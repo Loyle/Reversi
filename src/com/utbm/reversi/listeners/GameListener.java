@@ -13,6 +13,7 @@ import com.utbm.reversi.model.cells.Cell;
 import com.utbm.reversi.view.MenuFrame;
 import com.utbm.reversi.view.PowerButton;
 import com.utbm.reversi.view.ReversiFrame;
+import com.utbm.reversi.view.RulesFrame;
 
 public class GameListener implements ActionListener {
 	private GameController controller;
@@ -43,6 +44,11 @@ public class GameListener implements ActionListener {
 
 		menuFrame.setVisible(true);
 		menuFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+	}
+	
+	public void onRulesClicked() 
+	{
+		new RulesFrame();
 	}
 
 	// Fonction associée au clic sur le bouton rejouer

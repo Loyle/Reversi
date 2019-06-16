@@ -82,7 +82,7 @@ public class ReversiFrame extends JFrame
 		}
 		else
 		{
-			this.scoresSizeX = 1070;
+			this.scoresSizeX = 768;
 		}
 		this.buttonSizeY=0;
 		this.cellSize = 70;
@@ -424,11 +424,29 @@ public class ReversiFrame extends JFrame
 		}
 
 
+		// RULES
+		gbc.gridx = 0;
+		gbc.gridy = 15+incr+5;
+		JButton rules = new JButton("Rules");
+		rules.setPreferredSize(new Dimension(125,30));
+		// On associe ce bouton à une fonction dans ReversiController
+		rules.addActionListener(e -> listener.onRulesClicked());
+		scores.add(rules,gbc);
+		
+		
+
+		// ADD SPACE
+		for (int addSpace = 15+incr+6 ; addSpace<15+incr+8 ; addSpace++) 
+		{
+			gbc.gridx = 0;
+			gbc.gridy = addSpace;
+			scores.add(new JLabel(" "),gbc);
+		}
 
 		// BACK TO MENU
 		// On crée un bouton qui renvoie vers le menu
 		gbc.gridx = 0;
-		gbc.gridy = 15+incr+5;
+		gbc.gridy = 15+incr+8;
 		this.backToMenu = new JButton("Back to menu");
 		this.backToMenu.setPreferredSize(new Dimension(125,30));
 		// On associe ce bouton à une fonction dans ReversiController
@@ -438,7 +456,7 @@ public class ReversiFrame extends JFrame
 
 
 		// Power Part
-		JPanel powerPart = new JPanel(new GridLayout(1,this.game.getNumberPower()));
+		JPanel powerPart = new JPanel(new GridLayout(this.game.getNumberPower(),1));
 		for(int i = 0; i < this.game.getNumberPower(); i++) {
 			PowerButton btn = new PowerButton();
 			btn.addActionListener(e -> this.listener.onPowerClick(btn));
@@ -450,14 +468,14 @@ public class ReversiFrame extends JFrame
 		}
 
 		// On donne une taille minimale à la fenêtre
-		this.setMinimumSize(new Dimension(10+gridSize*(cellSize+5)+scoresSizeX, 39+gridSize*(cellSize+5)+buttonSizeY));
+		this.setMinimumSize(new Dimension(10+gridSize*(cellSize+5)+scoresSizeX+buttonSizeY, 39+gridSize*(cellSize+5)));
 
 		//this.gamePanel.setSize(new Dimension(this.gamePanel.getHeight(),this.gamePanel.getHeight()));
 		//scores.setPreferredSize(new Dimension(this.getWidth()-this.gamePanel.getWidth(),1500));
 		//System.out.println(this.getWidth()+"-"+this.gamePanel.wid);
 		// On ajoute les 2 panel à la fenêtre
 
-		this.getContentPane().add(powerPart, BorderLayout.SOUTH);
+		this.getContentPane().add(powerPart, BorderLayout.WEST);
 		this.getContentPane().add(gamePanel, BorderLayout.CENTER);
 		this.getContentPane().add(scores, BorderLayout.EAST);
 		this.pack();
