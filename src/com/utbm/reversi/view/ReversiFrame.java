@@ -468,7 +468,7 @@ public class ReversiFrame extends JFrame
 		}
 
 		// On donne une taille minimale à la fenêtre
-		this.setMinimumSize(new Dimension(10+gridSize*(cellSize+5)+scoresSizeX, 39+gridSize*(cellSize+5)+buttonSizeY));
+		this.setMinimumSize(new Dimension(10+gridSize*(cellSize+5)+scoresSizeX+buttonSizeY, 39+gridSize*(cellSize+5)));
 
 		//this.gamePanel.setSize(new Dimension(this.gamePanel.getHeight(),this.gamePanel.getHeight()));
 		//scores.setPreferredSize(new Dimension(this.getWidth()-this.gamePanel.getWidth(),1500));
