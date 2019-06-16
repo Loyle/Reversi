@@ -71,7 +71,7 @@ public class MenuFrame extends JFrame
         gbc.gridy = 1;
         this.menuBackground.add(new JLabel("     "),gbc);
 
-		rules.addActionListener(e -> menuController.onRulesClicked(rules));
+		rules.addActionListener(e -> menuController.onRulesClicked());
         gbc.gridx = 0;
         gbc.gridy = 2;
         this.menuBackground.add(rules,gbc);
