@@ -31,7 +31,14 @@ public class RulesFrame extends JFrame
 	private JPanel explanationPanel;
 	private JPanel textRulesPanel;
 	private JPanel imageRulesPanel;
-	private JLabel textExplanation;
+	
+	private JLabel textExplanation1;
+	private JLabel textExplanation2;
+	private JLabel textExplanation3;
+	private JLabel textExplanation4;
+	private JLabel textExplanation5;
+	private JLabel textExplanation6;
+	private JLabel textExplanation7;
 	
 	private RulesPanel rulesPanel;
 	
@@ -50,30 +57,46 @@ public class RulesFrame extends JFrame
 
 		// BUTTON PANEL
 		this.buttonPanel = new JPanel();
-		this.buttonPanel.setLayout(new GridLayout(7,1));
+		this.buttonPanel.setLayout(new GridLayout(12,1));
 		
 		JButton reversiRules = new JButton("Reversi");
+		JPanel space1 = new JPanel();
+		space1.setBackground(Color.white);
+		JButton obstacles = new JButton("Obstacles");
+		JButton treacherousPawn = new JButton("Treacherous Pawn");
+		JButton bombPawn = new JButton("Bomb Pawn");
+		JPanel space2 = new JPanel();
+		space2.setBackground(Color.white);
 		JButton colorBomb = new JButton("Color Bomb");
 		JButton shield = new JButton("Shield");
 		JButton switchOwner = new JButton("Switch");
 		JButton yellowJacket = new JButton("Yellow Jacket");
-		JButton flintnSteel = new JButton("Flint n Steel");
+		JButton fire = new JButton("Fire");
 		JButton lightning = new JButton("Lightning");
 		
-		reversiRules.addActionListener(e -> rulesController.onReversiRulesClicked(reversiRules));
-		colorBomb.addActionListener(e -> rulesController.onColorBombClicked(colorBomb));
-		shield.addActionListener(e -> rulesController.onShieldClicked(shield));
-		switchOwner.addActionListener(e -> rulesController.onSwitchOwnerClicked(switchOwner));
-		yellowJacket.addActionListener(e -> rulesController.onYellowJacketClicked(yellowJacket));
-		flintnSteel.addActionListener(e -> rulesController.onFlintnSteelClicked(flintnSteel));
-		lightning.addActionListener(e -> rulesController.onLightningClicked(lightning));
+		reversiRules.addActionListener(e -> rulesController.onReversiRulesClicked());
+		obstacles.addActionListener(e -> rulesController.onObstaclesClicked());
+		treacherousPawn.addActionListener(e -> rulesController.onTreacherousPawnClicked());
+		bombPawn.addActionListener(e -> rulesController.onBombPawnClicked());
+		reversiRules.addActionListener(e -> rulesController.onReversiRulesClicked());
+		colorBomb.addActionListener(e -> rulesController.onColorBombClicked());
+		shield.addActionListener(e -> rulesController.onShieldClicked());
+		switchOwner.addActionListener(e -> rulesController.onSwitchOwnerClicked());
+		yellowJacket.addActionListener(e -> rulesController.onYellowJacketClicked());
+		fire.addActionListener(e -> rulesController.onFireClicked());
+		lightning.addActionListener(e -> rulesController.onLightningClicked());
 		
 		this.buttonPanel.add(reversiRules);
+		this.buttonPanel.add(space1);
+		this.buttonPanel.add(obstacles);
+		this.buttonPanel.add(treacherousPawn);
+		this.buttonPanel.add(bombPawn);
+		this.buttonPanel.add(space2);
 		this.buttonPanel.add(colorBomb);
 		this.buttonPanel.add(shield);
 		this.buttonPanel.add(switchOwner);
 		this.buttonPanel.add(yellowJacket);
-		this.buttonPanel.add(flintnSteel);
+		this.buttonPanel.add(fire);
 		this.buttonPanel.add(lightning);
 		
 
@@ -90,8 +113,32 @@ public class RulesFrame extends JFrame
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx=0;
 		gbc.gridy=0;
-		this.textExplanation = new JLabel("Reversi rules");
-		this.textRulesPanel.add(this.textExplanation,gbc);
+		this.textExplanation1 = new JLabel(" ");
+		this.textRulesPanel.add(this.textExplanation1,gbc);
+		gbc.gridx=0;
+		gbc.gridy=1;
+		this.textExplanation2 = new JLabel(" ");
+		this.textRulesPanel.add(this.textExplanation2,gbc);
+		gbc.gridx=0;
+		gbc.gridy=2;
+		this.textExplanation3 = new JLabel(" ");
+		this.textRulesPanel.add(this.textExplanation3,gbc);
+		gbc.gridx=0;
+		gbc.gridy=3;
+		this.textExplanation4 = new JLabel(" ");
+		this.textRulesPanel.add(this.textExplanation4,gbc);
+		gbc.gridx=0;
+		gbc.gridy=4;
+		this.textExplanation5 = new JLabel(" ");
+		this.textRulesPanel.add(this.textExplanation5,gbc);
+		gbc.gridx=0;
+		gbc.gridy=5;
+		this.textExplanation6 = new JLabel(" ");
+		this.textRulesPanel.add(this.textExplanation6,gbc);
+		gbc.gridx=0;
+		gbc.gridy=6;
+		this.textExplanation7 = new JLabel(" ");
+		this.textRulesPanel.add(this.textExplanation7,gbc);
 		this.explanationPanel.add(this.textRulesPanel);
 		
 		// IMAGE EXPLANATION
@@ -107,14 +154,40 @@ public class RulesFrame extends JFrame
 		this.imageRulesPanel.add(this.rulesPanel,gbc2);
 		this.explanationPanel.add(this.imageRulesPanel);
 		
+		this.rulesController.onReversiRulesClicked();
+		
 		
 		
 		this.getContentPane().add(this.explanationPanel,BorderLayout.CENTER);
 		this.getContentPane().add(this.buttonPanel,BorderLayout.WEST);
 	}
 
-	public JLabel getTextExplanation() {
-		return textExplanation;
+	public JLabel getTextExplanation1() {
+		return textExplanation1;
+	}
+
+	public JLabel getTextExplanation2() {
+		return textExplanation2;
+	}
+
+	public JLabel getTextExplanation3() {
+		return textExplanation3;
+	}
+
+	public JLabel getTextExplanation4() {
+		return textExplanation4;
+	}
+
+	public JLabel getTextExplanation5() {
+		return textExplanation5;
+	}
+
+	public JLabel getTextExplanation6() {
+		return textExplanation6;
+	}
+
+	public JLabel getTextExplanation7() {
+		return textExplanation7;
 	}
 
 	public RulesPanel getRulesPanel() {

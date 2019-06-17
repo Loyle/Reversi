@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
 import com.utbm.reversi.controller.GameController;
@@ -38,12 +39,7 @@ public class GameListener implements ActionListener {
 
 		MenuFrame menuFrame = new MenuFrame();
 
-		menuFrame.setTitle("Menu - Reversi Game");
-
-		menuFrame.setSize(700, 700);
-
 		menuFrame.setVisible(true);
-		menuFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
 	
 	public void onRulesClicked() 
@@ -60,7 +56,7 @@ public class GameListener implements ActionListener {
 		for(Player player : this.controller.getGame().getPlayers()) {
 			player.getPowers().clear();
 		}
-		ReversiFrame newFrame = new ReversiFrame(this.controller.getGame().getBoard().getSize(),this.controller.getFrame().getGame().getNumberPower(),this.controller.getFrame().getGame().getPlayers());
+		ReversiFrame newFrame = new ReversiFrame(this.controller.getGame().getBoard().getSize(),this.controller.getFrame().getGame().getPowerNumber(),this.controller.getFrame().getGame().getObstaclesNumber(),this.controller.getFrame().getGame().getTrapsNumber(),this.controller.getFrame().getGame().getPlayers());
 		newFrame.setTitle("Reversi Game");
 
 		newFrame.setSize(700, 700);
@@ -68,6 +64,7 @@ public class GameListener implements ActionListener {
 		this.controller.getFrame().dispose();
 
 		newFrame.setVisible(true);
+		newFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		newFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
 	

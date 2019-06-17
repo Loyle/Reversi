@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -38,11 +39,19 @@ public class MenuFrame extends JFrame
 	private JTextField playersTextField;
 	private JComboBox<String> playersComboBox;
 	private JComboBox<String> powersComboBox;
+	private JComboBox<String> obstaclesComboBox;
+	private JComboBox<String> trapsComboBox;
     private String[] couleurs = {"White","Black","Red","Blue","Yellow","Green","Gray","Pink","Cyan","Orange"};
 	
 	public MenuFrame() 
 	{
-		
+
+		this.setTitle("Menu - Reversi Game");
+
+		this.setMinimumSize(new Dimension(900,900));
+
+		this.setVisible(true);
+		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		
@@ -61,27 +70,32 @@ public class MenuFrame extends JFrame
 		// ==========================================================================================================================
 		final JButton play = new JButton("Play");
 		final JButton rules = new JButton("Rules");
+		int decalage=0;
 		// On associe le clic sur le bouton play à cette fonction du controller
 		play.addActionListener(e -> menuController.onPlayClicked(play));
         gbc.gridx = 0;
-        gbc.gridy = 0;
+        decalage++;
+        gbc.gridy = decalage;
         this.menuBackground.add(play,gbc);
 
         gbc.gridx = 0;
-        gbc.gridy = 1;
+        decalage++;
+        gbc.gridy = decalage;
         this.menuBackground.add(new JLabel("     "),gbc);
 
 		rules.addActionListener(e -> menuController.onRulesClicked());
         gbc.gridx = 0;
-        gbc.gridy = 2;
+        decalage++;
+        gbc.gridy = decalage;
         this.menuBackground.add(rules,gbc);
 		
         // ADD SPACE
-        for (int addSpace = 3 ; addSpace<5 ; addSpace++) 
+        for (int addSpace = 0 ; addSpace<4 ; addSpace++) 
         {
             gbc.gridx = 0;
-            gbc.gridy = addSpace;
-            if (addSpace == 4) 
+            decalage++;
+            gbc.gridy = decalage;
+            if (addSpace == 2) 
             {
             	this.error = new JLabel(" ");
                 this.menuBackground.add(this.error,gbc);
@@ -103,7 +117,8 @@ public class MenuFrame extends JFrame
         playersPanel.setBorder(BorderFactory.createTitledBorder("Players :"));
         playersPanel.setPreferredSize(new Dimension(400, 150));
         gbc.gridx = 0;
-        gbc.gridy = 6;
+        decalage++;
+        gbc.gridy = decalage;
         this.menuBackground.add(playersPanel,gbc);
         
         
@@ -200,10 +215,11 @@ public class MenuFrame extends JFrame
         
 
         // ADD SPACE
-        for (int addSpace = 7 ; addSpace<10 ; addSpace++) 
+        for (int addSpace = 0 ; addSpace<3 ; addSpace++) 
         {
             gbc.gridx = 0;
-            gbc.gridy = addSpace;
+            decalage++;
+            gbc.gridy = decalage;
             this.menuBackground.add(new JLabel(" "),gbc);
         }
         
@@ -219,7 +235,8 @@ public class MenuFrame extends JFrame
 		powersPanel.setBorder(BorderFactory.createTitledBorder("Powers :"));
 		powersPanel.setPreferredSize(new Dimension(400, 80));
         gbc.gridx = 0;
-        gbc.gridy = 11;
+        decalage++;
+        gbc.gridy = decalage;
         this.menuBackground.add(powersPanel,gbc);
         
         
@@ -235,20 +252,82 @@ public class MenuFrame extends JFrame
         
         String[] powerNumbers = {"0","1","2","3","4","5","6","7","8","9","10"};
         this.powersComboBox = new JComboBox<String>(powerNumbers); 
-        this.powersComboBox.setSelectedIndex(4);
+        this.powersComboBox.setSelectedIndex(0);
         gbcPowers.gridx = 2;
         gbcPowers.gridy = 0;
         powersPanel.add(powersComboBox,gbcPowers);
         
         // ADD SPACE
-        for (int addSpace = 12 ; addSpace<15 ; addSpace++) 
+        for (int addSpace = 0 ; addSpace<3 ; addSpace++) 
         {
             gbc.gridx = 0;
-            gbc.gridy = addSpace;
+            decalage++;
+            gbc.gridy = decalage;
             this.menuBackground.add(new JLabel(" "),gbc);
         }
         
        
+        
+        
+        
+        
+        
+        // ==========================================================================================================================
+        // OBSTACLES AND TRAPS
+        // ==========================================================================================================================
+        JPanel obstaclesAndTrapsPanel = new JPanel();
+        obstaclesAndTrapsPanel.setBackground(Color.white);
+        obstaclesAndTrapsPanel.setLayout(new GridBagLayout());
+		GridBagConstraints gbcObstaclesAndTraps = new GridBagConstraints();
+		obstaclesAndTrapsPanel.setBorder(BorderFactory.createTitledBorder("Obstacles and traps :"));
+		obstaclesAndTrapsPanel.setPreferredSize(new Dimension(400, 120));
+        gbc.gridx = 0;
+        decalage++;
+        gbc.gridy = decalage;
+        this.menuBackground.add(obstaclesAndTrapsPanel,gbc);
+        
+        
+        JLabel obstaclesLabel = new JLabel("Number of obstacles :");
+        gbcObstaclesAndTraps.gridx = 0;
+        gbcObstaclesAndTraps.gridy = 0;
+        obstaclesAndTrapsPanel.add(obstaclesLabel,gbcObstaclesAndTraps);
+        gbcObstaclesAndTraps.gridx = 1;
+        gbcObstaclesAndTraps.gridy = 0;
+        obstaclesAndTrapsPanel.add(new JLabel("               "),gbcObstaclesAndTraps);
+        String[] obstaclesNumbers = {"0","1","2","3","4","5","6","7","8","9","10"};
+        this.obstaclesComboBox = new JComboBox<String>(obstaclesNumbers); 
+        this.obstaclesComboBox.setSelectedIndex(0);
+        gbcObstaclesAndTraps.gridx = 2;
+        gbcObstaclesAndTraps.gridy = 0;
+        obstaclesAndTrapsPanel.add(this.obstaclesComboBox,gbcObstaclesAndTraps);
+
+        gbcObstaclesAndTraps.gridx = 0;
+        gbcObstaclesAndTraps.gridy = 2;
+        obstaclesAndTrapsPanel.add(new JLabel(" "),gbcObstaclesAndTraps);
+        
+        JLabel trapsLabel = new JLabel("Number of traps :");
+        gbcObstaclesAndTraps.gridx = 0;
+        gbcObstaclesAndTraps.gridy = 3;
+        obstaclesAndTrapsPanel.add(trapsLabel,gbcObstaclesAndTraps);
+        gbcObstaclesAndTraps.gridx = 1;
+        gbcObstaclesAndTraps.gridy = 3;
+        obstaclesAndTrapsPanel.add(new JLabel("               "),gbcObstaclesAndTraps);
+        String[] trapsNumbers = {"0","1","2","3","4","5","6","7","8","9","10"};
+        this.trapsComboBox = new JComboBox<String>(trapsNumbers); 
+        this.trapsComboBox.setSelectedIndex(0);
+        gbcObstaclesAndTraps.gridx = 2;
+        gbcObstaclesAndTraps.gridy = 3;
+        obstaclesAndTrapsPanel.add(this.trapsComboBox,gbcObstaclesAndTraps);
+        
+        // ADD SPACE
+        for (int addSpace = 0 ; addSpace<3 ; addSpace++) 
+        {
+            gbc.gridx = 0;
+            decalage++;
+            gbc.gridy = decalage;
+            this.menuBackground.add(new JLabel(" "),gbc);
+        }
+        
         
         
         
@@ -269,7 +348,8 @@ public class MenuFrame extends JFrame
         // On lui donne la dimension voulue
         gridSizePanel.setPreferredSize(new Dimension(400, 100));
         gbc.gridx = 0;
-        gbc.gridy = 15;
+        decalage++;
+        gbc.gridy = decalage;
         this.menuBackground.add(gridSizePanel,gbc);
         
         // On crée la slide bar
@@ -363,6 +443,14 @@ public class MenuFrame extends JFrame
 
 	public JSlider getGridSizeSlider() {
 		return gridSizeSlider;
+	}
+
+	public JComboBox<String> getObstaclesComboBox() {
+		return obstaclesComboBox;
+	}
+
+	public JComboBox<String> getTrapsComboBox() {
+		return trapsComboBox;
 	}
 	
 	

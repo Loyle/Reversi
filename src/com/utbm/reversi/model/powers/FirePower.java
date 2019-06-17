@@ -9,16 +9,16 @@ import com.utbm.reversi.model.Game;
 import com.utbm.reversi.model.Player;
 import com.utbm.reversi.model.cells.Cell;
 
-public class FlintnSteelPower extends Power {
+public class FirePower extends Power {
 	
 	private ArrayList<Cell> burningCell;
 	
-	public FlintnSteelPower(Player owner, ImageIcon icon, ImageIcon hoverIcon) {
+	public FirePower(Player owner, ImageIcon icon, ImageIcon hoverIcon) {
 		super(owner,icon,hoverIcon,3);
 		this.burningCell = new ArrayList<Cell>();
 	}
 	
-	public FlintnSteelPower(Player owner, String icon, String hoverIcon) {
+	public FirePower(Player owner, String icon, String hoverIcon) {
 		super(owner,icon,hoverIcon,3);
 		this.burningCell = new ArrayList<Cell>();
 	}

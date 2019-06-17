@@ -17,7 +17,6 @@ public class MenuController
 	private final MenuFrame menuFrame;
 	// Taille de la grille de jeu
 	private int gridSize = 8;
-	private int nbPower = 4;
 	
 	private ArrayList<Player> players = new ArrayList<Player>();
 	
@@ -30,7 +29,9 @@ public class MenuController
 	// Fonction appelé lorsque l'on clique sur le bouton play
 	public void onPlayClicked(JButton play) 
 	{
-		this.nbPower = this.menuFrame.getPowersComboBox().getSelectedIndex();
+		int powerNumber = this.menuFrame.getPowersComboBox().getSelectedIndex();
+		int obstaclesNumber = this.menuFrame.getObstaclesComboBox().getSelectedIndex();
+		int trapsNumber = this.menuFrame.getTrapsComboBox().getSelectedIndex();
 		if (this.players.size() < 2) 
 		{
 			this.menuFrame.getError().setText("There is not enough players to start the game !");
@@ -41,7 +42,7 @@ public class MenuController
 			this.menuFrame.dispose();
 			
 			// On lance une nouvelle partie
-			new ReversiFrame(this.gridSize, this.nbPower,players);
+			new ReversiFrame(this.gridSize, powerNumber,obstaclesNumber,trapsNumber,players);
 		}
 	}
 	
