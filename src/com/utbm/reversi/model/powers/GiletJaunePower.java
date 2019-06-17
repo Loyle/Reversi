@@ -29,14 +29,15 @@ public class GiletJaunePower extends Power {
 		}
 
 		while (xStart <= cell.getCoordX() + 1 && xStart < game.getBoard().getSize()) {
-			game.getBoard().getBoardCells()[xStart][yStart].setEnabled(false);
-			if (game.getBoard().getBoardCells()[xStart][yStart].getOwner() != null) {
-				game.getBoard().getBoardCells()[xStart][yStart].addHoverIcon(this.getHoverIcon());
-			} else {
-				game.getBoard().getBoardCells()[xStart][yStart].addHoverIcon(this.getIcon());
+			if (game.getBoard().getBoardCells()[xStart][yStart].isEnabled()) {
+				game.getBoard().getBoardCells()[xStart][yStart].setEnabled(false);
+				if (game.getBoard().getBoardCells()[xStart][yStart].getOwner() != null) {
+					game.getBoard().getBoardCells()[xStart][yStart].addHoverIcon(this.getHoverIcon());
+				} else {
+					game.getBoard().getBoardCells()[xStart][yStart].addHoverIcon(this.getIcon());
+				}
+				game.getBoard().getBoardCells()[xStart][yStart].updateState();
 			}
-			game.getBoard().getBoardCells()[xStart][yStart].updateState();
-
 			xStart++;
 		}
 
@@ -46,13 +47,15 @@ public class GiletJaunePower extends Power {
 		xStart = cell.getCoordX();
 
 		while (yStart <= cell.getCoordY() + 1 && yStart < game.getBoard().getSize()) {
-			game.getBoard().getBoardCells()[xStart][yStart].setEnabled(false);
-			if (game.getBoard().getBoardCells()[xStart][yStart].getOwner() != null) {
-				game.getBoard().getBoardCells()[xStart][yStart].addHoverIcon(this.getHoverIcon());
-			} else {
-				game.getBoard().getBoardCells()[xStart][yStart].addHoverIcon(this.getIcon());
+			if (game.getBoard().getBoardCells()[xStart][yStart].isEnabled()) {
+				game.getBoard().getBoardCells()[xStart][yStart].setEnabled(false);
+				if (game.getBoard().getBoardCells()[xStart][yStart].getOwner() != null) {
+					game.getBoard().getBoardCells()[xStart][yStart].addHoverIcon(this.getHoverIcon());
+				} else {
+					game.getBoard().getBoardCells()[xStart][yStart].addHoverIcon(this.getIcon());
+				}
+				game.getBoard().getBoardCells()[xStart][yStart].updateState();
 			}
-			game.getBoard().getBoardCells()[xStart][yStart].updateState();
 			yStart++;
 		}
 		return true;

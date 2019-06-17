@@ -37,11 +37,11 @@ public class FollowingRules {
 		// Les coordonnées du voisin sont dans la grille
 		// ET QUE
 		// Ce voisin a un pion posé sur lui/a un propriétaire
-		while (startY >= 0 && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null && this.game.getBoard().getBoardCells()[startX][startY].isEnabled()) {
+		while (startY >= 0 && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) {
 			// SI
 			// Le propriétaire de cette case est celui qui joue en ce moment
 			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner()
-					.equals(this.game.getCurrentPlayer()) == true && this.game.getBoard().getBoardCells()[startX][startY].isEnabled()) {
+					.equals(this.game.getCurrentPlayer()) == true) {
 
 				inter[0] = count;
 				break;
@@ -56,9 +56,9 @@ public class FollowingRules {
 		startX = this.x;
 		startY = this.y + 1;
 		count = 0;
-		while (startY < this.size && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null && this.game.getBoard().getBoardCells()[startX][startY].isEnabled()) {
+		while (startY < this.size && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) {
 			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner()
-					.equals(this.game.getCurrentPlayer()) == true && this.game.getBoard().getBoardCells()[startX][startY].isEnabled()) {
+					.equals(this.game.getCurrentPlayer()) == true) {
 				inter[1] = count;
 				break;
 			} else {
@@ -72,9 +72,9 @@ public class FollowingRules {
 		startX = this.x - 1;
 		startY = this.y;
 		count = 0;
-		while (startX >= 0 && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null && this.game.getBoard().getBoardCells()[startX][startY].isEnabled()) {
+		while (startX >= 0 && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) {
 			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner()
-					.equals(this.game.getCurrentPlayer()) == true && this.game.getBoard().getBoardCells()[startX][startY].isEnabled()) {
+					.equals(this.game.getCurrentPlayer()) == true) {
 				inter[2] = count;
 				break;
 			} else {
@@ -88,9 +88,9 @@ public class FollowingRules {
 		startX = this.x + 1;
 		startY = this.y;
 		count = 0;
-		while (startX < this.size && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null && this.game.getBoard().getBoardCells()[startX][startY].isEnabled()) {
+		while (startX < this.size && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) {
 			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner()
-					.equals(this.game.getCurrentPlayer()) == true && this.game.getBoard().getBoardCells()[startX][startY].isEnabled()) {
+					.equals(this.game.getCurrentPlayer()) == true) {
 				inter[3] = count;
 				break;
 			} else {
@@ -105,9 +105,9 @@ public class FollowingRules {
 		startY = this.y - 1;
 		count = 0;
 		while (startX < this.size && startY >= 0
-				&& this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null && this.game.getBoard().getBoardCells()[startX][startY].isEnabled()) {
+				&& this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) {
 			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner()
-					.equals(this.game.getCurrentPlayer()) == true && this.game.getBoard().getBoardCells()[startX][startY].isEnabled()) {
+					.equals(this.game.getCurrentPlayer()) == true) {
 				inter[4] = count;
 				break;
 			} else {
@@ -123,9 +123,9 @@ public class FollowingRules {
 		startY = this.y + 1;
 		count = 0;
 		while (startX < this.size && startY < this.size
-				&& this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null && this.game.getBoard().getBoardCells()[startX][startY].isEnabled()) {
+				&& this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) {
 			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner()
-					.equals(this.game.getCurrentPlayer()) == true && this.game.getBoard().getBoardCells()[startX][startY].isEnabled()) {
+					.equals(this.game.getCurrentPlayer()) == true) {
 				inter[5] = count;
 				break;
 			} else {
@@ -139,9 +139,9 @@ public class FollowingRules {
 		startX = this.x - 1;
 		startY = this.y + 1;
 		count = 0;
-		while (startX >= 0 && startY < this.size && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null && this.game.getBoard().getBoardCells()[startX][startY].isEnabled()) {
+		while (startX >= 0 && startY < this.size && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) {
 			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner()
-					.equals(this.game.getCurrentPlayer()) == true && this.game.getBoard().getBoardCells()[startX][startY].isEnabled()) {
+					.equals(this.game.getCurrentPlayer()) == true) {
 				inter[6] = count;
 				break;
 			} else {
@@ -155,9 +155,9 @@ public class FollowingRules {
 		startX = this.x - 1;
 		startY = this.y - 1;
 		count = 0;
-		while (startX >= 0 && startY >= 0 && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null && this.game.getBoard().getBoardCells()[startX][startY].isEnabled()) {
+		while (startX >= 0 && startY >= 0 && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) {
 			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner()
-					.equals(this.game.getCurrentPlayer()) == true && this.game.getBoard().getBoardCells()[startX][startY].isEnabled()) {
+					.equals(this.game.getCurrentPlayer()) == true) {
 				inter[7] = count;
 				break;
 			} else {

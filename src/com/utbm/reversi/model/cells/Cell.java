@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -18,11 +19,9 @@ public class Cell extends JButton {
 	private Player owner;
 	private Color color;
 	private Color defaultColor;
+	private ImageIcon background;
 	private boolean isLock;
-	private ImageIcon icon;
 	private ArrayList<ImageIcon> hoverIcons;
-	
-	//private Pawn pawn;
 	
 	private int coordX;
 	private int coordY;
@@ -33,10 +32,8 @@ public class Cell extends JButton {
 		this.defaultColor = this.color;
 		this.owner = null;
 		this.isLock = true;
-		this.setBackground(this.defaultColor);
-		this.icon = null;
-		this.hoverIcons = new ArrayList<ImageIcon>();
-				
+		this.background = null;
+		this.hoverIcons = new ArrayList<ImageIcon>();		
 		this.setContentAreaFilled(false);
 	}
 	public Cell(Color color) {
@@ -45,10 +42,19 @@ public class Cell extends JButton {
 		this.defaultColor = this.color;
 		this.owner = null;
 		this.isLock = true;
-		this.setBackground(this.defaultColor);
-		this.icon = null;
-		this.hoverIcons = new ArrayList<ImageIcon>();;
-
+		this.background = null;
+		this.hoverIcons = new ArrayList<ImageIcon>();
+		this.setContentAreaFilled(false);
+	}
+	public Cell(ImageIcon background) {
+		this.value = 0;
+		this.color = null;
+		this.background = background;
+		this.defaultColor = this.color;
+		this.owner = null;
+		this.isLock = true;
+		this.hoverIcons = new ArrayList<ImageIcon>();
+		//this.setBorder(BorderFactory.createLineBorder(Color.white,1));
 		this.setContentAreaFilled(false);
 	}
 	
@@ -138,18 +144,17 @@ public class Cell extends JButton {
 		
 		g2d.setRenderingHints(rh);
 		
-		//if(this.isEnabled()) {
+		if(this.background != null) {
+			g2d.drawImage(this.background.getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+		}
+		else {			
 			g2d.setColor(this.defaultColor);
-			g2d.fillRect(0, 0, this.getWidth(), getHeight());
-		/*}
-		else {
-			// Cell is disable
-			g2d.setColor(new Color(120,120,120));
-			g2d.fillRect(0, 0, this.getWidth(), getHeight());
-		}*/
+			g2d.fillRect(0, 0, this.getWidth(), getHeight());			
+		}
+
 		if(this.owner != null) {			
 			g2d.setColor(this.color);
-			g2d.fillOval(10, 10, this.getWidth() - 20, this.getHeight() - 20);
+			g2d.fillOval((this.getWidth()- (int)(this.getWidth() * 0.7)) / 2, (this.getHeight()- (int)(this.getHeight() * 0.7)) / 2, (int)(this.getWidth() * 0.7), (int)(this.getHeight() * 0.7));
 		}
 		
 		for(ImageIcon hoverIcon : this.hoverIcons) {

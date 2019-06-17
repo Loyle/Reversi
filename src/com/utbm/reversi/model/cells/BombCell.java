@@ -2,6 +2,8 @@ package com.utbm.reversi.model.cells;
 
 import java.awt.Color;
 
+import javax.swing.ImageIcon;
+
 import com.utbm.reversi.model.Game;
 import com.utbm.reversi.model.Player;
 
@@ -16,6 +18,11 @@ public class BombCell extends Cell {
 	}
 	public BombCell(Color color) {
 		super(color);
+		
+		this.isUsed = false;
+	}
+	public BombCell(ImageIcon background) {
+		super(background);
 		
 		this.isUsed = false;
 	}

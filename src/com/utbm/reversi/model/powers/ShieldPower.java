@@ -43,6 +43,7 @@ public class ShieldPower extends Power {
 	public void stop(Game game) {
 		this.getOriginCell().setEnabled(true);	
 		this.getOriginCell().removeHoverIcon(this.getHoverIcon());
+		this.getOriginCell().updateState();
 	}
 
 }
