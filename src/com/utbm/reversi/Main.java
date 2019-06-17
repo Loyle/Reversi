@@ -17,13 +17,8 @@ public class Main {
 		// Ici, on crée un objet MenuFrame (c'est la fenêtre où le menu est affiché)
 		//==========================================================================================================================
 		final JFrame menuFrame = new MenuFrame();
-		menuFrame.setTitle("Menu - Reversi Game");
-
-		menuFrame.setMinimumSize(new Dimension(700,700));
-		menuFrame.setSize(700, 700);
 
 		menuFrame.setVisible(true);
-		menuFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
         
         

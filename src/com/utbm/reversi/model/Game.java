@@ -21,19 +21,23 @@ public class Game {
 	private ArrayList<Power> powers;	
 	private Player currentPlayer;
 	private Board board;
-	private int numberPower;
+	private int powerNumber;
+	private int obstaclesNumber;
+	private int trapsNumber;
 	
 	private ReversiFrame frame;
 
 	private boolean isStart;
 	private int round;
 
-	public Game(ReversiFrame frame, int size, int nbPower) {
+	public Game(ReversiFrame frame, int size, int powerNumber, int obstaclesNumber, int trapsNumber) {
 		this.players = new ArrayList<Player>();
 		this.powers = new ArrayList<Power>();
 		this.isStart = false;
 		this.round = 0;
-		this.numberPower = nbPower ;
+		this.powerNumber = powerNumber ;
+		this.obstaclesNumber = obstaclesNumber;
+		this.trapsNumber = trapsNumber;
 		
 		this.frame = frame;
 
@@ -47,14 +51,6 @@ public class Game {
 	}
 	public void removePlayer(Player player) {
 		this.players.remove(player);
-	}
-	
-	public int getNumberPower() {
-		return numberPower;
-	}
-
-	public void setNumberPower(int numberPower) {
-		this.numberPower = numberPower;
 	}
 	
 	public void addPower(Power power) {
@@ -90,6 +86,19 @@ public class Game {
 	public ArrayList<Player> getPlayers() {
 		return this.players;
 	}
+	
+
+	public int getPowerNumber() {
+		return powerNumber;
+	}
+
+	public int getObstaclesNumber() {
+		return obstaclesNumber;
+	}
+
+	public int getTrapsNumber() {
+		return trapsNumber;
+	}
 
 	public void run() {
 		this.currentPlayer = this.players.get(0);
@@ -97,7 +106,7 @@ public class Game {
 
 		// Give random power to each player
 		for(Player player : players) {
-			for(int nbPow = 0; nbPow<this.numberPower;nbPow++) {
+			for(int nbPow = 0; nbPow<this.powerNumber;nbPow++) {
 				player.addRandomPower();
 			}
 		}
@@ -173,9 +182,6 @@ public class Game {
 	        // On associe un message de fin à ce panel en fonction de la manière dont la partie s'est terminée et en fonction du score
 			JLabel endMsg = new JLabel();
 			if (isEnded() == true) 
-			{
-				endMsg.setText("PUTEUH");
-			}
 	        gbc.gridx=0;
 	        gbc.gridy=0;
 			end.add(endMsg,gbc);

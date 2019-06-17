@@ -56,9 +56,9 @@ public class ReversiFrame extends JFrame
 	private ArrayList<PowerButton> powerListBtn;
 
 
-	public ReversiFrame(int size , int nbPower, ArrayList<Player> players) 
+	public ReversiFrame(int size , int powerNumber, int obstaclesNumber, int trapsNumber, ArrayList<Player> players) 
 	{
-		this.game = new Game(this, size, nbPower);
+		this.game = new Game(this, size, powerNumber, obstaclesNumber, trapsNumber);
 
 		for (Player player : players) 
 		{
@@ -76,7 +76,7 @@ public class ReversiFrame extends JFrame
 
 	public void initWindow() {
 
-		if (this.game.getNumberPower() ==0) 
+		if (this.game.getPowerNumber() ==0) 
 		{
 			this.scoresSizeX = 918;
 		}
@@ -363,12 +363,14 @@ public class ReversiFrame extends JFrame
 		scores.setLayout(new GridBagLayout());
 		scores.setPreferredSize(new Dimension(scoresSizeX,500));
 		GridBagConstraints gbc = new GridBagConstraints();
+		
+		int decalage=0;
 
 		// WHO WILL PLAY
 		// On positionne les informations sur qui va jouer
 
 		gbc.gridx = 0;
-		gbc.gridy = 0;
+		gbc.gridy = decalage;
 
 		this.label = new JLabel("Tour de :");
 		this.label.setFont(new Font("Arial",0,20));
@@ -376,14 +378,16 @@ public class ReversiFrame extends JFrame
 
 
 		gbc.gridx = 0;
-		gbc.gridy = 1;
+        decalage++;
+        gbc.gridy = decalage;
 		this.whoPlayName= new JLabel();
 		this.whoPlayName.setFont(new Font("Arial",0,20));
 		//this.whoPlayName.setPreferredSize(new Dimension(20,100));
 		scores.add(this.whoPlayName,gbc);
 
 		gbc.gridx = 0;
-		gbc.gridy = 2;
+        decalage++;
+        gbc.gridy = decalage;
 		this.whoPlayColor= new JPanel();
 		this.whoPlayColor.setMinimumSize(new Dimension(50,50));
 		this.whoPlayColor.setPreferredSize(new Dimension(50,50));
@@ -392,41 +396,42 @@ public class ReversiFrame extends JFrame
 
 		// ADD SPACE
 		// On se déplace vers le bas en ajoutant des label vides
-		for (int addSpace = 2 ; addSpace<15 ; addSpace++) 
+		for (int addSpace = 0 ; addSpace<13 ; addSpace++) 
 		{
 			gbc.gridx = 0;
-			gbc.gridy = addSpace;
+            decalage++;
+            gbc.gridy = decalage;
 			scores.add(new JLabel(" "),gbc);
 		}
 
 
 		// SCORES LABELS
 		// On crée un nouveau label par joueur
-		int incr=0;
-		
 		for (Player player : this.game.getPlayers()) 
 		{
 			player.setScore(this.game.getPlayers().size());
 			player.getScoreLabel().setText("Score de "+player.getName()+" : "+player.getScore());
 			player.getScoreLabel().setFont(new Font("Arial",0,20));
-			incr++;
 			gbc.gridx = 0;
-			gbc.gridy = 15+incr;
+            decalage++;
+            gbc.gridy = decalage;
 			scores.add(player.getScoreLabel(),gbc);
 		}
 
 		// ADD SPACE
-		for (int addSpace = 15+incr+1 ; addSpace<15+incr+5 ; addSpace++) 
+		for (int addSpace = 0 ; addSpace<4 ; addSpace++) 
 		{
 			gbc.gridx = 0;
-			gbc.gridy = addSpace;
+            decalage++;
+            gbc.gridy = decalage;
 			scores.add(new JLabel(" "),gbc);
 		}
 
 
 		// RULES
 		gbc.gridx = 0;
-		gbc.gridy = 15+incr+5;
+        decalage++;
+        gbc.gridy = decalage;
 		JButton rules = new JButton("Rules");
 		rules.setPreferredSize(new Dimension(125,30));
 		// On associe ce bouton à une fonction dans ReversiController
@@ -436,17 +441,19 @@ public class ReversiFrame extends JFrame
 		
 
 		// ADD SPACE
-		for (int addSpace = 15+incr+6 ; addSpace<15+incr+8 ; addSpace++) 
+		for (int addSpace = 0 ; addSpace<2 ; addSpace++) 
 		{
 			gbc.gridx = 0;
-			gbc.gridy = addSpace;
+            decalage++;
+            gbc.gridy = decalage;
 			scores.add(new JLabel(" "),gbc);
 		}
 
 		// BACK TO MENU
 		// On crée un bouton qui renvoie vers le menu
 		gbc.gridx = 0;
-		gbc.gridy = 15+incr+8;
+        decalage++;
+        gbc.gridy = decalage;
 		this.backToMenu = new JButton("Back to menu");
 		this.backToMenu.setPreferredSize(new Dimension(125,30));
 		// On associe ce bouton à une fonction dans ReversiController
@@ -456,8 +463,8 @@ public class ReversiFrame extends JFrame
 
 
 		// Power Part
-		JPanel powerPart = new JPanel(new GridLayout(this.game.getNumberPower(),1));
-		for(int i = 0; i < this.game.getNumberPower(); i++) {
+		JPanel powerPart = new JPanel(new GridLayout(this.game.getPowerNumber(),1));
+		for(int i = 0; i < this.game.getPowerNumber(); i++) {
 			PowerButton btn = new PowerButton();
 			btn.addActionListener(e -> this.listener.onPowerClick(btn));
 			this.setFixedSize(btn, 150, 150);
@@ -508,7 +515,7 @@ public class ReversiFrame extends JFrame
 
 	public void updatePlayerPowers(Player player) {
 		int i = 0;
-		for(i = 0; i < this.game.getNumberPower(); i++) {
+		for(i = 0; i < this.game.getPowerNumber(); i++) {
 			this.powerListBtn.get(i).setIcon(null);
 			this.powerListBtn.get(i).setBackground(null);
 			this.powerListBtn.get(i).setEnabled(false);

@@ -7,7 +7,7 @@ import java.util.Random;
 import javax.swing.JLabel;
 
 import com.utbm.reversi.model.powers.ColorBombPower;
-import com.utbm.reversi.model.powers.FlintnSteelPower;
+import com.utbm.reversi.model.powers.FirePower;
 import com.utbm.reversi.model.powers.GiletJaunePower;
 import com.utbm.reversi.model.powers.LightningPower;
 import com.utbm.reversi.model.powers.Power;
@@ -172,7 +172,7 @@ public class Player {
 			this.powers.add(new ShieldPower(this,"./data/Shield_logo.png","./data/Shield_logo.png"));
 			break;
 		case 5:
-			this.powers.add(new FlintnSteelPower(this,"./data/FlintnSteel_logo.png","./data/FlintnSteel_logo.png"));
+			this.powers.add(new FirePower(this,"./data/Fire_logo.png","./data/Fire_logo.png"));
 			break;
 
 		default:
