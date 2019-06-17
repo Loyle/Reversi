@@ -450,6 +450,18 @@ public class ReversiFrame extends JFrame
 			scores.add(new JLabel(" "),gbc);
 		}
 
+		
+		// BACK TO MENU
+		// On crée un bouton qui renvoie vers le menu
+		gbc.gridx = 0;
+		decalage++;
+        gbc.gridy = decalage;
+        JButton replay = new JButton("Replay");
+        replay.setPreferredSize(new Dimension(125,30));
+		// On associe ce bouton à une fonction dans ReversiController
+        replay.addActionListener(e -> listener.onReplayClicked(replay));
+		scores.add(replay,gbc);
+		
 		// BACK TO MENU
 		// On crée un bouton qui renvoie vers le menu
 		gbc.gridx = 0;

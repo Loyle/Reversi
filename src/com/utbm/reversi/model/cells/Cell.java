@@ -21,6 +21,7 @@ public class Cell extends JButton {
 	private Color defaultColor;
 	private ImageIcon background;
 	private boolean isLock;
+	private boolean isObstacle;
 	private ArrayList<ImageIcon> hoverIcons;
 	
 	private int coordX;
@@ -32,6 +33,7 @@ public class Cell extends JButton {
 		this.defaultColor = this.color;
 		this.owner = null;
 		this.isLock = true;
+		this.isObstacle = false;
 		this.background = null;
 		this.hoverIcons = new ArrayList<ImageIcon>();		
 		this.setContentAreaFilled(false);
@@ -42,6 +44,7 @@ public class Cell extends JButton {
 		this.defaultColor = this.color;
 		this.owner = null;
 		this.isLock = true;
+		this.isObstacle = false;
 		this.background = null;
 		this.hoverIcons = new ArrayList<ImageIcon>();
 		this.setContentAreaFilled(false);
@@ -53,6 +56,7 @@ public class Cell extends JButton {
 		this.defaultColor = this.color;
 		this.owner = null;
 		this.isLock = true;
+		this.isObstacle = false;
 		this.hoverIcons = new ArrayList<ImageIcon>();
 		//this.setBorder(BorderFactory.createLineBorder(Color.white,1));
 		this.setContentAreaFilled(false);
@@ -89,7 +93,10 @@ public class Cell extends JButton {
 	 */
 	public void setOwner(Player owner) {
 		this.owner = owner;
-		this.color = this.owner.getColor();
+		if (this.owner != null) 
+		{
+			this.color = this.owner.getColor();
+		}
 	}
 	
 	public void clearOwner() {
@@ -114,6 +121,13 @@ public class Cell extends JButton {
 	}
 	public void setLock(boolean isLock) {
 		this.isLock = isLock;
+	}
+	
+	public boolean isObstacle() {
+		return isObstacle;
+	}
+	public void setObstacle(boolean isObstacle) {
+		this.isObstacle = isObstacle;
 	}
 	/**
 	 * @return the hoverIcon

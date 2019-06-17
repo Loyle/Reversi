@@ -56,10 +56,10 @@ public class RulesController
 	{
 		this.rulesFrame.getTextExplanation1().setText(" ");
 		this.rulesFrame.getTextExplanation2().setText(" ");
-		this.rulesFrame.getTextExplanation3().setText(" ");
-		this.rulesFrame.getTextExplanation4().setText("A treacherous pawn is a trapped disk.");
-		this.rulesFrame.getTextExplanation5().setText("When the opposite player turns it, it turns a line of his disks to your color.");
-		this.rulesFrame.getTextExplanation6().setText(" ");
+		this.rulesFrame.getTextExplanation3().setText("A treacherous pawn is a trapped disk.");
+		this.rulesFrame.getTextExplanation4().setText("When the opposite player turns it, it turns a line of his disks to your color.");
+		this.rulesFrame.getTextExplanation5().setText(" ");
+		this.rulesFrame.getTextExplanation6().setText("The visual on the pawn is not in the game.");
 		this.rulesFrame.getTextExplanation7().setText(" ");
 		
 		this.rulesFrame.getRulesPanel().setImage("Treacherous Pawn");
@@ -70,10 +70,10 @@ public class RulesController
 	{
 		this.rulesFrame.getTextExplanation1().setText(" ");
 		this.rulesFrame.getTextExplanation2().setText(" ");
-		this.rulesFrame.getTextExplanation3().setText(" ");
-		this.rulesFrame.getTextExplanation4().setText("A bomb pawn is a trapped disk.");
-		this.rulesFrame.getTextExplanation5().setText("When the opposite player turns it, it destroys a square of 3*3 of disks.");
-		this.rulesFrame.getTextExplanation6().setText(" ");
+		this.rulesFrame.getTextExplanation3().setText("A bomb pawn is a trapped disk.");
+		this.rulesFrame.getTextExplanation4().setText("When the opposite player turns it, it destroys a square of 3*3 of disks.");
+		this.rulesFrame.getTextExplanation5().setText(" ");
+		this.rulesFrame.getTextExplanation6().setText("The visual on the pawn is not in the game.");
 		this.rulesFrame.getTextExplanation7().setText(" ");
 		
 		this.rulesFrame.getRulesPanel().setImage("Bomb Pawn");

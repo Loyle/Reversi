@@ -266,7 +266,7 @@ public class Game {
 		{
 			for (int j=0;j<board.getSize();j++) 
 			{
-				if (this.board.getBoardCells()[i][j].getOwner() != null) 
+				if (this.board.getBoardCells()[i][j].getOwner() != null || this.board.getBoardCells()[i][j].isObstacle() == true) 
 				{
 					idx=idx+1;
 				}
@@ -300,13 +300,13 @@ public class Game {
 				FollowingRules rules = new FollowingRules(this, this.board.getBoardCells()[i][j]);
 				
 				// Si la case est vide et que l'on ne peut rien y poser, on incrémente idx1
-				if (this.board.getBoardCells()[i][j].getOwner() == null && rules.isPlayable() == false) 
+				if (this.board.getBoardCells()[i][j].getOwner() == null && rules.isPlayable() == false && this.board.getBoardCells()[i][j].isObstacle() == false) 
 				{
 					idx1=idx1+1;
 				}
 				
 				// Si la case est vide, on incrémente idx2
-				if (this.board.getBoardCells()[i][j].getOwner() == null) 
+				if (this.board.getBoardCells()[i][j].getOwner() == null && this.board.getBoardCells()[i][j].isObstacle() == false) 
 				{
 					idx2=idx2+1;
 				}
