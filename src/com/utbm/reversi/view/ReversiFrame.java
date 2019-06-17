@@ -72,6 +72,7 @@ public class ReversiFrame extends JFrame
 
 		this.initWindow();
 		this.game.run();
+		
 	}
 
 	public void initWindow() {

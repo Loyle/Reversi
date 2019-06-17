@@ -42,7 +42,7 @@ public class Game {
 		this.frame = frame;
 
 		// On crée un board de la taille voulu
-		this.board = new Board(size);
+		this.board = new Board(size,obstaclesNumber,trapsNumber);
 
 	}
 
