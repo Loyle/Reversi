@@ -30,7 +30,7 @@ public class Game {
 	private boolean isStart;
 	private int round;
 
-	public Game(ReversiFrame frame, int size, int powerNumber, int obstaclesNumber, int trapsNumber, int playerNumber) {
+	public Game(ReversiFrame frame, int size, int powerNumber, int obstaclesNumber, int trapsNumber) {
 		this.players = new ArrayList<Player>();
 		this.powers = new ArrayList<Power>();
 		this.isStart = false;
@@ -42,7 +42,7 @@ public class Game {
 		this.frame = frame;
 
 		// On crée un board de la taille voulu
-		this.board = new Board(size,obstaclesNumber,trapsNumber,playerNumber);
+		this.board = new Board(size,obstaclesNumber,trapsNumber);
 
 	}
 
