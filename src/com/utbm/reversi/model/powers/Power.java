@@ -1,5 +1,7 @@
 package com.utbm.reversi.model.powers;
 
+import java.util.ArrayList;
+
 import javax.swing.ImageIcon;
 
 import com.utbm.reversi.model.Game;
@@ -13,12 +15,15 @@ public abstract class Power {
 	private ImageIcon hoverIcon;
 	private int duration;
 	private Cell originCell;
+	private ArrayList<Thread> animations;
 	
 	public Power() {
 		this.owner = null;
 		this.icon = null;
 		this.hoverIcon = null;
 		this.setOriginCell(null);
+		
+		this.animations = new ArrayList<Thread>();
 	}
 	public Power(Player owner, ImageIcon icon, ImageIcon hoverIcon, int duration) {
 		this.owner = owner;
@@ -26,6 +31,8 @@ public abstract class Power {
 		this.hoverIcon = hoverIcon;
 		this.duration = duration;
 		this.setOriginCell(null);
+		
+		this.animations = new ArrayList<Thread>();
 	}
 	public Power(Player owner, String icon, String hoverIcon, int duration) {
 		this.owner = owner;
@@ -33,8 +40,9 @@ public abstract class Power {
 		this.hoverIcon = new ImageIcon(hoverIcon);
 		this.duration =  duration;
 		this.setOriginCell(null);
+		
+		this.animations = new ArrayList<Thread>();
 	}
-	
 	
 	
 	public void setOwner(Player owner) {

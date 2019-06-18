@@ -1,5 +1,7 @@
 package com.utbm.reversi.model.powers;
 
+import java.awt.Cursor;
+
 import javax.swing.ImageIcon;
 
 import com.utbm.reversi.model.Game;
@@ -27,6 +29,8 @@ public class SwitchPower extends Power {
 		if(cell.getOwner() !=null && cell.isEnabled()) {
 			if(!cell.getOwner().equals(game.getCurrentPlayer())) {
 				cell.setOwner(game.getCurrentPlayer());
+				
+				game.getFrame().setCursor(Cursor.getDefaultCursor());
 				return true;
 			}
 		} 

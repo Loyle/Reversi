@@ -1,5 +1,7 @@
 package com.utbm.reversi.model.powers;
 
+import java.awt.Cursor;
+
 import javax.swing.ImageIcon;
 
 import com.utbm.reversi.model.Game;
@@ -47,6 +49,7 @@ public class ColorBombPower extends Power {
 			xStart++;
 		}
 		
+		game.getFrame().setCursor(Cursor.getDefaultCursor());
 		return true; 
 
 	}

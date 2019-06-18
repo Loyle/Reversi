@@ -1,5 +1,7 @@
 package com.utbm.reversi.model.powers;
 
+import java.awt.Cursor;
+
 import javax.swing.ImageIcon;
 import com.utbm.reversi.model.Game;
 import com.utbm.reversi.model.Player;
@@ -58,8 +60,9 @@ public class GiletJaunePower extends Power {
 			}
 			yStart++;
 		}
+		
+		game.getFrame().setCursor(Cursor.getDefaultCursor());
 		return true;
-
 	}
 
 	@Override

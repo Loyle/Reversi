@@ -1,5 +1,6 @@
 package com.utbm.reversi.model.powers;
 
+import java.awt.Cursor;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -64,8 +65,8 @@ public class LightningPower extends Power {
 			yStart--;
 		}
 		
+		game.getFrame().setCursor(Cursor.getDefaultCursor());
 		return true;
-		
 	}
 	@Override
 	public void next(Game game) {

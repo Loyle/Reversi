@@ -43,6 +43,10 @@ public class Game {
 		this.players.remove(player);
 	}
 	
+	public ReversiFrame getFrame() {
+		return this.frame;
+	}
+	
 	public void addPower(Power power) {
 		this.powers.add(power);
 	}
@@ -127,7 +131,6 @@ public class Game {
 			ArrayList<Power> powersToDelete = new ArrayList<Power>();
 			for(Power power : powers) {
 				power.next(this);
-				System.out.println(power.getDuration());
 				if(power.getDuration()==0) {
 					powersToDelete.add(power);
 				}

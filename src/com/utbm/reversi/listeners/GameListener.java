@@ -1,6 +1,10 @@
 package com.utbm.reversi.listeners;
 
 import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -56,7 +60,7 @@ public class GameListener implements ActionListener {
 		for(Player player : this.controller.getGame().getPlayers()) {
 			player.getPowers().clear();
 		}
-		ReversiFrame newFrame = new ReversiFrame(this.controller.getGame().getBoard().getSize(),this.controller.getFrame().getGame().getPowerNumber(),this.controller.getFrame().getGame().getObstaclesNumber(),this.controller.getFrame().getGame().getTrapsNumber(),this.controller.getFrame().getGame().getPlayers());
+		ReversiFrame newFrame = new ReversiFrame(this.controller.getGame().getBoard().getSize(),this.controller.getGame().getPowerNumber(),this.controller.getGame().getObstaclesNumber(),this.controller.getGame().getTrapsNumber(),this.controller.getGame().getPlayers());
 		newFrame.setTitle("Reversi Game");
 
 		newFrame.setSize(700, 700);
@@ -71,11 +75,21 @@ public class GameListener implements ActionListener {
 	
 	public void onPowerClick(PowerButton btn) {
 		if(this.controller.getGame().getCurrentPlayer().getUsingPower() == null || this.controller.getGame().getCurrentPlayer().getUsingPower().equals(btn.getPower()) == false) {
+			for(PowerButton power : this.controller.getFrame().getPowerListBtn()) {
+				power.setBackground(null);
+			}
+			
 			this.controller.getGame().getCurrentPlayer().setUsingPower(btn.getPower());
 			btn.setBackground(Color.RED);
+			
+			Toolkit toolkit = Toolkit.getDefaultToolkit();
+			Image image = btn.getPower().getIcon().getImage();
+			Cursor cursor = toolkit.createCustomCursor(image , new Point(0,0), "img");
+			this.controller.getFrame().setCursor(cursor);
 		}
 		else {
 			this.controller.getGame().getCurrentPlayer().setUsingPower(null);
+			this.controller.getFrame().setCursor(Cursor.getDefaultCursor());
 			btn.setBackground(null);
 		}
 	}

@@ -366,14 +366,11 @@ public class ReversiFrame extends JFrame {
 	public JPanel getGamePanel() {
 		return gamePanel;
 	}
-
-	public GameListener getListener() {
-		return listener;
+	
+	public ArrayList<PowerButton> getPowerListBtn() {
+		return this.powerListBtn;
 	}
-
-	public Game getGame() {
-		return game;
-	}
+	
 	public void displayEndMessage() {
 		// On détruit le panel sur lequel la grille de Cell est générée
 		this.remove(this.getGamePanel());
@@ -400,7 +397,7 @@ public class ReversiFrame extends JFrame {
 		JButton replay = new JButton("Replay");
 		gbc.gridx=0;
 	    gbc.gridy=5;
-	    replay.addActionListener(e -> this.getListener().onReplayClicked(replay));
+	    replay.addActionListener(e -> this.listener.onReplayClicked(replay));
 	    end.add(replay,gbc);
 		this.getContentPane().add(end,BorderLayout.CENTER);
 		
@@ -408,7 +405,7 @@ public class ReversiFrame extends JFrame {
 		JButton endBackToMenu = new JButton("Back to Menu");
 		gbc.gridx=0;
 	    gbc.gridy=6;
-	    endBackToMenu.addActionListener(e -> this.getListener().onBackToMenuClicked(endBackToMenu));
+	    endBackToMenu.addActionListener(e -> this.listener.onBackToMenuClicked(endBackToMenu));
 	    end.add(endBackToMenu,gbc);
 	    
 	    

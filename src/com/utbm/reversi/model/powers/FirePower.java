@@ -1,5 +1,6 @@
 package com.utbm.reversi.model.powers;
 
+import java.awt.Cursor;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -37,9 +38,9 @@ public class FirePower extends Power {
 		cell.addHoverIcon(this.getHoverIcon());
 		cell.updateState();
 		
-		return true;
 		// afficher flamme sur la cell
-		
+		game.getFrame().setCursor(Cursor.getDefaultCursor());
+		return true;
 	}
 	@Override
 	public void next(Game game) {
@@ -92,8 +93,8 @@ public class FirePower extends Power {
 	public void stop(Game game) {
 		for(Cell cell : this.burningCell) {
 			cell.setEnabled(true);
-			cell.removeHoverIcon(this.getHoverIcon());
 			cell.clearOwner();
+			cell.getHoverIcon().clear();
 			cell.updateState();
 		}
 		this.burningCell.clear();

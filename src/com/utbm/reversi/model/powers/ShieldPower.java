@@ -1,5 +1,7 @@
 package com.utbm.reversi.model.powers;
 
+import java.awt.Cursor;
+
 import javax.swing.ImageIcon;
 
 import com.utbm.reversi.model.Game;
@@ -28,6 +30,8 @@ public class ShieldPower extends Power {
 				cell.setEnabled(false);
 				cell.addHoverIcon(this.getHoverIcon());
 				game.getBoard().getBoardCells()[cell.getCoordX()][cell.getCoordY()].updateState();
+				
+				game.getFrame().setCursor(Cursor.getDefaultCursor());
 				return true;
 			}			
 		}
