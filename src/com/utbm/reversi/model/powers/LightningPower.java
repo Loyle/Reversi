@@ -104,6 +104,7 @@ public class LightningPower extends Power {
 							if(xStart>=0 && yStart>=0) {
 								if(game.getBoard().getBoardCells()[xStart][yStart].isEnabled()) {
 									game.getBoard().getBoardCells()[xStart][yStart].setOwner(this.getOwner());
+									this.animations.add(game.getBoard().getBoardCells()[xStart][yStart].addHoverAnimation(this.getSprite()));
 									game.getBoard().getBoardCells()[xStart][yStart].updateState();
 									toAdd.add(game.getBoard().getBoardCells()[xStart][yStart]);																					
 								}
@@ -122,11 +123,10 @@ public class LightningPower extends Power {
 	@Override
 	public void stop(Game game) {
 		for(PowerAnimation animation : this.animations) {
-			for(Cell cell : this.lightningCell) {
-				cell.removeHoverIcon(animation);
-				cell.updateState();
-			}
 			animation.stop();
+		}
+		for(Cell cell : this.lightningCell) {
+			cell.updateState();
 		}
 		this.lightningCell.clear();
 	}

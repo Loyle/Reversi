@@ -131,23 +131,23 @@ public class Game {
 			ArrayList<Power> powersToDelete = new ArrayList<Power>();
 			for(Power power : powers) {
 				power.next(this);
-				if(power.getDuration()==0) {
+				if (power.getDuration() == 0) {
 					powersToDelete.add(power);
 				}
 			}
-			for(Power power : powersToDelete) {
+			for (Power power : powersToDelete) {
 				power.stop(this);
 			}
-				powers.removeAll(powersToDelete);
-				powersToDelete.clear();
-	
-				// Tour suivant
-				this.addRound();
-		
+			powers.removeAll(powersToDelete);
+			powersToDelete.clear();
 
-			//for each power en cours decrementer duration check état et remove array si == 0 créer stop power 
+			// Tour suivant
+			this.addRound();
 
-		}else {
+			// for each power en cours decrementer duration check état et remove array si ==
+			// 0 créer stop power
+
+		} else {
 			// Go to next player
 			this.currentPlayer = this.players.get(this.players.indexOf(this.currentPlayer) + 1);
 		}

@@ -156,7 +156,7 @@ public class Cell extends JButton {
 		this.hoverAnimations.add(animation);
 		return animation;
 	}
-	public void removeHoverIcon(PowerAnimation hoverAnimations) {
+	public void removeHoverAnimation(PowerAnimation hoverAnimations) {
 		this.hoverAnimations.remove(hoverAnimations);
 	}
 	

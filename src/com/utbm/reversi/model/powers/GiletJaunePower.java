@@ -80,6 +80,10 @@ public class GiletJaunePower extends Power {
 
 	@Override
 	public void stop(Game game) {
+		for(PowerAnimation animation : this.animations) {
+			animation.stop();
+		}
+		
 		int xStart = this.getOriginCell().getCoordX();
 		int yStart = this.getOriginCell().getCoordY();
 		if (this.getOriginCell().getCoordX() > 0) {
@@ -88,10 +92,6 @@ public class GiletJaunePower extends Power {
 
 		while (xStart <= this.getOriginCell().getCoordX() + 1 && xStart < game.getBoard().getSize()) {
 			game.getBoard().getBoardCells()[xStart][yStart].setEnabled(true);
-			for(PowerAnimation animation : this.animations) {
-				game.getBoard().getBoardCells()[xStart][yStart].removeHoverIcon(animation);
-				animation.stop();
-			}
 			game.getBoard().getBoardCells()[xStart][yStart].updateState();
 			xStart++;
 		}
@@ -103,10 +103,6 @@ public class GiletJaunePower extends Power {
 
 		while (yStart <= this.getOriginCell().getCoordY() + 1 && yStart < game.getBoard().getSize()) {
 			game.getBoard().getBoardCells()[xStart][yStart].setEnabled(true);
-			for(PowerAnimation animation : this.animations) {
-				game.getBoard().getBoardCells()[xStart][yStart].removeHoverIcon(animation);
-				animation.stop();
-			}
 			game.getBoard().getBoardCells()[xStart][yStart].updateState();
 			yStart++;
 		}

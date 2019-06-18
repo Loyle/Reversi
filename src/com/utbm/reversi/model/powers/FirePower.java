@@ -92,15 +92,23 @@ public class FirePower extends Power {
 	
 	@Override
 	public void stop(Game game) {
+		ArrayList<PowerAnimation> toDelete = new ArrayList<PowerAnimation>();
 		for(Cell cell : this.burningCell) {
 			cell.setEnabled(true);
 			cell.clearOwner();
 			for(PowerAnimation animation : cell.getHoverAnimations()) {
-				animation.stop();
+				toDelete.add(animation);
 			}
-			cell.getHoverAnimations().clear();
-			cell.updateState();
 		}
+		
+		for(PowerAnimation animation : toDelete) {
+			animation.stop();
+		}
+		
+		for(Cell cell : this.burningCell) {
+			cell.updateState();			
+		}
+		
 		this.burningCell.clear();
 	}
 	

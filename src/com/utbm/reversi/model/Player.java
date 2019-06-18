@@ -164,16 +164,16 @@ public class Player {
 			this.powers.add(new ColorBombPower(this,"./data/ColorBomb_logo.png",new Sprite("./data/ColorBomb_logo.png",1,50,100,100)));	
 			break;
 		case 2:
-			this.powers.add(new LightningPower(this,"./data/Lightning_logo.png",new Sprite("./data/Lightning_logo.png",1,50,100,100)));
+			this.powers.add(new LightningPower(this,"./data/Lightning_logo.png",new Sprite("./data/static_elec.png",10,75,50,50)));
 			break;
 		case 3:
-			this.powers.add(new GiletJaunePower(this,"./data/GiletJaune_logo.png",new Sprite("./data/GiletJaune_hover.png",1,1000,70,70)));
+			this.powers.add(new GiletJaunePower(this,"./data/GiletJaune_logo.png",new Sprite("./data/GiletJaune_hover.png",1,1000,100,100)));
 			break;
 		case 4:
-			this.powers.add(new ShieldPower(this,"./data/Shield_logo.png",new Sprite("./data/Shield_logo.png",1,50,100,100)));
+			this.powers.add(new ShieldPower(this,"./data/Shield_logo.png",new Sprite("./data/Shield_logo.png",1,1000,100,100)));
 			break;
 		case 5:
-			this.powers.add(new FirePower(this,"./data/Fire_logo.png",new Sprite("./data/fire_animation.png",4,50,28, 33)));
+			this.powers.add(new FirePower(this,"./data/Fire_logo.png",new Sprite("./data/fire_animation.png",4,75,28, 33)));
 			break;
 
 		default:

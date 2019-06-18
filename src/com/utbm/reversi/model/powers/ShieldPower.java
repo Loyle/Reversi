@@ -50,7 +50,7 @@ public class ShieldPower extends Power {
 	@Override
 	public void stop(Game game) {
 		this.getOriginCell().setEnabled(true);	
-		this.getOriginCell().removeHoverIcon(this.animation);
+		this.animation.stop();
 		this.getOriginCell().updateState();
 	}
 
