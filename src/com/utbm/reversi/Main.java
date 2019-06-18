@@ -15,8 +15,8 @@ public class Main {
 		// Ici, on crée un objet MenuFrame (c'est la fenêtre où le menu est affiché)
 		//==========================================================================================================================
 		
-		TestAnimation animation = new TestAnimation(3);
-		animation.run();
+		Thread ani = new Thread(new TestAnimation(3));
+		ani.start();
 		
 		final JFrame menuFrame = new MenuFrame();
 

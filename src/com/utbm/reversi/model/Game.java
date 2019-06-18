@@ -1,17 +1,7 @@
 package com.utbm.reversi.model;
 
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.util.ArrayList;
-import java.util.Collections;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 import com.utbm.reversi.controller.FollowingRules;
 import com.utbm.reversi.model.powers.Power;
 import com.utbm.reversi.view.ReversiFrame;
@@ -172,69 +162,7 @@ public class Game {
 		
 		if (isEnded() || isBlocked()) 
 		{
-			// On détruit le panel sur lequel la grille de Cell est générée
-			this.frame.remove(this.frame.getGamePanel());
-			// On crée un nouveau panel pour remplacer celui que l'on vient de supprimer
-			JPanel end = new JPanel();
-			end.setBackground(Color.lightGray);
-			end.setLayout(new GridBagLayout());
-	        GridBagConstraints gbc = new GridBagConstraints();
-	        // On associe un message de fin à ce panel en fonction de la manière dont la partie s'est terminée et en fonction du score
-			JLabel endMsg = new JLabel();
-			if (isEnded() == true) 
-	        gbc.gridx=0;
-	        gbc.gridy=0;
-			end.add(endMsg,gbc);
-			
-			// ADD SPACE
-			for (int addSpace = 1 ; addSpace<5 ; addSpace++) 
-	        {
-	            gbc.gridx = 0;
-	            gbc.gridy = addSpace;
-	            end.add(new JLabel(" "),gbc);
-	        }
-			
-			// Création du bouton permettant de recommencer la partie avec la même taille de grille
-			JButton replay = new JButton("Replay");
-			gbc.gridx=0;
-		    gbc.gridy=5;
-		    replay.addActionListener(e -> this.frame.getListener().onReplayClicked(replay));
-		    end.add(replay,gbc);
-			this.frame.getContentPane().add(end,BorderLayout.CENTER);
-			
-			// Création du bouton pour revenir au menu
-			JButton endBackToMenu = new JButton("Back to Menu");
-			gbc.gridx=0;
-		    gbc.gridy=6;
-		    endBackToMenu.addActionListener(e -> this.frame.getListener().onBackToMenuClicked(endBackToMenu));
-		    end.add(endBackToMenu,gbc);
-		    
-		    
-
-			endMsg.setText("BLOCKED !");
-		    
-		    if (isEnded()) 
-			{
-				endMsg.setText("END !");
-			}
-		    
-		    
-		    ArrayList<Integer> scores = new ArrayList<Integer>();
-		    for (Player player : this.players) 
-		    {
-		    	scores.add(player.getScore());
-		    }
-		    int max = Collections.max(scores);
-		    for (Player player : this.players) 
-		    {
-		    	if (max == player.getScore())
-		    	{
-					endMsg.setText(endMsg.getText()+" "+player.getName() + " wins !");
-		    	}
-		    }
-		    
-		    // On place le panel de fin là où se trouvait la grille
-			this.frame.getContentPane().add(end,BorderLayout.CENTER);
+			this.frame.displayEndMessage();
 		}
 	}
 		
