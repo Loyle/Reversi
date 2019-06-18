@@ -61,6 +61,7 @@ public class ReversiFrame extends JFrame {
 	public ReversiFrame(int size, int powerNumber, int obstaclesNumber, int trapsNumber, ArrayList<Player> players) {
 		this.game = new Game(this, size, powerNumber, obstaclesNumber, trapsNumber);
 
+
 		for (Player player : players) {
 			this.game.addPlayer(player);
 		}

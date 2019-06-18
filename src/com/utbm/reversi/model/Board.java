@@ -20,14 +20,18 @@ public class Board {
 					this.board[i][j]= new Cell(new ImageIcon("./data/grass.png"));	
 				}
 			}
-					
+			
+
 			int incrObstacles = 0;
+			int incrTraps = 0;
+			
+			
 			while (incrObstacles<obstaclesNumber) 
 			{
 				int randoX = new Random().nextInt(size);
 				int randoY = new Random().nextInt(size);
 
-				if (this.board[randoX][randoY].isEnabled() && this.board[randoX][randoY].getOwner()==null) 
+				if (this.board[randoX][randoY].isEnabled() && this.board[randoX][randoY].getOwner() == null) 
 				{
 					this.board[randoX][randoY] = new Cell(new Color(50,50,50));
 					this.board[randoX][randoY].addHoverIcon(new ImageIcon("./data/wall.png"));
@@ -36,18 +40,15 @@ public class Board {
 					incrObstacles++;
 				}
 			}	
-			
-			
-			int incrTraps = 0;
 			while (incrTraps<trapsNumber) 
 			{
 				int randoX = new Random().nextInt(size);
 				int randoY = new Random().nextInt(size);
 
-				if (this.board[randoX][randoY].isEnabled() && this.board[randoX][randoY].getOwner()==null) 
+				if (this.board[randoX][randoY].isEnabled() && this.board[randoX][randoY].getOwner() == null && this.board[randoX][randoY].isObstacle() == false) 
 				{
 					int whatTrap = new Random().nextInt(2);
-					if (whatTrap < 1) 
+					if (whatTrap <= 1) 
 					{
 						this.board[randoX][randoY]= new TrapCell(new ImageIcon("./data/grass.png"));
 					}
@@ -57,7 +58,7 @@ public class Board {
 					}
 					incrTraps++;
 				}
-			}				
+			}
 		}
 		
 		public int getSize() {
