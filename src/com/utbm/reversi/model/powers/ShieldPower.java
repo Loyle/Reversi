@@ -1,20 +1,24 @@
 package com.utbm.reversi.model.powers;
 
 import java.awt.Cursor;
-
 import javax.swing.ImageIcon;
 
+import com.utbm.reversi.animation.PowerAnimation;
+import com.utbm.reversi.animation.Sprite;
 import com.utbm.reversi.model.Game;
 import com.utbm.reversi.model.Player;
 import com.utbm.reversi.model.cells.Cell;
 
 public class ShieldPower extends Power {
+	private PowerAnimation animation;
 	
-	public ShieldPower(Player owner, ImageIcon icon, ImageIcon hoverIcon) {
-		super(owner,icon,hoverIcon,3);
+	public ShieldPower(Player owner, ImageIcon icon, Sprite sprite) {
+		super(owner,icon,sprite,3);
+		this.animation = null;
 	}
-	public ShieldPower(Player owner, String icon, String hoverIcon) {
-		super(owner,icon,hoverIcon,3);
+	public ShieldPower(Player owner, String icon, Sprite sprite) {
+		super(owner,icon,sprite,3);
+		this.animation = null;
 	}
 	
 	@Override
@@ -28,7 +32,7 @@ public class ShieldPower extends Power {
 		if(cell.getOwner()!=null) {
 			if(cell.getOwner().equals(this.getOwner())) {
 				cell.setEnabled(false);
-				cell.addHoverIcon(this.getHoverIcon());
+				this.animation = cell.addHoverAnimation(this.getSprite());
 				game.getBoard().getBoardCells()[cell.getCoordX()][cell.getCoordY()].updateState();
 				
 				game.getFrame().setCursor(Cursor.getDefaultCursor());
@@ -46,7 +50,7 @@ public class ShieldPower extends Power {
 	@Override
 	public void stop(Game game) {
 		this.getOriginCell().setEnabled(true);	
-		this.getOriginCell().removeHoverIcon(this.getHoverIcon());
+		this.getOriginCell().removeHoverIcon(this.animation);
 		this.getOriginCell().updateState();
 	}
 

@@ -1,20 +1,28 @@
 package com.utbm.reversi.model.powers;
 
 import java.awt.Cursor;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+
+import com.utbm.reversi.animation.PowerAnimation;
+import com.utbm.reversi.animation.Sprite;
 import com.utbm.reversi.model.Game;
 import com.utbm.reversi.model.Player;
 import com.utbm.reversi.model.cells.Cell;
 
 public class GiletJaunePower extends Power {
-
-	public GiletJaunePower(Player owner, ImageIcon icon, ImageIcon hoverIcon) {
-		super(owner, icon, hoverIcon, 5);
+	
+	private ArrayList<PowerAnimation> animations;
+	
+	public GiletJaunePower(Player owner, ImageIcon icon, Sprite sprite) {
+		super(owner, icon, sprite, 5);
+		this.animations = new ArrayList<PowerAnimation>();
 	}
 
-	public GiletJaunePower(Player owner, String icon, String hoverIcon) {
-		super(owner, icon, hoverIcon, 5);
+	public GiletJaunePower(Player owner, String icon, Sprite sprite) {
+		super(owner, icon, sprite, 5);
+		this.animations = new ArrayList<PowerAnimation>();
 	}
 
 	@Override
@@ -34,9 +42,9 @@ public class GiletJaunePower extends Power {
 			if (game.getBoard().getBoardCells()[xStart][yStart].isEnabled()) {
 				game.getBoard().getBoardCells()[xStart][yStart].setEnabled(false);
 				if (game.getBoard().getBoardCells()[xStart][yStart].getOwner() != null) {
-					game.getBoard().getBoardCells()[xStart][yStart].addHoverIcon(this.getHoverIcon());
+					this.animations.add(game.getBoard().getBoardCells()[xStart][yStart].addHoverAnimation(this.getSprite()));					
 				} else {
-					game.getBoard().getBoardCells()[xStart][yStart].addHoverIcon(this.getIcon());
+					this.animations.add(game.getBoard().getBoardCells()[xStart][yStart].addHoverAnimation(new Sprite("./data/GiletJaune_Logo.png",1,1000,100,100)));
 				}
 				game.getBoard().getBoardCells()[xStart][yStart].updateState();
 			}
@@ -52,9 +60,9 @@ public class GiletJaunePower extends Power {
 			if (game.getBoard().getBoardCells()[xStart][yStart].isEnabled()) {
 				game.getBoard().getBoardCells()[xStart][yStart].setEnabled(false);
 				if (game.getBoard().getBoardCells()[xStart][yStart].getOwner() != null) {
-					game.getBoard().getBoardCells()[xStart][yStart].addHoverIcon(this.getHoverIcon());
+					this.animations.add(game.getBoard().getBoardCells()[xStart][yStart].addHoverAnimation(this.getSprite()));
 				} else {
-					game.getBoard().getBoardCells()[xStart][yStart].addHoverIcon(this.getIcon());
+					this.animations.add(game.getBoard().getBoardCells()[xStart][yStart].addHoverAnimation(new Sprite("./data/GiletJaune_Logo.png",1,1000,100,100)));
 				}
 				game.getBoard().getBoardCells()[xStart][yStart].updateState();
 			}
@@ -72,7 +80,6 @@ public class GiletJaunePower extends Power {
 
 	@Override
 	public void stop(Game game) {
-
 		int xStart = this.getOriginCell().getCoordX();
 		int yStart = this.getOriginCell().getCoordY();
 		if (this.getOriginCell().getCoordX() > 0) {
@@ -81,10 +88,9 @@ public class GiletJaunePower extends Power {
 
 		while (xStart <= this.getOriginCell().getCoordX() + 1 && xStart < game.getBoard().getSize()) {
 			game.getBoard().getBoardCells()[xStart][yStart].setEnabled(true);
-			if (game.getBoard().getBoardCells()[xStart][yStart].getOwner() != null) {
-				game.getBoard().getBoardCells()[xStart][yStart].removeHoverIcon(this.getHoverIcon());
-			} else {
-				game.getBoard().getBoardCells()[xStart][yStart].removeHoverIcon(this.getIcon());
+			for(PowerAnimation animation : this.animations) {
+				game.getBoard().getBoardCells()[xStart][yStart].removeHoverIcon(animation);
+				animation.stop();
 			}
 			game.getBoard().getBoardCells()[xStart][yStart].updateState();
 			xStart++;
@@ -97,11 +103,12 @@ public class GiletJaunePower extends Power {
 
 		while (yStart <= this.getOriginCell().getCoordY() + 1 && yStart < game.getBoard().getSize()) {
 			game.getBoard().getBoardCells()[xStart][yStart].setEnabled(true);
-			game.getBoard().getBoardCells()[xStart][yStart].removeHoverIcon(this.getHoverIcon());
-			game.getBoard().getBoardCells()[xStart][yStart].removeHoverIcon(this.getIcon());
+			for(PowerAnimation animation : this.animations) {
+				game.getBoard().getBoardCells()[xStart][yStart].removeHoverIcon(animation);
+				animation.stop();
+			}
 			game.getBoard().getBoardCells()[xStart][yStart].updateState();
 			yStart++;
 		}
-
 	}
 }

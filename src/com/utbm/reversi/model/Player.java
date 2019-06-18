@@ -6,6 +6,7 @@ import java.util.Random;
 
 import javax.swing.JLabel;
 
+import com.utbm.reversi.animation.Sprite;
 import com.utbm.reversi.model.powers.ColorBombPower;
 import com.utbm.reversi.model.powers.FirePower;
 import com.utbm.reversi.model.powers.GiletJaunePower;
@@ -157,22 +158,22 @@ public class Player {
 		
 		switch (rando) {
 		case 0:
-			this.powers.add(new SwitchPower(this,"./data/Switch_logo.png",""));
+			this.powers.add(new SwitchPower(this,"./data/Switch_logo.png", new Sprite("./data/fire_animation.png",1,50,28,33)));
 			break;
 		case 1:
-			this.powers.add(new ColorBombPower(this,"./data/ColorBomb_logo.png","./data/ColorBomb_logo.png"));	
+			this.powers.add(new ColorBombPower(this,"./data/ColorBomb_logo.png",new Sprite("./data/ColorBomb_logo.png",1,50,100,100)));	
 			break;
 		case 2:
-			this.powers.add(new LightningPower(this,"./data/Lightning_logo.png","./data/Lightning_logo.png"));
+			this.powers.add(new LightningPower(this,"./data/Lightning_logo.png",new Sprite("./data/Lightning_logo.png",1,50,100,100)));
 			break;
 		case 3:
-			this.powers.add(new GiletJaunePower(this,"./data/GiletJaune_logo.png","./data/GiletJaune_hover.png"));
+			this.powers.add(new GiletJaunePower(this,"./data/GiletJaune_logo.png",new Sprite("./data/GiletJaune_hover.png",1,1000,70,70)));
 			break;
 		case 4:
-			this.powers.add(new ShieldPower(this,"./data/Shield_logo.png","./data/Shield_logo.png"));
+			this.powers.add(new ShieldPower(this,"./data/Shield_logo.png",new Sprite("./data/Shield_logo.png",1,50,100,100)));
 			break;
 		case 5:
-			this.powers.add(new FirePower(this,"./data/Fire_logo.png","./data/Fire_logo.png"));
+			this.powers.add(new FirePower(this,"./data/Fire_logo.png",new Sprite("./data/fire_animation.png",4,50,28, 33)));
 			break;
 
 		default:

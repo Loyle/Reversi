@@ -1,9 +1,7 @@
 package com.utbm.reversi.model.powers;
 
-import java.util.ArrayList;
-
 import javax.swing.ImageIcon;
-
+import com.utbm.reversi.animation.Sprite;
 import com.utbm.reversi.model.Game;
 import com.utbm.reversi.model.Player;
 import com.utbm.reversi.model.cells.Cell;
@@ -12,36 +10,29 @@ public abstract class Power {
 	
 	private Player owner;
 	private ImageIcon icon;
-	private ImageIcon hoverIcon;
+	private Sprite sprite;
 	private int duration;
 	private Cell originCell;
-	private ArrayList<Thread> animations;
 	
 	public Power() {
 		this.owner = null;
 		this.icon = null;
-		this.hoverIcon = null;
+		this.sprite = null;
 		this.setOriginCell(null);
-		
-		this.animations = new ArrayList<Thread>();
 	}
-	public Power(Player owner, ImageIcon icon, ImageIcon hoverIcon, int duration) {
+	public Power(Player owner, ImageIcon icon, Sprite sprite, int duration) {
 		this.owner = owner;
 		this.icon = icon;
-		this.hoverIcon = hoverIcon;
+		this.sprite = sprite;
 		this.duration = duration;
 		this.setOriginCell(null);
-		
-		this.animations = new ArrayList<Thread>();
 	}
-	public Power(Player owner, String icon, String hoverIcon, int duration) {
+	public Power(Player owner, String icon, Sprite sprite, int duration) {
 		this.owner = owner;
 		this.icon = new ImageIcon(icon);
-		this.hoverIcon = new ImageIcon(hoverIcon);
+		this.sprite = sprite;
 		this.duration =  duration;
 		this.setOriginCell(null);
-		
-		this.animations = new ArrayList<Thread>();
 	}
 	
 	
@@ -64,19 +55,21 @@ public abstract class Power {
 		this.duration = duration;
 	}
 	
-	public abstract boolean use(Game game, Cell cell);
-	public abstract void next(Game game);
-	public abstract void stop(Game game);
 	public Cell getOriginCell() {
 		return originCell;
 	}
 	public void setOriginCell(Cell originCell) {
 		this.originCell = originCell;
 	}
-	public ImageIcon getHoverIcon() {
-		return hoverIcon;
+	public Sprite getSprite() {
+		return sprite;
 	}
-	public void setHoverIcon(ImageIcon hoverIcon) {
-		this.hoverIcon = hoverIcon;
+	public void setSprite(Sprite sprite) {
+		this.sprite = sprite;
 	}
+	
+	
+	public abstract boolean use(Game game, Cell cell);
+	public abstract void next(Game game);
+	public abstract void stop(Game game);
 }

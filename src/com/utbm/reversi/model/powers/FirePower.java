@@ -3,9 +3,9 @@ package com.utbm.reversi.model.powers;
 import java.awt.Cursor;
 import java.util.ArrayList;
 import java.util.Random;
-
 import javax.swing.ImageIcon;
-
+import com.utbm.reversi.animation.PowerAnimation;
+import com.utbm.reversi.animation.Sprite;
 import com.utbm.reversi.model.Game;
 import com.utbm.reversi.model.Player;
 import com.utbm.reversi.model.cells.Cell;
@@ -14,13 +14,13 @@ public class FirePower extends Power {
 	
 	private ArrayList<Cell> burningCell;
 	
-	public FirePower(Player owner, ImageIcon icon, ImageIcon hoverIcon) {
-		super(owner,icon,hoverIcon,3);
+	public FirePower(Player owner, ImageIcon icon, Sprite sprite) {
+		super(owner,icon,sprite,3);
 		this.burningCell = new ArrayList<Cell>();
 	}
 	
-	public FirePower(Player owner, String icon, String hoverIcon) {
-		super(owner,icon,hoverIcon,3);
+	public FirePower(Player owner, String icon, Sprite sprite) {
+		super(owner,icon,sprite,3);
 		this.burningCell = new ArrayList<Cell>();
 	}
 	
@@ -35,7 +35,8 @@ public class FirePower extends Power {
 		this.burningCell.add(cell);
 		cell.setEnabled(false);
 		
-		cell.addHoverIcon(this.getHoverIcon());
+		cell.addHoverAnimation(this.getSprite());
+		
 		cell.updateState();
 		
 		// afficher flamme sur la cell
@@ -72,7 +73,7 @@ public class FirePower extends Power {
 						if( r <= 10) {	
 							if(xStart>=0 && yStart>=0) {
 								game.getBoard().getBoardCells()[xStart][yStart].setEnabled(false);
-								game.getBoard().getBoardCells()[xStart][yStart].addHoverIcon(this.getHoverIcon());
+								game.getBoard().getBoardCells()[xStart][yStart].addHoverAnimation(this.getSprite());
 								game.getBoard().getBoardCells()[xStart][yStart].updateState();
 								toAdd.add(game.getBoard().getBoardCells()[xStart][yStart]);								
 							}
@@ -94,7 +95,10 @@ public class FirePower extends Power {
 		for(Cell cell : this.burningCell) {
 			cell.setEnabled(true);
 			cell.clearOwner();
-			cell.getHoverIcon().clear();
+			for(PowerAnimation animation : cell.getHoverAnimations()) {
+				animation.stop();
+			}
+			cell.getHoverAnimations().clear();
 			cell.updateState();
 		}
 		this.burningCell.clear();

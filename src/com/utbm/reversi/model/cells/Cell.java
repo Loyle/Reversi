@@ -4,11 +4,14 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+import com.utbm.reversi.animation.PowerAnimation;
+import com.utbm.reversi.animation.Sprite;
 import com.utbm.reversi.model.Player;
 
 @SuppressWarnings("serial")
@@ -21,7 +24,7 @@ public class Cell extends JButton {
 	private ImageIcon background;
 	private boolean isLock;
 	private boolean isObstacle;
-	private ArrayList<ImageIcon> hoverIcons;
+	private ArrayList<PowerAnimation> hoverAnimations;
 	
 	private int coordX;
 	private int coordY;
@@ -34,7 +37,7 @@ public class Cell extends JButton {
 		this.isLock = true;
 		this.isObstacle = false;
 		this.background = null;
-		this.hoverIcons = new ArrayList<ImageIcon>();		
+		this.hoverAnimations = new ArrayList<PowerAnimation>();		
 		this.setContentAreaFilled(false);
 	}
 	public Cell(Color color) {
@@ -45,7 +48,7 @@ public class Cell extends JButton {
 		this.isLock = true;
 		this.isObstacle = false;
 		this.background = null;
-		this.hoverIcons = new ArrayList<ImageIcon>();
+		this.hoverAnimations = new ArrayList<PowerAnimation>();
 		this.setContentAreaFilled(false);
 	}
 	public Cell(ImageIcon background) {
@@ -56,7 +59,7 @@ public class Cell extends JButton {
 		this.owner = null;
 		this.isLock = true;
 		this.isObstacle = false;
-		this.hoverIcons = new ArrayList<ImageIcon>();
+		this.hoverAnimations = new ArrayList<PowerAnimation>();
 		//this.setBorder(BorderFactory.createLineBorder(Color.white,1));
 		this.setContentAreaFilled(false);
 	}
@@ -131,21 +134,33 @@ public class Cell extends JButton {
 	/**
 	 * @return the hoverIcon
 	 */
-	public ArrayList<ImageIcon> getHoverIcon() {
-		return this.hoverIcons;
+	public ArrayList<PowerAnimation> getHoverAnimations() {
+		return this.hoverAnimations;
 	}
-	/**
-	 * @param hoverIcon the hoverIcon to set
-	 */
-	public void addHoverIcon(ImageIcon hoverIcon) {
-		this.hoverIcons.add(hoverIcon);
+
+	public void addHoverAnimation(PowerAnimation hoverAnimations) {
+		Thread thread = new Thread(hoverAnimations);
+		thread.start();
+		this.hoverAnimations.add(hoverAnimations);
 	}
-	public void removeHoverIcon(ImageIcon hoverIcon) {
-		this.hoverIcons.remove(hoverIcon);
+	public PowerAnimation addHoverAnimation(Sprite sprite) {
+		int size = sprite.getSpriteSize();
+		BufferedImage[] buffer = new BufferedImage[size];
+		for(int i = 0; i < size; i++) {
+			buffer[i] = sprite.getSprite(i, 0);
+		}
+		
+		PowerAnimation animation = new PowerAnimation(buffer,this,sprite.getDuration());
+		Thread thread = new Thread(animation);
+		thread.start();
+		this.hoverAnimations.add(animation);
+		return animation;
+	}
+	public void removeHoverIcon(PowerAnimation hoverAnimations) {
+		this.hoverAnimations.remove(hoverAnimations);
 	}
 	
 	public void updateState() {
-		this.setBackground(this.defaultColor);
 		repaint();
 	}
 	
@@ -154,6 +169,8 @@ public class Cell extends JButton {
 	}
 	
 	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		
 		Graphics2D g2d = (Graphics2D)g;
 		
 		RenderingHints rh = new RenderingHints(
@@ -175,8 +192,8 @@ public class Cell extends JButton {
 			g2d.fillOval((this.getWidth()- (int)(this.getWidth() * 0.7)) / 2, (this.getHeight()- (int)(this.getHeight() * 0.7)) / 2, (int)(this.getWidth() * 0.7), (int)(this.getHeight() * 0.7));
 		}
 		
-		for(ImageIcon hoverIcon : this.hoverIcons) {
-			g2d.drawImage(hoverIcon.getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+		for(PowerAnimation hoverAnimations : this.hoverAnimations) {
+			g2d.drawImage(hoverAnimations.getSprite(), 0, 0, this.getWidth(), this.getHeight(), this);
 		}
 	}
 }

@@ -1,20 +1,19 @@
 package com.utbm.reversi.model.powers;
 
 import java.awt.Cursor;
-
 import javax.swing.ImageIcon;
-
+import com.utbm.reversi.animation.Sprite;
 import com.utbm.reversi.model.Game;
 import com.utbm.reversi.model.Player;
 import com.utbm.reversi.model.cells.Cell;
 
 public class ColorBombPower extends Power {
 	
-	public ColorBombPower(Player owner, ImageIcon icon, ImageIcon hoverIcon) {
-		super(owner,icon,hoverIcon,0);
+	public ColorBombPower(Player owner, ImageIcon icon, Sprite sprite) {
+		super(owner,icon,sprite,0);
 	}
-	public ColorBombPower(Player owner, String icon, String hoverIcon) {
-		super(owner,icon,hoverIcon,0);
+	public ColorBombPower(Player owner, String icon, Sprite sprite) {
+		super(owner,icon,sprite,0);
 	}
 	
 	@Override

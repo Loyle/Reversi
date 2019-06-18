@@ -1,17 +1,37 @@
 package com.utbm.reversi.animation;
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 public class Sprite {
-	private static BufferedImage spritesheet ;
-    private static final int TILE_SIZE_x = 28;
-    private static final int TILE_SIZE_y= 33;
-
-    public static BufferedImage loadSprite(String file) {
-
+	private BufferedImage spritesheet;
+    private int sizeX;
+    private int sizeY;
+    private int duration;
+    private int spriteSize;
+    
+    public Sprite(String img, int spriteSize, int duration, int sizeX, int sizeY) {
+    	this.sizeX = sizeX;
+    	this.sizeY = sizeY;
+    	this.duration = duration;
+    	this.spriteSize = spriteSize;
+    	
+    	this.loadSprite(img);
+    }
+    public Sprite(ImageIcon img, int spriteSize, int duration, int sizeX, int sizeY) {
+    	this.sizeX = sizeX;
+    	this.sizeY = sizeY;
+    	this.duration = duration;
+    	this.spriteSize = spriteSize;
+    	
+    	this.loadSprite(img);
+    }
+    
+    public void loadSprite(String file) {
         BufferedImage sprite = null;
 
         try {
@@ -20,15 +40,56 @@ public class Sprite {
             e.printStackTrace();
         }
 
-        return sprite;
+        this.spritesheet = sprite;
     }
+    
+    public void loadSprite(ImageIcon file) {
 
-    public static BufferedImage getSprite(int xGrid, int yGrid) {
+		BufferedImage bufferedImage = new BufferedImage(file.getImage().getWidth(null), file.getImage().getHeight(null),
+				BufferedImage.TYPE_INT_RGB);
 
-        if (spritesheet == null) {
-        	spritesheet = loadSprite("./data/fire.png");
-        }
+		Graphics g = bufferedImage.createGraphics();
+		g.drawImage(file.getImage(), 0, 0, null);
+		g.dispose();
 
-        return spritesheet.getSubimage(xGrid * TILE_SIZE_x, yGrid * TILE_SIZE_y, TILE_SIZE_x, TILE_SIZE_y);
-    }
+		try {
+			ImageIO.write(bufferedImage, "png", new File("a.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.spritesheet = bufferedImage;
+	}
+
+	public BufferedImage getSprite(int xGrid, int yGrid) {
+		return this.spritesheet.getSubimage(xGrid * this.sizeX, yGrid * this.sizeY, this.sizeX, this.sizeY);
+	}
+
+	/**
+	 * @return the duration
+	 */
+	public int getDuration() {
+		return duration;
+	}
+
+	/**
+	 * @param duration the duration to set
+	 */
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+
+	/**
+	 * @return the spriteSize
+	 */
+	public int getSpriteSize() {
+		return spriteSize;
+	}
+
+	/**
+	 * @param spriteSize the spriteSize to set
+	 */
+	public void setSpriteSize(int spriteSize) {
+		this.spriteSize = spriteSize;
+	}
 }
