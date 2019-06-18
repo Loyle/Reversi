@@ -9,6 +9,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -372,6 +373,70 @@ public class ReversiFrame extends JFrame {
 
 	public Game getGame() {
 		return game;
+	}
+	public void displayEndMessage() {
+		// On détruit le panel sur lequel la grille de Cell est générée
+		this.remove(this.getGamePanel());
+		// On crée un nouveau panel pour remplacer celui que l'on vient de supprimer
+		JPanel end = new JPanel();
+		end.setBackground(Color.lightGray);
+		end.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        // On associe un message de fin à ce panel en fonction de la manière dont la partie s'est terminée et en fonction du score
+		JLabel endMsg = new JLabel();
+        gbc.gridx=0;
+        gbc.gridy=0;
+		end.add(endMsg,gbc);
+		
+		// ADD SPACE
+		for (int addSpace = 1 ; addSpace<5 ; addSpace++) 
+        {
+            gbc.gridx = 0;
+            gbc.gridy = addSpace;
+            end.add(new JLabel(" "),gbc);
+        }
+		
+		// Création du bouton permettant de recommencer la partie avec la même taille de grille
+		JButton replay = new JButton("Replay");
+		gbc.gridx=0;
+	    gbc.gridy=5;
+	    replay.addActionListener(e -> this.getListener().onReplayClicked(replay));
+	    end.add(replay,gbc);
+		this.getContentPane().add(end,BorderLayout.CENTER);
+		
+		// Création du bouton pour revenir au menu
+		JButton endBackToMenu = new JButton("Back to Menu");
+		gbc.gridx=0;
+	    gbc.gridy=6;
+	    endBackToMenu.addActionListener(e -> this.getListener().onBackToMenuClicked(endBackToMenu));
+	    end.add(endBackToMenu,gbc);
+	    
+	    
+
+		/*endMsg.setText("BLOCKED !");
+	    
+	    if (isEnded()) 
+		{
+			endMsg.setText("END !");
+		}*/
+	    
+	    
+	    ArrayList<Integer> scores = new ArrayList<Integer>();
+	    for (Player player : this.game.getPlayers()) 
+	    {
+	    	scores.add(player.getScore());
+	    }
+	    int max = Collections.max(scores);
+	    for (Player player : this.game.getPlayers()) 
+	    {
+	    	if (max == player.getScore())
+	    	{
+				endMsg.setText(endMsg.getText()+" "+player.getName() + " wins !");
+	    	}
+	    }
+	    
+	    // On place le panel de fin là où se trouvait la grille
+		this.getContentPane().add(end,BorderLayout.CENTER);
 	}
 
 }
