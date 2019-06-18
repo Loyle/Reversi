@@ -137,7 +137,8 @@ public class MenuFrame extends JFrame
         
         gbcAddPlayers.gridx = 0;
         gbcAddPlayers.gridy = 0;
-        addPlayersPanel.add(playersTextField,gbcAddPlayers);   
+        addPlayersPanel.add(playersTextField,gbcAddPlayers);
+        
         
         gbcAddPlayers.gridx = 1;
         gbcAddPlayers.gridy = 0;

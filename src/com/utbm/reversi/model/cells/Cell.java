@@ -6,7 +6,6 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.util.ArrayList;
 
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -149,6 +148,11 @@ public class Cell extends JButton {
 		this.setBackground(this.defaultColor);
 		repaint();
 	}
+	
+	public void setDefaultBackground(ImageIcon img) {
+		this.background = img;
+	}
+	
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D)g;
 		

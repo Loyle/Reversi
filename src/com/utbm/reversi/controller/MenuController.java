@@ -31,7 +31,8 @@ public class MenuController
 	{
 		int powerNumber = this.menuFrame.getPowersComboBox().getSelectedIndex();
 		int obstaclesNumber = this.menuFrame.getObstaclesComboBox().getSelectedIndex();
-		int trapsNumber = this.menuFrame.getTrapsComboBox().getSelectedIndex();
+		int trapsNumber = this.menuFrame.getTrapsComboBox().getSelectedIndex();		
+		
 		if (this.players.size() < 2) 
 		{
 			this.menuFrame.getError().setText("There is not enough players to start the game !");

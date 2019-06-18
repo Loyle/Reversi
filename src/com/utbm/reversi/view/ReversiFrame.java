@@ -1,4 +1,5 @@
 package com.utbm.reversi.view;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -9,6 +10,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,30 +25,31 @@ import com.utbm.reversi.model.cells.Cell;
 import com.utbm.reversi.model.powers.Power;
 
 @SuppressWarnings("serial")
-public class ReversiFrame extends JFrame 
-{
+public class ReversiFrame extends JFrame {
 	// On stock la class board qui gère le board
-	//private Board board;
+	// private Board board;
 
-	// On crée un premier panel sur lequel seront affichés les boutons (il est en paramètre pour gérer la fin d'une partie)
+	// On crée un premier panel sur lequel seront affichés les boutons (il est en
+	// paramètre pour gérer la fin d'une partie)
 	private JPanel gamePanel;
 
-	// On crée un label et un panel associés au tour du joueur (le panel est la case qui change de couleur, le texte est "tour des :")
+	// On crée un label et un panel associés au tour du joueur (le panel est la case
+	// qui change de couleur, le texte est "tour des :")
 	private JLabel label;
 	private JPanel whoPlayColor;
 	private JLabel whoPlayName;
 
-
-
 	// On crée le bouton de retour vers le menu
 	private JButton backToMenu;
 
-	// On crée 2 constantes (la taille d'une case à la génération et la largeur de la bande sur le côté où les scores sont affichés)
+	// On crée 2 constantes (la taille d'une case à la génération et la largeur de
+	// la bande sur le côté où les scores sont affichés)
 	private int cellSize;
 	private int scoresSizeX;
 	private int buttonSizeY;
 
-	// La taille de la grille est stockée dans un int, qui change à chaque génération d'une nouvelle fenêtre
+	// La taille de la grille est stockée dans un int, qui change à chaque
+	// génération d'une nouvelle fenêtre
 	private int gridSize;
 
 	private GameListener listener;
@@ -55,13 +58,10 @@ public class ReversiFrame extends JFrame
 
 	private ArrayList<PowerButton> powerListBtn;
 
-
-	public ReversiFrame(int size , int powerNumber, int obstaclesNumber, int trapsNumber, ArrayList<Player> players) 
-	{
+	public ReversiFrame(int size, int powerNumber, int obstaclesNumber, int trapsNumber, ArrayList<Player> players) {
 		this.game = new Game(this, size, powerNumber, obstaclesNumber, trapsNumber);
 
-		for (Player player : players) 
-		{
+		for (Player player : players) {
 			this.game.addPlayer(player);
 		}
 
@@ -72,7 +72,7 @@ public class ReversiFrame extends JFrame
 
 		this.initWindow();
 		this.game.run();
-		
+
 	}
 
 	public void initWindow() {
@@ -109,7 +109,51 @@ public class ReversiFrame extends JFrame
 		this.gamePanel.setBackground(Color.black);
 		this.gamePanel.setLayout(new GridLayout(this.gridSize,this.gridSize,0,0));
 
-
+		
+		
+		// On place les premiers jetons au milieu
+		int startX = (this.game.getBoard().getSize() / 2) - (this.game.getPlayers().size() / 2);
+		int startY = (this.game.getBoard().getSize() / 2) - (this.game.getPlayers().size() / 2) + this.game.getPlayers().size() - 1;
+		
+		int sizeX = (this.game.getBoard().getSize() / 2) - (this.game.getPlayers().size() / 2) + this.game.getPlayers().size();
+		int sizeY = (this.game.getBoard().getSize() / 2) - (this.game.getPlayers().size() / 2);
+		
+		int pl = 0;
+		for (int i = startX; i <= ((this.game.getBoard().getSize() / 2) + (this.game.getPlayers().size() - 2)); i++) {
+			int x = i;
+			int y = startY;
+			
+			while (x < sizeX && y >= sizeY) {
+				cells[x][y].setOwner(this.game.getPlayers().get(pl));	
+				if(cells[x][y].isEnabled()) {
+					cells[x][y].setEnabled(true);
+					cells[x][y].setDefaultBackground(new ImageIcon("./data/grass.png"));
+				}
+				x++;
+				y--;
+			}
+			
+			if(pl > 0) {
+				x = startX;
+				y = (this.game.getBoard().getSize() / 2) - (this.game.getPlayers().size() / 2) + (pl - 1);
+				while (x < sizeX && y >= sizeY) {
+					cells[x][y].setOwner(this.game.getPlayers().get(pl));	
+					if(cells[x][y].isEnabled()) {
+						cells[x][y].setEnabled(true);
+						cells[x][y].setDefaultBackground(new ImageIcon("./data/grass.png"));
+					}
+					x++;
+					y--;
+				}
+			}
+			
+			pl++;
+			if (pl >= this.game.getPlayers().size()) {
+				pl = 0;
+			}
+		}
+		
+		
 		// On génère la grille de Cell
 		for (int j=0; j < this.gridSize ; j++) 
 		{
@@ -121,229 +165,6 @@ public class ReversiFrame extends JFrame
 				// On stocke dans la Cell sa position dans le tableau
 				cells[i][j].setCoordX(i);
 				cells[i][j].setCoordY(j);
-
-				// On place les premiers jetons au milieu
-
-				switch (this.game.getPlayers().size()) 
-				{
-				case 2:
-					if ((i > -2 + this.gridSize/2) && (i < 1 + this.gridSize/2) && (j > -2 + this.gridSize/2) && (j < 1 + this.gridSize/2)) 
-					{
-						if (((i == -1 + this.gridSize/2) && (j == -1 + this.gridSize/2)) || ((i == this.gridSize/2) && (j == this.gridSize/2))) 
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(0));
-						}
-						else 
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(1));
-						}
-					}
-					break;
-				case 3:
-					if ((i > -2 + this.gridSize/2) && (i < 2 + this.gridSize/2) && (j > -2 + this.gridSize/2) && (j < 2 + this.gridSize/2)) 
-					{
-						if (((i == -1 + this.gridSize/2) && (j == -1 + this.gridSize/2)) || ((i == this.gridSize/2) && (j == this.gridSize/2)) || ((i == 1+this.gridSize/2) && (j == 1+this.gridSize/2))) 
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(0));
-						}
-						else if (((i == this.gridSize/2) && (j == -1 + this.gridSize/2)) || ((i == 1+this.gridSize/2) && (j == this.gridSize/2)) || ((i == -1+this.gridSize/2) && (j == 1+this.gridSize/2))) 
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(1));
-						}
-						else
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(2));
-						}
-					}
-					break;
-				case 4 :
-					if ((i > -3 + this.gridSize/2) && (i < 2 + this.gridSize/2) && (j > -3 + this.gridSize/2) && (j < 2 + this.gridSize/2)) 
-					{
-						if (((i == -2 + this.gridSize/2) && (j == -2 + this.gridSize/2)) || ((i == -1 +this.gridSize/2) && (j == -1 +this.gridSize/2)) || ((i == this.gridSize/2) && (j == this.gridSize/2)) || ((i == 1+this.gridSize/2) && (j == 1+this.gridSize/2))) 
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(0));
-						}
-						else if (((i == -1 + this.gridSize/2) && (j == -2 + this.gridSize/2)) || ((i == this.gridSize/2) && (j == -1 +this.gridSize/2)) || ((i == 1+this.gridSize/2) && (j == this.gridSize/2)) || ((i == -2+this.gridSize/2) && (j == 1+this.gridSize/2)))    
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(1));
-						}
-						else if (((i == this.gridSize/2) && (j == -2 + this.gridSize/2)) || ((i == 1+this.gridSize/2) && (j == -1 +this.gridSize/2)) || ((i == -2+this.gridSize/2) && (j == this.gridSize/2)) || ((i == -1+this.gridSize/2) && (j == 1+this.gridSize/2)))
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(2));
-						}
-						else
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(3));
-						}
-					}
-					break;
-				case 5 :
-					if ((i > -3 + this.gridSize/2) && (i < 3 + this.gridSize/2) && (j > -3 + this.gridSize/2) && (j < 3 + this.gridSize/2)) 
-					{
-						if (((i == -2 + this.gridSize/2) && (j == -2 + this.gridSize/2)) || ((i == -1 +this.gridSize/2) && (j == -1 +this.gridSize/2)) || ((i == this.gridSize/2) && (j == this.gridSize/2)) || ((i == 1+this.gridSize/2) && (j == 1+this.gridSize/2)) || ((i == 2+this.gridSize/2) && (j == 2+this.gridSize/2))) 
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(0));
-						}
-						else if (((i == -1 + this.gridSize/2) && (j == -2 + this.gridSize/2)) || ((i == this.gridSize/2) && (j == -1 +this.gridSize/2)) || ((i == 1+this.gridSize/2) && (j == this.gridSize/2)) || ((i == 2+this.gridSize/2) && (j == 1+this.gridSize/2)) || ((i == -2+this.gridSize/2) && (j == 2+this.gridSize/2)))    
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(1));
-						}
-						else if(((i == this.gridSize/2) && (j == -2 + this.gridSize/2)) || ((i == 1 +this.gridSize/2) && (j == -1 +this.gridSize/2)) || ((i == 2+this.gridSize/2) && (j == this.gridSize/2)) || ((i == -2+this.gridSize/2) && (j == 1+this.gridSize/2)) || ((i == -1+this.gridSize/2) && (j == 2+this.gridSize/2))) 
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(2));
-						}
-						else if(((i == 1+this.gridSize/2) && (j == -2 + this.gridSize/2)) || ((i == 2+this.gridSize/2) && (j == -1 +this.gridSize/2)) || ((i == -2+this.gridSize/2) && (j == this.gridSize/2)) || ((i == -1+this.gridSize/2) && (j == 1+this.gridSize/2)) || ((i == this.gridSize/2) && (j == 2+this.gridSize/2))) 
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(3));
-						}
-						else
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(4));
-						}
-					}
-					break;
-				case 6 :
-					if ((i > -4 + this.gridSize/2) && (i < 3 + this.gridSize/2) && (j > -4 + this.gridSize/2) && (j < 3 + this.gridSize/2)) 
-					{
-						if (((i == -3 + this.gridSize/2) && (j == -3 + this.gridSize/2)) || ((i == -2 +this.gridSize/2) && (j == -2 +this.gridSize/2)) || ((i == -1+this.gridSize/2) && (j == -1+this.gridSize/2)) || ((i == this.gridSize/2) && (j == this.gridSize/2)) || ((i == 1+this.gridSize/2) && (j == 1+this.gridSize/2)) || ((i == 2+this.gridSize/2) && (j == 2+this.gridSize/2))) 
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(0));
-						}
-						else if (((i == -2 + this.gridSize/2) && (j == -3 + this.gridSize/2)) || ((i == -1 +this.gridSize/2) && (j == -2 +this.gridSize/2)) || ((i == this.gridSize/2) && (j == -1+this.gridSize/2)) || ((i == 1+this.gridSize/2) && (j == this.gridSize/2)) || ((i == 2+this.gridSize/2) && (j == 1+this.gridSize/2)) || ((i == -3+this.gridSize/2) && (j == 2+this.gridSize/2))) 
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(1));
-						}
-						else if (((i == -1 + this.gridSize/2) && (j == -3 + this.gridSize/2)) || ((i == this.gridSize/2) && (j == -2 +this.gridSize/2)) || ((i == 1+this.gridSize/2) && (j == -1+this.gridSize/2)) || ((i == 2+this.gridSize/2) && (j == this.gridSize/2)) || ((i == -3+this.gridSize/2) && (j == 1+this.gridSize/2)) || ((i == -2+this.gridSize/2) && (j == 2+this.gridSize/2))) 
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(2));
-						}
-						else if (((i == this.gridSize/2) && (j == -3 + this.gridSize/2)) || ((i == 1 + this.gridSize/2) && (j == -2 +this.gridSize/2)) || ((i == 2 + this.gridSize/2) && (j == -1+this.gridSize/2)) || ((i == -3+this.gridSize/2) && (j == this.gridSize/2)) || ((i == -2+this.gridSize/2) && (j == 1+this.gridSize/2)) || ((i == -1+this.gridSize/2) && (j == 2+this.gridSize/2))) 
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(3));
-						}
-						else if (((i == 1+this.gridSize/2) && (j == -3 + this.gridSize/2)) || ((i == 2 + this.gridSize/2) && (j == -2 +this.gridSize/2)) || ((i == -3 + this.gridSize/2) && (j == -1+this.gridSize/2)) || ((i == -2+this.gridSize/2) && (j == this.gridSize/2)) || ((i == -1+this.gridSize/2) && (j == 1+this.gridSize/2)) || ((i == this.gridSize/2) && (j == 2+this.gridSize/2))) 
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(4));
-						}
-						else
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(5));
-						}
-					}
-					break;
-				case 7 :
-					if ((i > -4 + this.gridSize/2) && (i < 4 + this.gridSize/2) && (j > -4 + this.gridSize/2) && (j < 4 + this.gridSize/2)) 
-					{
-						if (((i == -3 + this.gridSize/2) && (j == -3 + this.gridSize/2)) || ((i == -2 +this.gridSize/2) && (j == -2 +this.gridSize/2)) || ((i == -1+this.gridSize/2) && (j == -1+this.gridSize/2)) || ((i == this.gridSize/2) && (j == this.gridSize/2)) || ((i == 1+this.gridSize/2) && (j == 1+this.gridSize/2)) || ((i == 2+this.gridSize/2) && (j == 2+this.gridSize/2)) || ((i == 3+this.gridSize/2) && (j == 3+this.gridSize/2))) 
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(0));
-						}
-						else if (((i == -2 + this.gridSize/2) && (j == -3 + this.gridSize/2)) || ((i == -1 +this.gridSize/2) && (j == -2 +this.gridSize/2)) || ((i == this.gridSize/2) && (j == -1+this.gridSize/2)) || ((i == 1 + this.gridSize/2) && (j == this.gridSize/2)) || ((i == 2+this.gridSize/2) && (j == 1+this.gridSize/2)) || ((i == 3+this.gridSize/2) && (j == 2+this.gridSize/2)) || ((i == -3+this.gridSize/2) && (j == 3+this.gridSize/2))) 
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(1));
-						}
-						else if (((i == -1 + this.gridSize/2) && (j == -3 + this.gridSize/2)) || ((i == this.gridSize/2) && (j == -2 +this.gridSize/2)) || ((i == 1+this.gridSize/2) && (j == -1+this.gridSize/2)) || ((i == 2 + this.gridSize/2) && (j == this.gridSize/2)) || ((i == 3+this.gridSize/2) && (j == 1+this.gridSize/2)) || ((i == -3+this.gridSize/2) && (j == 2+this.gridSize/2)) || ((i == -2+this.gridSize/2) && (j == 3+this.gridSize/2))) 
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(2));
-						}
-						else if (((i == this.gridSize/2) && (j == -3 + this.gridSize/2)) || ((i == 1+this.gridSize/2) && (j == -2 +this.gridSize/2)) || ((i == 2+this.gridSize/2) && (j == -1+this.gridSize/2)) || ((i == 3 + this.gridSize/2) && (j == this.gridSize/2)) || ((i == -3+this.gridSize/2) && (j == 1+this.gridSize/2)) || ((i == -2+this.gridSize/2) && (j == 2+this.gridSize/2)) || ((i == -1+this.gridSize/2) && (j == 3+this.gridSize/2))) 
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(3));
-						}
-						else if (((i == 1 + this.gridSize/2) && (j == -3 + this.gridSize/2)) || ((i == 2+this.gridSize/2) && (j == -2 +this.gridSize/2)) || ((i == 3+this.gridSize/2) && (j == -1+this.gridSize/2)) || ((i == -3 + this.gridSize/2) && (j == this.gridSize/2)) || ((i == -2+this.gridSize/2) && (j == 1+this.gridSize/2)) || ((i == -1+this.gridSize/2) && (j == 2+this.gridSize/2)) || ((i == this.gridSize/2) && (j == 3+this.gridSize/2))) 
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(4));
-						}
-						else if (((i == 2 + this.gridSize/2) && (j == -3 + this.gridSize/2)) || ((i == 3+this.gridSize/2) && (j == -2 +this.gridSize/2)) || ((i == -3+this.gridSize/2) && (j == -1+this.gridSize/2)) || ((i == -2 + this.gridSize/2) && (j == this.gridSize/2)) || ((i == -1+this.gridSize/2) && (j == 1+this.gridSize/2)) || ((i == this.gridSize/2) && (j == 2+this.gridSize/2)) || ((i == 1+this.gridSize/2) && (j == 3+this.gridSize/2))) 
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(5));
-						}
-						else
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(6));
-						}
-					}
-					break;
-				case 8 :
-					if ((i > -5 + this.gridSize/2) && (i < 4 + this.gridSize/2) && (j > -5 + this.gridSize/2) && (j < 4 + this.gridSize/2)) 
-					{
-						if (((i == -4 + this.gridSize/2) && (j == -4 + this.gridSize/2)) || ((i == -3 +this.gridSize/2) && (j == -3 +this.gridSize/2)) || ((i == -2+this.gridSize/2) && (j == -2+this.gridSize/2)) || ((i == -1+this.gridSize/2) && (j == -1+this.gridSize/2)) || ((i == this.gridSize/2) && (j == this.gridSize/2)) || ((i == 1+this.gridSize/2) && (j == 1+this.gridSize/2)) || ((i == 2+this.gridSize/2) && (j == 2+this.gridSize/2)) || ((i == 3+this.gridSize/2) && (j == 3+this.gridSize/2))) 
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(0));
-						}
-						else if (((i == -3 + this.gridSize/2) && (j == -4 + this.gridSize/2)) || ((i == -2 +this.gridSize/2) && (j == -3 +this.gridSize/2)) || ((i == -1+this.gridSize/2) && (j == -2+this.gridSize/2)) || ((i == this.gridSize/2) && (j == -1+this.gridSize/2)) || ((i == 1+this.gridSize/2) && (j == this.gridSize/2)) || ((i == 2+this.gridSize/2) && (j == 1+this.gridSize/2)) || ((i == 3+this.gridSize/2) && (j == 2+this.gridSize/2)) || ((i == -4+this.gridSize/2) && (j == 3+this.gridSize/2))) 
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(1));
-						}
-						else if (((i == -2 + this.gridSize/2) && (j == -4 + this.gridSize/2)) || ((i == -1 +this.gridSize/2) && (j == -3 +this.gridSize/2)) || ((i == this.gridSize/2) && (j == -2+this.gridSize/2)) || ((i == 1+this.gridSize/2) && (j == -1+this.gridSize/2)) || ((i == 2+this.gridSize/2) && (j == this.gridSize/2)) || ((i == 3+this.gridSize/2) && (j == 1+this.gridSize/2)) || ((i == -4+this.gridSize/2) && (j == 2+this.gridSize/2)) || ((i == -3+this.gridSize/2) && (j == 3+this.gridSize/2))) 
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(2));
-						}
-						else if (((i == -1 + this.gridSize/2) && (j == -4 + this.gridSize/2)) || ((i == this.gridSize/2) && (j == -3 +this.gridSize/2)) || ((i == 1+this.gridSize/2) && (j == -2+this.gridSize/2)) || ((i == 2+this.gridSize/2) && (j == -1+this.gridSize/2)) || ((i == 3+this.gridSize/2) && (j == this.gridSize/2)) || ((i == -4+this.gridSize/2) && (j == 1+this.gridSize/2)) || ((i == -3+this.gridSize/2) && (j == 2+this.gridSize/2)) || ((i == -2+this.gridSize/2) && (j == 3+this.gridSize/2))) 
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(3));
-						}
-						else if (((i == this.gridSize/2) && (j == -4 + this.gridSize/2)) || ((i == 1+this.gridSize/2) && (j == -3 +this.gridSize/2)) || ((i == 2+this.gridSize/2) && (j == -2+this.gridSize/2)) || ((i == 3+this.gridSize/2) && (j == -1+this.gridSize/2)) || ((i == -4+this.gridSize/2) && (j == this.gridSize/2)) || ((i == -3+this.gridSize/2) && (j == 1+this.gridSize/2)) || ((i == -2+this.gridSize/2) && (j == 2+this.gridSize/2)) || ((i == -1+this.gridSize/2) && (j == 3+this.gridSize/2))) 
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(4));
-						}
-						else if (((i == 1+this.gridSize/2) && (j == -4 + this.gridSize/2)) || ((i == 2+this.gridSize/2) && (j == -3 +this.gridSize/2)) || ((i == 3+this.gridSize/2) && (j == -2+this.gridSize/2)) || ((i == -4+this.gridSize/2) && (j == -1+this.gridSize/2)) || ((i == -3+this.gridSize/2) && (j == this.gridSize/2)) || ((i == -2+this.gridSize/2) && (j == 1+this.gridSize/2)) || ((i == -1+this.gridSize/2) && (j == 2+this.gridSize/2)) || ((i == this.gridSize/2) && (j == 3+this.gridSize/2))) 
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(5));
-						}
-						else if (((i == 2+this.gridSize/2) && (j == -4 + this.gridSize/2)) || ((i == 3+this.gridSize/2) && (j == -3 +this.gridSize/2)) || ((i == -4+this.gridSize/2) && (j == -2+this.gridSize/2)) || ((i == -3+this.gridSize/2) && (j == -1+this.gridSize/2)) || ((i == -2+this.gridSize/2) && (j == this.gridSize/2)) || ((i == -1+this.gridSize/2) && (j == 1+this.gridSize/2)) || ((i == this.gridSize/2) && (j == 2+this.gridSize/2)) || ((i == 1+this.gridSize/2) && (j == 3+this.gridSize/2))) 
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(6));
-						}
-						else
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(7));
-						}
-					}
-					break;
-				case 9 :
-					if ((i > -5 + this.gridSize/2) && (i < 5 + this.gridSize/2) && (j > -5 + this.gridSize/2) && (j < 5 + this.gridSize/2)) 
-					{
-						if (((i == -4 + this.gridSize/2) && (j == -4 + this.gridSize/2)) || ((i == -3 +this.gridSize/2) && (j == -3 +this.gridSize/2)) || ((i == -2+this.gridSize/2) && (j == -2+this.gridSize/2)) || ((i == -1+this.gridSize/2) && (j == -1+this.gridSize/2)) || ((i == this.gridSize/2) && (j == this.gridSize/2)) || ((i == 1+this.gridSize/2) && (j == 1+this.gridSize/2)) || ((i == 2+this.gridSize/2) && (j == 2+this.gridSize/2)) || ((i == 3+this.gridSize/2) && (j == 3+this.gridSize/2)) || ((i == 4+this.gridSize/2) && (j == 4+this.gridSize/2))) 
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(0));
-						}
-						else if (((i == -3 + this.gridSize/2) && (j == -4 + this.gridSize/2)) || ((i == -2 +this.gridSize/2) && (j == -3 +this.gridSize/2)) || ((i == -1+this.gridSize/2) && (j == -2+this.gridSize/2)) || ((i == this.gridSize/2) && (j == -1+this.gridSize/2)) || ((i == 1+this.gridSize/2) && (j == this.gridSize/2)) || ((i == 2+this.gridSize/2) && (j == 1+this.gridSize/2)) || ((i == 3+this.gridSize/2) && (j == 2+this.gridSize/2)) || ((i == 4+this.gridSize/2) && (j == 3+this.gridSize/2)) || ((i == -4+this.gridSize/2) && (j == 4+this.gridSize/2))) 
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(1));
-						}
-						else if (((i == -2 + this.gridSize/2) && (j == -4 + this.gridSize/2)) || ((i == -1 +this.gridSize/2) && (j == -3 +this.gridSize/2)) || ((i == this.gridSize/2) && (j == -2+this.gridSize/2)) || ((i == 1+this.gridSize/2) && (j == -1+this.gridSize/2)) || ((i == 2+this.gridSize/2) && (j == this.gridSize/2)) || ((i == 3+this.gridSize/2) && (j == 1+this.gridSize/2)) || ((i == 4+this.gridSize/2) && (j == 2+this.gridSize/2)) || ((i == -4+this.gridSize/2) && (j == 3+this.gridSize/2)) || ((i == -3+this.gridSize/2) && (j == 4+this.gridSize/2))) 
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(2));
-						}
-						else if (((i == -1 + this.gridSize/2) && (j == -4 + this.gridSize/2)) || ((i == this.gridSize/2) && (j == -3 +this.gridSize/2)) || ((i == 1+this.gridSize/2) && (j == -2+this.gridSize/2)) || ((i == 2+this.gridSize/2) && (j == -1+this.gridSize/2)) || ((i == 3+this.gridSize/2) && (j == this.gridSize/2)) || ((i == 4+this.gridSize/2) && (j == 1+this.gridSize/2)) || ((i == -4+this.gridSize/2) && (j == 2+this.gridSize/2)) || ((i == -3+this.gridSize/2) && (j == 3+this.gridSize/2)) || ((i == -2+this.gridSize/2) && (j == 4+this.gridSize/2))) 
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(3));
-						}
-						else if (((i == this.gridSize/2) && (j == -4 + this.gridSize/2)) || ((i == 1+this.gridSize/2) && (j == -3 +this.gridSize/2)) || ((i == 2+this.gridSize/2) && (j == -2+this.gridSize/2)) || ((i == 3+this.gridSize/2) && (j == -1+this.gridSize/2)) || ((i == 4+this.gridSize/2) && (j == this.gridSize/2)) || ((i == -4+this.gridSize/2) && (j == 1+this.gridSize/2)) || ((i == -3+this.gridSize/2) && (j == 2+this.gridSize/2)) || ((i == -2+this.gridSize/2) && (j == 3+this.gridSize/2)) || ((i == -1+this.gridSize/2) && (j == 4+this.gridSize/2))) 
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(4));
-						}
-						else if (((i == 1+this.gridSize/2) && (j == -4 + this.gridSize/2)) || ((i == 2+this.gridSize/2) && (j == -3 +this.gridSize/2)) || ((i == 3+this.gridSize/2) && (j == -2+this.gridSize/2)) || ((i == 4+this.gridSize/2) && (j == -1+this.gridSize/2)) || ((i == -4+this.gridSize/2) && (j == this.gridSize/2)) || ((i == -3+this.gridSize/2) && (j == 1+this.gridSize/2)) || ((i == -2+this.gridSize/2) && (j == 2+this.gridSize/2)) || ((i == -1+this.gridSize/2) && (j == 3+this.gridSize/2)) || ((i == this.gridSize/2) && (j == 4+this.gridSize/2))) 
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(5));
-						}
-						else if (((i == 2+this.gridSize/2) && (j == -4 + this.gridSize/2)) || ((i == 3+this.gridSize/2) && (j == -3 +this.gridSize/2)) || ((i == 4+this.gridSize/2) && (j == -2+this.gridSize/2)) || ((i == -4+this.gridSize/2) && (j == -1+this.gridSize/2)) || ((i == -3+this.gridSize/2) && (j == this.gridSize/2)) || ((i == -2+this.gridSize/2) && (j == 1+this.gridSize/2)) || ((i == -1+this.gridSize/2) && (j == 2+this.gridSize/2)) || ((i == this.gridSize/2) && (j == 3+this.gridSize/2)) || ((i == 1+this.gridSize/2) && (j == 4+this.gridSize/2))) 
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(6));
-						}
-						else if (((i == 3+this.gridSize/2) && (j == -4 + this.gridSize/2)) || ((i == 4+this.gridSize/2) && (j == -3 +this.gridSize/2)) || ((i == -4+this.gridSize/2) && (j == -2+this.gridSize/2)) || ((i == -3+this.gridSize/2) && (j == -1+this.gridSize/2)) || ((i == -2+this.gridSize/2) && (j == this.gridSize/2)) || ((i == -1+this.gridSize/2) && (j == 1+this.gridSize/2)) || ((i == this.gridSize/2) && (j == 2+this.gridSize/2)) || ((i == 1+this.gridSize/2) && (j == 3+this.gridSize/2)) || ((i == 2+this.gridSize/2) && (j == 4+this.gridSize/2))) 
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(7));
-						}
-						else
-						{
-							cells[i][j].setOwner(this.game.getPlayers().get(8));
-						}
-					}
-					break;
-				}
-
 
 				// On ajoute la Cell au panel
 				this.gamePanel.add(cells[i][j]);
@@ -504,20 +325,18 @@ public class ReversiFrame extends JFrame
 	}
 
 	public void setFixedSize(Component c, int width, int height) {
-		c.setPreferredSize(new Dimension(width,height));
-		c.setMinimumSize(new Dimension(width,height));
-		c.setMaximumSize(new Dimension(width,height));
+		c.setPreferredSize(new Dimension(width, height));
+		c.setMinimumSize(new Dimension(width, height));
+		c.setMaximumSize(new Dimension(width, height));
 		c.setSize(width, height);
 	}
 
 	// ======================================================================================
 	// Fonction qui actualise l'état des cores dans les label
 	// ======================================================================================
-	public void updateScores(ArrayList<Player> players) 
-	{
-		for (Player player : players) 
-		{
-			player.getScoreLabel().setText("Score de "+player.getName()+" : "+player.getScore());
+	public void updateScores(ArrayList<Player> players) {
+		for (Player player : players) {
+			player.getScoreLabel().setText("Score de " + player.getName() + " : " + player.getScore());
 		}
 	}
 
@@ -528,13 +347,13 @@ public class ReversiFrame extends JFrame
 
 	public void updatePlayerPowers(Player player) {
 		int i = 0;
-		for(i = 0; i < this.game.getPowerNumber(); i++) {
+		for (i = 0; i < this.game.getPowerNumber(); i++) {
 			this.powerListBtn.get(i).setIcon(null);
 			this.powerListBtn.get(i).setBackground(null);
 			this.powerListBtn.get(i).setEnabled(false);
 		}
 		i = 0;
-		for(Power power : player.getPowers()) {
+		for (Power power : player.getPowers()) {
 			this.powerListBtn.get(i).setIcon(power.getIcon());
 			this.powerListBtn.get(i).setPower(power);
 			this.powerListBtn.get(i).setEnabled(true);
@@ -553,8 +372,5 @@ public class ReversiFrame extends JFrame
 	public Game getGame() {
 		return game;
 	}
-
-
-
 
 }

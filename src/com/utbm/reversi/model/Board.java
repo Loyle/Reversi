@@ -46,14 +46,14 @@ public class Board {
 
 				if (this.board[randoX][randoY].isEnabled() && this.board[randoX][randoY].getOwner()==null) 
 				{
-					int whatTrap = new Random().nextInt(1);
-					if (whatTrap==0) 
+					int whatTrap = new Random().nextInt(2);
+					if (whatTrap < 1) 
 					{
 						this.board[randoX][randoY]= new TrapCell(new ImageIcon("./data/grass.png"));
 					}
 					else 
 					{
-						this.board[randoX][randoY]= new BombCell(new ImageIcon("./data/grass.png"));
+						this.board[randoX][randoY]= new BombCell(new ImageIcon("./data/grass.png"), this);
 					}
 					incrTraps++;
 				}
