@@ -33,7 +33,7 @@ public class Cell extends JButton {
 		this.color = Color.GREEN;
 		this.defaultColor = this.color;
 		this.owner = null;
-		this.isLock = true;
+		this.isLock = false;
 		this.background = null;
 		this.hoverAnimations = new ArrayList<PowerAnimation>();		
 		this.setContentAreaFilled(false);
@@ -43,7 +43,7 @@ public class Cell extends JButton {
 		this.color = color;
 		this.defaultColor = this.color;
 		this.owner = null;
-		this.isLock = true;
+		this.isLock = false;
 		this.background = null;
 		this.hoverAnimations = new ArrayList<PowerAnimation>();
 		this.setContentAreaFilled(false);
@@ -54,7 +54,7 @@ public class Cell extends JButton {
 		this.background = background;
 		this.defaultColor = this.color;
 		this.owner = null;
-		this.isLock = true;
+		this.isLock = false;
 		this.hoverAnimations = new ArrayList<PowerAnimation>();
 		//this.setBorder(BorderFactory.createLineBorder(Color.white,1));
 		this.setContentAreaFilled(false);
