@@ -20,12 +20,12 @@ public class SwitchPower extends Power {
 	public boolean use(Game game, Cell cell) {
 		// TODO Auto-generated method stub
 		/*
-		 * Use -> change juste un pion de couleur 
+		 * Use -> change the color of only one pawn
 		 */
 		this.setOriginCell(cell);
 		int currentX = cell.getCoordX();
 		int currentY = cell.getCoordY();
-		if(cell.getOwner() !=null && cell.isEnabled()) {
+		if(cell.getOwner() !=null && cell.isEnabled() && !cell.isLock()) {
 			if(!cell.getOwner().equals(game.getCurrentPlayer())) {
 				cell.setOwner(game.getCurrentPlayer());
 				

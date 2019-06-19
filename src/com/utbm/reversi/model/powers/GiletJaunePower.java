@@ -30,48 +30,54 @@ public class GiletJaunePower extends Power {
 	public boolean use(Game game, Cell cell) {
 		// TODO Auto-generated method stub
 		/*
-		 * Use -> block 5 case ne croix
+		 * Use -> block 5 cells with a cross-design 
 		 */
-		this.setOriginCell(cell);
-		int xStart = cell.getCoordX();
-		int yStart = cell.getCoordY();
-		if (cell.getCoordX() > 0) {
-			xStart--;
-		}
 
-		while (xStart <= cell.getCoordX() + 1 && xStart < game.getBoard().getSize()) {
-			if (game.getBoard().getBoardCells()[xStart][yStart].isEnabled()) {
-				game.getBoard().getBoardCells()[xStart][yStart].setEnabled(false);
-				if (game.getBoard().getBoardCells()[xStart][yStart].getOwner() != null) {
-					this.animations.add(game.getBoard().getBoardCells()[xStart][yStart].addHoverAnimation(this.getSprite()));					
-				} else {
-					this.animations.add(game.getBoard().getBoardCells()[xStart][yStart].addHoverAnimation(this.fullJacketSprite));
-				}
-				game.getBoard().getBoardCells()[xStart][yStart].updateState();
+		if(cell.isLock()) {
+			return false;
+		}else {
+			this.setOriginCell(cell);
+			int xStart = cell.getCoordX();
+			int yStart = cell.getCoordY();
+			if (cell.getCoordX() > 0) {
+				xStart--;
 			}
-			xStart++;
-		}
-
-		if (cell.getCoordY() > 0) {
-			yStart--;
-		}
-		xStart = cell.getCoordX();
-
-		while (yStart <= cell.getCoordY() + 1 && yStart < game.getBoard().getSize()) {
-			if (game.getBoard().getBoardCells()[xStart][yStart].isEnabled()) {
-				game.getBoard().getBoardCells()[xStart][yStart].setEnabled(false);
-				if (game.getBoard().getBoardCells()[xStart][yStart].getOwner() != null) {
-					this.animations.add(game.getBoard().getBoardCells()[xStart][yStart].addHoverAnimation(this.getSprite()));
-				} else {
-					this.animations.add(game.getBoard().getBoardCells()[xStart][yStart].addHoverAnimation(this.fullJacketSprite));
+			
+			while (xStart <= cell.getCoordX() + 1 && xStart < game.getBoard().getSize()) {
+				if (game.getBoard().getBoardCells()[xStart][yStart].isEnabled()&& !game.getBoard().getBoardCells()[xStart][yStart].isLock()) {
+					game.getBoard().getBoardCells()[xStart][yStart].setLock(true);
+					if (game.getBoard().getBoardCells()[xStart][yStart].getOwner() != null) {
+						this.animations.add(game.getBoard().getBoardCells()[xStart][yStart].addHoverAnimation(this.getSprite()));					
+					} else {
+						this.animations.add(game.getBoard().getBoardCells()[xStart][yStart].addHoverAnimation(new Sprite("./data/GiletJaune_Logo.png",1,1000,100,100)));
+					}
+					game.getBoard().getBoardCells()[xStart][yStart].updateState();
 				}
-				game.getBoard().getBoardCells()[xStart][yStart].updateState();
+				xStart++;
 			}
-			yStart++;
+			
+			if (cell.getCoordY() > 0) {
+				yStart--;
+			}
+			xStart = cell.getCoordX();
+			
+			while (yStart <= cell.getCoordY() + 1 && yStart < game.getBoard().getSize()) {
+				if (game.getBoard().getBoardCells()[xStart][yStart].isEnabled()&& !game.getBoard().getBoardCells()[xStart][yStart].isLock()) {
+					game.getBoard().getBoardCells()[xStart][yStart].setLock(true);
+					if (game.getBoard().getBoardCells()[xStart][yStart].getOwner() != null ) {
+						this.animations.add(game.getBoard().getBoardCells()[xStart][yStart].addHoverAnimation(this.getSprite()));
+					} else {
+						this.animations.add(game.getBoard().getBoardCells()[xStart][yStart].addHoverAnimation(new Sprite("./data/GiletJaune_Logo.png",1,1000,100,100)));
+					}
+					game.getBoard().getBoardCells()[xStart][yStart].updateState();
+
+				}
+				yStart++;
+			}
+			
+			game.getFrame().setCursor(Cursor.getDefaultCursor());
+			return true;
 		}
-		
-		game.getFrame().setCursor(Cursor.getDefaultCursor());
-		return true;
 	}
 
 	@Override
@@ -92,7 +98,7 @@ public class GiletJaunePower extends Power {
 		}
 
 		while (xStart <= this.getOriginCell().getCoordX() + 1 && xStart < game.getBoard().getSize()) {
-			game.getBoard().getBoardCells()[xStart][yStart].setEnabled(true);
+			game.getBoard().getBoardCells()[xStart][yStart].setLock(false);
 			game.getBoard().getBoardCells()[xStart][yStart].updateState();
 			xStart++;
 		}
@@ -103,7 +109,7 @@ public class GiletJaunePower extends Power {
 		xStart = this.getOriginCell().getCoordX();
 
 		while (yStart <= this.getOriginCell().getCoordY() + 1 && yStart < game.getBoard().getSize()) {
-			game.getBoard().getBoardCells()[xStart][yStart].setEnabled(true);
+			game.getBoard().getBoardCells()[xStart][yStart].setLock(false);
 			game.getBoard().getBoardCells()[xStart][yStart].updateState();
 			yStart++;
 		}

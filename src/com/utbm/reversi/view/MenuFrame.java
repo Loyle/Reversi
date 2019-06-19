@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -26,10 +27,11 @@ public class MenuFrame extends JFrame
 	 */
 	private static final long serialVersionUID = 1328756640538025065L;
 
-	// On associe un controller à la fenêtre
+	// Associating controller to the frame
 	private final MenuController menuController = new MenuController(this);
-	// On déclare un panel dans lequel on placera les boutons du menu
+	// Declaring a panel is which one we will place Menu Buttons
 	private JPanel menuBackground;
+	private JPanel registeredPlayersPanel;
 	private JLabel gridSizeLabel;
 	private JSlider gridSizeSlider;
 	private JLabel playersLabel1;
@@ -41,7 +43,7 @@ public class MenuFrame extends JFrame
 	private JComboBox<String> powersComboBox;
 	private JComboBox<String> obstaclesComboBox;
 	private JComboBox<String> trapsComboBox;
-    private String[] couleurs = {"White","Black","Red","Blue","Yellow","Green","Gray","Pink","Cyan","Orange"};
+	private GridBagConstraints gbcRegisteredPlayers;
 	
 	public MenuFrame() 
 	{
@@ -58,7 +60,7 @@ public class MenuFrame extends JFrame
         // ==========================================================================================================================
 		// BACKGROUND
         // ==========================================================================================================================
-		// Création du panel
+		// Creating panel
 		this.menuBackground = new JPanel();
 		this.menuBackground.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -71,7 +73,7 @@ public class MenuFrame extends JFrame
 		final JButton play = new JButton("Play");
 		final JButton rules = new JButton("Rules");
 		int decalage=0;
-		// On associe le clic sur le bouton play à cette fonction du controller
+		// Clicking on the play button is associated with this controller function
 		play.addActionListener(e -> menuController.onPlayClicked(play));
         gbc.gridx = 0;
         decalage++;
@@ -122,7 +124,7 @@ public class MenuFrame extends JFrame
         this.menuBackground.add(playersPanel,gbc);
         
         
-        // SOUS-PANEL : AJOUT DES JOUEURS
+        // SUB-PANEL : ADDING PLAYERS
         JPanel addPlayersPanel = new JPanel();
         addPlayersPanel.setBackground(Color.white);
 
@@ -144,10 +146,13 @@ public class MenuFrame extends JFrame
         gbcAddPlayers.gridy = 0;
         addPlayersPanel.add(new JLabel("     "),gbcAddPlayers);
         
-        this.playersComboBox = new JComboBox<String>(couleurs); 
+        
+        JButton playersColor = new JButton(" ");
+        playersColor.setBackground(Color.black);
         gbcAddPlayers.gridx = 2;
         gbcAddPlayers.gridy = 0;
-        addPlayersPanel.add(playersComboBox,gbcAddPlayers);
+        addPlayersPanel.add(playersColor,gbcAddPlayers);
+        playersColor.addActionListener(e -> menuController.onColorClicked(playersColor));
 
         gbcAddPlayers.gridx = 3;
         gbcAddPlayers.gridy = 0;
@@ -175,39 +180,45 @@ public class MenuFrame extends JFrame
         
         
         
-        
-        
-
-        // SOUS-PANEL : JOUEURS ENREGISTRÉS
-        JPanel registeredPlayersPanel = new JPanel();
-        registeredPlayersPanel.setLayout(new GridBagLayout());
-		GridBagConstraints gbcRegisteredPlayers = new GridBagConstraints();
-        registeredPlayersPanel.setBackground(Color.white);
-
+        // SOUS-PANEL : REGISTERED PLAYERS
+        JPanel msgRegistered = new JPanel();
+        msgRegistered.setBackground(Color.white);
+        msgRegistered.setLayout(new GridBagLayout());
+		GridBagConstraints gbcMsgRegistered = new GridBagConstraints();
         gbcPlayers.gridx = 0;
         gbcPlayers.gridy = 1;
         playersPanel.add(new JLabel("     "),gbcPlayers);
-        
         gbcPlayers.gridx = 0;
         gbcPlayers.gridy = 2;
-        playersPanel.add(registeredPlayersPanel,gbcPlayers);
+        playersPanel.add(msgRegistered,gbcPlayers);
+        gbcMsgRegistered.gridx=0;
+        gbcMsgRegistered.gridy=0;
+        msgRegistered.add(new JLabel("Registered players :"),gbcMsgRegistered);
         
-        JLabel label = new JLabel("Registered players :");
-        gbcRegisteredPlayers.gridx = 0;
-        gbcRegisteredPlayers.gridy = 0;
-        registeredPlayersPanel.add(label,gbcRegisteredPlayers);
-        this.playersLabel1 = new JLabel(" ");
+        
+
+
+        // SOUS-PANEL : JOUEURS ENREGISTRÉS
+        this.registeredPlayersPanel = new JPanel();
+        registeredPlayersPanel.setLayout(new GridBagLayout());
+		this.gbcRegisteredPlayers = new GridBagConstraints();
+        registeredPlayersPanel.setBackground(Color.white);
+
+        
         gbcRegisteredPlayers.gridx = 0;
         gbcRegisteredPlayers.gridy = 1;
-        registeredPlayersPanel.add(this.playersLabel1,gbcRegisteredPlayers);
-        this.playersLabel2 = new JLabel(" ");
+        registeredPlayersPanel.add(new JLabel(" "),gbcRegisteredPlayers);
         gbcRegisteredPlayers.gridx = 0;
         gbcRegisteredPlayers.gridy = 2;
-        registeredPlayersPanel.add(this.playersLabel2,gbcRegisteredPlayers);
-        this.playersLabel3 = new JLabel(" ");
+        registeredPlayersPanel.add(new JLabel(" "),gbcRegisteredPlayers);
         gbcRegisteredPlayers.gridx = 0;
         gbcRegisteredPlayers.gridy = 3;
-        registeredPlayersPanel.add(this.playersLabel3,gbcRegisteredPlayers);
+        registeredPlayersPanel.add(new JLabel(" "),gbcRegisteredPlayers);
+        
+
+        gbcPlayers.gridx = 0;
+        gbcPlayers.gridy = 3;
+        playersPanel.add(registeredPlayersPanel,gbcPlayers);
         
         
         
@@ -338,33 +349,33 @@ public class MenuFrame extends JFrame
         // ==========================================================================================================================
         // GRID SIZE
         // ==========================================================================================================================
-        // On crée un panel dans lequel on mettra la Slide Bar et la label qui affiche la taille de la grille
+        // We create a panel in which we will put the Slide Bar and the label that displays the size of the grid
         final JPanel gridSizePanel = new JPanel();
         gridSizePanel.setLayout(new GridBagLayout());
 		GridBagConstraints gbcGridSize = new GridBagConstraints();
 		
         gridSizePanel.setBackground(Color.white);
-        // On crée la un contour et un titre pour ce panel
+        // We create the outline and title for this panel
         gridSizePanel.setBorder(BorderFactory.createTitledBorder("Grid Size :"));
-        // On lui donne la dimension voulue
+        // It is given the required dimension
         gridSizePanel.setPreferredSize(new Dimension(400, 100));
         gbc.gridx = 0;
         decalage++;
         gbc.gridy = decalage;
         this.menuBackground.add(gridSizePanel,gbc);
         
-        // On crée la slide bar
+        // Creating slide bar
         this.gridSizeSlider = new JSlider();
-        // Minimum et maximum des valeurs possibles dans la slide bar
+        // Minimum and maximum possible values in the slide bar
         this.gridSizeSlider.setMinimum(4);
         this.gridSizeSlider.setMaximum(20);
-        // Afficher la graduation
+        // Display the scale
         this.gridSizeSlider.setPaintTicks(true);
-        // Afficher les nombres
+        // Display numbers
         this.gridSizeSlider.setPaintLabels(true);
-        // Taille graduation
+        // Size betwenn graduation
         this.gridSizeSlider.setMinorTickSpacing(2);
-        // Écart entre la valeur minimum et la valeur maximum
+        // Difference between the minimum and maximum value
         this.gridSizeSlider.setMajorTickSpacing(16);
         // Valeur de base
         this.gridSizeSlider.setValue(8);
@@ -379,14 +390,14 @@ public class MenuFrame extends JFrame
         gridSizePanel.add(new JLabel("               "),gbcGridSize);
         
         
-        // Label qui affiche la taille de la grille
+        // Label which displays the size of the board
         this.gridSizeLabel = new JLabel();
         this.gridSizeLabel.setText("Value : 08");
         gbcGridSize.gridx = 2;
         gbcGridSize.gridy = 0;
         gridSizePanel.add(this.gridSizeLabel,gbcGridSize);
         
-        // On associe le changement d'état de la slide bar à la fonction du controller
+        // We associate the change of state of the slide bar with the controller function
         gridSizeSlider.addChangeListener(new ChangeListener()
         {
             public void stateChanged(ChangeEvent event)
@@ -426,9 +437,6 @@ public class MenuFrame extends JFrame
 		return playersComboBox;
 	}
 
-	public String[] getCouleurs() {
-		return couleurs;
-	}
 
 	public JLabel getError() {
 		return error;
@@ -453,14 +461,16 @@ public class MenuFrame extends JFrame
 	public JComboBox<String> getTrapsComboBox() {
 		return trapsComboBox;
 	}
-	
-	
 
-	
-	
-	
-	
-	
+	public GridBagConstraints getGbcRegisteredPlayers() {
+		return gbcRegisteredPlayers;
+	}
+
+	public JPanel getRegisteredPlayersPanel() {
+		return registeredPlayersPanel;
+	}
+
+
 	
 	
 }

@@ -27,30 +27,26 @@ import com.utbm.reversi.model.powers.Power;
 
 @SuppressWarnings("serial")
 public class ReversiFrame extends JFrame {
-	// On stock la class board qui gère le board
+	// Stocking Board class who manage the board
 	// private Board board;
 
-	// On crée un premier panel sur lequel seront affichés les boutons (il est en
-	// paramètre pour gérer la fin d'une partie)
+	// We create a first panel on which the buttons will be displayed (it is a parameter to manage the end of a game)
 	private JPanel gamePanel;
 
-	// On crée un label et un panel associés au tour du joueur (le panel est la case
-	// qui change de couleur, le texte est "tour des :")
+	// We create a label and a panel associated with the player's turn (the panel is the box that changes color, the text is "round of:")
 	private JLabel label;
 	private JPanel whoPlayColor;
 	private JLabel whoPlayName;
 
-	// On crée le bouton de retour vers le menu
+	// We create the button back to the menu
 	private JButton backToMenu;
 
-	// On crée 2 constantes (la taille d'une case à la génération et la largeur de
-	// la bande sur le côté où les scores sont affichés)
+	// We create 2 constants (the size of a box when generating and the width of the strip on the side where the scores are displayed)
 	private int cellSize;
 	private int scoresSizeX;
 	private int buttonSizeY;
 
-	// La taille de la grille est stockée dans un int, qui change à chaque
-	// génération d'une nouvelle fenêtre
+	// The size of the grid is stored in an int, which changes with each generation of a new window
 	private int gridSize;
 
 	private GameListener listener;
@@ -91,7 +87,7 @@ public class ReversiFrame extends JFrame {
 		this.cellSize = 70;
 		this.powerListBtn = new ArrayList<PowerButton>();
 
-		// On recupère les cellules du board
+		// We're picking up the cells from the board.
 		Cell [][] cells = this.game.getBoard().getBoardCells();
 
 
@@ -104,7 +100,7 @@ public class ReversiFrame extends JFrame {
 		this.setLocationRelativeTo(null);
 
 		// ======================================================================================
-		// PANEL "game" OÙ SONT LES CELL
+		// PANEL "game" WHERE ARE CELLS
 		// ======================================================================================
 
 		this.gamePanel = new JPanel();
@@ -113,7 +109,7 @@ public class ReversiFrame extends JFrame {
 
 		
 		
-		// On place les premiers jetons au milieu
+		// The first pawns are placed in the middle
 		int startX = (this.game.getBoard().getSize() / 2) - (this.game.getPlayers().size() / 2);
 		int startY = (this.game.getBoard().getSize() / 2) - (this.game.getPlayers().size() / 2) + this.game.getPlayers().size() - 1;
 		
@@ -156,22 +152,22 @@ public class ReversiFrame extends JFrame {
 		}
 		
 		
-		// On génère la grille de Cell
+		// We generate the Cell grid
 		for (int j=0; j < this.gridSize ; j++) 
 		{
 			for (int i=0;i < this.gridSize;i++) 
 			{
-				// On associe le clic sur le bouton à une fonction présente dans le ReversiController
+				// Clicking on the button is associated with a function in the ReversiController
 				//cells[i][j].addActionListener(e -> reversiController.onCellClicked(cells[x][y]));
 				cells[i][j].addActionListener(this.listener);
-				// On stocke dans la Cell sa position dans le tableau
+				// We store in the Cell its position in the table
 				cells[i][j].setCoordX(i);
 				cells[i][j].setCoordY(j);
 
-				// On ajoute la Cell au panel
+				// The Cell is added to the panel
 				this.gamePanel.add(cells[i][j]);
 
-				// On actualise l'apparence de la Cell
+				// We update the appearance of the Cell
 				cells[i][j].updateState();
 			}
 		}
@@ -179,11 +175,11 @@ public class ReversiFrame extends JFrame {
 
 
 		// ======================================================================================
-		// PANEL "scores" OÙ SONT LES SCORES
+		// PANEL "scores" WHERE ARE SCORES
 		// ======================================================================================
-		final JPanel scores = new JPanel();
+		JPanel scores = new JPanel();
 		scores.setBackground(Color.LIGHT_GRAY);
-		// On détermine la taille de la band ede côté où sont les scores, et on lui associe le layout
+		// We determine the size of the band on the side where the scores are, and we associate it with the layout
 		scores.setLayout(new GridBagLayout());
 		scores.setPreferredSize(new Dimension(scoresSizeX,500));
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -191,7 +187,7 @@ public class ReversiFrame extends JFrame {
 		int decalage=0;
 
 		// WHO WILL PLAY
-		// On positionne les informations sur qui va jouer
+		// We position the information on who will play
 
 		gbc.gridx = 0;
 		gbc.gridy = decalage;
@@ -219,7 +215,7 @@ public class ReversiFrame extends JFrame {
 		scores.add(this.whoPlayColor,gbc);
 
 		// ADD SPACE
-		// On se déplace vers le bas en ajoutant des label vides
+		// We move down by adding empty labels
 		for (int addSpace = 0 ; addSpace<13 ; addSpace++) 
 		{
 			gbc.gridx = 0;
@@ -230,7 +226,7 @@ public class ReversiFrame extends JFrame {
 
 
 		// SCORES LABELS
-		// On crée un nouveau label par joueur
+		// We create a new label per player
 		for (Player player : this.game.getPlayers()) 
 		{
 			player.setScore(this.game.getPlayers().size());
@@ -258,7 +254,7 @@ public class ReversiFrame extends JFrame {
         gbc.gridy = decalage;
 		JButton rules = new JButton("Rules");
 		rules.setPreferredSize(new Dimension(125,30));
-		// On associe ce bouton à une fonction dans ReversiController
+		// This button is associated with a function in ReversiController
 		rules.addActionListener(e -> listener.onRulesClicked());
 		scores.add(rules,gbc);
 		
@@ -275,7 +271,7 @@ public class ReversiFrame extends JFrame {
 
 		
 		// BACK TO MENU
-		// On crée un bouton qui renvoie vers le menu
+		// We create a button that leads to the menu
 		gbc.gridx = 0;
 		decalage++;
         gbc.gridy = decalage;
@@ -286,13 +282,13 @@ public class ReversiFrame extends JFrame {
 		scores.add(replay,gbc);
 		
 		// BACK TO MENU
-		// On crée un bouton qui renvoie vers le menu
+		// We create a button that leads to the menu
 		gbc.gridx = 0;
         decalage++;
         gbc.gridy = decalage;
 		this.backToMenu = new JButton("Back to menu");
 		this.backToMenu.setPreferredSize(new Dimension(125,30));
-		// On associe ce bouton à une fonction dans ReversiController
+		// This button is associated with a function in ReversiController
 		this.backToMenu.addActionListener(e -> listener.onBackToMenuClicked(this.backToMenu));
 		scores.add(this.backToMenu,gbc);
 
@@ -310,7 +306,7 @@ public class ReversiFrame extends JFrame {
 			this.buttonSizeY=150;
 		}
 
-		// On donne une taille minimale à la fenêtre
+		// We give a minimum size to the frame
 		this.setMinimumSize(new Dimension(10+gridSize*(cellSize+5)+scoresSizeX+buttonSizeY, 39+gridSize*(cellSize+5)));
 
 		//this.gamePanel.setSize(new Dimension(this.gamePanel.getHeight(),this.gamePanel.getHeight()));
@@ -334,7 +330,7 @@ public class ReversiFrame extends JFrame {
 	}
 
 	// ======================================================================================
-	// Fonction qui actualise l'état des cores dans les label
+	// Function that updates the state of cores in labels
 	// ======================================================================================
 	public void updateScores(ArrayList<Player> players) {
 		for (Player player : players) {
@@ -372,50 +368,17 @@ public class ReversiFrame extends JFrame {
 	}
 	
 	public void displayEndMessage() {
-		// On détruit le panel sur lequel la grille de Cell est générée
-		this.remove(this.getGamePanel());
-		// On crée un nouveau panel pour remplacer celui que l'on vient de supprimer
-		JPanel end = new JPanel();
-		end.setBackground(Color.lightGray);
-		end.setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        // On associe un message de fin à ce panel en fonction de la manière dont la partie s'est terminée et en fonction du score
-		JLabel endMsg = new JLabel();
-        gbc.gridx=0;
-        gbc.gridy=0;
-		end.add(endMsg,gbc);
 		
-		// ADD SPACE
-		for (int addSpace = 1 ; addSpace<5 ; addSpace++) 
-        {
-            gbc.gridx = 0;
-            gbc.gridy = addSpace;
-            end.add(new JLabel(" "),gbc);
-        }
+		this.whoPlayColor.setBackground(Color.LIGHT_GRAY);
+		this.whoPlayName.setText(" ");
 		
-		// Création du bouton permettant de recommencer la partie avec la même taille de grille
-		JButton replay = new JButton("Replay");
-		gbc.gridx=0;
-	    gbc.gridy=5;
-	    replay.addActionListener(e -> this.listener.onReplayClicked(replay));
-	    end.add(replay,gbc);
-		this.getContentPane().add(end,BorderLayout.CENTER);
-		
-		// Création du bouton pour revenir au menu
-		JButton endBackToMenu = new JButton("Back to Menu");
-		gbc.gridx=0;
-	    gbc.gridy=6;
-	    endBackToMenu.addActionListener(e -> this.listener.onBackToMenuClicked(endBackToMenu));
-	    end.add(endBackToMenu,gbc);
-	    
-	    
+		this.label.setText("BLOCKED !");
 
-		/*endMsg.setText("BLOCKED !");
 	    
-	    if (isEnded()) 
+	    if (this.game.isEnded()) 
 		{
-			endMsg.setText("END !");
-		}*/
+	    	this.label.setText("END !");
+		}
 	    
 	    
 	    ArrayList<Integer> scores = new ArrayList<Integer>();
@@ -428,12 +391,10 @@ public class ReversiFrame extends JFrame {
 	    {
 	    	if (max == player.getScore())
 	    	{
-				endMsg.setText(endMsg.getText()+" "+player.getName() + " wins !");
+				this.whoPlayName.setText(this.whoPlayName.getText()+" "+player.getName() + " wins !");
 	    	}
 	    }
 	    
-	    // On place le panel de fin là où se trouvait la grille
-		this.getContentPane().add(end,BorderLayout.CENTER);
 	}
 
 }

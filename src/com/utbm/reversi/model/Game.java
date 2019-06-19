@@ -30,9 +30,8 @@ public class Game {
 		this.obstaclesNumber = obstaclesNumber;
 		this.trapsNumber = trapsNumber;
 		this.size = size;
-		this.frame = frame;
-		
-		// On crée un board de la taille voulu
+		this.frame = frame;	
+		// Creating a board on choosed size
 		this.board = new Board(this.size,obstaclesNumber,trapsNumber,nbPlayers);
 	}
 
@@ -127,31 +126,33 @@ public class Game {
 		if(this.players.indexOf(this.currentPlayer) == this.players.size() - 1) {
 			// Come back to first player
 			this.currentPlayer = this.players.get(0);
-			
-			// update des power à supprimer, stop et remove power si duration = 0
-			ArrayList<Power> powersToDelete = new ArrayList<Power>();
-			for(Power power : powers) {
-				power.next(this);
-				if (power.getDuration() == 0) {
-					powersToDelete.add(power);
-				}
-			}
-			for (Power power : powersToDelete) {
-				power.stop(this);
-			}
-			powers.removeAll(powersToDelete);
-			powersToDelete.clear();
 
-			// Tour suivant
+			// Next Round
 			this.addRound();
 
-			// for each power en cours decrementer duration check état et remove array si ==
-			// 0 créer stop power
+			// for each power using, decrement duration check state and remove array if ==
+			// 0 creating stop power
 
 		} else {
 			// Go to next player
 			this.currentPlayer = this.players.get(this.players.indexOf(this.currentPlayer) + 1);
 		}
+		
+		// Update of powers to delete, stop and remove power if duration = 0
+					ArrayList<Power> powersToDelete = new ArrayList<Power>();
+					for(Power power : powers) {
+						if(power.getOwner().equals(this.currentPlayer)) {
+							power.next(this);
+							if (power.getDuration() == 0) {
+								powersToDelete.add(power);
+							}					
+						}
+					}
+					for (Power power : powersToDelete) {
+						power.stop(this);
+					}
+					powers.removeAll(powersToDelete);
+					powersToDelete.clear();
 
 		// Update Score
 		this.countScore();
