@@ -39,7 +39,7 @@ public class ColorBombPower extends Power {
 		while ( xStart<=cell.getCoordX()+1 && xStart<game.getBoard().getSize()) {
 			yStart= saveY;
 			while ( yStart<=cell.getCoordY()+1 && yStart<game.getBoard().getSize()) {
-				if(game.getBoard().getBoardCells()[xStart][yStart].isEnabled()) {
+				if(game.getBoard().getBoardCells()[xStart][yStart].isEnabled()&&game.getBoard().getBoardCells()[xStart][yStart].isLock()) {
 					game.getBoard().getBoardCells()[xStart][yStart].setOwner(this.getOwner());
 					game.getBoard().getBoardCells()[xStart][yStart].updateState();
 				}

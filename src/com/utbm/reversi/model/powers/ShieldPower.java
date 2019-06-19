@@ -31,7 +31,7 @@ public class ShieldPower extends Power {
 
 		if(cell.getOwner()!=null) {
 			if(cell.getOwner().equals(this.getOwner())) {
-				cell.setEnabled(false);
+				cell.setLock(false);
 				this.animation = cell.addHoverAnimation(this.getSprite());
 				game.getBoard().getBoardCells()[cell.getCoordX()][cell.getCoordY()].updateState();
 				
@@ -49,7 +49,7 @@ public class ShieldPower extends Power {
 	}
 	@Override
 	public void stop(Game game) {
-		this.getOriginCell().setEnabled(true);	
+		this.getOriginCell().setLock(true);	
 		this.animation.stop();
 		this.getOriginCell().updateState();
 	}
