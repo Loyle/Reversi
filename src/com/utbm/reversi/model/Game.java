@@ -166,6 +166,7 @@ public class Game {
 		
 		// Check if game is ended
 		if(this.isEnded() == true) {
+			this.setStart(false);
 			this.frame.displayEndMessage();
 		}
 		else {			
@@ -177,6 +178,7 @@ public class Game {
 		}
 		
 		if(this.players.size() == 1) {
+			this.setStart(false);
 			this.frame.displayEndMessage();
 		}
 	}
@@ -224,10 +226,12 @@ public class Game {
 	public boolean isBlocked() 
 	{
 		for(int x = 0; x < this.getBoard().getSize(); x++) {
-			for(int y = 0; y < this.getBoard().getSize(); y++) {
-				FollowingRules rules = new FollowingRules(this, this.board.getBoardCells()[x][y]);
-				if(rules.isPlayable()) {
-					return false;
+			for (int y = 0; y < this.getBoard().getSize(); y++) {
+				if (this.board.getBoardCells()[x][y].getOwner() == null) {
+					FollowingRules rules = new FollowingRules(this, this.board.getBoardCells()[x][y]);
+					if (rules.isPlayable()) {
+						return false;
+					}
 				}
 			}
 		}

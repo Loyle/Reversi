@@ -2,6 +2,7 @@ package com.utbm.reversi.controller;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
@@ -193,6 +194,9 @@ public class MenuController
 			
 			
 			this.players.add(new Player(input,this.actualColor));
+			Random rando = new Random();
+			this.actualColor = new Color(rando.nextInt(255),rando.nextInt(255),rando.nextInt(255));
+			this.menuFrame.getPlayerColorButton().setBackground(this.actualColor);
 			
 			if (this.players.size() > 0)
 			{
@@ -333,6 +337,9 @@ public class MenuController
 			this.menuFrame.getError().setText("The maximum of players is 9 !");
 			this.menuFrame.getPlayersTextField().setText("");
 		}
+		
+		this.menuFrame.getPlayersTextField().requestFocusInWindow();
+		
 	}
 	
 	public void onRemoveClicked(JButton playersButton) 

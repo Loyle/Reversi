@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.Random;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -18,6 +19,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import com.utbm.reversi.controller.MenuController;
+import com.utbm.reversi.model.Player;
 
 public class MenuFrame extends JFrame
 {
@@ -30,6 +32,7 @@ public class MenuFrame extends JFrame
 	// Associating controller to the frame
 	private final MenuController menuController = new MenuController(this);
 	// Declaring a panel is which one we will place Menu Buttons
+	private JButton playersColor;
 	private JPanel menuBackground;
 	private JPanel registeredPlayersPanel;
 	private JLabel gridSizeLabel;
@@ -140,20 +143,23 @@ public class MenuFrame extends JFrame
         gbcAddPlayers.gridx = 0;
         gbcAddPlayers.gridy = 0;
         addPlayersPanel.add(playersTextField,gbcAddPlayers);
-        
+        this.playersTextField.requestFocusInWindow();
         
         gbcAddPlayers.gridx = 1;
         gbcAddPlayers.gridy = 0;
         addPlayersPanel.add(new JLabel("     "),gbcAddPlayers);
         
         
-        JButton playersColor = new JButton(" ");
+        playersColor = new JButton(" ");
         playersColor.setBackground(Color.black);
         gbcAddPlayers.gridx = 2;
         gbcAddPlayers.gridy = 0;
         addPlayersPanel.add(playersColor,gbcAddPlayers);
         playersColor.addActionListener(e -> menuController.onColorClicked(playersColor));
-
+        
+		Random rando = new Random();
+		playersColor.setBackground(new Color(rando.nextInt(255),rando.nextInt(255),rando.nextInt(255)));
+        
         gbcAddPlayers.gridx = 3;
         gbcAddPlayers.gridy = 0;
         addPlayersPanel.add(new JLabel("     "),gbcAddPlayers);
@@ -414,8 +420,6 @@ public class MenuFrame extends JFrame
         
         
         
-        
-        
 		this.getContentPane().add(menuBackground);
 	}
 
@@ -469,7 +473,10 @@ public class MenuFrame extends JFrame
 	public JPanel getRegisteredPlayersPanel() {
 		return registeredPlayersPanel;
 	}
-
+	
+	public JButton getPlayerColorButton() {
+		return this.playersColor;
+	}
 
 	
 	
