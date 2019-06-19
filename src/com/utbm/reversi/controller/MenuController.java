@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JSlider;
 
 import com.utbm.reversi.model.Player;
@@ -24,6 +25,8 @@ public class MenuController
 	private Color actualColor;
 	
 	private ArrayList<Player> players = new ArrayList<Player>();
+	private JLabel[] playersLabel = new JLabel[9];
+	private JPanel[] playersPanel = new JPanel[9];
 	
 	// Le MenuController doit être lié à une MenuFrame
 	public MenuController(MenuFrame menuFrame) 
@@ -191,41 +194,124 @@ public class MenuController
 			
 			this.players.add(new Player(input,this.actualColor));
 			
+			if (this.players.size() > 0)
+			{
+				this.playersPanel[this.players.size()-1] = new JPanel();
+				this.playersPanel[this.players.size()-1].setMinimumSize(new Dimension(10,10));
+				this.playersPanel[this.players.size()-1].setMaximumSize(new Dimension(10,10));
+				this.playersPanel[this.players.size()-1].setBackground(this.actualColor);
+				switch (this.players.size())
+				{
+					case 1:
+						this.menuFrame.getGbcRegisteredPlayers().gridx=0;
+						this.menuFrame.getGbcRegisteredPlayers().gridy=1;
+						break;
+					case 2:
+						this.menuFrame.getGbcRegisteredPlayers().gridx=3;
+						this.menuFrame.getGbcRegisteredPlayers().gridy=1;
+						break;
+					case 3:
+						this.menuFrame.getGbcRegisteredPlayers().gridx=6;
+						this.menuFrame.getGbcRegisteredPlayers().gridy=1;
+						break;
+					case 4:
+						this.menuFrame.getGbcRegisteredPlayers().gridx=0;
+						this.menuFrame.getGbcRegisteredPlayers().gridy=2;
+						break;
+					case 5:
+						this.menuFrame.getGbcRegisteredPlayers().gridx=3;
+						this.menuFrame.getGbcRegisteredPlayers().gridy=2;
+						break;
+					case 6:
+						this.menuFrame.getGbcRegisteredPlayers().gridx=6;
+						this.menuFrame.getGbcRegisteredPlayers().gridy=2;
+						break;
+					case 7:
+						this.menuFrame.getGbcRegisteredPlayers().gridx=0;
+						this.menuFrame.getGbcRegisteredPlayers().gridy=3;
+						break;
+					case 8:
+						this.menuFrame.getGbcRegisteredPlayers().gridx=3;
+						this.menuFrame.getGbcRegisteredPlayers().gridy=3;
+						break;
+					case 9:
+						this.menuFrame.getGbcRegisteredPlayers().gridx=6;
+						this.menuFrame.getGbcRegisteredPlayers().gridy=3;
+						break;
+				}
+				this.menuFrame.getRegisteredPlayersPanel().add(this.playersPanel[this.players.size()-1],this.menuFrame.getGbcRegisteredPlayers());
+				switch (this.players.size())
+				{
+					case 1:
+						this.menuFrame.getGbcRegisteredPlayers().gridx=1;
+						this.menuFrame.getGbcRegisteredPlayers().gridy=1;
+						break;
+					case 2:
+						this.menuFrame.getGbcRegisteredPlayers().gridx=4;
+						this.menuFrame.getGbcRegisteredPlayers().gridy=1;
+						break;
+					case 3:
+						this.menuFrame.getGbcRegisteredPlayers().gridx=7;
+						this.menuFrame.getGbcRegisteredPlayers().gridy=1;
+						break;
+					case 4:
+						this.menuFrame.getGbcRegisteredPlayers().gridx=1;
+						this.menuFrame.getGbcRegisteredPlayers().gridy=2;
+						break;
+					case 5:
+						this.menuFrame.getGbcRegisteredPlayers().gridx=4;
+						this.menuFrame.getGbcRegisteredPlayers().gridy=2;
+						break;
+					case 6:
+						this.menuFrame.getGbcRegisteredPlayers().gridx=7;
+						this.menuFrame.getGbcRegisteredPlayers().gridy=2;
+						break;
+					case 7:
+						this.menuFrame.getGbcRegisteredPlayers().gridx=1;
+						this.menuFrame.getGbcRegisteredPlayers().gridy=3;
+						break;
+					case 8:
+						this.menuFrame.getGbcRegisteredPlayers().gridx=4;
+						this.menuFrame.getGbcRegisteredPlayers().gridy=3;
+						break;
+					case 9:
+						this.menuFrame.getGbcRegisteredPlayers().gridx=7;
+						this.menuFrame.getGbcRegisteredPlayers().gridy=3;
+						break;
+				}
+				this.playersLabel[this.players.size()-1] = new JLabel(" "+input);
+				this.menuFrame.getRegisteredPlayersPanel().add(this.playersLabel[this.players.size()-1],this.menuFrame.getGbcRegisteredPlayers());
+				switch (this.players.size())
+				{
+					case 1:
+						this.menuFrame.getGbcRegisteredPlayers().gridx=2;
+						this.menuFrame.getGbcRegisteredPlayers().gridy=1;
+						break;
+					case 2:
+						this.menuFrame.getGbcRegisteredPlayers().gridx=5;
+						this.menuFrame.getGbcRegisteredPlayers().gridy=1;
+						break;
+					case 4:
+						this.menuFrame.getGbcRegisteredPlayers().gridx=2;
+						this.menuFrame.getGbcRegisteredPlayers().gridy=2;
+						break;
+					case 5:
+						this.menuFrame.getGbcRegisteredPlayers().gridx=5;
+						this.menuFrame.getGbcRegisteredPlayers().gridy=2;
+						break;
+					case 7:
+						this.menuFrame.getGbcRegisteredPlayers().gridx=2;
+						this.menuFrame.getGbcRegisteredPlayers().gridy=3;
+						break;
+					case 8:
+						this.menuFrame.getGbcRegisteredPlayers().gridx=5;
+						this.menuFrame.getGbcRegisteredPlayers().gridy=3;
+						break;
+				}
+				this.menuFrame.getRegisteredPlayersPanel().add(new JLabel("                 "),this.menuFrame.getGbcRegisteredPlayers());
+				
+			}
 			
-			
-			if (this.players.size() <= 3)
-			{
-				if (this.players.size()==1) 
-				{
-			        this.menuFrame.getPlayersLabel1().setText(this.menuFrame.getPlayersLabel1().getText() + input);
-				}
-				else
-				{
-			        this.menuFrame.getPlayersLabel1().setText(this.menuFrame.getPlayersLabel1().getText() + "  ;  " + input);
-				}
-			}
-			else if (this.players.size() > 3 && this.players.size() <= 6) 
-			{
-				if (this.players.size()==4) 
-				{
-			        this.menuFrame.getPlayersLabel2().setText(this.menuFrame.getPlayersLabel2().getText() + input);
-				}
-				else
-				{
-			        this.menuFrame.getPlayersLabel2().setText(this.menuFrame.getPlayersLabel2().getText() + "  ;  " +  input);
-				}
-			}
-			else if (this.players.size() > 6 && this.players.size() <= 9) 
-			{
-				if (this.players.size()==7) 
-				{
-			        this.menuFrame.getPlayersLabel3().setText(this.menuFrame.getPlayersLabel3().getText() + input);
-				}
-				else
-				{
-			        this.menuFrame.getPlayersLabel3().setText(this.menuFrame.getPlayersLabel3().getText() + "  ;  " +  input);
-				}
-			}
 			this.menuFrame.getPlayersTextField().setText("");
 			
 			if (this.players.size() == 2) 
@@ -252,20 +338,23 @@ public class MenuController
 	public void onRemoveClicked(JButton playersButton) 
 	{
 		this.menuFrame.getError().setText(" ");
-		for (int i=0;i<this.menuFrame.getCouleurs().length;i++) 
-		{
-			this.menuFrame.getPlayersComboBox().removeItem(this.menuFrame.getCouleurs()[i]);
-		}
-		for (int j=0;j<this.menuFrame.getCouleurs().length;j++) 
-		{
-			this.menuFrame.getPlayersComboBox().addItem(this.menuFrame.getCouleurs()[j]);
-		}
-	    this.menuFrame.getPlayersLabel1().setText(" ");
-	    this.menuFrame.getPlayersLabel2().setText(" ");
-	    this.menuFrame.getPlayersLabel3().setText(" ");
 	    this.menuFrame.getPlayersTextField().setText("");
-	    
 
+		for (int i=0;i<9;i++) 
+		{
+			if (this.playersLabel[i] != null)
+			{
+				this.menuFrame.getRegisteredPlayersPanel().remove(this.playersLabel[i]);
+			}
+			
+			if (this.playersPanel[i] != null) 
+			{
+				this.menuFrame.getRegisteredPlayersPanel().remove(this.playersPanel[i]);
+			}
+		}
+		onAddClicked(playersButton);
+	    
+	   
 		this.menuFrame.getGridSizeSlider().setMinimum(4);
 		this.menuFrame.getGridSizeSlider().setMaximum(20);
 		this.gridSize=8;

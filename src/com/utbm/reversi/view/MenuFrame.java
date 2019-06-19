@@ -31,6 +31,7 @@ public class MenuFrame extends JFrame
 	private final MenuController menuController = new MenuController(this);
 	// On déclare un panel dans lequel on placera les boutons du menu
 	private JPanel menuBackground;
+	private JPanel registeredPlayersPanel;
 	private JLabel gridSizeLabel;
 	private JSlider gridSizeSlider;
 	private JLabel playersLabel1;
@@ -42,7 +43,7 @@ public class MenuFrame extends JFrame
 	private JComboBox<String> powersComboBox;
 	private JComboBox<String> obstaclesComboBox;
 	private JComboBox<String> trapsComboBox;
-    private String[] couleurs = {"White","Black","Red","Blue","Yellow","Green","Gray","Pink","Cyan","Orange"};
+	private GridBagConstraints gbcRegisteredPlayers;
 	
 	public MenuFrame() 
 	{
@@ -179,39 +180,47 @@ public class MenuFrame extends JFrame
         
         
         
+        // SOUS-PANEL : REGISTERED PLAYERS
+        JPanel msgRegistered = new JPanel();
+        msgRegistered.setBackground(Color.white);
+        msgRegistered.setLayout(new GridBagLayout());
+		GridBagConstraints gbcMsgRegistered = new GridBagConstraints();
+        gbcPlayers.gridx = 0;
+        gbcPlayers.gridy = 1;
+        playersPanel.add(new JLabel("     "),gbcPlayers);
+        gbcPlayers.gridx = 0;
+        gbcPlayers.gridy = 2;
+        playersPanel.add(msgRegistered,gbcPlayers);
+        gbcMsgRegistered.gridx=0;
+        gbcMsgRegistered.gridy=0;
+        msgRegistered.add(new JLabel("Registered players :"),gbcMsgRegistered);
+        
+        
+        
         
         
 
         // SOUS-PANEL : JOUEURS ENREGISTRÉS
-        JPanel registeredPlayersPanel = new JPanel();
+        this.registeredPlayersPanel = new JPanel();
         registeredPlayersPanel.setLayout(new GridBagLayout());
-		GridBagConstraints gbcRegisteredPlayers = new GridBagConstraints();
+		this.gbcRegisteredPlayers = new GridBagConstraints();
         registeredPlayersPanel.setBackground(Color.white);
 
-        gbcPlayers.gridx = 0;
-        gbcPlayers.gridy = 1;
-        playersPanel.add(new JLabel("     "),gbcPlayers);
         
-        gbcPlayers.gridx = 0;
-        gbcPlayers.gridy = 2;
-        playersPanel.add(registeredPlayersPanel,gbcPlayers);
-        
-        JLabel label = new JLabel("Registered players :");
-        gbcRegisteredPlayers.gridx = 0;
-        gbcRegisteredPlayers.gridy = 0;
-        registeredPlayersPanel.add(label,gbcRegisteredPlayers);
-        this.playersLabel1 = new JLabel(" ");
         gbcRegisteredPlayers.gridx = 0;
         gbcRegisteredPlayers.gridy = 1;
-        registeredPlayersPanel.add(this.playersLabel1,gbcRegisteredPlayers);
-        this.playersLabel2 = new JLabel(" ");
+        registeredPlayersPanel.add(new JLabel(" "),gbcRegisteredPlayers);
         gbcRegisteredPlayers.gridx = 0;
         gbcRegisteredPlayers.gridy = 2;
-        registeredPlayersPanel.add(this.playersLabel2,gbcRegisteredPlayers);
-        this.playersLabel3 = new JLabel(" ");
+        registeredPlayersPanel.add(new JLabel(" "),gbcRegisteredPlayers);
         gbcRegisteredPlayers.gridx = 0;
         gbcRegisteredPlayers.gridy = 3;
-        registeredPlayersPanel.add(this.playersLabel3,gbcRegisteredPlayers);
+        registeredPlayersPanel.add(new JLabel(" "),gbcRegisteredPlayers);
+        
+
+        gbcPlayers.gridx = 0;
+        gbcPlayers.gridy = 3;
+        playersPanel.add(registeredPlayersPanel,gbcPlayers);
         
         
         
@@ -430,9 +439,6 @@ public class MenuFrame extends JFrame
 		return playersComboBox;
 	}
 
-	public String[] getCouleurs() {
-		return couleurs;
-	}
 
 	public JLabel getError() {
 		return error;
@@ -457,9 +463,17 @@ public class MenuFrame extends JFrame
 	public JComboBox<String> getTrapsComboBox() {
 		return trapsComboBox;
 	}
-	
-	
 
+	public GridBagConstraints getGbcRegisteredPlayers() {
+		return gbcRegisteredPlayers;
+	}
+
+	public JPanel getRegisteredPlayersPanel() {
+		return registeredPlayersPanel;
+	}
+
+
+	
 	
 	
 	
