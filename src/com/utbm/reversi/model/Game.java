@@ -14,13 +14,14 @@ public class Game {
 	private int powerNumber;
 	private int obstaclesNumber;
 	private int trapsNumber;
+	private int size;
 	
 	private ReversiFrame frame;
 
 	private boolean isStart;
 	private int round;
 
-	public Game(ReversiFrame frame, int size, int powerNumber, int obstaclesNumber, int trapsNumber) {
+	public Game(ReversiFrame frame, int size, int powerNumber, int obstaclesNumber, int trapsNumber, int nbPlayers) {
 		this.players = new ArrayList<Player>();
 		this.powers = new ArrayList<Power>();
 		this.isStart = false;
@@ -28,12 +29,11 @@ public class Game {
 		this.powerNumber = powerNumber ;
 		this.obstaclesNumber = obstaclesNumber;
 		this.trapsNumber = trapsNumber;
-		
+		this.size = size;
 		this.frame = frame;
-
+		
 		// On crée un board de la taille voulu
-		this.board = new Board(size,obstaclesNumber,trapsNumber);
-
+		this.board = new Board(this.size,obstaclesNumber,trapsNumber,nbPlayers);
 	}
 
 	public void addPlayer(Player player) {
@@ -95,6 +95,7 @@ public class Game {
 	}
 
 	public void run() {
+		
 		this.currentPlayer = this.players.get(0);
 		
 
@@ -162,9 +163,19 @@ public class Game {
 		// Set Player power
 		this.frame.updatePlayerPowers(this.currentPlayer);
 		
+		// Check if game is ended
+		if(this.isEnded() == true) {
+			this.frame.displayEndMessage();
+		}
+		else {			
+			// Check if player can play
+			if(this.isBlocked() == true) {
+				this.players.remove(this.currentPlayer);
+				this.next();
+			}
+		}
 		
-		if (isEnded() || isBlocked()) 
-		{
+		if(this.players.size() == 1) {
 			this.frame.displayEndMessage();
 		}
 	}
@@ -189,71 +200,36 @@ public class Game {
 	
 	public boolean isEnded() 
 	{
-		
-		int idx=0;
-		
-		// On parcourt la grille et on incrémente à chaque case non vide/non verte
-		for (int i=0;i<board.getSize();i++) 
-		{
-			for (int j=0;j<board.getSize();j++) 
-			{
-				if (this.board.getBoardCells()[i][j].getOwner() != null || this.board.getBoardCells()[i][j].isObstacle() == true) 
-				{
-					idx=idx+1;
+		int totalCells = 0;
+		int usedCells = 0;
+		for(int x = 0; x < this.getBoard().getSize(); x++) {
+			for(int y = 0; y < this.getBoard().getSize(); y++) {
+				if(this.getBoard().getBoardCells()[x][y].isEnabled()) {
+					totalCells++;
+				}
+				if(this.getBoard().getBoardCells()[x][y].getOwner() != null) {
+					usedCells++;
 				}
 			}
 		}
-		
-		// Si le nombre de case non vides correspond au nombre de cases de la grille, la grilles est complète
-		if (idx == board.getSize()*board.getSize()) 
-		{
+		if(totalCells == usedCells) {
 			return true;
 		}
-		else
-		{
-			return false;
-		}
+		return false;
 	}
 	
 	
 	
 	public boolean isBlocked() 
 	{
-		
-		int idx1=0;
-		int idx2=0;
-		
-		// On parcourt toute la grille
-		for (int i=0;i<board.getSize();i++) 
-		{
-			for (int j=0;j<board.getSize();j++) 
-			{
-				FollowingRules rules = new FollowingRules(this, this.board.getBoardCells()[i][j]);
-				
-				// Si la case est vide et que l'on ne peut rien y poser, on incrémente idx1
-				if (this.board.getBoardCells()[i][j].getOwner() == null && rules.isPlayable() == false && this.board.getBoardCells()[i][j].isObstacle() == false) 
-				{
-					idx1=idx1+1;
+		for(int x = 0; x < this.getBoard().getSize(); x++) {
+			for(int y = 0; y < this.getBoard().getSize(); y++) {
+				FollowingRules rules = new FollowingRules(this, this.board.getBoardCells()[x][y]);
+				if(rules.isPlayable()) {
+					return false;
 				}
-				
-				// Si la case est vide, on incrémente idx2
-				if (this.board.getBoardCells()[i][j].getOwner() == null && this.board.getBoardCells()[i][j].isObstacle() == false) 
-				{
-					idx2=idx2+1;
-				}
-					
 			}
 		}
-		
-		// S'il y a autant de case vide que de cases vides où on ne peut rien poser, alors le jeu est bien bloqué
-		if (idx1 == idx2) 
-		{
-			return true;
-		}
-		// Sinon, on peut continuer à jouer
-		else
-		{
-			return false;
-		}
+		return true;
 	}
 }

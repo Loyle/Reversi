@@ -4,6 +4,8 @@ import java.util.Random;
 
 import javax.swing.ImageIcon;
 
+import org.omg.CORBA.NVList;
+
 import com.utbm.reversi.model.cells.BombCell;
 import com.utbm.reversi.model.cells.Cell;
 import com.utbm.reversi.model.cells.TrapCell;
@@ -12,9 +14,9 @@ public class Board {
 		private int size;
 		private Cell [][] board;
 		
-		public Board(int size, int obstaclesNumber, int trapsNumber) {
+		public Board(int size, int obstaclesNumber, int trapsNumber, int nbPlayer) {
 			this.board = new Cell[size][size];
-			this.size=size;
+			this.size = size;
 			for (int j=0;j<size;j++ ) {
 				for(int i=0;i<size;i++) {
 					this.board[i][j]= new Cell(new ImageIcon("./data/grass.png"));	
@@ -25,17 +27,21 @@ public class Board {
 			int incrObstacles = 0;
 			int incrTraps = 0;
 			
+			int minX = (this.size / 2) - (nbPlayer / 2);
+			int minY = (this.size / 2) - (nbPlayer / 2);
+			
+			int maxX = minX + nbPlayer - 1;
+			int maxY = minY + nbPlayer - 1;
 			
 			while (incrObstacles<obstaclesNumber) 
 			{
 				int randoX = new Random().nextInt(size);
 				int randoY = new Random().nextInt(size);
 
-				if (this.board[randoX][randoY].isEnabled() && this.board[randoX][randoY].getOwner() == null) 
+				if (this.board[randoX][randoY].isEnabled() && this.board[randoX][randoY].getOwner() == null && ((randoX < minX || randoX > maxX) && (randoY < minY || randoY > maxY))) 
 				{
 					this.board[randoX][randoY] = new Cell(new Color(50,50,50));
 					this.board[randoX][randoY].setDefaultBackground(new ImageIcon("./data/wall.png"));
-					this.board[randoX][randoY].setObstacle(true);
 					this.board[randoX][randoY].setEnabled(false);
 					incrObstacles++;
 				}
@@ -45,10 +51,10 @@ public class Board {
 				int randoX = new Random().nextInt(size);
 				int randoY = new Random().nextInt(size);
 
-				if (this.board[randoX][randoY].isEnabled() && this.board[randoX][randoY].getOwner() == null && this.board[randoX][randoY].isObstacle() == false) 
+				if (this.board[randoX][randoY].isEnabled() && this.board[randoX][randoY].getOwner() == null && ((randoX < minX || randoX > maxX) && (randoY < minY || randoY > maxY))) 
 				{
 					int whatTrap = new Random().nextInt(2);
-					if (whatTrap <= 1) 
+					if (whatTrap < 1) 
 					{
 						this.board[randoX][randoY]= new TrapCell(new ImageIcon("./data/grass.png"));
 					}

@@ -1,10 +1,7 @@
 package com.utbm.reversi.model.powers;
 
 import java.awt.Cursor;
-import java.awt.image.BufferedImage;
-
 import javax.swing.ImageIcon;
-
 import com.utbm.reversi.animation.Sprite;
 import com.utbm.reversi.model.Game;
 import com.utbm.reversi.model.Player;

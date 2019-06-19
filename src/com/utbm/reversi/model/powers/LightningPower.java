@@ -21,11 +21,13 @@ public class LightningPower extends Power {
 		super(owner,icon,sprite,3);
 		this.lightningCell = new ArrayList<Cell>();
 		this.animations = new ArrayList<PowerAnimation>();
+		this.setClickSprite(new Sprite("./data/lightning.png",9,1,50,42,56));
 	}
 	public LightningPower(Player owner, String icon, Sprite sprite) {
 		super(owner,icon,sprite,3);
 		this.lightningCell = new ArrayList<Cell>();
 		this.animations = new ArrayList<PowerAnimation>();
+		this.setClickSprite(new Sprite("./data/lightning.png",9,1,50,42,56));
 	}
 	
 	@Override

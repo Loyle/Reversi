@@ -23,7 +23,6 @@ public class Cell extends JButton {
 	private Color defaultColor;
 	private ImageIcon background;
 	private boolean isLock;
-	private boolean isObstacle;
 	private ArrayList<PowerAnimation> hoverAnimations;
 	
 	private int coordX;
@@ -35,7 +34,6 @@ public class Cell extends JButton {
 		this.defaultColor = this.color;
 		this.owner = null;
 		this.isLock = true;
-		this.isObstacle = false;
 		this.background = null;
 		this.hoverAnimations = new ArrayList<PowerAnimation>();		
 		this.setContentAreaFilled(false);
@@ -46,7 +44,6 @@ public class Cell extends JButton {
 		this.defaultColor = this.color;
 		this.owner = null;
 		this.isLock = true;
-		this.isObstacle = false;
 		this.background = null;
 		this.hoverAnimations = new ArrayList<PowerAnimation>();
 		this.setContentAreaFilled(false);
@@ -58,7 +55,6 @@ public class Cell extends JButton {
 		this.defaultColor = this.color;
 		this.owner = null;
 		this.isLock = true;
-		this.isObstacle = false;
 		this.hoverAnimations = new ArrayList<PowerAnimation>();
 		//this.setBorder(BorderFactory.createLineBorder(Color.white,1));
 		this.setContentAreaFilled(false);
@@ -124,13 +120,6 @@ public class Cell extends JButton {
 	public void setLock(boolean isLock) {
 		this.isLock = isLock;
 	}
-	
-	public boolean isObstacle() {
-		return isObstacle;
-	}
-	public void setObstacle(boolean isObstacle) {
-		this.isObstacle = isObstacle;
-	}
 	/**
 	 * @return the hoverIcon
 	 */
@@ -144,13 +133,36 @@ public class Cell extends JButton {
 		this.hoverAnimations.add(hoverAnimations);
 	}
 	public PowerAnimation addHoverAnimation(Sprite sprite) {
-		int size = sprite.getSpriteSize();
-		BufferedImage[] buffer = new BufferedImage[size];
-		for(int i = 0; i < size; i++) {
-			buffer[i] = sprite.getSprite(i, 0);
+		int sizeX = sprite.getSpriteSizeX();
+		int sizeY = sprite.getSpriteSizeY();
+		BufferedImage[] buffer = new BufferedImage[sizeX * sizeY];
+		int i = 0;
+		for(int x = 0; x < sizeX; x++) {
+			for(int y = 0; y < sizeY; y++) {
+				buffer[i] = sprite.getSprite(x, y);
+				i++;
+			}
 		}
 		
-		PowerAnimation animation = new PowerAnimation(buffer,this,sprite.getDuration());
+		PowerAnimation animation = new PowerAnimation(buffer,this,sprite.getDuration(),true);
+		Thread thread = new Thread(animation);
+		thread.start();
+		this.hoverAnimations.add(animation);
+		return animation;
+	}
+	public PowerAnimation addHoverAnimation(Sprite sprite, boolean repeat) {
+		int sizeX = sprite.getSpriteSizeX();
+		int sizeY = sprite.getSpriteSizeY();
+		BufferedImage[] buffer = new BufferedImage[sizeX * sizeY];
+		int i = 0;
+		for(int x = 0; x < sizeY; x++) {
+			for(int y = 0; y < sizeX; y++) {
+				buffer[i] = sprite.getSprite(y,x);
+				i++;
+			}
+		}
+		
+		PowerAnimation animation = new PowerAnimation(buffer,this,sprite.getDuration(),repeat);
 		Thread thread = new Thread(animation);
 		thread.start();
 		this.hoverAnimations.add(animation);

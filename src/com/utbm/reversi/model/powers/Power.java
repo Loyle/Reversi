@@ -11,6 +11,7 @@ public abstract class Power {
 	private Player owner;
 	private ImageIcon icon;
 	private Sprite sprite;
+	private Sprite clickSprite;
 	private int duration;
 	private Cell originCell;
 	
@@ -18,12 +19,14 @@ public abstract class Power {
 		this.owner = null;
 		this.icon = null;
 		this.sprite = null;
+		this.clickSprite = null;
 		this.setOriginCell(null);
 	}
 	public Power(Player owner, ImageIcon icon, Sprite sprite, int duration) {
 		this.owner = owner;
 		this.icon = icon;
 		this.sprite = sprite;
+		this.clickSprite = null;
 		this.duration = duration;
 		this.setOriginCell(null);
 	}
@@ -31,6 +34,7 @@ public abstract class Power {
 		this.owner = owner;
 		this.icon = new ImageIcon(icon);
 		this.sprite = sprite;
+		this.clickSprite = null;
 		this.duration =  duration;
 		this.setOriginCell(null);
 	}
@@ -69,6 +73,18 @@ public abstract class Power {
 	}
 	
 	
+	/**
+	 * @return the clickSprite
+	 */
+	public Sprite getClickSprite() {
+		return clickSprite;
+	}
+	/**
+	 * @param clickSprite the clickSprite to set
+	 */
+	public void setClickSprite(Sprite clickSprite) {
+		this.clickSprite = clickSprite;
+	}
 	public abstract boolean use(Game game, Cell cell);
 	public abstract void next(Game game);
 	public abstract void stop(Game game);

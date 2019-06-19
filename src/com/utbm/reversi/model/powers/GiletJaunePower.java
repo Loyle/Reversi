@@ -14,6 +14,7 @@ import com.utbm.reversi.model.cells.Cell;
 public class GiletJaunePower extends Power {
 	
 	private ArrayList<PowerAnimation> animations;
+	private Sprite fullJacketSprite = new Sprite("./data/GiletJaune_Logo.png",1,1,1000,100,100);
 	
 	public GiletJaunePower(Player owner, ImageIcon icon, Sprite sprite) {
 		super(owner, icon, sprite, 5);
@@ -44,7 +45,7 @@ public class GiletJaunePower extends Power {
 				if (game.getBoard().getBoardCells()[xStart][yStart].getOwner() != null) {
 					this.animations.add(game.getBoard().getBoardCells()[xStart][yStart].addHoverAnimation(this.getSprite()));					
 				} else {
-					this.animations.add(game.getBoard().getBoardCells()[xStart][yStart].addHoverAnimation(new Sprite("./data/GiletJaune_Logo.png",1,1000,100,100)));
+					this.animations.add(game.getBoard().getBoardCells()[xStart][yStart].addHoverAnimation(this.fullJacketSprite));
 				}
 				game.getBoard().getBoardCells()[xStart][yStart].updateState();
 			}
@@ -62,7 +63,7 @@ public class GiletJaunePower extends Power {
 				if (game.getBoard().getBoardCells()[xStart][yStart].getOwner() != null) {
 					this.animations.add(game.getBoard().getBoardCells()[xStart][yStart].addHoverAnimation(this.getSprite()));
 				} else {
-					this.animations.add(game.getBoard().getBoardCells()[xStart][yStart].addHoverAnimation(new Sprite("./data/GiletJaune_Logo.png",1,1000,100,100)));
+					this.animations.add(game.getBoard().getBoardCells()[xStart][yStart].addHoverAnimation(this.fullJacketSprite));
 				}
 				game.getBoard().getBoardCells()[xStart][yStart].updateState();
 			}

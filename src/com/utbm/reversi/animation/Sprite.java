@@ -12,21 +12,24 @@ public class Sprite {
     private int sizeX;
     private int sizeY;
     private int duration;
-    private int spriteSize;
+    private int spriteSizeX;
+    private int spriteSizeY;
     
-    public Sprite(String img, int spriteSize, int duration, int sizeX, int sizeY) {
+    public Sprite(String img, int spriteSizeX, int spriteSizeY, int duration, int sizeX, int sizeY) {
     	this.sizeX = sizeX;
     	this.sizeY = sizeY;
     	this.duration = duration;
-    	this.spriteSize = spriteSize;
+    	this.spriteSizeX = spriteSizeX;
+    	this.spriteSizeY = spriteSizeY;
     	
     	this.loadSprite(img);
     }
-    public Sprite(ImageIcon img, int spriteSize, int duration, int sizeX, int sizeY) {
+    public Sprite(ImageIcon img, int spriteSizeX, int spriteSizeY, int duration, int sizeX, int sizeY) {
     	this.sizeX = sizeX;
     	this.sizeY = sizeY;
     	this.duration = duration;
-    	this.spriteSize = spriteSize;
+    	this.spriteSizeX = spriteSizeX;
+    	this.spriteSizeY = spriteSizeY;
     	
     	this.loadSprite(img);
     }
@@ -82,14 +85,26 @@ public class Sprite {
 	/**
 	 * @return the spriteSize
 	 */
-	public int getSpriteSize() {
-		return spriteSize;
+	public int getSpriteSizeX() {
+		return spriteSizeX;
 	}
 
 	/**
 	 * @param spriteSize the spriteSize to set
 	 */
-	public void setSpriteSize(int spriteSize) {
-		this.spriteSize = spriteSize;
+	public void setSpriteSizeX(int spriteSize) {
+		this.spriteSizeX = spriteSize;
+	}
+	/**
+	 * @return the spriteSizeY
+	 */
+	public int getSpriteSizeY() {
+		return spriteSizeY;
+	}
+	/**
+	 * @param spriteSizeY the spriteSizeY to set
+	 */
+	public void setSpriteSizeY(int spriteSizeY) {
+		this.spriteSizeY = spriteSizeY;
 	}
 }

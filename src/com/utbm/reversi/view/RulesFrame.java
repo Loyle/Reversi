@@ -47,6 +47,7 @@ public class RulesFrame extends JFrame
 		this.setMinimumSize(new Dimension(700,700));
 		this.setSize(700, 700);
 		this.setVisible(true);
+		this.setLocationRelativeTo(null);
 		
 		
 

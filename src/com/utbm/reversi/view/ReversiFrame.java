@@ -60,7 +60,7 @@ public class ReversiFrame extends JFrame {
 	private ArrayList<PowerButton> powerListBtn;
 
 	public ReversiFrame(int size, int powerNumber, int obstaclesNumber, int trapsNumber, ArrayList<Player> players) {
-		this.game = new Game(this, size, powerNumber, obstaclesNumber, trapsNumber);
+		this.game = new Game(this, size, powerNumber, obstaclesNumber, trapsNumber, players.size());
 
 
 		for (Player player : players) {

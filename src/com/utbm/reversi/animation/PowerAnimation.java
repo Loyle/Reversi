@@ -7,17 +7,17 @@ import java.util.List;
 import com.utbm.reversi.model.cells.Cell;
 
 public class PowerAnimation implements Runnable{        
-    private int currentFrame;               // animations current frame
-    private int totalFrames;                // total amount of frames for your animation
+    private int currentFrame;
+    private int totalFrames;
     
-    private boolean stopped;           
+    private boolean stopped;  
+    private boolean repeat;
     
     private Cell cell;
 
     private List<BufferedImage> buffer = new ArrayList<BufferedImage>();
-	private int frameDelay;     
-
-    public PowerAnimation(BufferedImage[] buffer, Cell cell, int frameDelay) {   
+	private int frameDelay;
+    public PowerAnimation(BufferedImage[] buffer, Cell cell, int frameDelay, boolean repeat) {   
         for(int i = 0; i < buffer.length; i++) {
         	this.buffer.add(buffer[i]);        	
         }
@@ -27,6 +27,7 @@ public class PowerAnimation implements Runnable{
         this.currentFrame = 0;
         this.totalFrames = this.buffer.size();
         
+        this.repeat = repeat;
         this.stopped = false;
     }
     
@@ -41,16 +42,21 @@ public class PowerAnimation implements Runnable{
 
 	@Override
 	public void run() {
-		while(!stopped) {			
-			this.cell.updateState();
-			if(currentFrame < totalFrames-1) {
-				currentFrame++;
-			}else {
-				currentFrame = 0;
-			}
-		
+		while(!stopped) {
+			this.cell.updateState();	
 			try {
 				Thread.sleep(this.frameDelay);
+				if(currentFrame < totalFrames-1) {
+					currentFrame++;
+				}else {
+					if(this.repeat) {
+						currentFrame = 0;					
+					}
+					else {
+						this.stop();
+					}
+				}
+				
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

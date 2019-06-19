@@ -1,7 +1,11 @@
 package com.utbm.reversi.controller;
 
+import java.util.ArrayList;
+
 import com.utbm.reversi.model.Game;
+import com.utbm.reversi.model.cells.BombCell;
 import com.utbm.reversi.model.cells.Cell;
+import com.utbm.reversi.model.cells.TrapCell;
 
 public class FollowingRules {
 	private Cell cell;
@@ -189,72 +193,86 @@ public class FollowingRules {
 		// Change le propriétaire de toutes les cases encadrées, et actualise (ce qui
 		// place le pion)
 		
+		ArrayList<Cell> treatedCells = new ArrayList<Cell>();
 		this.cell.setOwner(this.game.getCurrentPlayer());
+		treatedCells.add(this.cell);
 
 		for (int i = 0; i <= this.countInter[0]; i++) {
-			if (this.game.getBoard().getBoardCells()[this.x][this.y - i].isEnabled()
-					&& this.game.getBoard().getBoardCells()[this.x][this.y - i].equals(this.cell) == false) {
-				this.game.getBoard().getBoardCells()[this.x][this.y - i].setOwner(this.game.getCurrentPlayer());
-				this.game.getBoard().getBoardCells()[this.x][this.y - i].updateState();
+			Cell treating = this.game.getBoard().getBoardCells()[this.x][this.y - i];
+			if (treating.isEnabled() && treating.equals(this.cell) == false) {
+				treating.setOwner(this.game.getCurrentPlayer());
+				treatedCells.add(treating);
 			}
 		}
 		// BOTTOM
 		for (int i = 0; i <= this.countInter[1]; i++) {
-			if (this.game.getBoard().getBoardCells()[this.x][this.y + i].isEnabled()
-					&& this.game.getBoard().getBoardCells()[this.x][this.y + i].equals(this.cell) == false) {
-				this.game.getBoard().getBoardCells()[this.x][this.y + i].setOwner(this.game.getCurrentPlayer());
-				this.game.getBoard().getBoardCells()[this.x][this.y + i].updateState();
+			Cell treating = this.game.getBoard().getBoardCells()[this.x][this.y + i];
+			if (treating.isEnabled() && treating.equals(this.cell) == false) {
+				treating.setOwner(this.game.getCurrentPlayer());
+				treatedCells.add(treating);
 			}
 		}
 		// LEFT
-		for (int i = 0; i <= this.countInter[2]; i++) {
-			if (this.game.getBoard().getBoardCells()[this.x - i][this.y].isEnabled()
-					&& this.game.getBoard().getBoardCells()[this.x - i][this.y].equals(this.cell) == false) {
-				this.game.getBoard().getBoardCells()[this.x - i][this.y].setOwner(this.game.getCurrentPlayer());
-				this.game.getBoard().getBoardCells()[this.x - i][this.y].updateState();
+		for (int i = 0; i <= this.countInter[2]; i++) {	
+			Cell treating = this.game.getBoard().getBoardCells()[this.x - i][this.y];
+			if (treating.isEnabled() && treating.equals(this.cell) == false) {
+				treating.setOwner(this.game.getCurrentPlayer());
+				treatedCells.add(treating);
 			}
 		}
 		// RIGHT
-		for (int i = 0; i <= this.countInter[3]; i++) {
-			if (this.game.getBoard().getBoardCells()[this.x + i][this.y].isEnabled()
-					&& this.game.getBoard().getBoardCells()[this.x + i][this.y].equals(this.cell) == false) {
-				this.game.getBoard().getBoardCells()[this.x + i][this.y].setOwner(this.game.getCurrentPlayer());
-				this.game.getBoard().getBoardCells()[this.x + i][this.y].updateState();
+		for (int i = 0; i <= this.countInter[3]; i++) {			
+			Cell treating = this.game.getBoard().getBoardCells()[this.x + i][this.y];
+			if (treating.isEnabled() && treating.equals(this.cell) == false) {
+				treating.setOwner(this.game.getCurrentPlayer());
+				treatedCells.add(treating);
 			}
 		}
 
 		// TOP-RIGHT
 		for (int i = 0; i <= this.countInter[4]; i++) {
-			if (this.game.getBoard().getBoardCells()[this.x + i][this.y - i].isEnabled()
-					&& this.game.getBoard().getBoardCells()[this.x + i][this.y - i].equals(this.cell) == false) {
-				this.game.getBoard().getBoardCells()[this.x + i][this.y - i].setOwner(this.game.getCurrentPlayer());
-				this.game.getBoard().getBoardCells()[this.x + i][this.y - i].updateState();
+			Cell treating = this.game.getBoard().getBoardCells()[this.x + i][this.y - i];
+			if (treating.isEnabled() && treating.equals(this.cell) == false) {
+				treating.setOwner(this.game.getCurrentPlayer());
+				treatedCells.add(treating);
 			}
 		}
 		// BOTTOM-RIGHT
 		for (int i = 0; i <= this.countInter[5]; i++) {
-			if (this.game.getBoard().getBoardCells()[this.x + i][this.y + i].isEnabled()
-					&& this.game.getBoard().getBoardCells()[this.x + i][this.y + i].equals(this.cell) == false) {
-				this.game.getBoard().getBoardCells()[this.x + i][this.y + i].setOwner(this.game.getCurrentPlayer());
-				this.game.getBoard().getBoardCells()[this.x + i][this.y + i].updateState();
+			Cell treating = this.game.getBoard().getBoardCells()[this.x + i][this.y + i];
+			if (treating.isEnabled() && treating.equals(this.cell) == false) {
+				treating.setOwner(this.game.getCurrentPlayer());
+				treatedCells.add(treating);
 			}
 		}
 
 		// BOTTOM-LEFT
 		for (int i = 0; i <= this.countInter[6]; i++) {
-			if (this.game.getBoard().getBoardCells()[this.x - i][this.y + i].isEnabled()
-					&& this.game.getBoard().getBoardCells()[this.x - i][this.y + i].equals(this.cell) == false) {
-				this.game.getBoard().getBoardCells()[this.x - i][this.y + i].setOwner(this.game.getCurrentPlayer());
-				this.game.getBoard().getBoardCells()[this.x - i][this.y + i].updateState();
+			Cell treating = this.game.getBoard().getBoardCells()[this.x - i][this.y + i];
+			if (treating.isEnabled() && treating.equals(this.cell) == false) {
+				treating.setOwner(this.game.getCurrentPlayer());
+				treatedCells.add(treating);
 			}
 		}
 		// TOP-LEFT
 		for (int i = 0; i <= this.countInter[7]; i++) {
-			if (this.game.getBoard().getBoardCells()[this.x - i][this.y - i].isEnabled()
-					&& this.game.getBoard().getBoardCells()[this.x - i][this.y - i].equals(this.cell) == false) {
-				this.game.getBoard().getBoardCells()[this.x - i][this.y - i].setOwner(this.game.getCurrentPlayer());
-				this.game.getBoard().getBoardCells()[this.x - i][this.y - i].updateState();
+			Cell treating = this.game.getBoard().getBoardCells()[this.x - i][this.y - i];
+			if (treating.isEnabled() && treating.equals(this.cell) == false) {
+				treating.setOwner(this.game.getCurrentPlayer());
+				treatedCells.add(treating);
 			}
+		}
+		
+		// Start Explosions And trap
+		for(Cell cell : treatedCells) {
+			if(cell instanceof BombCell) {
+				((BombCell) cell).use();
+			}
+			else if(cell instanceof TrapCell) {
+				((TrapCell) cell).use();
+			}
+			
+			cell.updateState();
 		}
 	}
 }
