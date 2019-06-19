@@ -28,7 +28,7 @@ public class SwitchPower extends Power {
 		this.setOriginCell(cell);
 		int currentX = cell.getCoordX();
 		int currentY = cell.getCoordY();
-		if(cell.getOwner() !=null && cell.isEnabled()) {
+		if(cell.getOwner() !=null && cell.isEnabled() && cell.isLock()) {
 			if(!cell.getOwner().equals(game.getCurrentPlayer())) {
 				cell.setOwner(game.getCurrentPlayer());
 				

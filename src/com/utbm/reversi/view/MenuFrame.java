@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -144,10 +145,13 @@ public class MenuFrame extends JFrame
         gbcAddPlayers.gridy = 0;
         addPlayersPanel.add(new JLabel("     "),gbcAddPlayers);
         
-        this.playersComboBox = new JComboBox<String>(couleurs); 
+        
+        JButton playersColor = new JButton(" ");
+        playersColor.setBackground(Color.black);
         gbcAddPlayers.gridx = 2;
         gbcAddPlayers.gridy = 0;
-        addPlayersPanel.add(playersComboBox,gbcAddPlayers);
+        addPlayersPanel.add(playersColor,gbcAddPlayers);
+        playersColor.addActionListener(e -> menuController.onColorClicked(playersColor));
 
         gbcAddPlayers.gridx = 3;
         gbcAddPlayers.gridy = 0;

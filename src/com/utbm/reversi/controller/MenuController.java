@@ -1,8 +1,11 @@
 package com.utbm.reversi.controller;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JSlider;
 
@@ -18,12 +21,15 @@ public class MenuController
 	//Size of the board
 	private int gridSize = 8;
 	
+	private Color actualColor;
+	
 	private ArrayList<Player> players = new ArrayList<Player>();
 	
 	//MenuController has to be linked with a menuFrame
 	public MenuController(MenuFrame menuFrame) 
 	{
 		this.menuFrame = menuFrame;
+		this.actualColor = Color.black;
 	}
 	
 	// Function called when someone click on Play button
@@ -183,77 +189,41 @@ public class MenuController
 			
 			
 			
+			this.players.add(new Player(input,this.actualColor));
 			
-			
-			String color = this.menuFrame.getPlayersComboBox().getSelectedItem().toString();
-			this.menuFrame.getPlayersComboBox().removeItem(color);
-			
-			switch (color) {
-				case "White":
-					this.players.add(new Player(input,Color.white));
-					break;
-				case "Black":
-					this.players.add(new Player(input,Color.black));
-					break;
-				case "Red":
-					this.players.add(new Player(input,Color.red));
-					break;
-				case "Blue":
-					this.players.add(new Player(input,Color.blue));
-					break;
-				case "Yellow":
-					this.players.add(new Player(input,Color.yellow));
-					break;
-				case "Green":
-					this.players.add(new Player(input,Color.green));
-					break;
-				case "Gray":
-					this.players.add(new Player(input,Color.gray));
-					break;
-				case "Pink":
-					this.players.add(new Player(input,Color.pink));
-					break;
-				case "Cyan":
-					this.players.add(new Player(input,Color.cyan));
-					break;
-				case "Orange":
-					this.players.add(new Player(input,Color.orange));
-					break;
-			}
-
 			
 			
 			if (this.players.size() <= 3)
 			{
 				if (this.players.size()==1) 
 				{
-			        this.menuFrame.getPlayersLabel1().setText(this.menuFrame.getPlayersLabel1().getText() + input + " (" + color + ")");
+			        this.menuFrame.getPlayersLabel1().setText(this.menuFrame.getPlayersLabel1().getText() + input);
 				}
 				else
 				{
-			        this.menuFrame.getPlayersLabel1().setText(this.menuFrame.getPlayersLabel1().getText() + "  ;  " + input + " (" + color + ")");
+			        this.menuFrame.getPlayersLabel1().setText(this.menuFrame.getPlayersLabel1().getText() + "  ;  " + input);
 				}
 			}
 			else if (this.players.size() > 3 && this.players.size() <= 6) 
 			{
 				if (this.players.size()==4) 
 				{
-			        this.menuFrame.getPlayersLabel2().setText(this.menuFrame.getPlayersLabel2().getText() + input + " (" + color + ")");
+			        this.menuFrame.getPlayersLabel2().setText(this.menuFrame.getPlayersLabel2().getText() + input);
 				}
 				else
 				{
-			        this.menuFrame.getPlayersLabel2().setText(this.menuFrame.getPlayersLabel2().getText() + "  ;  " +  input + " (" + color + ")");
+			        this.menuFrame.getPlayersLabel2().setText(this.menuFrame.getPlayersLabel2().getText() + "  ;  " +  input);
 				}
 			}
 			else if (this.players.size() > 6 && this.players.size() <= 9) 
 			{
 				if (this.players.size()==7) 
 				{
-			        this.menuFrame.getPlayersLabel3().setText(this.menuFrame.getPlayersLabel3().getText() + input + " (" + color + ")");
+			        this.menuFrame.getPlayersLabel3().setText(this.menuFrame.getPlayersLabel3().getText() + input);
 				}
 				else
 				{
-			        this.menuFrame.getPlayersLabel3().setText(this.menuFrame.getPlayersLabel3().getText() + "  ;  " +  input + " (" + color + ")");
+			        this.menuFrame.getPlayersLabel3().setText(this.menuFrame.getPlayersLabel3().getText() + "  ;  " +  input);
 				}
 			}
 			this.menuFrame.getPlayersTextField().setText("");
@@ -307,6 +277,12 @@ public class MenuController
 		
 	}
 
+	public void onColorClicked(JButton playersColor) 
+	{
+        this.actualColor = JColorChooser.showDialog(null,"JColorChooser Sample", Color.black);
+        playersColor.setBackground(actualColor);
+	}
+	
 	public void onRulesClicked() 
 	{
 		new RulesFrame();

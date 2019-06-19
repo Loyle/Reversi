@@ -12,6 +12,8 @@ import com.utbm.reversi.model.Game;
 import com.utbm.reversi.model.Player;
 import com.utbm.reversi.model.cells.Cell;
 
+
+
 public class LightningPower extends Power {
 	
 	private ArrayList<Cell> lightningCell;
@@ -41,7 +43,7 @@ public class LightningPower extends Power {
 			yStart--;
 		}
 		while(xStart<=cell.getCoordX()+1 && xStart<game.getBoard().getSize() && yStart<=cell.getCoordY()+1 && yStart<game.getBoard().getSize()) {
-			if(game.getBoard().getBoardCells()[xStart][yStart].isEnabled()) {
+			if(game.getBoard().getBoardCells()[xStart][yStart].isEnabled()&&game.getBoard().getBoardCells()[xStart][yStart].isLock()) {
 				game.getBoard().getBoardCells()[xStart][yStart].setOwner(this.getOwner());
 				this.animations.add(game.getBoard().getBoardCells()[xStart][yStart].addHoverAnimation(this.getSprite()));
 				game.getBoard().getBoardCells()[xStart][yStart].updateState();
@@ -61,7 +63,7 @@ public class LightningPower extends Power {
 		}
 		
 		while(xStart<=cell.getCoordX()+1 && xStart<game.getBoard().getSize() && yStart>=cell.getCoordY()-1 && yStart>=0){
-			if(game.getBoard().getBoardCells()[xStart][yStart].isEnabled()) {
+			if(game.getBoard().getBoardCells()[xStart][yStart].isEnabled()&&game.getBoard().getBoardCells()[xStart][yStart].isLock()) {
 				game.getBoard().getBoardCells()[xStart][yStart].setOwner(this.getOwner());
 				this.animations.add(game.getBoard().getBoardCells()[xStart][yStart].addHoverAnimation(this.getSprite()));
 				game.getBoard().getBoardCells()[xStart][yStart].updateState();
@@ -74,6 +76,7 @@ public class LightningPower extends Power {
 		game.getFrame().setCursor(Cursor.getDefaultCursor());
 		return true;
 	}
+	
 	@Override
 	public void next(Game game) {
 		this.setDuration(this.getDuration()-1);
@@ -98,13 +101,15 @@ public class LightningPower extends Power {
 				yStart= saveY;
 				while ( yStart<=this.getOriginCell().getCoordY()+1 && yStart<game.getBoard().getSize()) {
 					
-					if(xStart != this.getOriginCell().getCoordX()|| yStart!=this.getOriginCell().getCoordY() ) {
-						float r = rand.nextInt(200) ;
+					if(xStart != this.getOriginCell().getCoordX() || yStart!=this.getOriginCell().getCoordY() ) {
+						float r = rand.nextInt(20) ;
 						if( r <= 10) {	
 							if(xStart>=0 && yStart>=0) {
-								if(game.getBoard().getBoardCells()[xStart][yStart].isEnabled()) {
+								if(game.getBoard().getBoardCells()[xStart][yStart].isEnabled()&&game.getBoard().getBoardCells()[xStart][yStart].isLock()) {
 									game.getBoard().getBoardCells()[xStart][yStart].setOwner(this.getOwner());
-									this.animations.add(game.getBoard().getBoardCells()[xStart][yStart].addHoverAnimation(this.getSprite()));
+									if(!this.lightningCell.contains(game.getBoard().getBoardCells()[xStart][yStart])) {
+										this.animations.add(game.getBoard().getBoardCells()[xStart][yStart].addHoverAnimation(this.getSprite()));																				
+									}
 									game.getBoard().getBoardCells()[xStart][yStart].updateState();
 									toAdd.add(game.getBoard().getBoardCells()[xStart][yStart]);																					
 								}
@@ -117,6 +122,7 @@ public class LightningPower extends Power {
 			}
 		}
 		this.lightningCell.addAll(toAdd);
+		toAdd.clear();
 		
 		
 	}

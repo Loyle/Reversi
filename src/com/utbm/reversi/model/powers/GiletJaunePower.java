@@ -39,8 +39,8 @@ public class GiletJaunePower extends Power {
 		}
 
 		while (xStart <= cell.getCoordX() + 1 && xStart < game.getBoard().getSize()) {
-			if (game.getBoard().getBoardCells()[xStart][yStart].isEnabled()) {
-				game.getBoard().getBoardCells()[xStart][yStart].setEnabled(false);
+			if (game.getBoard().getBoardCells()[xStart][yStart].isEnabled()&&game.getBoard().getBoardCells()[xStart][yStart].isLock()) {
+				game.getBoard().getBoardCells()[xStart][yStart].setLock(false);
 				if (game.getBoard().getBoardCells()[xStart][yStart].getOwner() != null) {
 					this.animations.add(game.getBoard().getBoardCells()[xStart][yStart].addHoverAnimation(this.getSprite()));					
 				} else {
