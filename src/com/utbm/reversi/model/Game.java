@@ -126,20 +126,6 @@ public class Game {
 		if(this.players.indexOf(this.currentPlayer) == this.players.size() - 1) {
 			// Come back to first player
 			this.currentPlayer = this.players.get(0);
-			
-			// Update of powers to delete, stop et remove power si duration = 0
-			ArrayList<Power> powersToDelete = new ArrayList<Power>();
-			for(Power power : powers) {
-				power.next(this);
-				if (power.getDuration() == 0) {
-					powersToDelete.add(power);
-				}
-			}
-			for (Power power : powersToDelete) {
-				power.stop(this);
-			}
-			powers.removeAll(powersToDelete);
-			powersToDelete.clear();
 
 			// Next Round
 			this.addRound();
@@ -151,6 +137,22 @@ public class Game {
 			// Go to next player
 			this.currentPlayer = this.players.get(this.players.indexOf(this.currentPlayer) + 1);
 		}
+		
+		// Update of powers to delete, stop and remove power if duration = 0
+					ArrayList<Power> powersToDelete = new ArrayList<Power>();
+					for(Power power : powers) {
+						if(power.getOwner().equals(this.currentPlayer)) {
+							power.next(this);
+							if (power.getDuration() == 0) {
+								powersToDelete.add(power);
+							}					
+						}
+					}
+					for (Power power : powersToDelete) {
+						power.stop(this);
+					}
+					powers.removeAll(powersToDelete);
+					powersToDelete.clear();
 
 		// Update Score
 		this.countScore();
