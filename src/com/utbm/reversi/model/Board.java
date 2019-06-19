@@ -4,8 +4,6 @@ import java.util.Random;
 
 import javax.swing.ImageIcon;
 
-import org.omg.CORBA.NVList;
-
 import com.utbm.reversi.model.cells.BombCell;
 import com.utbm.reversi.model.cells.Cell;
 import com.utbm.reversi.model.cells.TrapCell;

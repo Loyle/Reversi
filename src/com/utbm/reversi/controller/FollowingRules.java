@@ -197,7 +197,7 @@ public class FollowingRules {
 
 		for (int i = 0; i <= this.countInter[0]; i++) {
 			Cell treating = this.game.getBoard().getBoardCells()[this.x][this.y - i];
-			if (treating.isEnabled() && treating.equals(this.cell) == false) {
+			if (treating.isEnabled() && treating.equals(this.cell) == false && !treating.isLock()) {
 				treating.setOwner(this.game.getCurrentPlayer());
 				treatedCells.add(treating);
 			}
@@ -205,7 +205,7 @@ public class FollowingRules {
 		// BOTTOM
 		for (int i = 0; i <= this.countInter[1]; i++) {
 			Cell treating = this.game.getBoard().getBoardCells()[this.x][this.y + i];
-			if (treating.isEnabled() && treating.equals(this.cell) == false) {
+			if (treating.isEnabled() && treating.equals(this.cell) == false && !treating.isLock()) {
 				treating.setOwner(this.game.getCurrentPlayer());
 				treatedCells.add(treating);
 			}
@@ -213,7 +213,7 @@ public class FollowingRules {
 		// LEFT
 		for (int i = 0; i <= this.countInter[2]; i++) {	
 			Cell treating = this.game.getBoard().getBoardCells()[this.x - i][this.y];
-			if (treating.isEnabled() && treating.equals(this.cell) == false) {
+			if (treating.isEnabled() && treating.equals(this.cell) == false && !treating.isLock()) {
 				treating.setOwner(this.game.getCurrentPlayer());
 				treatedCells.add(treating);
 			}
@@ -221,7 +221,7 @@ public class FollowingRules {
 		// RIGHT
 		for (int i = 0; i <= this.countInter[3]; i++) {			
 			Cell treating = this.game.getBoard().getBoardCells()[this.x + i][this.y];
-			if (treating.isEnabled() && treating.equals(this.cell) == false) {
+			if (treating.isEnabled() && treating.equals(this.cell) == false && !treating.isLock()) {
 				treating.setOwner(this.game.getCurrentPlayer());
 				treatedCells.add(treating);
 			}
@@ -230,7 +230,7 @@ public class FollowingRules {
 		// TOP-RIGHT
 		for (int i = 0; i <= this.countInter[4]; i++) {
 			Cell treating = this.game.getBoard().getBoardCells()[this.x + i][this.y - i];
-			if (treating.isEnabled() && treating.equals(this.cell) == false) {
+			if (treating.isEnabled() && treating.equals(this.cell) == false && !treating.isLock()) {
 				treating.setOwner(this.game.getCurrentPlayer());
 				treatedCells.add(treating);
 			}
@@ -238,7 +238,7 @@ public class FollowingRules {
 		// BOTTOM-RIGHT
 		for (int i = 0; i <= this.countInter[5]; i++) {
 			Cell treating = this.game.getBoard().getBoardCells()[this.x + i][this.y + i];
-			if (treating.isEnabled() && treating.equals(this.cell) == false) {
+			if (treating.isEnabled() && treating.equals(this.cell) == false && !treating.isLock()) {
 				treating.setOwner(this.game.getCurrentPlayer());
 				treatedCells.add(treating);
 			}
@@ -247,7 +247,7 @@ public class FollowingRules {
 		// BOTTOM-LEFT
 		for (int i = 0; i <= this.countInter[6]; i++) {
 			Cell treating = this.game.getBoard().getBoardCells()[this.x - i][this.y + i];
-			if (treating.isEnabled() && treating.equals(this.cell) == false) {
+			if (treating.isEnabled() && treating.equals(this.cell) == false && !treating.isLock()) {
 				treating.setOwner(this.game.getCurrentPlayer());
 				treatedCells.add(treating);
 			}
@@ -255,7 +255,7 @@ public class FollowingRules {
 		// TOP-LEFT
 		for (int i = 0; i <= this.countInter[7]; i++) {
 			Cell treating = this.game.getBoard().getBoardCells()[this.x - i][this.y - i];
-			if (treating.isEnabled() && treating.equals(this.cell) == false) {
+			if (treating.isEnabled() && treating.equals(this.cell) == false && !treating.isLock()) {
 				treating.setOwner(this.game.getCurrentPlayer());
 				treatedCells.add(treating);
 			}

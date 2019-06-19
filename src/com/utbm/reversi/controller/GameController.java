@@ -22,7 +22,7 @@ public class GameController {
 		if (this.game.isStart()) {
 			// We want to the cell doesn't belong to a player 
 			if (this.game.getCurrentPlayer().getUsingPower() == null) {
-				if (cell.getOwner() == null) {
+				if (cell.getOwner() == null && !cell.isLock()) {
 					FollowingRules rules = new FollowingRules(this.game, cell);
 					if (rules.isPlayable()) {
 						rules.replaceCell();
