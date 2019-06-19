@@ -28,8 +28,7 @@ public class FirePower extends Power {
 	public boolean use(Game game, Cell cell) {
 		// TODO Auto-generated method stub
 		/*
-		 * Use -> une cell en fire , set proba pour que une des cells autour devient en fire 
-		 * dure 3-5 tour après s'éteint
+		 * Use -> a cell in fire, sets a probability that one of the surrounding cells becomes in fire, during 3-5 turns after it is extinguished.
 		 */
 		this.setOriginCell(cell);
 		this.burningCell.add(cell);
@@ -39,7 +38,7 @@ public class FirePower extends Power {
 		
 		cell.updateState();
 		
-		// afficher flamme sur la cell
+		// Displaying a fire on cell
 		game.getFrame().setCursor(Cursor.getDefaultCursor());
 		return true;
 	}

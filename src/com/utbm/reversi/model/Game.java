@@ -31,7 +31,7 @@ public class Game {
 		
 		this.frame = frame;
 
-		// On crée un board de la taille voulu
+		// Creating a board on choosed size
 		this.board = new Board(size,obstaclesNumber,trapsNumber);
 
 	}
@@ -127,7 +127,7 @@ public class Game {
 			// Come back to first player
 			this.currentPlayer = this.players.get(0);
 			
-			// update des power à supprimer, stop et remove power si duration = 0
+			// Update of powers to delete, stop et remove power si duration = 0
 			ArrayList<Power> powersToDelete = new ArrayList<Power>();
 			for(Power power : powers) {
 				power.next(this);
@@ -141,11 +141,11 @@ public class Game {
 			powers.removeAll(powersToDelete);
 			powersToDelete.clear();
 
-			// Tour suivant
+			// Next Round
 			this.addRound();
 
-			// for each power en cours decrementer duration check état et remove array si ==
-			// 0 créer stop power
+			// for each power using, decrement duration check state and remove array if ==
+			// 0 creating stop power
 
 		} else {
 			// Go to next player
@@ -223,20 +223,20 @@ public class Game {
 		int idx1=0;
 		int idx2=0;
 		
-		// On parcourt toute la grille
+		// Browsing all the grid
 		for (int i=0;i<board.getSize();i++) 
 		{
 			for (int j=0;j<board.getSize();j++) 
 			{
 				FollowingRules rules = new FollowingRules(this, this.board.getBoardCells()[i][j]);
 				
-				// Si la case est vide et que l'on ne peut rien y poser, on incrémente idx1
+				// If the cell is empty and nothing can be placed on it, we increment idx1
 				if (this.board.getBoardCells()[i][j].getOwner() == null && rules.isPlayable() == false && this.board.getBoardCells()[i][j].isObstacle() == false) 
 				{
 					idx1=idx1+1;
 				}
 				
-				// Si la case est vide, on incrémente idx2
+				// If the cell is empty,we increment idx2
 				if (this.board.getBoardCells()[i][j].getOwner() == null && this.board.getBoardCells()[i][j].isObstacle() == false) 
 				{
 					idx2=idx2+1;
@@ -245,12 +245,12 @@ public class Game {
 			}
 		}
 		
-		// S'il y a autant de case vide que de cases vides où on ne peut rien poser, alors le jeu est bien bloqué
+		// If there are as many empty squares as there are empty squares where you can't put anything, then the game is blocked
 		if (idx1 == idx2) 
 		{
 			return true;
 		}
-		// Sinon, on peut continuer à jouer
+		// Else,we can continue
 		else
 		{
 			return false;

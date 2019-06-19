@@ -23,7 +23,7 @@ public class FollowingRules {
 	public int[] findInter() {
 		int inter[] = { 0, 0, 0, 0, 0, 0, 0, 0 };
 
-		// startX et startY sont les coordonnées d'une Cell voisine
+		// startX and startY are coordinates of a neighbour Cell
 		int startX;
 		int startY;
 
@@ -33,13 +33,13 @@ public class FollowingRules {
 		startY = this.y - 1;
 		count = 0;
 
-		// TANT QUE
-		// Les coordonnées du voisin sont dans la grille
-		// ET QUE
-		// Ce voisin a un pion posé sur lui/a un propriétaire
+		// WHILE
+		// Coordinates of the neighbour are in the board
+		// AND
+		// This neighbour has a pawn put on him/has an owner
 		while (startY >= 0 && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) {
-			// SI
-			// Le propriétaire de cette case est celui qui joue en ce moment
+			// IF
+			// Owner on this cell is the one who's playing now
 			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner()
 					.equals(this.game.getCurrentPlayer()) == true) {
 
@@ -170,8 +170,7 @@ public class FollowingRules {
 		return inter;
 	}
 
-	// La case est jouable si on a pu compter un pion adverse entre le nouveau pion
-	// et un autre pion de la même couleur
+	// The cell is playable if we could count an opponent's pawn between the new pawn and another pawn of the same color
 	public boolean isPlayable() {
 		this.countInter = this.findInter();
 
@@ -183,11 +182,10 @@ public class FollowingRules {
 		return false;
 	}
 
-	// Permet de placer le nouveau pion et de retourner les pions impactés
+	// Permit to place the new pawn and reverse a impacted pawns
 	public void replaceCell() {
 		// TOP
-		// Change le propriétaire de toutes les cases encadrées, et actualise (ce qui
-		// place le pion)
+		// Change owners of all the framed cells, and update (that's placing the pawn)
 		
 		this.cell.setOwner(this.game.getCurrentPlayer());
 
