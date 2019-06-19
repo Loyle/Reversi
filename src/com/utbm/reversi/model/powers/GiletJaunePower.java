@@ -49,7 +49,7 @@ public class GiletJaunePower extends Power {
 					if (game.getBoard().getBoardCells()[xStart][yStart].getOwner() != null) {
 						this.animations.add(game.getBoard().getBoardCells()[xStart][yStart].addHoverAnimation(this.getSprite()));					
 					} else {
-						this.animations.add(game.getBoard().getBoardCells()[xStart][yStart].addHoverAnimation(new Sprite("./data/GiletJaune_Logo.png",1,1000,100,100)));
+						this.animations.add(game.getBoard().getBoardCells()[xStart][yStart].addHoverAnimation(this.fullJacketSprite));
 					}
 					game.getBoard().getBoardCells()[xStart][yStart].updateState();
 				}
@@ -67,7 +67,7 @@ public class GiletJaunePower extends Power {
 					if (game.getBoard().getBoardCells()[xStart][yStart].getOwner() != null ) {
 						this.animations.add(game.getBoard().getBoardCells()[xStart][yStart].addHoverAnimation(this.getSprite()));
 					} else {
-						this.animations.add(game.getBoard().getBoardCells()[xStart][yStart].addHoverAnimation(new Sprite("./data/GiletJaune_Logo.png",1,1000,100,100)));
+						this.animations.add(game.getBoard().getBoardCells()[xStart][yStart].addHoverAnimation(this.fullJacketSprite));
 					}
 					game.getBoard().getBoardCells()[xStart][yStart].updateState();
 
