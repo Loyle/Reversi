@@ -43,6 +43,7 @@ public class FirePower extends Power {
 		}else {
 			return false;
 		}
+	}
 
 	
 	@Override
