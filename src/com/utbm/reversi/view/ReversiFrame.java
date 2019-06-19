@@ -181,7 +181,7 @@ public class ReversiFrame extends JFrame {
 		// ======================================================================================
 		// PANEL "scores" OÙ SONT LES SCORES
 		// ======================================================================================
-		final JPanel scores = new JPanel();
+		JPanel scores = new JPanel();
 		scores.setBackground(Color.LIGHT_GRAY);
 		// On détermine la taille de la band ede côté où sont les scores, et on lui associe le layout
 		scores.setLayout(new GridBagLayout());
@@ -372,50 +372,16 @@ public class ReversiFrame extends JFrame {
 	}
 	
 	public void displayEndMessage() {
-		// On détruit le panel sur lequel la grille de Cell est générée
-		this.remove(this.getGamePanel());
-		// On crée un nouveau panel pour remplacer celui que l'on vient de supprimer
-		JPanel end = new JPanel();
-		end.setBackground(Color.lightGray);
-		end.setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        // On associe un message de fin à ce panel en fonction de la manière dont la partie s'est terminée et en fonction du score
-		JLabel endMsg = new JLabel();
-        gbc.gridx=0;
-        gbc.gridy=0;
-		end.add(endMsg,gbc);
 		
-		// ADD SPACE
-		for (int addSpace = 1 ; addSpace<5 ; addSpace++) 
-        {
-            gbc.gridx = 0;
-            gbc.gridy = addSpace;
-            end.add(new JLabel(" "),gbc);
-        }
+		this.whoPlayColor.setBackground(Color.LIGHT_GRAY);
+		this.whoPlayName.setText(" ");
 		
-		// Création du bouton permettant de recommencer la partie avec la même taille de grille
-		JButton replay = new JButton("Replay");
-		gbc.gridx=0;
-	    gbc.gridy=5;
-	    replay.addActionListener(e -> this.listener.onReplayClicked(replay));
-	    end.add(replay,gbc);
-		this.getContentPane().add(end,BorderLayout.CENTER);
-		
-		// Création du bouton pour revenir au menu
-		JButton endBackToMenu = new JButton("Back to Menu");
-		gbc.gridx=0;
-	    gbc.gridy=6;
-	    endBackToMenu.addActionListener(e -> this.listener.onBackToMenuClicked(endBackToMenu));
-	    end.add(endBackToMenu,gbc);
+		this.label.setText("BLOCKED !");
 	    
-	    
-
-		/*endMsg.setText("BLOCKED !");
-	    
-	    if (isEnded()) 
+	    if (this.game.isEnded()) 
 		{
-			endMsg.setText("END !");
-		}*/
+	    	this.label.setText("END !");
+		}
 	    
 	    
 	    ArrayList<Integer> scores = new ArrayList<Integer>();
@@ -428,12 +394,10 @@ public class ReversiFrame extends JFrame {
 	    {
 	    	if (max == player.getScore())
 	    	{
-				endMsg.setText(endMsg.getText()+" "+player.getName() + " wins !");
+				this.whoPlayName.setText(this.whoPlayName.getText()+" "+player.getName() + " wins !");
 	    	}
 	    }
 	    
-	    // On place le panel de fin là où se trouvait la grille
-		this.getContentPane().add(end,BorderLayout.CENTER);
 	}
 
 }
