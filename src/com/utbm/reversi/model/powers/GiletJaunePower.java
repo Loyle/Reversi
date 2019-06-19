@@ -29,7 +29,7 @@ public class GiletJaunePower extends Power {
 	public boolean use(Game game, Cell cell) {
 		// TODO Auto-generated method stub
 		/*
-		 * Use -> block 5 case ne croix
+		 * Use -> block 5 cells with a cross-design 
 		 */
 		if(cell.isLock()) {
 			return false;

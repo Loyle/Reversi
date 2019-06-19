@@ -20,8 +20,8 @@ public class ColorBombPower extends Power {
 	public boolean use(Game game, Cell cell) {
 		// TODO Auto-generated method stub
 		/*
-		 *Use ->  Carré autour du pion changeant la couleur de touts les pions dans la couelur du 
-		 * player ayant poser le pion
+		 *Use ->  Square around the pawn changing the color of all the pawns in the color of the player who placed the pawn
+		 *
 		 * 		°	*	*		°	°	°
 		 *		*	°	*	=> 	°	°	°
 		 * 		*	°	°		°	°	°

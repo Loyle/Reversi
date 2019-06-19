@@ -334,7 +334,7 @@ public class ReversiFrame extends JFrame {
 	}
 
 	// ======================================================================================
-	// Fonction qui actualise l'état des cores dans les label
+	// Function that updates the state of cores in labels
 	// ======================================================================================
 	public void updateScores(ArrayList<Player> players) {
 		for (Player player : players) {
@@ -372,14 +372,14 @@ public class ReversiFrame extends JFrame {
 	}
 	
 	public void displayEndMessage() {
-		// On détruit le panel sur lequel la grille de Cell est générée
+		// We destroy the panel on which the Cell grid is generated
 		this.remove(this.getGamePanel());
-		// On crée un nouveau panel pour remplacer celui que l'on vient de supprimer
+		// A new panel is created to replace the one just deleted.
 		JPanel end = new JPanel();
 		end.setBackground(Color.lightGray);
 		end.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        // On associe un message de fin à ce panel en fonction de la manière dont la partie s'est terminée et en fonction du score
+        // We associate an end message to this panel according to the way the game ended and according to the score
 		JLabel endMsg = new JLabel();
         gbc.gridx=0;
         gbc.gridy=0;
@@ -393,7 +393,7 @@ public class ReversiFrame extends JFrame {
             end.add(new JLabel(" "),gbc);
         }
 		
-		// Création du bouton permettant de recommencer la partie avec la même taille de grille
+		// Creation of the button allowing to start the game again with the same grid size
 		JButton replay = new JButton("Replay");
 		gbc.gridx=0;
 	    gbc.gridy=5;
@@ -401,7 +401,7 @@ public class ReversiFrame extends JFrame {
 	    end.add(replay,gbc);
 		this.getContentPane().add(end,BorderLayout.CENTER);
 		
-		// Création du bouton pour revenir au menu
+		// Creating the button to return to the menu
 		JButton endBackToMenu = new JButton("Back to Menu");
 		gbc.gridx=0;
 	    gbc.gridy=6;
@@ -432,7 +432,7 @@ public class ReversiFrame extends JFrame {
 	    	}
 	    }
 	    
-	    // On place le panel de fin là où se trouvait la grille
+	    // We place the end panel where the grid was located
 		this.getContentPane().add(end,BorderLayout.CENTER);
 	}
 

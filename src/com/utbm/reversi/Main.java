@@ -10,7 +10,7 @@ public class Main {
 	{
 		
 		//==========================================================================================================================
-		// Ici, on crée un objet MenuFrame (c'est la fenêtre où le menu est affiché)
+		//Here, we create an object MenuFrame (it's the frame where menu appears)
 		//==========================================================================================================================
 		JFrame menuFrame = new MenuFrame();
 
