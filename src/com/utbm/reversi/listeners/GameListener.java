@@ -36,9 +36,9 @@ public class GameListener implements ActionListener {
 		}
 	}
 
-	// Fonction associée au clic sur le bouton retour au menu
+	// Function associated with clicks on Back button
 	public void onBackToMenuClicked(JButton backToMenu) {
-		// Suppression de la fenêtre de jeu et création d'une fenêtre de menu
+		// Deleting game Panel and Creating a new Menupanel
 		this.controller.getFrame().dispose();
 
 		MenuFrame menuFrame = new MenuFrame();
@@ -51,9 +51,9 @@ public class GameListener implements ActionListener {
 		new RulesFrame();
 	}
 
-	// Fonction associée au clic sur le bouton rejouer
+	// Function associated with clicks on Replay button 
 	public void onReplayClicked(JButton replay) {
-		// Destruction de l'ancienne fenêtre et création d'un nouvelle
+		// Deleting old game Panel and Creating a new one
 
 		this.controller.getFrame().dispose();
 		

@@ -25,13 +25,13 @@ public class ShieldPower extends Power {
 	public boolean use(Game game, Cell cell) {
 		// TODO Auto-generated method stub
 		/*
-		 * Use -> le pion choisi ne se retourne pas s'il est encadré 
+		 * Use -> the chosen pawn does not turn over if it is framed 
 		 */
-		this.setOriginCell(cell); 
 
 		if(cell.getOwner()!=null) {
 			if(cell.getOwner().equals(this.getOwner())) {
-				cell.setEnabled(false);
+				this.setOriginCell(cell); 
+				cell.setLock(true);
 				this.animation = cell.addHoverAnimation(this.getSprite());
 				game.getBoard().getBoardCells()[cell.getCoordX()][cell.getCoordY()].updateState();
 				
@@ -49,7 +49,7 @@ public class ShieldPower extends Power {
 	}
 	@Override
 	public void stop(Game game) {
-		this.getOriginCell().setEnabled(true);	
+		this.getOriginCell().setLock(false);	
 		this.animation.stop();
 		this.getOriginCell().updateState();
 	}

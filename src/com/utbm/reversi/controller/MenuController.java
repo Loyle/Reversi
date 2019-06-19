@@ -17,9 +17,9 @@ import com.utbm.reversi.view.RulesFrame;
 
 public class MenuController 
 {
-	// Le controller est associé à une fenêtre
+	// Controller is affected to a Panel
 	private final MenuFrame menuFrame;
-	// Taille de la grille de jeu
+	//Size of the board
 	private int gridSize = 8;
 	
 	private Color actualColor;
@@ -28,14 +28,14 @@ public class MenuController
 	private JLabel[] playersLabel = new JLabel[9];
 	private JPanel[] playersPanel = new JPanel[9];
 	
-	// Le MenuController doit être lié à une MenuFrame
+	//MenuController has to be linked with a menuFrame
 	public MenuController(MenuFrame menuFrame) 
 	{
 		this.menuFrame = menuFrame;
 		this.actualColor = Color.black;
 	}
 	
-	// Fonction appelé lorsque l'on clique sur le bouton play
+	// Function called when someone click on Play button
 	public void onPlayClicked(JButton play) 
 	{
 		int powerNumber = this.menuFrame.getPowersComboBox().getSelectedIndex();
@@ -48,35 +48,35 @@ public class MenuController
 		}
 		else
 		{
-			// On supprime la fenêtre actuelle (le menu)
+			// Deleting menuFrame
 			this.menuFrame.dispose();
 			
-			// On lance une nouvelle partie
+			//Launch a new game
 			new ReversiFrame(this.gridSize, powerNumber,obstaclesNumber,trapsNumber,players);
 		}
 	}
 	
-	// Fonction appelée lorsque l'on déplace le curseur pour modifier la taille de la grille
+	// Function called when cursor is moving to change size of the board
 	public void onSliderStateChanged(JSlider gridSizeSlider, JLabel gridSizeLabel, int gridSize) 
 	{
 
-		if (this.players.size()%2 !=0) // Si le nombre de joueurs est impair
+		if (this.players.size()%2 !=0) // If number of player is odd
 		{
-			if (gridSize%2 ==0) // Si la taille de la grille est pair
+			if (gridSize%2 ==0) // If size of the board is even
 	    	{
 	    		gridSize=gridSize+1;
 	    	}
 		}
-		else // Si le nombre de joueurs est pair
+		else // If number of player is even
 		{
-			if (gridSize%2 !=0) // Si la taille de la grille est impair
+			if (gridSize%2 !=0) // IF size of the board is odd
 	    	{
 	    		gridSize=gridSize-1;
 	    	}
 		}
     	
     	
-    	// La condition permet d'ajouter un 0 aux nombres à un chiffre pour garder un label à 2 chiffres, qui ne se décale donc pas
+    	// Condition permits to add a "0" at numbers with one digit to keep a 2-digit-design
     	if (gridSize < 10)
 		{
         	gridSizeLabel.setText("Value : 0" + gridSize);
@@ -86,7 +86,7 @@ public class MenuController
     		gridSizeLabel.setText("Value : " + gridSize);
     	}
     	
-    	// On enregistre la taille de la grille
+    	// Saving size of the board
     	this.gridSize = gridSize;
     	
     	

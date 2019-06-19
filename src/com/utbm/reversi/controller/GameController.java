@@ -18,7 +18,7 @@ public class GameController {
 
 	public void onCellClick(Cell cell) {
 		if (this.game.isStart()) {
-			// On veut que la case appartienne pas à un joueur
+			// We want to the cell doesn't belong to a player 
 			if (this.game.getCurrentPlayer().getUsingPower() == null) {
 				if (cell.getOwner() == null) {
 					FollowingRules rules = new FollowingRules(this.game, cell);
