@@ -31,16 +31,18 @@ public class FirePower extends Power {
 		 * Use -> une cell en fire , set proba pour que une des cells autour devient en fire 
 		 * dure 3-5 tour après s'éteint
 		 */
-		this.setOriginCell(cell);
-		this.burningCell.add(cell);
-		cell.setLock(false);		
-		cell.addHoverAnimation(this.getSprite());
-		
-		cell.updateState();
-		
-		// afficher flamme sur la cell
-		game.getFrame().setCursor(Cursor.getDefaultCursor());
-		return true;
+		if(cell.isEnabled()) {
+			this.setOriginCell(cell);
+			this.burningCell.add(cell);
+			cell.setLock(true);		
+			cell.addHoverAnimation(this.getSprite());
+			
+			cell.updateState();
+			game.getFrame().setCursor(Cursor.getDefaultCursor());
+			return true;			
+		}else {
+			return false;
+		}
 	}
 	
 	@Override
@@ -74,7 +76,7 @@ public class FirePower extends Power {
 							float r = rand.nextInt(100) ;
 							if( r <= 10) {	
 								if(xStart>=0 && yStart>=0 && game.getBoard().getBoardCells()[xStart][yStart].isEnabled()) {
-									game.getBoard().getBoardCells()[xStart][yStart].setLock(false);
+									game.getBoard().getBoardCells()[xStart][yStart].setLock(true);
 									game.getBoard().getBoardCells()[xStart][yStart].addHoverAnimation(this.getSprite());
 									game.getBoard().getBoardCells()[xStart][yStart].updateState();
 									toAdd.add(game.getBoard().getBoardCells()[xStart][yStart]);								
@@ -97,7 +99,7 @@ public class FirePower extends Power {
 	public void stop(Game game) {
 		ArrayList<PowerAnimation> toDelete = new ArrayList<PowerAnimation>();
 		for(Cell cell : this.burningCell) {
-			cell.setLock(true);
+			cell.setLock(false);
 			cell.clearOwner();
 			for(PowerAnimation animation : cell.getHoverAnimations()) {
 				toDelete.add(animation);

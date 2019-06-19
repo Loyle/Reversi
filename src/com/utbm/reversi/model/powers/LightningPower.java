@@ -43,7 +43,7 @@ public class LightningPower extends Power {
 			yStart--;
 		}
 		while(xStart<=cell.getCoordX()+1 && xStart<game.getBoard().getSize() && yStart<=cell.getCoordY()+1 && yStart<game.getBoard().getSize()) {
-			if(game.getBoard().getBoardCells()[xStart][yStart].isEnabled()&&game.getBoard().getBoardCells()[xStart][yStart].isLock()) {
+			if(game.getBoard().getBoardCells()[xStart][yStart].isEnabled()&& !game.getBoard().getBoardCells()[xStart][yStart].isLock()) {
 				game.getBoard().getBoardCells()[xStart][yStart].setOwner(this.getOwner());
 				this.animations.add(game.getBoard().getBoardCells()[xStart][yStart].addHoverAnimation(this.getSprite()));
 				game.getBoard().getBoardCells()[xStart][yStart].updateState();
@@ -63,7 +63,7 @@ public class LightningPower extends Power {
 		}
 		
 		while(xStart<=cell.getCoordX()+1 && xStart<game.getBoard().getSize() && yStart>=cell.getCoordY()-1 && yStart>=0){
-			if(game.getBoard().getBoardCells()[xStart][yStart].isEnabled()&&game.getBoard().getBoardCells()[xStart][yStart].isLock()) {
+			if(game.getBoard().getBoardCells()[xStart][yStart].isEnabled()&& !game.getBoard().getBoardCells()[xStart][yStart].isLock()) {
 				game.getBoard().getBoardCells()[xStart][yStart].setOwner(this.getOwner());
 				this.animations.add(game.getBoard().getBoardCells()[xStart][yStart].addHoverAnimation(this.getSprite()));
 				game.getBoard().getBoardCells()[xStart][yStart].updateState();
@@ -102,10 +102,10 @@ public class LightningPower extends Power {
 				while ( yStart<=this.getOriginCell().getCoordY()+1 && yStart<game.getBoard().getSize()) {
 					
 					if(xStart != this.getOriginCell().getCoordX() || yStart!=this.getOriginCell().getCoordY() ) {
-						float r = rand.nextInt(20) ;
+						float r = rand.nextInt(100) ;
 						if( r <= 10) {	
 							if(xStart>=0 && yStart>=0) {
-								if(game.getBoard().getBoardCells()[xStart][yStart].isEnabled()&&game.getBoard().getBoardCells()[xStart][yStart].isLock()) {
+								if(game.getBoard().getBoardCells()[xStart][yStart].isEnabled()&& !game.getBoard().getBoardCells()[xStart][yStart].isLock()) {
 									game.getBoard().getBoardCells()[xStart][yStart].setOwner(this.getOwner());
 									if(!this.lightningCell.contains(game.getBoard().getBoardCells()[xStart][yStart])) {
 										this.animations.add(game.getBoard().getBoardCells()[xStart][yStart].addHoverAnimation(this.getSprite()));																				

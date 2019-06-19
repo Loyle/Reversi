@@ -26,30 +26,35 @@ public class ColorBombPower extends Power {
 		 *		*	°	*	=> 	°	°	°
 		 * 		*	°	°		°	°	°
 		 */
-		this.setOriginCell(cell);
-		int xStart = cell.getCoordX();
-		int yStart = cell.getCoordY();
-		if (cell.getCoordX()>0) {
-			xStart--;
-		}
-		if (cell.getCoordY()>0) {
-			yStart--;
-		}
-		int saveY = yStart;
-		while ( xStart<=cell.getCoordX()+1 && xStart<game.getBoard().getSize()) {
-			yStart= saveY;
-			while ( yStart<=cell.getCoordY()+1 && yStart<game.getBoard().getSize()) {
-				if(game.getBoard().getBoardCells()[xStart][yStart].isEnabled()&&game.getBoard().getBoardCells()[xStart][yStart].isLock()) {
-					game.getBoard().getBoardCells()[xStart][yStart].setOwner(this.getOwner());
-					game.getBoard().getBoardCells()[xStart][yStart].updateState();
-				}
-				yStart++;
+		if(cell.isLock()) {
+			return false;
+		}else {
+			this.setOriginCell(cell);
+			int xStart = cell.getCoordX();
+			int yStart = cell.getCoordY();
+			if (cell.getCoordX()>0) {
+				xStart--;
 			}
-			xStart++;
+			if (cell.getCoordY()>0) {
+				yStart--;
+			}
+			int saveY = yStart;
+			while ( xStart<=cell.getCoordX()+1 && xStart<game.getBoard().getSize()) {
+				yStart= saveY;
+				while ( yStart<=cell.getCoordY()+1 && yStart<game.getBoard().getSize()) {
+					if(game.getBoard().getBoardCells()[xStart][yStart].isEnabled() && !game.getBoard().getBoardCells()[xStart][yStart].isLock()) {
+						game.getBoard().getBoardCells()[xStart][yStart].setOwner(this.getOwner());
+						game.getBoard().getBoardCells()[xStart][yStart].updateState();
+					}
+					yStart++;
+				}
+				xStart++;
+			}
+			
+			game.getFrame().setCursor(Cursor.getDefaultCursor());
+			return true; 			
 		}
 		
-		game.getFrame().setCursor(Cursor.getDefaultCursor());
-		return true; 
 
 	}
 	@Override
