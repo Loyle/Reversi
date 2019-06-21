@@ -168,21 +168,35 @@ public class Game {
 		if(this.isEnded() == true) {
 			this.setStart(false);
 			this.frame.displayEndMessage();
+			return;
 		}
 		else {			
 			// Check if player can play
 			if(this.isBlocked() == true) {
-				this.players.remove(this.currentPlayer);
-				this.next();
+				this.currentPlayer.setLose(true);
 			}
 		}
 		
-		if(this.players.size() == 1) {
+		if(this.inGamePlayer() == 1) {
 			this.setStart(false);
 			this.frame.displayEndMessage();
+			return;
+		}
+		if(this.currentPlayer.hasLose()) {
+			this.next();
 		}
 	}
 		
+
+	private int inGamePlayer() {
+		int count = 0;
+		for(Player player : this.players) {
+			if(player.hasLose() == false) {
+				count++;
+			}
+		}
+		return count;
+	}
 
 	public void countScore() {
 		for(Player player : this.players) {

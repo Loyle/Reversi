@@ -58,6 +58,7 @@ public class GameListener implements ActionListener {
 		this.controller.getFrame().dispose();
 		
 		for(Player player : this.controller.getGame().getPlayers()) {
+			player.setLose(false);
 			player.getPowers().clear();
 		}
 		ReversiFrame newFrame = new ReversiFrame(this.controller.getGame().getBoard().getSize(),this.controller.getGame().getPowerNumber(),this.controller.getGame().getObstaclesNumber(),this.controller.getGame().getTrapsNumber(),this.controller.getGame().getPlayers());

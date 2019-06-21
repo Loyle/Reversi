@@ -75,6 +75,12 @@ public class Cell extends JButton {
 		return color;
 	}
 	/**
+	 * @return
+	 */
+	public Color getDefaultColor() {
+		return this.defaultColor;
+	}
+	/**
 	 * @param color the color to set
 	 */
 	public void setColor(Color color) {

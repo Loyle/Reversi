@@ -38,9 +38,17 @@ public class BombCell extends Cell {
 	/**
 	 * @param owner the owner to set
 	 */
+	@Override
 	public void setOwner(Player owner) {
 		super.setOwner(owner);
 		this.changed++;
+	}
+	
+	@Override
+	public void clearOwner() {
+		this.setOwner(null);
+		this.setColor(this.getDefaultColor());
+		this.changed = 0;
 	}
 
 	public boolean use() {

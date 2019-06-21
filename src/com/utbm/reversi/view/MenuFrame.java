@@ -7,7 +7,6 @@ import java.util.Random;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JColorChooser;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,9 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-
 import com.utbm.reversi.controller.MenuController;
-import com.utbm.reversi.model.Player;
 
 public class MenuFrame extends JFrame
 {
@@ -158,7 +155,8 @@ public class MenuFrame extends JFrame
         playersColor.addActionListener(e -> menuController.onColorClicked(playersColor));
         
 		Random rando = new Random();
-		playersColor.setBackground(new Color(rando.nextInt(255),rando.nextInt(255),rando.nextInt(255)));
+		
+		this.menuController.setActualColor(new Color(rando.nextInt(255),rando.nextInt(255),rando.nextInt(255)));
         
         gbcAddPlayers.gridx = 3;
         gbcAddPlayers.gridy = 0;

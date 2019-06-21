@@ -24,6 +24,7 @@ public class Player {
 	private Color color;
 	private ArrayList<Power> powers;
 	private Power usingPower;
+	private boolean hasLose;
 	
 	public Player(String name) {
 		this.setName(name);
@@ -33,6 +34,7 @@ public class Player {
 		this.powers = new ArrayList<Power>();
 		this.usingPower = null;
 		this.scoreLabel = new JLabel();
+		this.hasLose = false;
 	}
 	public Player(String name, Color color) {
 		this.setName(name);
@@ -42,6 +44,7 @@ public class Player {
 		this.powers = new ArrayList<Power>();
 		this.usingPower = null;
 		this.scoreLabel = new JLabel();
+		this.hasLose = false;
 	}
 	
 	/**
@@ -107,6 +110,18 @@ public class Player {
 	 */
 	public int getScore() {
 		return this.score;
+	}
+	/**
+	 * @return the hasLose
+	 */
+	public boolean hasLose() {
+		return hasLose;
+	}
+	/**
+	 * @param hasLose the hasLose to set
+	 */
+	public void setLose(boolean hasLose) {
+		this.hasLose = hasLose;
 	}
 	/**
 	 * Increase score by 1

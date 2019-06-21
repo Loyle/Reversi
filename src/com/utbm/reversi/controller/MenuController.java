@@ -6,7 +6,6 @@ import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
@@ -194,9 +193,6 @@ public class MenuController
 			
 			
 			this.players.add(new Player(input,this.actualColor));
-			Random rando = new Random();
-			this.actualColor = new Color(rando.nextInt(255),rando.nextInt(255),rando.nextInt(255));
-			this.menuFrame.getPlayerColorButton().setBackground(this.actualColor);
 			
 			if (this.players.size() > 0)
 			{
@@ -338,6 +334,8 @@ public class MenuController
 			this.menuFrame.getPlayersTextField().setText("");
 		}
 		
+		Random rando = new Random();
+		this.setActualColor(new Color(rando.nextInt(255),rando.nextInt(255),rando.nextInt(255)));
 		this.menuFrame.getPlayersTextField().requestFocusInWindow();
 		
 	}
@@ -383,5 +381,8 @@ public class MenuController
 	{
 		new RulesFrame();
 	}
-	
+	public void setActualColor(Color color) {
+		this.actualColor = color;
+		this.menuFrame.getPlayerColorButton().setBackground(color);
+	}
 }
