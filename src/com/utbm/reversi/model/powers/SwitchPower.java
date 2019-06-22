@@ -9,19 +9,33 @@ import com.utbm.reversi.model.cells.Cell;
 
 public class SwitchPower extends Power {
 	
+	/**
+	 * Generate a new SwithPower
+	 * @param owner cell owner
+	 * @param icon PowerBar icon
+	 * @param sprite Board icon
+	 */
 	public SwitchPower(Player owner, ImageIcon icon, Sprite sprite) {
 		super(owner,icon,sprite,0);
 	}
+	/**
+	 * Generate a new SwitchPower
+	 * @param owner cell owner
+	 * @param icon PowerBar icon
+	 * @param sprite Board icon
+	 */
 	public SwitchPower(Player owner, String icon, Sprite sprite) {
 		super(owner,icon,sprite,0);
 	}
 	
 	@Override
+	/**
+	 * Change the color of only one pawn
+	 * @param game
+	 * @param cell clickedCell
+	 */
 	public boolean use(Game game, Cell cell) {
-		// TODO Auto-generated method stub
-		/*
-		 * Use -> change the color of only one pawn
-		 */
+	
 		this.setOriginCell(cell);
 		int currentX = cell.getCoordX();
 		int currentY = cell.getCoordY();

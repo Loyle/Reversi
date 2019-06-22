@@ -11,22 +11,35 @@ import com.utbm.reversi.model.cells.Cell;
 
 public class ShieldPower extends Power {
 	private PowerAnimation animation;
-	
+	/**
+	 * Generate a new ShieldPower
+	 * @param owner cell owner
+	 * @param icon PowerBar icon
+	 * @param sprite Board icon
+	 */
 	public ShieldPower(Player owner, ImageIcon icon, Sprite sprite) {
 		super(owner,icon,sprite,3);
 		this.animation = null;
 	}
+	/**
+	 * Generate a new ShieldPower
+	 * @param owner cell owner
+	 * @param icon PowerBar icon
+	 * @param sprite Board icon
+	 */
 	public ShieldPower(Player owner, String icon, Sprite sprite) {
 		super(owner,icon,sprite,3);
 		this.animation = null;
 	}
 	
 	@Override
+	/**
+	 * the chosen pawn does not turn over if it is framed 
+	 * @param game 
+	 * @param cell clickedCell
+	 * @return boolean
+	 */
 	public boolean use(Game game, Cell cell) {
-		// TODO Auto-generated method stub
-		/*
-		 * Use -> the chosen pawn does not turn over if it is framed 
-		 */
 
 		if(cell.getOwner()!=null) {
 			if(cell.getOwner().equals(this.getOwner())) {
@@ -42,12 +55,20 @@ public class ShieldPower extends Power {
 		return false;
 	}
 	@Override
+	/**
+	 * Decrease the duration
+	 * @param game
+	 */
 	public void next(Game game) {
 		if(this.getDuration()>0) {
 			this.setDuration(this.getDuration()-1);			
 		}
 	}
 	@Override
+	/**
+	 * Unlock the pawn
+	 * @param game
+	 */
 	public void stop(Game game) {
 		this.getOriginCell().setLock(false);	
 		this.animation.stop();

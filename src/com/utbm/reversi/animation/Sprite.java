@@ -15,6 +15,16 @@ public class Sprite {
     private int spriteSizeX;
     private int spriteSizeY;
     
+    /**
+     * Generate a new Sprite
+     * @param img file path
+     * @param spriteSizeX 
+     * @param spriteSizeY
+     * @param duration active time 
+     * @param sizeX
+     * @param sizeY
+     */
+    
     public Sprite(String img, int spriteSizeX, int spriteSizeY, int duration, int sizeX, int sizeY) {
     	this.sizeX = sizeX;
     	this.sizeY = sizeY;
@@ -33,7 +43,11 @@ public class Sprite {
     	
     	this.loadSprite(img);
     }
-    
+    /**
+     * Load sprite sheet from the data file
+     * @param file file path
+     * @exception IOException
+     */
     public void loadSprite(String file) {
         BufferedImage sprite = null;
 
@@ -45,7 +59,11 @@ public class Sprite {
 
         this.spritesheet = sprite;
     }
-    
+    /**
+     * Load sprite/icon from the data file
+     * @param file file path
+     * @exception IOException
+     */
     public void loadSprite(ImageIcon file) {
 
 		BufferedImage bufferedImage = new BufferedImage(file.getImage().getWidth(null), file.getImage().getHeight(null),

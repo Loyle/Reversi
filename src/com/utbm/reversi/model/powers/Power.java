@@ -15,6 +15,10 @@ public abstract class Power {
 	private int duration;
 	private Cell originCell;
 	
+	/**
+	 * Generates a new power
+	 */
+	
 	public Power() {
 		this.owner = null;
 		this.icon = null;
@@ -22,6 +26,14 @@ public abstract class Power {
 		this.clickSprite = null;
 		this.setOriginCell(null);
 	}
+	
+	/**
+	 * Generates a new power using a player, icon , and sprite , and a duration for an Animate power 
+	 * @param owner cell owner
+	 * @param icon PowerBar icon
+	 * @param sprite Board icon
+	 * @param duration number round where the power is effective
+	 */
 	public Power(Player owner, ImageIcon icon, Sprite sprite, int duration) {
 		this.owner = owner;
 		this.icon = icon;
@@ -30,6 +42,13 @@ public abstract class Power {
 		this.duration = duration;
 		this.setOriginCell(null);
 	}
+	/**
+	 * Generates a new power using a player, icon , and sprite , and a duration for an non Animate power
+	 * @param owner cell owner
+	 * @param icon PowerBar icon
+	 * @param sprite Board icon
+	 * @param duration number round where the power is effective
+	 */
 	public Power(Player owner, String icon, Sprite sprite, int duration) {
 		this.owner = owner;
 		this.icon = new ImageIcon(icon);
@@ -39,16 +58,18 @@ public abstract class Power {
 		this.setOriginCell(null);
 	}
 	
-	
 	public void setOwner(Player owner) {
 		this.owner = owner;
 	}
+
 	public void setIcon(ImageIcon icon) {
 		this.icon = icon;
 	}
+
 	public Player getOwner() {
 		return this.owner;
 	}
+
 	public ImageIcon getIcon() {
 		return this.icon;
 	}
