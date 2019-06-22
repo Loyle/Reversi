@@ -27,6 +27,7 @@ public class RulesController
      *            The frame linked to the controller.
      * 
      * @see RulesFrame
+     * @see RulesPanel
      */
 	public RulesController(RulesFrame rulesFrame) 
 	{
@@ -38,7 +39,6 @@ public class RulesController
      * <p>
      * Change the text explaining the rules.
      * Change the image explaining the rules.
-     * vide.
      * </p>
      * 
      * @see RulesFrame
@@ -63,7 +63,6 @@ public class RulesController
      * <p>
      * Change the text explaining the rules.
      * Change the image explaining the rules.
-     * vide.
      * </p>
      * 
      * @see RulesFrame
@@ -88,7 +87,6 @@ public class RulesController
      * <p>
      * Change the text explaining the rules.
      * Change the image explaining the rules.
-     * vide.
      * </p>
      * 
      * @see RulesFrame
@@ -113,7 +111,6 @@ public class RulesController
      * <p>
      * Change the text explaining the rules.
      * Change the image explaining the rules.
-     * vide.
      * </p>
      * 
      * @see RulesFrame
@@ -138,7 +135,6 @@ public class RulesController
      * <p>
      * Change the text explaining the rules.
      * Change the image explaining the rules.
-     * vide.
      * </p>
      * 
      * @see RulesFrame
@@ -163,7 +159,6 @@ public class RulesController
      * <p>
      * Change the text explaining the rules.
      * Change the image explaining the rules.
-     * vide.
      * </p>
      * 
      * @see RulesFrame
@@ -188,7 +183,6 @@ public class RulesController
      * <p>
      * Change the text explaining the rules.
      * Change the image explaining the rules.
-     * vide.
      * </p>
      * 
      * @see RulesFrame
@@ -213,7 +207,6 @@ public class RulesController
      * <p>
      * Change the text explaining the rules.
      * Change the image explaining the rules.
-     * vide.
      * </p>
      * 
      * @see RulesFrame
@@ -238,7 +231,6 @@ public class RulesController
      * <p>
      * Change the text explaining the rules.
      * Change the image explaining the rules.
-     * vide.
      * </p>
      * 
      * @see RulesFrame
@@ -258,6 +250,16 @@ public class RulesController
 		this.rulesFrame.getRulesPanel().repaint();
 	}
 	
+	/**
+     * Function called when someone click on the "lightning rules" button.
+     * <p>
+     * Change the text explaining the rules.
+     * Change the image explaining the rules.
+     * </p>
+     * 
+     * @see RulesFrame
+     * @see RulesPanel
+     */
 	public void onLightningClicked() 
 	{
 		this.rulesFrame.getTextExplanation1().setText(" ");
