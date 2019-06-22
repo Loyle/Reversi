@@ -104,7 +104,7 @@ public class ReversiFrame extends JFrame {
 	    *            The list of players in the game.
 	    *            
 	    * @see ReversiFrame#initWindow()
-	    * @see Game#run()
+	    * @see GameController#run()
 	    * @see GameController
 	    * @see GameListener
 	    * @see Game
@@ -126,7 +126,7 @@ public class ReversiFrame extends JFrame {
 		this.gridSize = size;
 
 		this.initWindow();
-		this.game.run();
+		this.controller.run();
 
 	}
 
@@ -495,7 +495,7 @@ public class ReversiFrame extends JFrame {
 		this.label.setText("BLOCKED !");
 
 	    
-	    if (this.game.isEnded()) 
+	    if (this.controller.isEnded())
 		{
 	    	this.label.setText("END !");
 		}

@@ -161,112 +161,36 @@ public class Game {
 		return trapsNumber;
 	}
 	/**
-	 * Start the game
-	 */
-	public void run() {
-		
-		this.currentPlayer = this.players.get(0);
-
-		// Give random power to each player
-		for(Player player : players) {
-			for(int nbPow = 0; nbPow<this.powerNumber;nbPow++) {
-				player.addRandomPower();
-			}
-		}
-
-		this.frame.setCurrentPlayer(this.currentPlayer);
-		
-		// Update power list for this player
-		this.frame.updatePlayerPowers(this.currentPlayer);
-
-		this.countScore();
-		this.frame.updateScores(this.players);
-
-		this.setStart(true);
-	}
-	/**
 	 * get the player currently playing
 	 * @return
 	 */
 	public Player getCurrentPlayer() {
 		return this.currentPlayer;
 	}
+
 	/**
-	 * go to the next round
+	 * set the current player
+	 *
+	 * @param player
 	 */
-	public void next() {
-		this.countScore();
-		
-		if(this.players.indexOf(this.currentPlayer) == this.players.size() - 1) {
-			// Come back to first player
-			this.currentPlayer = this.players.get(0);
-
-			// Next Round
-			this.addRound();
-
-			// for each power using, decrement duration check state and remove array if ==
-			// 0 creating stop power
-
-		} else {
-			// Go to next player
-			this.currentPlayer = this.players.get(this.players.indexOf(this.currentPlayer) + 1);
-		}
-		
-		// Update of powers to delete, stop and remove power if duration = 0
-					ArrayList<Power> powersToDelete = new ArrayList<Power>();
-					for(Power power : powers) {
-						if(power.getOwner().equals(this.currentPlayer)) {
-							power.next(this);
-							if (power.getDuration() == 0) {
-								powersToDelete.add(power);
-							}					
-						}
-					}
-					for (Power power : powersToDelete) {
-						power.stop(this);
-					}
-					powers.removeAll(powersToDelete);
-					powersToDelete.clear();
-
-		// Update Score
-		this.countScore();
-		this.frame.updateScores(this.players);
-
-		// Update Current player
-		this.frame.setCurrentPlayer(this.currentPlayer);
-		
-		// Set Player power
-		this.frame.updatePlayerPowers(this.currentPlayer);
-		
-		// Check if game is ended
-		if(this.isEnded() == true) {
-			this.setStart(false);
-			this.frame.displayEndMessage();
-			return;
-		}
-		else {			
-			// Check if player can play
-			if(this.isBlocked() == true) {
-				this.currentPlayer.setLose(true);
-			}
-		}
-		
-		if(this.inGamePlayer() == 1) {
-			this.setStart(false);
-			this.frame.displayEndMessage();
-			return;
-		}
-		if(this.currentPlayer.hasLose()) {
-			this.next();
-		}
+	public void setCurrentPlayer(Player player) {
+		this.currentPlayer = player;
 	}
 
+	/**
+	 * Return the power which are currently activate
+	 *
+	 * @return
+	 */
+	public ArrayList<Power> getPowers() {
+		return this.powers;
+	}
 	/**
 	 * get the number of players still playing in the game (not lose)
 	 *
 	 * @return int
 	 */
-	private int inGamePlayer() {
+	public int inGamePlayer() {
 		int count = 0;
 		for(Player player : this.players) {
 			if(player.hasLose() == false) {
@@ -279,59 +203,16 @@ public class Game {
 	 * refresh all the players score
 	 */
 	public void countScore() {
-		for(Player player : this.players) {
+		for (Player player : this.players) {
 			player.setScore(0);
 		}
 
-		for(int x = 0; x < this.board.getSize(); x++) {
-			for(int y = 0; y < this.board.getSize(); y++) {
-				if(this.board.getBoardCells()[x][y].getOwner() != null) {
+		for (int x = 0; x < this.board.getSize(); x++) {
+			for (int y = 0; y < this.board.getSize(); y++) {
+				if (this.board.getBoardCells()[x][y].getOwner() != null) {
 					this.board.getBoardCells()[x][y].getOwner().addScore();
 				}
 			}
 		}
-	}
-	/**
-	 * check if the board is full => game ended
-	 *
-	 * @return boolean
-	 */
-	public boolean isEnded() 
-	{
-		int totalCells = 0;
-		int usedCells = 0;
-		for(int x = 0; x < this.getBoard().getSize(); x++) {
-			for(int y = 0; y < this.getBoard().getSize(); y++) {
-				if(this.getBoard().getBoardCells()[x][y].isEnabled()) {
-					totalCells++;
-				}
-				if(this.getBoard().getBoardCells()[x][y].getOwner() != null) {
-					usedCells++;
-				}
-			}
-		}
-		if(totalCells == usedCells) {
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * Check if the current player can play => is blocked
-	 * @return boolean
-	 */
-	public boolean isBlocked() 
-	{
-		for(int x = 0; x < this.getBoard().getSize(); x++) {
-			for (int y = 0; y < this.getBoard().getSize(); y++) {
-				if (this.board.getBoardCells()[x][y].getOwner() == null) {
-					FollowingRules rules = new FollowingRules(this, this.board.getBoardCells()[x][y]);
-					if (rules.isPlayable()) {
-						return false;
-					}
-				}
-			}
-		}
-		return true;
 	}
 }
