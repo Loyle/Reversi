@@ -18,9 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
-
 import com.utbm.reversi.controller.GameController;
-import com.utbm.reversi.controller.MenuController;
 import com.utbm.reversi.listeners.GameListener;
 import com.utbm.reversi.model.Game;
 import com.utbm.reversi.model.Player;

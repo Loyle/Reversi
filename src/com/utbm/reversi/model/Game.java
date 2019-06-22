@@ -2,7 +2,6 @@ package com.utbm.reversi.model;
 
 
 import java.util.ArrayList;
-import com.utbm.reversi.controller.FollowingRules;
 import com.utbm.reversi.model.powers.Power;
 import com.utbm.reversi.view.ReversiFrame;
 

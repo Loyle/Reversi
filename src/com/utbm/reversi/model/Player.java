@@ -3,9 +3,6 @@ package com.utbm.reversi.model;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
-
-import javax.swing.JLabel;
-
 import com.utbm.reversi.animation.Sprite;
 import com.utbm.reversi.model.powers.ColorBombPower;
 import com.utbm.reversi.model.powers.FirePower;
@@ -19,7 +16,6 @@ public class Player {
 	private String name;
 	private int level;
 	private int score;
-	private JLabel scoreLabel;
 	private float xp;
 	private Color color;
 	private ArrayList<Power> powers;
@@ -38,7 +34,6 @@ public class Player {
 		this.setXp(0);
 		this.powers = new ArrayList<Power>();
 		this.usingPower = null;
-		this.scoreLabel = new JLabel();
 		this.hasLose = false;
 	}
 
@@ -55,7 +50,6 @@ public class Player {
 		this.setXp(0);
 		this.powers = new ArrayList<Power>();
 		this.usingPower = null;
-		this.scoreLabel = new JLabel();
 		this.hasLose = false;
 	}
 	
