@@ -20,14 +20,39 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import com.utbm.reversi.controller.GameController;
+import com.utbm.reversi.controller.MenuController;
 import com.utbm.reversi.listeners.GameListener;
 import com.utbm.reversi.model.Game;
 import com.utbm.reversi.model.Player;
 import com.utbm.reversi.model.cells.Cell;
 import com.utbm.reversi.model.powers.Power;
 
-@SuppressWarnings("serial")
+/**
+ * <b>ReversiFrame is the frame class of the "game" (MVC pattern).</b>
+ * <p>
+ * ReversiFrame is defined by :
+ * <ul>
+ * <li>A "game" controller (MVC pattern).</li>
+ * <li>A "game" listener (MVC pattern).</li>
+ * <li>A "game" model (MVC pattern).</li>
+ * <li>A panel where the game takes place (with an array of Cell extends JButton).</li>
+ * <li>A panel where all the informations about the game are displayed.</li>
+ * <li>An optional panel where the powers are displayed.</li>
+ * <li>A player list and some others informations about the game (graphically or about the game itself).</li>
+ * </ul>
+ * </p>
+ * 
+ * @see GameController
+ * @see GameListener
+ * @see Game
+ * @see Player
+ */
 public class ReversiFrame extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7286880342975597850L;
+
 	// Stocking Board class who manage the board
 	// private Board board;
 
@@ -57,6 +82,34 @@ public class ReversiFrame extends JFrame {
 	private ArrayList<PowerButton> powerListBtn;
 	private HashMap<Player,JLabel> playersScores;
 
+	
+	/**
+	    * ReversiFrame constructor.
+	    * <p>
+	    * <li>At the construction, the model, the controller and the listener are linked.
+	    * <li>Then, the window is created.
+	    * <li>Finally, the game is runned.</li>
+	    * </p>
+	    * 
+	    * 
+	    * @param size
+	    *            The size of the grid in the game.
+	    * @param powerNumber
+	    *            The number of powers per player in the game.
+	    * @param obstaclesNumber
+	    *            The number of obstacles in the game.
+	    * @param trapsNumber
+	    *            The number of traps in the game.
+	    * @param players
+	    *            The list of players in the game.
+	    *            
+	    * @see ReversiFrame#initWindow()
+	    * @see Game#run()
+	    * @see GameController
+	    * @see GameListener
+	    * @see Game
+	    * @see Player
+	    */
 	public ReversiFrame(int size, int powerNumber, int obstaclesNumber, int trapsNumber, ArrayList<Player> players) {
 		this.game = new Game(this, size, powerNumber, obstaclesNumber, trapsNumber, players.size());
 
@@ -77,6 +130,22 @@ public class ReversiFrame extends JFrame {
 
 	}
 
+	/**
+	 * Create the window where the game takes place.
+	 * <p>
+	 * The window is organized with :
+	 * <ul>
+	 * <li>A panel where the game takes place (with an array of Cell extends JButton).</li>
+	 * <li>A panel where all the informations about the game are displayed (score, who must play, rules button, replay button, back to menu buton).</li>
+	 * <li>An optional panel where the powers are displayed.</li>
+	 * </ul>
+	 * All buttons are linked to the game listener. Buttons from the game (Cell) are linked to game controller.
+	 * </p>
+	 * 
+	 * @see GameController
+	 * @see GameListener
+	 * @see Game
+	 */
 	public void initWindow() {
 
 		if (this.game.getPowerNumber() ==0) 
@@ -326,6 +395,17 @@ public class ReversiFrame extends JFrame {
 		this.setVisible(true);
 	}
 
+	/**
+     * Set the definitive size of a component.
+     * 
+     * 
+	 * @param c
+	 *            The component that need to be sized.
+	 * @param width
+	 *            The width of component that need to be sized.
+	 * @param height
+	 *            The height of component that need to be sized.
+     */
 	public void setFixedSize(Component c, int width, int height) {
 		c.setPreferredSize(new Dimension(width, height));
 		c.setMinimumSize(new Dimension(width, height));
@@ -333,20 +413,54 @@ public class ReversiFrame extends JFrame {
 		c.setSize(width, height);
 	}
 
-	// ======================================================================================
-	// Function that updates the state of cores in labels
-	// ======================================================================================
+
+	/**
+     * Display the updated score of all players in the labels.
+     * <p>
+     * Function called when a score is changed.
+     * </p>
+     * 
+     * @param players
+     *            The list of players in the game.
+     *            
+     * @see Player
+     * @see Game
+     */
 	public void updateScores(ArrayList<Player> players) {
 		for (Player player : players) {
 			this.playersScores.get(player).setText("Score de " + player.getName() + " : " + player.getScore());
 		}
 	}
 
+	/**
+     * Display the player that needs to play in the panel with his color and in the label with his name.
+     * <p>
+     * Function called every time a player plays.
+     * </p>
+     * 
+     * @param player
+     *            The player who must play.
+     *            
+     * @see Player
+     * @see Game
+     */
 	public void setCurrentPlayer(Player player) {
 		this.whoPlayColor.setBackground(player.getColor());
 		this.whoPlayName.setText(player.getName());
 	}
 
+	/**
+     * Remove/add power buttons for a player.
+     * <p>
+     * Function called every time a player uses a power.
+     * </p>
+     * 
+     * @param player
+     *            The player who must play.
+     *            
+     * @see Player
+     * @see Game
+     */
 	public void updatePlayerPowers(Player player) {
 		int i = 0;
 		for (i = 0; i < this.game.getPowerNumber(); i++) {
@@ -363,14 +477,16 @@ public class ReversiFrame extends JFrame {
 		}
 	}
 
-	public JPanel getGamePanel() {
-		return gamePanel;
-	}
-	
-	public ArrayList<PowerButton> getPowerListBtn() {
-		return this.powerListBtn;
-	}
-	
+
+	/**
+     * Display a message when the game is over.
+     * <p>
+     * Function when the game is over.
+     * </p>
+     * 
+     * @see Player
+     * @see Game
+     */
 	public void displayEndMessage() {
 		
 		this.whoPlayColor.setBackground(Color.LIGHT_GRAY);
@@ -400,5 +516,26 @@ public class ReversiFrame extends JFrame {
 	    }
 	    
 	}
+	
+	/**
+     * Get the panel where the game takes place.
+     * 
+     * @see Game
+     * @see GameController
+     */
+	public JPanel getGamePanel() {
+		return gamePanel;
+	}
+	
+	/**
+     * Get the list of power buttons.
+     * 
+     * @see Game
+     * @see GameController
+     */
+	public ArrayList<PowerButton> getPowerListBtn() {
+		return this.powerListBtn;
+	}
+	
 
 }
