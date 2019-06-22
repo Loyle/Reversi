@@ -25,7 +25,12 @@ public class Player {
 	private ArrayList<Power> powers;
 	private Power usingPower;
 	private boolean hasLose;
-	
+
+	/**
+	 * Player constructor
+	 *
+	 * @param name
+	 */
 	public Player(String name) {
 		this.setName(name);
 		this.setColor(Color.black);
@@ -36,6 +41,13 @@ public class Player {
 		this.scoreLabel = new JLabel();
 		this.hasLose = false;
 	}
+
+	/**
+	 * Player constructor
+	 *
+	 * @param name
+	 * @param color
+	 */
 	public Player(String name, Color color) {
 		this.setName(name);
 		this.setColor(color);
@@ -48,12 +60,16 @@ public class Player {
 	}
 	
 	/**
-	 * @return
+	 * get player color
+	 *
+	 * @return Color
 	 */
 	public Color getColor() {
 		return color;
 	}
 	/**
+	 * set player color
+	 *
 	 * @param color
 	 */
 	public void setColor(Color color) {
@@ -61,12 +77,16 @@ public class Player {
 	}
 	
 	/**
-	 * @return
+	 * get player name
+	 *
+	 * @return String
 	 */
 	public String getName() {
 		return this.name;
 	}
 	/**
+	 * set player name
+	 *
 	 * @param name
 	 */
 	public void setName(String name) {
@@ -74,12 +94,16 @@ public class Player {
 	}
 	
 	/**
-	 * @return 
+	 * get player XP
+	 *
+	 * @return float
 	 */
 	public float getXp() {
 		return this.xp;
 	}
 	/**
+	 * set player XP
+	 *
 	 * @param xp
 	 */
 	public void setXp(float xp) {
@@ -87,12 +111,16 @@ public class Player {
 	}
 	
 	/**
-	 * @return 
+	 * get player level
+	 *
+	 * @return int
 	 */
 	public int getLevel() {
 		return this.level;
 	}
 	/**
+	 * set player level
+	 *
 	 * @param level
 	 */
 	public void setLevel(int level) {
@@ -100,24 +128,32 @@ public class Player {
 	}
 	
 	/**
+	 * set player score
+	 *
 	 * @param score
 	 */
 	public void setScore(int score) {
 		this.score = score;
 	}
 	/**
-	 * @return
+	 * get player score
+	 *
+	 * @return int
 	 */
 	public int getScore() {
 		return this.score;
 	}
 	/**
+	 * get if the player has lose
+	 *
 	 * @return the hasLose
 	 */
 	public boolean hasLose() {
 		return hasLose;
 	}
 	/**
+	 * set if the player has lose
+	 *
 	 * @param hasLose the hasLose to set
 	 */
 	public void setLose(boolean hasLose) {
@@ -138,7 +174,8 @@ public class Player {
 	}
 	
 	/**
-	 * 
+	 * add specific power to the player
+	 *
 	 * @param power
 	 */
 	public void addPower(Power power) {
@@ -146,27 +183,43 @@ public class Player {
 	}
 	
 	/**
-	 * 
+	 * Remove a power
+	 *
 	 * @param power
 	 */
 	public void removePower(Power power) {
 		this.powers.remove(power);
 	}
-	
-	
+
+	/**
+	 * get player powers
+	 *
+	 * @return ArrayList<Power>
+	 */
 	public ArrayList<Power> getPowers() {
 		return this.powers;
 	}
-	
+
+	/**
+	 * set the actual using power
+	 *
+	 * @param power
+	 */
 	public void setUsingPower(Power power) {
 		this.usingPower = power;
 	}
+
+	/**
+	 * get the actual using power
+	 *
+	 * @return Power
+	 */
 	public Power getUsingPower() {
 		return this.usingPower;
 	}
 	
 	/**
-	 * Get a random power to player
+	 * give random power to player
 	 */
 	public void addRandomPower() {
 		int rando = (int) new Random().nextInt(6);
@@ -195,9 +248,7 @@ public class Player {
 			break;
 		}
 	}
-	public JLabel getScoreLabel() {
+	/*public JLabel getScoreLabel() {
 		return scoreLabel;
-	}
-	
-	
+	}*/
 }

@@ -10,6 +10,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -54,9 +55,12 @@ public class ReversiFrame extends JFrame {
 	private GameController controller;
 
 	private ArrayList<PowerButton> powerListBtn;
+	private HashMap<Player,JLabel> playersScores;
 
 	public ReversiFrame(int size, int powerNumber, int obstaclesNumber, int trapsNumber, ArrayList<Player> players) {
 		this.game = new Game(this, size, powerNumber, obstaclesNumber, trapsNumber, players.size());
+
+		this.playersScores = new HashMap<>();
 
 
 		for (Player player : players) {
@@ -230,12 +234,12 @@ public class ReversiFrame extends JFrame {
 		for (Player player : this.game.getPlayers()) 
 		{
 			player.setScore(this.game.getPlayers().size());
-			player.getScoreLabel().setText("Score de "+player.getName()+" : "+player.getScore());
-			player.getScoreLabel().setFont(new Font("Arial",0,20));
+			this.playersScores.put(player,new JLabel("Score de "+player.getName()+" : "+player.getScore()));
+			this.playersScores.get(player).setFont(new Font("Arial",0,20));
 			gbc.gridx = 0;
             decalage++;
             gbc.gridy = decalage;
-			scores.add(player.getScoreLabel(),gbc);
+			scores.add(this.playersScores.get(player),gbc);
 		}
 
 		// ADD SPACE
@@ -277,7 +281,7 @@ public class ReversiFrame extends JFrame {
         gbc.gridy = decalage;
         JButton replay = new JButton("Replay");
         replay.setPreferredSize(new Dimension(125,30));
-		// On associe ce bouton à une fonction dans ReversiController
+		// On associe ce bouton ï¿½ une fonction dans ReversiController
         replay.addActionListener(e -> listener.onReplayClicked(replay));
 		scores.add(replay,gbc);
 		
@@ -312,7 +316,7 @@ public class ReversiFrame extends JFrame {
 		//this.gamePanel.setSize(new Dimension(this.gamePanel.getHeight(),this.gamePanel.getHeight()));
 		//scores.setPreferredSize(new Dimension(this.getWidth()-this.gamePanel.getWidth(),1500));
 		//System.out.println(this.getWidth()+"-"+this.gamePanel.wid);
-		// On ajoute les 2 panel à la fenêtre
+		// On ajoute les 2 panel ï¿½ la fenï¿½tre
 
 		this.getContentPane().add(powerPart, BorderLayout.WEST);
 		this.getContentPane().add(gamePanel, BorderLayout.CENTER);
@@ -334,7 +338,7 @@ public class ReversiFrame extends JFrame {
 	// ======================================================================================
 	public void updateScores(ArrayList<Player> players) {
 		for (Player player : players) {
-			player.getScoreLabel().setText("Score de " + player.getName() + " : " + player.getScore());
+			this.playersScores.get(player).setText("Score de " + player.getName() + " : " + player.getScore());
 		}
 	}
 

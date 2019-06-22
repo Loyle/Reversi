@@ -15,9 +15,7 @@ public class Game {
 	private int obstaclesNumber;
 	private int trapsNumber;
 	private int size;
-	
 	private ReversiFrame frame;
-
 	private boolean isStart;
 	private int round;
 
