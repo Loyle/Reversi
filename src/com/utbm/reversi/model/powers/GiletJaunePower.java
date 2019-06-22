@@ -16,22 +16,36 @@ public class GiletJaunePower extends Power {
 	private ArrayList<PowerAnimation> animations;
 	private Sprite fullJacketSprite = new Sprite("./data/GiletJaune_Logo.png",1,1,1000,100,100);
 	
+	/**
+	 * Generate a new GiletJaunePower
+	 * @param owner cell owner
+	 * @param icon PowerBar icon
+	 * @param sprite Board icon
+	 */
 	public GiletJaunePower(Player owner, ImageIcon icon, Sprite sprite) {
 		super(owner, icon, sprite, 5);
 		this.animations = new ArrayList<PowerAnimation>();
 	}
-
+	/**
+	 * Generate a new GiletJaunePower
+	 * @param owner cell owner
+	 * @param icon PowerBar icon
+	 * @param sprite Board icon
+	 */
 	public GiletJaunePower(Player owner, String icon, Sprite sprite) {
 		super(owner, icon, sprite, 5);
 		this.animations = new ArrayList<PowerAnimation>();
 	}
 
 	@Override
+	/**
+	 * Block 5 cells with a cross-design 
+	 * @param game 
+	 * @param cell clickedCell
+	 * @return boolean
+	 * 
+	 */
 	public boolean use(Game game, Cell cell) {
-		// TODO Auto-generated method stub
-		/*
-		 * Use -> block 5 cells with a cross-design 
-		 */
 
 		if(cell.isLock()) {
 			return false;
@@ -82,11 +96,20 @@ public class GiletJaunePower extends Power {
 	}
 
 	@Override
+	/**
+	 * Decrease the duration 
+	 * @param game
+	 */
 	public void next(Game game) {
 		this.setDuration(this.getDuration() - 1);
 	}
 
 	@Override
+	/**
+	 * Unblock the previous blocked cell
+	 * @param game
+	 * 
+	 */
 	public void stop(Game game) {
 		for(PowerAnimation animation : this.animations) {
 			animation.stop();

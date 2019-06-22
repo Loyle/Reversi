@@ -9,23 +9,39 @@ import com.utbm.reversi.model.cells.Cell;
 
 public class ColorBombPower extends Power {
 	
+	/**
+	 * Create a new ColorBombPower
+	 * @param owner cell owner
+	 * @param icon PowerBar icon
+	 * @param sprite Board icon
+	 */
 	public ColorBombPower(Player owner, ImageIcon icon, Sprite sprite) {
 		super(owner,icon,sprite,0);
 	}
+	/**
+	 * Create a new ColorBombPower
+	 * @param owner cell owner
+	 * @param icon PowerBar icon
+	 * @param sprite Board icon
+	 */
 	public ColorBombPower(Player owner, String icon, Sprite sprite) {
 		super(owner,icon,sprite,0);
 	}
 	
+	
 	@Override
+	/**
+	 * Generate a square around the pawn changing the color of all the pawns in the color of the player who placed the pawn
+	 *	 
+	 * 		°	*	*		°	°	°
+	 *		*	°	*	=> 	°	°	°
+	 * 		*	°	°		°	°	°
+	 * @param cell clickedCell
+	 * @param game
+	 * @return boolean
+	 */
 	public boolean use(Game game, Cell cell) {
-		// TODO Auto-generated method stub
-		/*
-		 *Use ->  Square around the pawn changing the color of all the pawns in the color of the player who placed the pawn
-		 *
-		 * 		°	*	*		°	°	°
-		 *		*	°	*	=> 	°	°	°
-		 * 		*	°	°		°	°	°
-		 */
+		
 		if(cell.isLock()) {
 			return false;
 		}else {

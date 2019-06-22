@@ -18,13 +18,24 @@ public class LightningPower extends Power {
 	
 	private ArrayList<Cell> lightningCell;
 	private ArrayList<PowerAnimation> animations;
-
+/**
+ * Generate a new LightningPower
+ * @param owner cell owner
+ * @param icon PowerBar icon
+	 * @param sprite Board icon
+ */
 	public LightningPower(Player owner, ImageIcon icon, Sprite sprite) {
 		super(owner,icon,sprite,3);
 		this.lightningCell = new ArrayList<Cell>();
 		this.animations = new ArrayList<PowerAnimation>();
 		this.setClickSprite(new Sprite("./data/lightning.png",9,1,50,42,56));
 	}
+	/**
+	 * Generate a new LightningPower
+	 * @param owner cell owner
+	 * @param icon PowerBar icon
+	 * @param sprite Board icon
+	 */
 	public LightningPower(Player owner, String icon, Sprite sprite) {
 		super(owner,icon,sprite,3);
 		this.lightningCell = new ArrayList<Cell>();
@@ -33,6 +44,12 @@ public class LightningPower extends Power {
 	}
 	
 	@Override
+	/**
+	 * Place 5 pawn in a cross (x) pattern 
+	 * @param game
+	 * @param cell clickedCell
+	 * @return boolean
+	 */
 	public boolean use(Game game, Cell cell) {
 		this.setOriginCell(cell);
 		int xStart = cell.getCoordX();
@@ -80,6 +97,11 @@ public class LightningPower extends Power {
 	}
 	
 	@Override
+	/**
+	 * Generate with a 1/15 probability a new pawn next to the previous one
+	 * Decrease the duration
+	 * @param game
+	 */
 	public void next(Game game) {
 		this.setDuration(this.getDuration()-1);
 		ArrayList<Cell> toAdd = new ArrayList<Cell>();
@@ -129,6 +151,10 @@ public class LightningPower extends Power {
 		
 	}
 	@Override
+	/**
+	 * Stop the propagation
+	 * @param game
+	 */
 	public void stop(Game game) {
 		for(PowerAnimation animation : this.animations) {
 			animation.stop();

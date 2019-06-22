@@ -13,23 +13,35 @@ import com.utbm.reversi.model.cells.Cell;
 public class FirePower extends Power {
 	
 	private ArrayList<Cell> burningCell;
-	
+	/**
+	 * Create a new FirePower
+	 * @param owner cell owner
+	 * @param icon PowerBar icon
+	 * @param sprite Board icon
+	 */
 	public FirePower(Player owner, ImageIcon icon, Sprite sprite) {
 		super(owner,icon,sprite,3);
 		this.burningCell = new ArrayList<Cell>();
 	}
-	
+	/**
+	 * Create a new FirePower
+	 * @param owner cell owner
+	 * @param icon PowerBar icon
+	 * @param sprite Board icon
+	 */
 	public FirePower(Player owner, String icon, Sprite sprite) {
 		super(owner,icon,sprite,3);
 		this.burningCell = new ArrayList<Cell>();
 	}
 	
 	@Override
+	/**
+	 * a cell in fire, sets a probability that one of the surrounding cells becomes in fire, during 3 turns after it is extinguished.
+	 * @param game  
+	 * @param cell clickedCell
+	 * @return boolean
+	 */
 	public boolean use(Game game, Cell cell) {
-		// TODO Auto-generated method stub
-		/*
-		 * Use -> a cell in fire, sets a probability that one of the surrounding cells becomes in fire, during 3-5 turns after it is extinguished.
-		 */
 
 		if(cell.isEnabled()) {
 			this.setOriginCell(cell);
@@ -47,6 +59,11 @@ public class FirePower extends Power {
 
 	
 	@Override
+	/**
+	 * Decrease the duration number and apply power own effect
+	 * @param game
+	 * @return void 
+	 */
 	public void next(Game game) {
 		this.setDuration(this.getDuration()-1);
 		
@@ -97,6 +114,11 @@ public class FirePower extends Power {
 	
 	
 	@Override
+	/**
+	 * Stop the power effect 
+	 * @param game
+	 * @return void 
+	 */
 	public void stop(Game game) {
 		ArrayList<PowerAnimation> toDelete = new ArrayList<PowerAnimation>();
 		for(Cell cell : this.burningCell) {
