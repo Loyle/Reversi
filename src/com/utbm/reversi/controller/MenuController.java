@@ -15,27 +15,71 @@ import com.utbm.reversi.view.MenuFrame;
 import com.utbm.reversi.view.ReversiFrame;
 import com.utbm.reversi.view.RulesFrame;
 
+
+/**
+ * <b>MenuController is the control class of the frame "menu" (MVC pattern).</b>
+ * <p>
+ * MenuController is defined by :
+ * <ul>
+ * <li>A "menu" view/frame (MVC pattern).</li>
+ * <li>The grid size, that the user can change.</li>
+ * <li>Players who will play to the game.</li>
+ * <li>The label with the new player name.</li>
+ * <li>The panel with the new player color.</li>
+ * <li>The color that has been chosen before a new player is added.</li>
+ * </ul>
+ * </p>
+ * 
+ * @see MenuFrame
+ * @see Player
+ */
 public class MenuController 
 {
 	// Controller is affected to a Panel
 	private final MenuFrame menuFrame;
 	//Size of the board
 	private int gridSize = 8;
-	
-	private Color actualColor;
+
 	
 	private ArrayList<Player> players = new ArrayList<Player>();
 	private JLabel[] playersLabel = new JLabel[9];
 	private JPanel[] playersPanel = new JPanel[9];
+	private Color actualColor;
 	
-	//MenuController has to be linked with a menuFrame
+    /**
+     * MenuController constructor.
+     * <p>
+     * At the construction, the controller has to be link to a view/frame (MVC pattern).
+     * The chosen color is intialized.
+     * </p>
+     * 
+     * @param menuFrame
+     *            The frame linked to the controller.
+     * @param actualColor
+     *            The color that has been chosen before a new player is added.
+     * 
+     * @see MenuFrame
+     */
 	public MenuController(MenuFrame menuFrame) 
 	{
 		this.menuFrame = menuFrame;
 		this.actualColor = Color.black;
 	}
 	
-	// Function called when someone click on Play button
+	/**
+     * Function called when someone click on Play button.
+     * <p>
+     * The frame is close and a new game is launched if there is more than 2 players.
+     * All the informations from the menu are given to the new frame where the game takes place.
+     * vide.
+     * </p>
+     * 
+     * @param play
+     *            The "Play" button that has been clicked.
+     * 
+     * @see MenuFrame
+     * @see ReversiFrame
+     */
 	public void onPlayClicked(JButton play) 
 	{
 		int powerNumber = this.menuFrame.getPowersComboBox().getSelectedIndex();
@@ -56,7 +100,23 @@ public class MenuController
 		}
 	}
 	
-	// Function called when cursor is moving to change size of the board
+	/**
+     * Function called when cursor is moving to change size of the board.
+     * <p>
+     * The value of the grid size changes when the state of the slider changes.
+     * The scale depends on the number of players (even or odd).
+     * vide.
+     * </p>
+     * 
+     * @param gridSizeSlider
+     *            The slider that has been changed.
+     * @param gridSizeLabel
+     *            The label that show the actual size of the grid.
+     * @param gridSize
+     *            The size of the grid.
+     *            
+     * @see MenuFrame
+     */
 	public void onSliderStateChanged(JSlider gridSizeSlider, JLabel gridSizeLabel, int gridSize) 
 	{
 
@@ -92,6 +152,20 @@ public class MenuController
     	
 	}
 	
+	/**
+     * Function called when the "Add" button is clicked.
+     * <p>
+     * A new player is added to the list if his name is between 1 and 9 characters.
+     * A list of players is created with a label for their name and a panel for their color.
+     * The slider size adapts its scale in function of the number of players.
+     * The actual color is randomly changed after the new player is added.
+     * </p>
+     * 
+     * @param playersButton
+     *            The "Add" button that has been clicked.
+     *            
+     * @see MenuFrame
+     */
 	public void onAddClicked(JButton playersButton) 
 	{
 		String input = this.menuFrame.getPlayersTextField().getText();
@@ -340,6 +414,20 @@ public class MenuController
 		
 	}
 	
+	
+	/**
+     * Function called when the "Remove" button is clicked.
+     * <p>
+     * This function remove all the players from the player list.
+     * It also erases the visual list with labels and panels.
+     * It reinitialise the grid size slider.
+     * </p>
+     * 
+     * @param playersButton
+     *            The "Remove" button that has been clicked.
+     *            
+     * @see MenuFrame
+     */
 	public void onRemoveClicked(JButton playersButton) 
 	{
 		this.menuFrame.getError().setText(" ");
@@ -371,16 +459,52 @@ public class MenuController
 		
 	}
 
+	/**
+     * Function called when the "color chooser" button is clicked.
+     * <p>
+     * Show a dialog where the user can choose a color for the new player.
+     * vide.
+     * </p>
+     * 
+     * @param playersColor
+     *            The "color chooser" button that has been clicked.
+     *            
+     * @see MenuFrame
+     * @see MenuController#onAddClicked(JButton)
+     */
 	public void onColorClicked(JButton playersColor) 
 	{
         this.actualColor = JColorChooser.showDialog(null,"JColorChooser Sample", Color.black);
         playersColor.setBackground(actualColor);
 	}
 	
+	/**
+     * Function called when the "rules" button is clicked.
+     * <p>
+     * Show a frame where the rules of the game are explained.
+     * vide.
+     * </p>
+     * 
+     * @see MenuFrame
+     */
 	public void onRulesClicked() 
 	{
 		new RulesFrame();
 	}
+	
+	/**
+     * Function called when a new color is randomly chosen.
+     * <p>
+     * Set the color.
+     * vide.
+     * </p>
+     * 
+     * @param color
+     *            The new color.
+     *            
+     * @see MenuFrame
+     * @see MenuFrame
+     */
 	public void setActualColor(Color color) {
 		this.actualColor = color;
 		this.menuFrame.getPlayerColorButton().setBackground(color);

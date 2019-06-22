@@ -2,15 +2,48 @@ package com.utbm.reversi.controller;
 
 import com.utbm.reversi.view.RulesFrame;
 
+/**
+ * <b>RulesController is the control class of the frame "rules" (MVC pattern).</b>
+ * <p>
+ * RulesController is defined by :
+ * <ul>
+ * <li>A "rules" view/frame (MVC pattern).</li>
+ * </ul>
+ * </p>
+ * 
+ * @see RulesFrame
+ */
 public class RulesController 
 {
 	private RulesFrame rulesFrame;
 	
+	 /**
+     * RulesController constructor.
+     * <p>
+     * At the construction, the controller has to be link to a view/frame (MVC pattern).
+     * </p>
+     * 
+     * @param rulesFrame
+     *            The frame linked to the controller.
+     * 
+     * @see RulesFrame
+     */
 	public RulesController(RulesFrame rulesFrame) 
 	{
 		this.rulesFrame = rulesFrame;
 	}
 	
+	/**
+     * Function called when someone click on the "reversi rules" button.
+     * <p>
+     * Change the text explaining the rules.
+     * Change the image explaining the rules.
+     * vide.
+     * </p>
+     * 
+     * @see RulesFrame
+     * @see RulesPanel
+     */
 	public void onReversiRulesClicked() 
 	{
 		this.rulesFrame.getTextExplanation1().setText("Reversi is a strategy board game for two players, played on an 8×8 uncheckered board.");
@@ -25,6 +58,17 @@ public class RulesController
 		this.rulesFrame.getRulesPanel().repaint();
 	}
 	
+	/**
+     * Function called when someone click on the "obstacles rules" button.
+     * <p>
+     * Change the text explaining the rules.
+     * Change the image explaining the rules.
+     * vide.
+     * </p>
+     * 
+     * @see RulesFrame
+     * @see RulesPanel
+     */
 	public void onObstaclesClicked() 
 	{
 		this.rulesFrame.getTextExplanation1().setText(" ");
@@ -39,6 +83,17 @@ public class RulesController
 		this.rulesFrame.getRulesPanel().repaint();
 	}
 	
+	/**
+     * Function called when someone click on the "treacherous rules" button.
+     * <p>
+     * Change the text explaining the rules.
+     * Change the image explaining the rules.
+     * vide.
+     * </p>
+     * 
+     * @see RulesFrame
+     * @see RulesPanel
+     */
 	public void onTreacherousPawnClicked() 
 	{
 		this.rulesFrame.getTextExplanation1().setText(" ");
@@ -53,6 +108,17 @@ public class RulesController
 		this.rulesFrame.getRulesPanel().repaint();
 	}
 	
+	/**
+     * Function called when someone click on the "bomb rules" button.
+     * <p>
+     * Change the text explaining the rules.
+     * Change the image explaining the rules.
+     * vide.
+     * </p>
+     * 
+     * @see RulesFrame
+     * @see RulesPanel
+     */
 	public void onBombPawnClicked() 
 	{
 		this.rulesFrame.getTextExplanation1().setText(" ");
@@ -67,6 +133,17 @@ public class RulesController
 		this.rulesFrame.getRulesPanel().repaint();
 	}
 	
+	/**
+     * Function called when someone click on the "color bomb rules" button.
+     * <p>
+     * Change the text explaining the rules.
+     * Change the image explaining the rules.
+     * vide.
+     * </p>
+     * 
+     * @see RulesFrame
+     * @see RulesPanel
+     */
 	public void onColorBombClicked() 
 	{
 		this.rulesFrame.getTextExplanation1().setText(" ");
@@ -81,6 +158,17 @@ public class RulesController
 		this.rulesFrame.getRulesPanel().repaint();
 	}
 	
+	/**
+     * Function called when someone click on the "shield rules" button.
+     * <p>
+     * Change the text explaining the rules.
+     * Change the image explaining the rules.
+     * vide.
+     * </p>
+     * 
+     * @see RulesFrame
+     * @see RulesPanel
+     */
 	public void onShieldClicked() 
 	{
 		this.rulesFrame.getTextExplanation1().setText(" ");
@@ -95,6 +183,17 @@ public class RulesController
 		this.rulesFrame.getRulesPanel().repaint();
 	}
 	
+	/**
+     * Function called when someone click on the "switch owner rules" button.
+     * <p>
+     * Change the text explaining the rules.
+     * Change the image explaining the rules.
+     * vide.
+     * </p>
+     * 
+     * @see RulesFrame
+     * @see RulesPanel
+     */
 	public void onSwitchOwnerClicked() 
 	{
 		this.rulesFrame.getTextExplanation1().setText(" ");
@@ -109,6 +208,17 @@ public class RulesController
 		this.rulesFrame.getRulesPanel().repaint();
 	}
 	
+	/**
+     * Function called when someone click on the "yellow jacket rules" button.
+     * <p>
+     * Change the text explaining the rules.
+     * Change the image explaining the rules.
+     * vide.
+     * </p>
+     * 
+     * @see RulesFrame
+     * @see RulesPanel
+     */
 	public void onYellowJacketClicked() 
 	{
 		this.rulesFrame.getTextExplanation1().setText(" ");
@@ -123,6 +233,17 @@ public class RulesController
 		this.rulesFrame.getRulesPanel().repaint();
 	}
 	
+	/**
+     * Function called when someone click on the "fire rules" button.
+     * <p>
+     * Change the text explaining the rules.
+     * Change the image explaining the rules.
+     * vide.
+     * </p>
+     * 
+     * @see RulesFrame
+     * @see RulesPanel
+     */
 	public void onFireClicked() 
 	{
 		this.rulesFrame.getTextExplanation1().setText(" ");

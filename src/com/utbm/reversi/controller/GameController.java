@@ -6,6 +6,7 @@ import com.utbm.reversi.model.cells.Cell;
 import com.utbm.reversi.model.cells.TrapCell;
 import com.utbm.reversi.view.ReversiFrame;
 
+
 public class GameController {
 
 	Game game;
