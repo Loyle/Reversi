@@ -7,20 +7,32 @@ import javax.swing.ImageIcon;
 import com.utbm.reversi.animation.Sprite;
 import com.utbm.reversi.model.Board;
 import com.utbm.reversi.model.Player;
-
+/**
+ * 
+ * extends @see Cell
+ *
+ */
 @SuppressWarnings("serial")
 public class BombCell extends Cell {
 	private boolean isUsed;
 	private Board board;
 	private int changed;
 	private Sprite spriteExplosion = new Sprite("./data/explosion_animation.png", 9, 9, 10, 100, 100);;
-	
+	/**
+	 * Generate a bomb 
+	 * @param board 
+	 */
 	public BombCell(Board board) {
 		super();
 		this.board = board;
 		this.isUsed = false;
 		this.changed = 0;
 	}
+	/**
+	 * Generate a bomb  with the cell's color
+	 * @param color
+	 * @param board
+	 */
 	public BombCell(Color color, Board board) {
 		super(color);
 		
@@ -28,6 +40,11 @@ public class BombCell extends Cell {
 		this.isUsed = false;
 		this.changed = 0;
 	}
+	/**
+	 * Generate a bomb with the cell's background
+	 * @param background
+	 * @param board
+	 */
 	public BombCell(ImageIcon background, Board board) {
 		super(background);
 		
@@ -51,6 +68,10 @@ public class BombCell extends Cell {
 		this.changed = 0;
 	}
 
+	/**
+	 * Destroy all pawn in a 3x3 square 
+	 * @return boolean
+	 */
 	public boolean use() {
 		if(!this.isUsed && this.getOwner() != null && this.changed > 1) {			
 			int x = this.getCoordX();
