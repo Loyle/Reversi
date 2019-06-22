@@ -14,6 +14,11 @@ import com.utbm.reversi.animation.PowerAnimation;
 import com.utbm.reversi.animation.Sprite;
 import com.utbm.reversi.model.Player;
 
+/**
+ * 
+ * extends @see JButton
+ *
+ */
 @SuppressWarnings("serial")
 public class Cell extends JButton {
 	private int value;
@@ -27,7 +32,9 @@ public class Cell extends JButton {
 	
 	private int coordX;
 	private int coordY;
-	
+	/**
+	 * Generate a new Cell
+	 */
 	public Cell() {
 		this.value = 0;
 		this.color = Color.GREEN;
@@ -38,6 +45,10 @@ public class Cell extends JButton {
 		this.hoverAnimations = new ArrayList<PowerAnimation>();		
 		this.setContentAreaFilled(false);
 	}
+	/**
+	 * Generate a new Cell with a specific color
+	 * @param color cell's color
+	 */
 	public Cell(Color color) {
 		this.value = 0;
 		this.color = color;
@@ -48,6 +59,11 @@ public class Cell extends JButton {
 		this.hoverAnimations = new ArrayList<PowerAnimation>();
 		this.setContentAreaFilled(false);
 	}
+	
+	/**
+	 * Generate a new Cell with a image
+	 * @param background image
+	 */
 	public Cell(ImageIcon background) {
 		this.value = 0;
 		this.color = null;
@@ -132,12 +148,20 @@ public class Cell extends JButton {
 	public ArrayList<PowerAnimation> getHoverAnimations() {
 		return this.hoverAnimations;
 	}
-
+	/**
+	 * Create a thread animation with animation 
+	 * @param hoverAnimations power's animation
+	 */
 	public void addHoverAnimation(PowerAnimation hoverAnimations) {
 		Thread thread = new Thread(hoverAnimations);
 		thread.start();
 		this.hoverAnimations.add(hoverAnimations);
 	}
+	/**
+	 * Create a thread animation with a sprite sheet 
+	 * @param sprite image
+	 * @return PowerAnimation 
+	 */
 	public PowerAnimation addHoverAnimation(Sprite sprite) {
 		int sizeX = sprite.getSpriteSizeX();
 		int sizeY = sprite.getSpriteSizeY();
@@ -156,6 +180,12 @@ public class Cell extends JButton {
 		this.hoverAnimations.add(animation);
 		return animation;
 	}
+	/**
+	 * Create a thread repeatable animation with a sprite sheet
+	 * @param sprite image 
+	 * @param repeat boolean 
+	 * @return PowerAnimation
+	 */
 	public PowerAnimation addHoverAnimation(Sprite sprite, boolean repeat) {
 		int sizeX = sprite.getSpriteSizeX();
 		int sizeY = sprite.getSpriteSizeY();
@@ -185,7 +215,9 @@ public class Cell extends JButton {
 	public void setDefaultBackground(ImageIcon img) {
 		this.background = img;
 	}
-	
+	/**
+	 * Draw the animation
+	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
