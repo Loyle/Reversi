@@ -17,6 +17,14 @@ public class PowerAnimation implements Runnable{
 
     private List<BufferedImage> buffer = new ArrayList<BufferedImage>();
 	private int frameDelay;
+	
+	/**
+	 * Generate a new Animation base on sprite from the data file
+	 * @param buffer sprite array
+	 * @param cell clickedCell
+	 * @param frameDelay delay between 2 frame
+	 * @param repeat boolean value saying if the animation is repeating or not  
+	 */
     public PowerAnimation(BufferedImage[] buffer, Cell cell, int frameDelay, boolean repeat) {   
         for(int i = 0; i < buffer.length; i++) {
         	this.buffer.add(buffer[i]);        	
@@ -30,7 +38,9 @@ public class PowerAnimation implements Runnable{
         this.repeat = repeat;
         this.stopped = false;
     }
-    
+    /**
+     * stop the animation
+     */
     public void stop() {
     	cell.removeHoverAnimation(this);
     	this.stopped = true;
@@ -41,6 +51,11 @@ public class PowerAnimation implements Runnable{
     }
 
 	@Override
+	/**
+	 * Start and run the animation while the stop method isn't call 
+	 * @see stop
+	 * @exception InterruptedException
+	 */
 	public void run() {
 		while(!stopped) {
 			this.cell.updateState();	
