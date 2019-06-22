@@ -18,7 +18,11 @@ public class GameController {
 		this.frame = frame;
 
 	}
-
+	/**
+	 * Check the clicked cell for traps
+	 * @param cell
+	 * 		The cell clicked
+	 */
 	public void onCellClick(Cell cell) {
 		if (this.game.isStart()) {
 			// We want to the cell doesn't belong to a player 
@@ -58,7 +62,7 @@ public class GameController {
 	public Game getGame() {
 		return game;
 	}
-
+	
 	public ReversiFrame getFrame() {
 		return frame;
 	}
