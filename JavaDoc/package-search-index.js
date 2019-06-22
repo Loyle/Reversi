@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"com.utbm.reversi"},{"l":"com.utbm.reversi.animation"},{"l":"com.utbm.reversi.controller"},{"l":"com.utbm.reversi.listeners"},{"l":"com.utbm.reversi.model"},{"l":"com.utbm.reversi.model.cells"},{"l":"com.utbm.reversi.model.powers"},{"l":"com.utbm.reversi.view"}]

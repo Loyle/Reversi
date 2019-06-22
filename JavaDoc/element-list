@@ -1,0 +1,8 @@
+com.utbm.reversi
+com.utbm.reversi.animation
+com.utbm.reversi.controller
+com.utbm.reversi.listeners
+com.utbm.reversi.model
+com.utbm.reversi.model.cells
+com.utbm.reversi.model.powers
+com.utbm.reversi.view
