@@ -18,6 +18,20 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import com.utbm.reversi.controller.MenuController;
 
+/**
+ * <b>MenuFrame is the frame class of the "menu" (MVC pattern).</b>
+ * <p>
+ * MenuFrame is defined by :
+ * <ul>
+ * <li>A "menu" controller (MVC pattern).</li>
+ * <li>4 panels divide into others panels, labels, buttons and other options.</li>
+ * <li>These options are organized with several GridBagLayout.</li>
+ * <li>The user can choose how to play by choosing between these options.</li>
+ * </ul>
+ * </p>
+ * 
+ * @see MenuController
+ */
 public class MenuFrame extends JFrame
 {
 
@@ -34,17 +48,24 @@ public class MenuFrame extends JFrame
 	private JPanel registeredPlayersPanel;
 	private JLabel gridSizeLabel;
 	private JSlider gridSizeSlider;
-	private JLabel playersLabel1;
-	private JLabel playersLabel2;
-	private JLabel playersLabel3;
 	private JLabel error;
 	private JTextField playersTextField;
-	private JComboBox<String> playersComboBox;
 	private JComboBox<String> powersComboBox;
 	private JComboBox<String> obstaclesComboBox;
 	private JComboBox<String> trapsComboBox;
 	private GridBagConstraints gbcRegisteredPlayers;
 	
+	/**
+    * MenuFrame constructor.
+    * <p>
+    * <li>At the construction, the window is first created.
+    * <li>Then, all the choices are graphically set.
+    * <li>All buttons, sliders, combobox and options are linked to the controller.
+    * <li>There are 5 parts : play and rules buttons, players, powers, obstacles, grid size
+    * </p>
+    * 
+    * @see MenuController
+    */
 	public MenuFrame() 
 	{
 
@@ -421,57 +442,133 @@ public class MenuFrame extends JFrame
 		this.getContentPane().add(menuBackground);
 	}
 
-	public JLabel getPlayersLabel1() {
-		return playersLabel1;
-	}
-	public JLabel getPlayersLabel2() {
-		return playersLabel2;
-	}
-	public JLabel getPlayersLabel3() {
-		return playersLabel3;
-	}
-
+	
+	/**
+     * Get the text field where the user can enter the player name.
+     * <p>
+     * Function called when "Add" or "Remove" button are clicked.
+     * </p>
+     *            
+     * @see MenuController#onAddClicked(JButton)
+     * @see MenuController#onRemoveClicked(JButton)
+     */
 	public JTextField getPlayersTextField() {
 		return playersTextField;
 	}
 
-	public JComboBox<String> getPlayersComboBox() {
-		return playersComboBox;
-	}
-
-
+	/**
+     * Get the label where error messages are displayed.
+     * <p>
+     * Function called when "Add" or "Play" button are clicked.
+     * </p>
+     *            
+     * @see MenuController#onAddClicked(JButton)
+     * @see MenuController#onPlayClicked(JButton)
+     */
 	public JLabel getError() {
 		return error;
 	}
 
+	/**
+     * Get the combobox that set the number of powers per player in a game.
+     * <p>
+     * Function called when "Play" button is clicked.
+     * </p>
+     *            
+     * @see MenuController#onPlayClicked(JButton)
+     */
 	public JComboBox<String> getPowersComboBox() {
 		return powersComboBox;
 	}
 
+	/**
+     * Get the label that display the size of the grid.
+     * <p>
+     * Function called when "Play" or "Add" or "Remove" button is clicked.
+     * </p>
+     *            
+     * @see MenuController#onPlayClicked(JButton)
+     * @see MenuController#onAddClicked(JButton)
+     * @see MenuController#onRemoveClicked(JButton)
+     * 
+     */
 	public JLabel getGridSizeLabel() {
 		return gridSizeLabel;
 	}
 
+	/**
+     * Get the slider that set the size of the grid.
+     * <p>
+     * Function called when "Add" or "Remove" button is clicked.
+     * </p>
+     *            
+     * @see MenuController#onAddClicked(JButton)
+     * @see MenuController#onRemoveClicked(JButton)
+     * 
+     */
 	public JSlider getGridSizeSlider() {
 		return gridSizeSlider;
 	}
 
+	/**
+     * Get the combobox that set the number of obstacles in a game.
+     * <p>
+     * Function called when "Play" button is clicked.
+     * </p>
+     *            
+     * @see MenuController#onPlayClicked(JButton)
+     */
 	public JComboBox<String> getObstaclesComboBox() {
 		return obstaclesComboBox;
 	}
 
+	/**
+     * Get the combobox that set the number of traps in a game.
+     * <p>
+     * Function called when "Play" button is clicked.
+     * </p>
+     *            
+     * @see MenuController#onPlayClicked(JButton)
+     */
 	public JComboBox<String> getTrapsComboBox() {
 		return trapsComboBox;
 	}
 
+	/**
+     * Get the layout (gridbagconstraints) which is used to display the list of players already registered.
+     * <p>
+     * Function called when "Add" or "Remove" button is clicked.
+     * </p>
+     *            
+     * @see MenuController#onAddClicked(JButton)
+     * @see MenuController#onRemoveClicked(JButton)
+     */
 	public GridBagConstraints getGbcRegisteredPlayers() {
 		return gbcRegisteredPlayers;
 	}
 
+	/**
+     * Get the panel which is used to display the list of players already registered.
+     * <p>
+     * Function called when "Add" or "Remove" button is clicked.
+     * </p>
+     *            
+     * @see MenuController#onAddClicked(JButton)
+     * @see MenuController#onRemoveClicked(JButton)
+     */
 	public JPanel getRegisteredPlayersPanel() {
 		return registeredPlayersPanel;
 	}
 	
+	/**
+     * Get the button which is used to set the color of a player.
+     * <p>
+     * Function called when "Add" or "Remove" button is clicked.
+     * </p>
+     *            
+     * @see MenuController#onAddClicked(JButton)
+     * @see MenuController#onRemoveClicked(JButton)
+     */
 	public JButton getPlayerColorButton() {
 		return this.playersColor;
 	}

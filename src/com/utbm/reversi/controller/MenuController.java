@@ -50,7 +50,6 @@ public class MenuController
      * MenuController constructor.
      * <p>
      * At the construction, the controller has to be link to a view/frame (MVC pattern).
-     * The chosen color is intialized.
      * </p>
      * 
      * @param menuFrame
@@ -63,7 +62,6 @@ public class MenuController
 	public MenuController(MenuFrame menuFrame) 
 	{
 		this.menuFrame = menuFrame;
-		this.actualColor = Color.black;
 	}
 	
 	/**
@@ -463,7 +461,6 @@ public class MenuController
      * Function called when the "color chooser" button is clicked.
      * <p>
      * Show a dialog where the user can choose a color for the new player.
-     * vide.
      * </p>
      * 
      * @param playersColor
@@ -482,7 +479,6 @@ public class MenuController
      * Function called when the "rules" button is clicked.
      * <p>
      * Show a frame where the rules of the game are explained.
-     * vide.
      * </p>
      * 
      * @see MenuFrame
@@ -493,17 +489,16 @@ public class MenuController
 	}
 	
 	/**
-     * Function called when a new color is randomly chosen.
-     * <p>
      * Set the color.
-     * vide.
+     * <p>
+     * Function called when a new color is randomly chosen.
      * </p>
      * 
      * @param color
      *            The new color.
      *            
      * @see MenuFrame
-     * @see MenuFrame
+     * @see MenuController#onAddClicked(JButton)
      */
 	public void setActualColor(Color color) {
 		this.actualColor = color;

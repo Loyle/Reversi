@@ -8,6 +8,21 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import com.utbm.reversi.controller.RulesController;
+
+/**
+ * <b>RulesPanel is the panel that displays rules explanations with images.</b>
+ * <p>
+ * RulesFrame is defined by :
+ * <ul>
+ * <li>An actual image (the image that is displayed).</li>
+ * <li>All explanations images that are loaded here.</li>
+ * </ul>
+ * </p>
+ * 
+ * @see RulesController
+ * @see RulesFrame
+ */
 public class RulesPanel extends JPanel
 {
 	/**
@@ -29,7 +44,16 @@ public class RulesPanel extends JPanel
 	private Image fire;
 	private Image lightning;
 	
-
+	/**
+	    * RulesPanel constructor.
+	    * <p>
+	    * <li>At the construction, all explanation images are loaded.
+	    * <li>The default image is set on "reversi rules image"
+	    * </p>
+	    * 
+	    * @see RulesController
+	    * @see RulesFrame
+	    */
 	public RulesPanel() 
 	{
 		try 
@@ -133,11 +157,35 @@ public class RulesPanel extends JPanel
 		this.actualImage = this.reversiRules;
 	}
 	
+	/**
+     * Paint the image in the panel.
+     * <p>
+     * Function called when a new rules button is clicked.
+     * </p>
+     * 
+     * @param g
+     *            Graphics element used to draw the image.
+     *        
+     * @see RulesController    
+     * @see RulesPanel
+     */
 	public void paintComponent(Graphics g) 
 	{
 		g.drawImage(this.actualImage,0,0,null);
 	}
 	
+	/**
+     * Set which image should be displayed.
+     * <p>
+     * Function called when a new rules button is clicked.
+     * </p>
+     * 
+     * @param name
+     *            A string that is used to select the image to display.
+     *        
+     * @see RulesController    
+     * @see RulesPanel
+     */
 	public void setImage(String name) 
 	{
 		switch (name) 

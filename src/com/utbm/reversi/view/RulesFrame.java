@@ -12,14 +12,29 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.utbm.reversi.controller.MenuController;
 import com.utbm.reversi.controller.RulesController;
 
+
+/**
+ * <b>RulesFrame is the frame class of the "rules" (MVC pattern).</b>
+ * <p>
+ * RulesFrame is defined by :
+ * <ul>
+ * <li>A "rules" controller (MVC pattern).</li>
+ * <li>A panel which display the rules with text.</li>
+ * <li>A panel which display the rules with an image.</li>
+ * <li>A panel to choose which rule the user wants to know.</li>
+ * </ul>
+ * </p>
+ * 
+ * @see RulesController
+ * @see RulesPanel
+ */
 public class RulesFrame extends JFrame
 {
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 8461744358975503772L;
 	
 	private JPanel buttonPanel;
@@ -41,6 +56,24 @@ public class RulesFrame extends JFrame
 
 	private final RulesController rulesController = new RulesController(this);
 
+	
+	
+	/**
+	    * RulesFrame constructor.
+	    * RulesFrame is defined by :
+	    * <ul>
+	    * <li>A panel which display the rules with text.</li>
+	    * <li>A panel which display the rules with an image.</li>
+	    * <li>A panel to choose which rule the user wants to know.</li>
+	    * </ul>
+	    * <p>
+	    * At the construction, the window is first created.
+	    * Then, all the choices are graphically set("reversi game rule" by default).
+	    * All buttons are linked to the RulesController.
+	    * </p>
+	    * 
+	    * @see MenuController
+	    */
 	public RulesFrame() 
 	{
 		this.setTitle("Rules - Reversi Game");
@@ -158,34 +191,99 @@ public class RulesFrame extends JFrame
 		this.getContentPane().add(this.buttonPanel,BorderLayout.WEST);
 	}
 
+	/**
+     * Get the 1st label which displays explanations.
+     * <p>
+     * Function called when an other rule button is clicked.
+     * </p>
+     *            
+     * @see RulesController
+     */
 	public JLabel getTextExplanation1() {
 		return textExplanation1;
 	}
 
+	/**
+     * Get the 2nd label which displays explanations.
+     * <p>
+     * Function called when an other rule button is clicked.
+     * </p>
+     *            
+     * @see RulesController
+     */
 	public JLabel getTextExplanation2() {
 		return textExplanation2;
 	}
 
+	/**
+     * Get the 3rd label which displays explanations.
+     * <p>
+     * Function called when an other rule button is clicked.
+     * </p>
+     *            
+     * @see RulesController
+     */
 	public JLabel getTextExplanation3() {
 		return textExplanation3;
 	}
 
+	/**
+     * Get the 4th label which displays explanations.
+     * <p>
+     * Function called when an other rule button is clicked.
+     * </p>
+     *            
+     * @see RulesController
+     */
 	public JLabel getTextExplanation4() {
 		return textExplanation4;
 	}
 
+	/**
+     * Get the 5th label which displays explanations.
+     * <p>
+     * Function called when an other rule button is clicked.
+     * </p>
+     *            
+     * @see RulesController
+     */
 	public JLabel getTextExplanation5() {
 		return textExplanation5;
 	}
 
+	/**
+     * Get the 6th label which displays explanations.
+     * <p>
+     * Function called when an other rule button is clicked.
+     * </p>
+     *            
+     * @see RulesController
+     */
 	public JLabel getTextExplanation6() {
 		return textExplanation6;
 	}
 
+	/**
+     * Get the 7th label which displays explanations.
+     * <p>
+     * Function called when an other rule button is clicked.
+     * </p>
+     *            
+     * @see RulesController
+     */
 	public JLabel getTextExplanation7() {
 		return textExplanation7;
 	}
 
+	/**
+     * Get the panel which displays explanations with an image.
+     * <p>
+     * Function called when an other rule button is clicked.
+     * </p>
+     *            
+     * @see RulesController
+     * @see RulesPanel
+     */
 	public RulesPanel getRulesPanel() {
 		return rulesPanel;
 	}
