@@ -45,13 +45,20 @@ public class GameListener implements ActionListener {
 
 		menuFrame.setVisible(true);
 	}
-	
+	/**
+	 * Create a new frame of rules if Rules's button is clicked
+	 */
 	public void onRulesClicked() 
 	{
 		new RulesFrame();
 	}
 
 	// Function associated with clicks on Replay button 
+	/**
+	 * Recreate a game frame if Replay button is clicked
+	 * @param replay
+	 * 		Replay button
+	 */
 	public void onReplayClicked(JButton replay) {
 		// Deleting old game Panel and Creating a new one
 
@@ -73,7 +80,11 @@ public class GameListener implements ActionListener {
 		newFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
 	
-	
+	/**
+	 * Launch if a Power button is clicked during the game (it's only a graphic method)
+	 * @param btn
+	 * 		Button Power clicked
+	 */
 	public void onPowerClick(PowerButton btn) {
 		if(this.controller.getGame().getCurrentPlayer().getUsingPower() == null || this.controller.getGame().getCurrentPlayer().getUsingPower().equals(btn.getPower()) == false) {
 			for(PowerButton power : this.controller.getFrame().getPowerListBtn()) {

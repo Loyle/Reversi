@@ -24,6 +24,11 @@ public class FollowingRules {
 		this.size = this.game.getBoard().getSize();
 	}
 
+	/**
+	 * To see how many pawns the player can win
+	 * @return Array of integer 
+	 * 		To see for each direction how many points the player should win
+	 */
 	public int[] findInter() {
 		int inter[] = { 0, 0, 0, 0, 0, 0, 0, 0 };
 
@@ -175,6 +180,11 @@ public class FollowingRules {
 	}
 
 	// The cell is playable if we could count an opponent's pawn between the new pawn and another pawn of the same color
+	/**
+	 * See if a cell is playable, i.e. if it exists pawns of other player between a player's cell and the tested cell 
+	 * @return boolean 
+ 	 *			To see if the cell is playable
+	 */
 	public boolean isPlayable() {
 		this.countInter = this.findInter();
 
@@ -187,6 +197,9 @@ public class FollowingRules {
 	}
 
 	// Permit to place the new pawn and reverse a impacted pawns
+	/**
+	 * Change, for each direction, pawns to player color
+	 */
 	public void replaceCell() {
 		// TOP
 		// Change owners of all the framed cells, and update (that's placing the pawn)
