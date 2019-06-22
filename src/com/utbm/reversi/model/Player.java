@@ -248,7 +248,4 @@ public class Player {
 			break;
 		}
 	}
-	/*public JLabel getScoreLabel() {
-		return scoreLabel;
-	}*/
 }
