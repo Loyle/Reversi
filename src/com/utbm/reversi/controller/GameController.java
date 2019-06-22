@@ -188,7 +188,7 @@ public class GameController {
 	{
 		for(int x = 0; x < this.game.getBoard().getSize(); x++) {
 			for (int y = 0; y < this.game.getBoard().getSize(); y++) {
-				if (this.game.getBoard().getBoardCells()[x][y].getOwner() == null) {
+				if (this.game.getBoard().getBoardCells()[x][y].getOwner() == null && this.game.getBoard().getBoardCells()[x][y].isEnabled()) {
 					FollowingRules rules = new FollowingRules(this.game, this.game.getBoard().getBoardCells()[x][y]);
 					if (rules.isPlayable()) {
 						return false;

@@ -30,6 +30,8 @@ public class FollowingRules {
 	 * 		To see for each direction how many points the player should win
 	 */
 	public int[] findInter() {
+		System.out.println(this.game.getCurrentPlayer().getName());
+
 		int inter[] = { 0, 0, 0, 0, 0, 0, 0, 0 };
 
 		// startX and startY are coordinates of a neighbour Cell
@@ -46,7 +48,7 @@ public class FollowingRules {
 		// Coordinates of the neighbour are in the board
 		// AND
 		// This neighbour has a pawn put on him/has an owner
-		while (startY >= 0 && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) {
+		while (startY >= 0 && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null && this.game.getBoard().getBoardCells()[startX][startY].isEnabled()) {
 			// IF
 			// Owner on this cell is the one who's playing now
 			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner()
@@ -65,7 +67,7 @@ public class FollowingRules {
 		startX = this.x;
 		startY = this.y + 1;
 		count = 0;
-		while (startY < this.size && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) {
+		while (startY < this.size && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null && this.game.getBoard().getBoardCells()[startX][startY].isEnabled()) {
 			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner()
 					.equals(this.game.getCurrentPlayer()) == true) {
 				inter[1] = count;
@@ -81,7 +83,7 @@ public class FollowingRules {
 		startX = this.x - 1;
 		startY = this.y;
 		count = 0;
-		while (startX >= 0 && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) {
+		while (startX >= 0 && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null && this.game.getBoard().getBoardCells()[startX][startY].isEnabled()) {
 			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner()
 					.equals(this.game.getCurrentPlayer()) == true) {
 				inter[2] = count;
@@ -97,7 +99,7 @@ public class FollowingRules {
 		startX = this.x + 1;
 		startY = this.y;
 		count = 0;
-		while (startX < this.size && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) {
+		while (startX < this.size && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null && this.game.getBoard().getBoardCells()[startX][startY].isEnabled()) {
 			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner()
 					.equals(this.game.getCurrentPlayer()) == true) {
 				inter[3] = count;
@@ -114,7 +116,7 @@ public class FollowingRules {
 		startY = this.y - 1;
 		count = 0;
 		while (startX < this.size && startY >= 0
-				&& this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) {
+				&& this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null && this.game.getBoard().getBoardCells()[startX][startY].isEnabled()) {
 			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner()
 					.equals(this.game.getCurrentPlayer()) == true) {
 				inter[4] = count;
@@ -132,7 +134,7 @@ public class FollowingRules {
 		startY = this.y + 1;
 		count = 0;
 		while (startX < this.size && startY < this.size
-				&& this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) {
+				&& this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null && this.game.getBoard().getBoardCells()[startX][startY].isEnabled()) {
 			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner()
 					.equals(this.game.getCurrentPlayer()) == true) {
 				inter[5] = count;
@@ -148,7 +150,7 @@ public class FollowingRules {
 		startX = this.x - 1;
 		startY = this.y + 1;
 		count = 0;
-		while (startX >= 0 && startY < this.size && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) {
+		while (startX >= 0 && startY < this.size && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null && this.game.getBoard().getBoardCells()[startX][startY].isEnabled()) {
 			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner()
 					.equals(this.game.getCurrentPlayer()) == true) {
 				inter[6] = count;
@@ -164,7 +166,7 @@ public class FollowingRules {
 		startX = this.x - 1;
 		startY = this.y - 1;
 		count = 0;
-		while (startX >= 0 && startY >= 0 && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null) {
+		while (startX >= 0 && startY >= 0 && this.game.getBoard().getBoardCells()[startX][startY].getOwner() != null && this.game.getBoard().getBoardCells()[startX][startY].isEnabled()) {
 			if (this.game.getBoard().getBoardCells()[startX][startY].getOwner()
 					.equals(this.game.getCurrentPlayer()) == true) {
 				inter[7] = count;

@@ -44,7 +44,7 @@ public class Board {
             int randoX = new Random().nextInt(size);
             int randoY = new Random().nextInt(size);
 
-            if (this.board[randoX][randoY].isEnabled() && this.board[randoX][randoY].getOwner() == null && ((randoX < minX || randoX > maxX) && (randoY < minY || randoY > maxY))) {
+            if (this.board[randoX][randoY].isEnabled() && this.board[randoX][randoY].getOwner() == null && ((randoX < minX || randoX > maxX) || (randoY < minY || randoY > maxY))) {
                 this.board[randoX][randoY] = new Cell(new Color(50, 50, 50));
                 this.board[randoX][randoY].setDefaultBackground(new ImageIcon("./data/wall.png"));
                 this.board[randoX][randoY].setEnabled(false);
@@ -55,7 +55,7 @@ public class Board {
             int randoX = new Random().nextInt(size);
             int randoY = new Random().nextInt(size);
 
-            if (this.board[randoX][randoY].isEnabled() && this.board[randoX][randoY].getOwner() == null && ((randoX < minX || randoX > maxX) && (randoY < minY || randoY > maxY))) {
+            if (this.board[randoX][randoY].isEnabled() && this.board[randoX][randoY].getOwner() == null && ((randoX < minX || randoX > maxX) || (randoY < minY || randoY > maxY))) {
                 int whatTrap = new Random().nextInt(2);
                 if (whatTrap < 1) {
                     this.board[randoX][randoY] = new TrapCell(new ImageIcon("./data/grass.png"));
